@@ -1,0 +1,11 @@
+""""""""""""""""""""""""""""""""""
+"" Screen setting
+""""""""""""""""""""""""""""""""""
+
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'
+
+attrcolor u "-u b"
+
+escape ^Pp

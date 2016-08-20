@@ -1,0 +1,80 @@
+! Set default font
+!URxvt*font: xft:Liberation Mono for Powerline:pixelsize=17
+!URxvt*boldFont: xft:Liberation Mono for Powerline:bold:pixelsize=17
+urxvt*font:                    -*-terminus-medium-*-*-*-16-*-*-*-*-*-iso8859-1
+urxvt*boldFont:                -*-terminus-medium-*-*-*-16-*-*-*-*-*-iso8859-1
+
+! Display and configure scrollbar
+URxvt*saveLines: 12000
+URxvt*scrollBar: true
+URxvt*scrollstyle: plain
+URxvt*scrollBar_right: true
+URxvt*scrollColor: #bfff00
+
+! Set transparent background
+URxvt*transparent: true
+URxvt*shading:20
+
+
+!######################### Colorscheme settings ########################!
+! Black baclground + Lightgray text
+*background: #111111
+*foreground: #babdb6
+! Black + DarkGrey
+*color0:  #000000
+*color8:  #555753
+! DarkRed + Red
+*color1:  #c8031a
+*color9:  #ff2828
+! DarkGreen + Green
+*color2:  #4e9a06
+*color10: #93d44f
+! DarkYellow + Yellow
+*color3:  #eab93d
+*color11: #ffc123
+! DarkBlue + Blue
+*color4:  #204a87
+*color12: #5a8bcb
+! DarkMagenta + Magenta
+*color5:  #ce5c00
+*color13: #f57900
+!DarkCyan + Cyan
+*color6:  #06989a
+*color14: #46a4ff
+! LightGrey + White
+*color7:  #cccccc
+*color15: #ffffff
+
+
+!###################### Load diffrent perl scripts #####################!
+URxvt.perl-ext-common:  ...,font-size,url-select,keyboard-select,clipboard
+
+!############### Perl script related bindings and config ###############!
+! I = Altgr
+
+! Bindings for on the fly font size change
+URxvt.keysym.I-Up:     perl:font-size:increase
+URxvt.keysym.I-Down:   perl:font-size:decrease
+URxvt.keysym.I-S-Up:   perl:font-size:incglobal
+URxvt.keysym.I-S-Down: perl:font-size:decglobal
+
+! Bindings for keyboard url selection
+! Altgr - u
+URxvt.keysym.downarrow: perl:url-select:select_next
+URxvt.url-select.button: 1
+URxvt.url-select.launcher: google-chrome
+URxvt.url-select.underline: true
+
+! Bindings for keyboard selection
+URxvt.keysym.I-Escape: perl:keyboard-select:activate
+! Altgr - s
+URxvt.keysym.ssharp: perl:keyboard-select:search
+
+! Bindings for clipboard plugin
+! Altgr - c
+URxvt.keysym.copyright:   perl:clipboard:copy
+! Altgr - v
+URxvt.keysym.leftdoublequotemark:   perl:clipboard:paste
+! Use Xclip to handle copy paste
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard

@@ -1,0 +1,5 @@
+dentity "jethro.sun7@gmail.com"
+hostname smtp.gmail.com:587
+username "jethro.sun7@gmail.com"
+password "ThisIsNotARealPassWord"
+starttls required
