@@ -24,13 +24,29 @@ alias cc="gcc -g -Wall -std=gnu99"
 alias update="echo \"\" ; echo \"   --- Personal utils: pacman & yaourt update ---\" ; echo \"\" ; sudo pacman -Syu ; echo \"\" ; sudo yaourt -Syu; echo \"\""
 alias blog-creat="cp ~/git/chrisblog/else/template "
 alias blog="cd ~/git/chrisblog/_posts/2016"
+alias mddt="sh ~/.scripts/mddt.sh"
+alias figr="sh ~/.scripts/figr.sh"
+alias advalgs="cd ~/workspace/cs530/"
+alias dsci="cd ~/workspace/cs505/cs505"
+alias database="cd ~/workspace/cs660"
+alias CourseList="cat ~/Dropbox/org/courselist.org"
+alias jn="jupyter notebook"
+
+
+#######################################
+##    TEMP
+## These are supposed to get rid of
+#######################################
+alias doc="gnome-documents"
+alias Bright="sudo tee /sys/class/backlight/acpi_video0/brightness <<<"
+alias Startlibvirt="sudo systemctl start libvirtd.service  && sudo systemctl start virtlogd.service"
 
 
 autoload -Uz narrow-to-region
 function _history-incremental-preserving-pattern-search-backward
 {
     local state
-    MARK=CURSOR  # magick, else multiple ^R don't work
+    MARK=CURSOR  # magick, else multipnle ^R don't work
     narrow-to-region -p "$LBUFFER${BUFFER:+>>}" -P "${BUFFER:+<<}$RBUFFER" -S state
     zle end-of-history
     zle history-incremental-pattern-search-backward
@@ -135,7 +151,7 @@ alias Weather='wego'
 alias Redding='wego 4 redding'
 
 # Git
-hash d g="~/git"
+hash -d g="~/git"
 #alias cdG='cd ~/Git/dotfiles'
 alias GitStatus='git status -u no'
 alias GitCommit='git commit -a'
@@ -775,7 +791,7 @@ iptv-Rueters() {  rtmpdump \
 
 
 plugins=(git archlinux vi-mode themes zsh-completions color-command)
-source /home/archie/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
 
 clear

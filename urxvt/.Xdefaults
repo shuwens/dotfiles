@@ -1,8 +1,8 @@
 ! Set default font
 !URxvt*font: xft:Liberation Mono for Powerline:pixelsize=17
 !URxvt*boldFont: xft:Liberation Mono for Powerline:bold:pixelsize=17
-urxvt*font:                    -*-terminus-medium-*-*-*-16-*-*-*-*-*-iso8859-1
-urxvt*boldFont:                -*-terminus-medium-*-*-*-16-*-*-*-*-*-iso8859-1
+urxvt*font:                    -*-terminus-medium-*-*-*-20-*-*-*-*-*-iso8859-1
+urxvt*boldFont:                -*-terminus-medium-*-*-*-20-*-*-*-*-*-iso8859-1
 
 ! Display and configure scrollbar
 URxvt*saveLines: 12000
@@ -47,7 +47,20 @@ URxvt*shading:20
 
 
 !###################### Load diffrent perl scripts #####################!
-URxvt.perl-ext-common:  ...,font-size,url-select,keyboard-select,clipboard
+URxvt.perl-ext-common:  ...,resize-font,font-size,url-select,tabbed,keyboard-select,clipboard
+
+!######################         Tab color          #####################!
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: 0
+
+!######################         Self config        #####################!
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+
 
 !############### Perl script related bindings and config ###############!
 ! I = Altgr
@@ -78,3 +91,12 @@ URxvt.keysym.leftdoublequotemark:   perl:clipboard:paste
 ! Use Xclip to handle copy paste
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
+
+!###############################
+!   Personal setting
+!###############################
+URxvt.iso14755 : false
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
