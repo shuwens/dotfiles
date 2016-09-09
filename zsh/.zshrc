@@ -31,7 +31,8 @@ alias dsci="cd ~/workspace/cs505/cs505"
 alias database="cd ~/workspace/cs660"
 alias CourseList="cat ~/Dropbox/org/courselist.org"
 alias jn="jupyter notebook"
-
+alias Datasci="cd ~/coding/data ; workon"
+alias SubmoduleUpdate="git pull --recurse-submodules && git submodule update --remote --recursive"
 
 #######################################
 ##    TEMP
@@ -189,11 +190,11 @@ alias Awesome='sudo ~/.scripts/awesome.sh'
 alias aquarium='asciiquarium'
 
 ## Conky
-alias eC='vim ~/.conkyrc'
-alias cdC='cd ~/.conky/HUD'
-alias HUD='~/.scripts/start_HUD.sh'
-alias SafeConky='~/.scripts/safe_conky.sh'
-alias DangerConky='~/.scripts/danger_conky.sh'
+#alias eC='vim ~/.conkyrc'
+#alias cdC='cd ~/.conky/HUD'
+#alias HUD='~/.scripts/start_HUD.sh'
+#alias SafeConky='~/.scripts/safe_conky.sh'
+#alias DangerConky='~/.scripts/danger_conky.sh'
 
 ## Bitcoin
 alias bc='btc'

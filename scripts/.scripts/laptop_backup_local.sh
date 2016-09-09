@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 START=$(date +%s)
@@ -12,3 +11,4 @@ rsync -aAXv /* /home/shwsun/backup  --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run
 
 FINISH=$(date +%s)
 echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" | tee $1/"Backup from $(date "+%Y-%m-%d, %T, %A")"
+echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" | tee $1/"Backup from $(date "+%Y-%m-%d, %T, %A")" >> backup-README.md

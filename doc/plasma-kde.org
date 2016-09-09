@@ -1,0 +1,36 @@
+Clarification:
+
+Below is a mirror part of [denudias's note](https://github.com/denydias/kdesome), I put it here as a note for myself or someone else who need it.
+
+
+
+** Installation
+
+KDEsome installation is kinda simple. It's just a matter to clone this repository and tell KDE that you don't want Plasma Desktop as your Window Manager anymore. So, let's do it:
+
+$ cd ~/.config
+$ echo "export KDEWM=awesome" > ~/.config/plasma-workspace/env/set_window_manager.sh
+$ chmod +x ~/.config/plasma-workspace/env/set_window_manager.sh
+Now go to System Settings > Startup and Shutdown > Autostart > uncheck Plasma Workspace item. Do not remove this item from the list, as KDE will assume the default behavior that is to start Plasma anyway.
+
+Next go to System Settings > Startup and Shutdown > Service Manager > uncheck Status Notifier Manager item. This will allow the system tray to show up in KDEsome.
+
+Also under Service Manager, you can also stop and disable Plasma Networkmanagement module and Display Management change monitor. The remaining services can be left alone.
+
+After restart into awesome and you can't see the NetworkManager icon on your system tray, make sure you have the package network-manager-applet and its related installed item is enabled in System Settings > Startup and Shutdown > Autostart.
+
+If you want to change the nm-applet icon to match KDEsome, run in Slackware (adapt for another distro):
+
+# cp ~/.config/awesome/themes/kdesome/trayicons/nm-applet/22x22/*.png \
+/usr/share/icons/hicolor/22x22/apps/
+# rm -f /usr/share/icons/icon-theme.cache && \
+/usr/bin/gtk-update-icon-cache -t -f /usr/share/icons/
+# pkill nm-applet
+$ nm-applet &
+In the rare case where someone uses Synology CloudStation client, there are also systray icons for it too. To install them in Slackware:
+
+# cp ~/.config/awesome/themes/kdesome/trayicons/cloudstation/*.png \
+~/.CloudStation/app/images/
+Restart you KDE and you should get it done.
+
+
