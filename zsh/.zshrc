@@ -8,11 +8,11 @@ ZSH_THEME="candy"    #powerline kardan agnoster af-magic bira clean candy gentoo
 ######################
 
 alias workon="source .venv/bin/activate"
-alias workoff="deactivate"
+alias walkaway="deactivate"
 alias sduo="sudo"
 alias GIT=' git commit -m "`curl -s http://whatthecommit.com/index.txt`" &&  git push '
 alias gits="git status"
-alias glog="git log --pretty=oneline --abbrev-commit"
+alias g l="git log --pretty=oneline --abbrev-commit"
 alias org="cd ~/Dropbox/org/"
 
 # use thefuck
@@ -28,7 +28,6 @@ alias mddt="sh ~/.scripts/mddt.sh"
 alias figr="sh ~/.scripts/figr.sh"
 alias advalgs="cd ~/workspace/cs530/"
 alias dsci="cd ~/workspace/cs505/cs505"
-alias database="cd ~/workspace/cs660"
 alias CourseList="cat ~/Dropbox/org/courselist.org"
 alias jn="jupyter notebook"
 alias Datasci="cd ~/coding/data ; workon"
@@ -42,6 +41,34 @@ alias doc="gnome-documents"
 alias Bright="sudo tee /sys/class/backlight/acpi_video0/brightness <<<"
 alias Startlibvirt="sudo systemctl start libvirtd.service  && sudo systemctl start virtlogd.service"
 
+man() {
+    LESS_TERMCAP_mb=$'\e[01;31m' \
+    LESS_TERMCAP_md=$'\e[01;35m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[04;36m' \
+    command man "$@"
+}
+ # LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode - red
+ # LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode - bold, magenta
+ # LESS_TERMCAP_me=$(printf '\e[0m') # turn off all appearance modes (mb, md, so, us)
+ # LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
+ # LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode - yellow
+ # LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
+ # LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode - cyan
+
+#--------------------------
+#  colored man from Arch Wiki
+#--------------------------
+# LESS_TERMCAP_md=$'\e[01;31m' \
+# LESS_TERMCAP_me=$'\e[0m' \
+# LESS_TERMCAP_se=$'\e[0m' \
+# LESS_TERMCAP_so=$'\e[01;44;33m' \
+# LESS_TERMCAP_ue=$'\e[0m' \
+# LESS_TERMCAP_us=$'\e[01;32m' \
+# command man "$@"
 
 autoload -Uz narrow-to-region
 function _history-incremental-preserving-pattern-search-backward

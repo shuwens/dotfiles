@@ -1,0 +1,4 @@
+#!/bin/sh
+
+killall xflux
+xflux -z 02215
