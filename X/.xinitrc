@@ -1,10 +1,5 @@
 # .xinitrc
 
-# for fcitx
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-
 xrandr -s 0
 
 xrdb $HOME/.Xresources
