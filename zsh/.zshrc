@@ -14,6 +14,8 @@ alias GIT=' git commit -m "`curl -s http://whatthecommit.com/index.txt`" &&  git
 alias gits="git status"
 alias g l="git log --pretty=oneline --abbrev-commit"
 alias org="cd ~/Dropbox/org/"
+alias MMemo="cat ~/Dropbox/org/utils/arch-memo.md | grep memo"
+
 
 # use thefuck
 eval $(thefuck --alias)

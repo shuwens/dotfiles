@@ -786,18 +786,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 	, ((modMask, xK_d), spawn "/usr/bin/killall dzen2 haskell-cpu-usage.out")                                             --Kill dzen2
 	, ((0, 0x1008ffa9), spawn "/home/shwsun/bin/touchpadtoggle.sh")                                                       --Toggle touchpad (xmodmap -pk | grep -i toggle)
 	--, ((0, xF86XK_AudioMute), spawn "/home/shwsun/bin/voldzen.sh t -d")                                                   --Mute/unmute volume
-	-- shwsun: volume control
-    --, ((0, xF86XK_AudioMute), spawn " amixer -q set Master toggle" )
-    --, ((0, xF86XK_AudioLowerVolume), spawn "amixer -q set Master 4- unmute ")
-    --, ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q set Master 4+ unmute ")
-
     , ((0, xF86XK_AudioRaiseVolume), spawn "/home/shwsun/bin/voldzen.sh + -d")                                            --Raise volume
 	--, ((mod1Mask, xK_Up), spawn "/home/shwsun/bin/voldzen.sh + -d")
 	, ((0, xF86XK_AudioLowerVolume), spawn "/home/shwsun/bin/voldzen.sh - -d")                                            --Lower volume
 	--, ((mod1Mask, xK_Down), spawn "/home/shwsun/bin/voldzen.sh - -d")
-	--, ((0, xF86XK_AudioNext),  flashText myTextConfig 1 " Next Song " >> spawn "/usr/bin/ncmpcpp next")                   --Next song
+	, ((0, xF86XK_AudioNext),  flashText myTextConfig 1 " Next Song " >> spawn "/usr/bin/ncmpcpp next")                   --Next song
 	--, ((mod1Mask, xK_Right), flashText myTextConfig 1 " Next Song " >> spawn "/usr/bin/ncmpcpp next")
-	--, ((0, xF86XK_AudioPrev), flashText myTextConfig 1 " Previous Song " >> spawn "/usr/bin/ncmpcpp prev")                --Prev song
+	, ((0, xF86XK_AudioPrev), flashText myTextConfig 1 " Previous Song " >> spawn "/usr/bin/ncmpcpp prev")                --Prev song
 	--, ((mod1Mask, xK_Left), flashText myTextConfig 1 " Previous Song " >> spawn "/usr/bin/ncmpcpp prev")
 	, ((0, xF86XK_AudioPlay), flashText myTextConfig 1 " Song Toggled " >> spawn "/usr/bin/ncmpcpp toggle")               --Toggle song
 	, ((mod1Mask .|. controlMask, xK_Down), flashText myTextConfig 1 " Song Toggled " >> spawn "/usr/bin/ncmpcpp toggle")

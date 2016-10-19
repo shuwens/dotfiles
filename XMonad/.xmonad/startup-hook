@@ -63,12 +63,13 @@ $HOME/.xmonad/start-flux
 $HOME/bin/external-mon.sh
 
 # DPI
-xrdb -merge ~/.Xresources
+#xrdb -merge ~/.Xresources
 
 #
 # APPLICATION LAUNCHER
 #
-
+# start dropbox
+dropbox start &
 
 # On login, we unlock the ssh keychain so we're not prompted for
 # passphrases later. We pipe /dev/null to ssh-add to make it realize
