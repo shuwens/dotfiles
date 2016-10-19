@@ -57,7 +57,7 @@ xcompmgr -c &
 xautolock -time 15 -locker slock &
 
 # start flux
-$HOME/.xmonad/start-flux
+#$HOME/.xmonad/start-flux
 
 # start multi-head
 $HOME/bin/external-mon.sh
@@ -68,8 +68,13 @@ $HOME/bin/external-mon.sh
 #
 # APPLICATION LAUNCHER
 #
+
 # start dropbox
 dropbox start &
+
+#xflux
+killall xflux
+xflux -z 02215
 
 # On login, we unlock the ssh keychain so we're not prompted for
 # passphrases later. We pipe /dev/null to ssh-add to make it realize
