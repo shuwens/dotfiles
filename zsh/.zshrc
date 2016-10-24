@@ -53,13 +53,19 @@ man() {
     LESS_TERMCAP_us=$'\e[04;36m' \
     command man "$@"
 }
- # LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode - red
- # LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode - bold, magenta
- # LESS_TERMCAP_me=$(printf '\e[0m') # turn off all appearance modes (mb, md, so, us)
- # LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
- # LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode - yellow
- # LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
- # LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode - cyan
+
+
+wworkon() {
+    set -ex
+    if [ -d ".venv" ]; then
+        echo "yeah!"
+        # Will enter here if $DIRECTORY exists, even if it contains spaces
+        source .venv/bin/activate
+    elif [ -d ".virtualenvs" ]; then
+        echo "yeah"
+        source .virtualenvs/bin/activate
+    fi
+}
 
 #--------------------------
 #  colored man from Arch Wiki
