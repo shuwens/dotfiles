@@ -84,7 +84,7 @@ main = do
 	botLeftBar  <- dzenSpawnPipe $ dzenBotLeftFlags r
 	botRightBar <- dzenSpawnPipe $ dzenBotRightFlags r
 	xmonad $ myUrgencyHook defaultConfig
-		{ terminal           = "/usr/bin/urxvt" --default terminal
+		{ terminal           = "/usr/bin/urxvtc" --default terminal
 		, modMask            = mod4Mask          --default modMask
 		, focusFollowsMouse  = True              --focus follow config
 		, clickJustFocuses   = True              --focus click config
@@ -106,7 +106,6 @@ main = do
 		, keys               = myKeys            --key bindings config
 		, mouseBindings      = myMouseBindings   --mouse bindings config
 		}
-
 
 --------------------------------------------------------------------------------------------
 -- LOOK AND FEEL CONFIG                                                                   --
@@ -190,6 +189,10 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 	, gs_cellpadding = 10
 	, gs_font        = dzenFont
 	}
+
+-- myTerminal
+myTerminal :: String
+myTerminal = "xfce4-terminal"
 
 -- Flash text config
 myTextConfig :: ShowTextConfig
@@ -467,7 +470,7 @@ myLayoutHook =
 myManageHook :: ManageHook
 myManageHook =
 	manageDocks <+>
-	(scratchpadManageHook $ W.RationalRect 0 0 1 (3/4)) <+>
+	(scratchpadManageHook $ W.RationalRect 0 0 1 (1/2)) <+>
 	dynamicMasterHook <+>
 	manageWindows
 
@@ -717,7 +720,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     
     ((modMask .|. shiftMask, xK_q), killAndExit)                        --Quit xmonad
     , ((mod1Mask, xK_n), spawn "nmcli_dmenu")                            --run nmcli-demnu
-    , ((mod1Mask, xK_f), spawn "thunar")                                 --run thunar
+    , ((mod1Mask, xK_f), spawn "thunar .")                                 --run thunar
     --, ((modMask, xK_q), killAndRestart)                                  --Restart xmonad
 	, ((0, xK_Pause), killAndRestart)
 	, ((mod1Mask, xK_F2), shellPrompt myXPConfig)                        --Launch Xmonad shell prompt
@@ -725,7 +728,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 	, ((mod1Mask, xK_F3), manPrompt myXPConfig)                          --Launch man prompt
 	, ((modMask, xK_g), goToSelected $ myGSConfig myColorizer)           --Launch GridSelect
 	, ((0, xK_F12), scratchPad)                                      --Scratchpad (0x0060 = grave key) xK_masculine
-	, ((modMask, 0x0060), scratchPad)
+    , ((modMask, 0x0060), scratchPad)
 	, ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf) --Launch default terminal
     , ((modMask, xK_p), spawn "dmenu_run -b")
 	--Window management bindings
@@ -786,13 +789,18 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 	, ((modMask, xK_d), spawn "/usr/bin/killall dzen2 haskell-cpu-usage.out")                                             --Kill dzen2
 	, ((0, 0x1008ffa9), spawn "/home/shwsun/bin/touchpadtoggle.sh")                                                       --Toggle touchpad (xmodmap -pk | grep -i toggle)
 	--, ((0, xF86XK_AudioMute), spawn "/home/shwsun/bin/voldzen.sh t -d")                                                   --Mute/unmute volume
+	-- shwsun: volume control
+    --, ((0, xF86XK_AudioMute), spawn " amixer -q set Master toggle" )
+    --, ((0, xF86XK_AudioLowerVolume), spawn "amixer -q set Master 4- unmute ")
+    --, ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q set Master 4+ unmute ")
+
     , ((0, xF86XK_AudioRaiseVolume), spawn "/home/shwsun/bin/voldzen.sh + -d")                                            --Raise volume
 	--, ((mod1Mask, xK_Up), spawn "/home/shwsun/bin/voldzen.sh + -d")
 	, ((0, xF86XK_AudioLowerVolume), spawn "/home/shwsun/bin/voldzen.sh - -d")                                            --Lower volume
 	--, ((mod1Mask, xK_Down), spawn "/home/shwsun/bin/voldzen.sh - -d")
-	, ((0, xF86XK_AudioNext),  flashText myTextConfig 1 " Next Song " >> spawn "/usr/bin/ncmpcpp next")                   --Next song
+	--, ((0, xF86XK_AudioNext),  flashText myTextConfig 1 " Next Song " >> spawn "/usr/bin/ncmpcpp next")                   --Next song
 	--, ((mod1Mask, xK_Right), flashText myTextConfig 1 " Next Song " >> spawn "/usr/bin/ncmpcpp next")
-	, ((0, xF86XK_AudioPrev), flashText myTextConfig 1 " Previous Song " >> spawn "/usr/bin/ncmpcpp prev")                --Prev song
+	--, ((0, xF86XK_AudioPrev), flashText myTextConfig 1 " Previous Song " >> spawn "/usr/bin/ncmpcpp prev")                --Prev song
 	--, ((mod1Mask, xK_Left), flashText myTextConfig 1 " Previous Song " >> spawn "/usr/bin/ncmpcpp prev")
 	, ((0, xF86XK_AudioPlay), flashText myTextConfig 1 " Song Toggled " >> spawn "/usr/bin/ncmpcpp toggle")               --Toggle song
 	, ((mod1Mask .|. controlMask, xK_Down), flashText myTextConfig 1 " Song Toggled " >> spawn "/usr/bin/ncmpcpp toggle")
@@ -822,7 +830,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 	  | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
 	  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
 	] where
-        scratchPad = scratchpadSpawnActionTerminal "konsole"--"/usr/bin/urxvtc -name scratchpad"
+        scratchPad = scratchpadSpawnActionTerminal "konsole" -- "xfce4-terminal"                           --"/usr/bin/urxvtc -name scratchpad"
         fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
         rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
         killAndExit =
