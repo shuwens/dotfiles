@@ -1,0 +1,19 @@
+* Emacs config notes
+
+** C programming style
+adopting google-c-style, however, set tab width to 8 if in ~/git/kernel
+
+
+** handy jumping
+setup C-up/down/left/right to jump by line or words
+
+** python
+setup anaconda mode
+
+** eshell promopt
+setup the eshell prompot
+
+** find file in proj
+C-x f to be find-file-in-project
+
+**
