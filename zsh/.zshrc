@@ -42,6 +42,7 @@ alias SubmoduleUpdate="git pull --recurse-submodules && git submodule update --r
 alias doc="gnome-documents"
 alias Bright="sudo tee /sys/class/backlight/acpi_video0/brightness <<<"
 alias Startlibvirt="sudo systemctl start libvirtd.service  && sudo systemctl start virtlogd.service"
+alias WifiUpgrade="Y -S broadcom-wl"
 
 man() {
     LESS_TERMCAP_mb=$'\e[01;31m' \

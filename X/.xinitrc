@@ -28,6 +28,9 @@ xset r rate 200 30   # 140 200
 #xss-lock -- i3lock -n -i ~/.xmonad/wallpapers/think_correctly.jpg &
 xss-lock -- slock &
 
+# dropbox
+dropbox &
+
 xmodmap -e "keycode 233 = Page_Down"
 xmodmap -e "keycode 234 = Page_Up"
 xmodmap -e "remove Lock = Caps_Lock"
@@ -45,6 +48,7 @@ xmonad &
 
 # wait for xmonad
 wait $!
+pkill -HUP dropbox
 pkill -HUP dzen2
 pkill -HUP -f xmonad-clock
 pkill -HUP -f xss-lock
