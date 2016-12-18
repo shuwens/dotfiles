@@ -9,4 +9,4 @@ vim +PluginInstall +qall
 
 cd ~/.vim_runtime/plugin/YouCompleteMe && python install.py --clang-completer #   --gocode-completer
 
-echo "let g:ycm_python_binary_path = 'python'" >> .vim_runtime/my_configs.vim
+#echo "let g:ycm_python_binary_path = 'python'" >> .vim_runtime/my_configs.vim
