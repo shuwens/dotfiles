@@ -101,6 +101,15 @@ alias F="nautilus ."
 alias cls="clear"
 alias vi="vim"
 
+alias update="sudo apt-get update && sudo apt-get upgrade"
+alias gs="git status"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gcam="git commit -am"
+alias gl="git log --graph --decorate --oneline"
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -164,6 +173,9 @@ if [ "$TERM" != "linux"  ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
+# virtualenvwrapper config
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/gi
 
 # end of [~/.bashrc]
 export PATSHOME=/home/jethro/ATS2
