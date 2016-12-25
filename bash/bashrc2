@@ -35,10 +35,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# I load Xmodmao here
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
-synclient MaxTapTime=0
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -59,6 +55,13 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -81,9 +84,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# use vim as the default editor
-export EDITOR=vim
-
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -94,38 +94,11 @@ alias l='ls -CF'
 alias ..='cd ..'
 alias sduo="sudo"
 alias gits="git status"
-alias workon="source .venv/bin/activate"
-alias walkaway="deactivate"
-alias jn="jupyter notebook"
-alias F="nautilus ."
-alias cls="clear"
-alias vi="vim"
 
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-alias todo="head -10 ~/.todo"
-
-export PATH=/home/jethro/anaconda3/bin:$PATH
-
-
-# Git branch in prompt.
-parse_git_branch() {
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-#export PS1="[\u@\h: \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\]]$ "
-
-
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1="${debian_chroot:+($debian_chroot)}\[\u@\h: \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\]]$ "
-fi
-unset color_prompt force_color_prompt
-
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -143,31 +116,6 @@ if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
-    . /e:tc/bash_completion
+    . /etc/bash_completion
   fi
 fi
-
-
-#-----------------------------------------------------------------------------
-#   experiment things
-#-----------------------------------------------------------------------------
-
-stty -ixon
-
-# powerline
-function _update_ps1() {
-    PS1="$(~/powerline-shell.py $? 2> /dev/null)"
-
-}
-
-if [ "$TERM" != "linux"  ]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
-
-# end of [~/.bashrc]
-export PATSHOME=/home/jethro/ATS2
-export PATSHOMERELOC=/home/jethro/ATS2-contrib
-export PATSHOME_contrib=/home/jethro/ATS2-contrib
-export PATH=${PATSHOME}/bin:${PATH}
-
