@@ -1,0 +1,10 @@
+[user]
+	email = shwsun@bu.edu
+	name = shwsun
+[url "git@github.com:"] 
+    insteadOf = gh:
+    # eg: $ git clone gh:kisielk/errcheck
+
+
+[core]
+	editor = vim
