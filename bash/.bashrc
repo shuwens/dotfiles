@@ -92,6 +92,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias ..='cd ..'
+alias ...="cd ..."
 alias sduo="sudo"
 alias gits="git status"
 alias workon="source .venv/bin/activate"
