@@ -102,6 +102,7 @@ alias F="nautilus ."
 alias cls="clear"
 alias vi="vim"
 
+alias Cl="rm -rf \~"
 alias update="sudo apt-get update && sudo apt-get upgrade"
 alias gs="git status"
 alias gc="git checkout"
