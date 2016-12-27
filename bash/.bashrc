@@ -101,6 +101,7 @@ alias jn="jupyter notebook"
 alias F="nautilus ."
 alias cls="clear"
 alias vi="vim"
+alias ee="emacsclient"
 
 alias Cl="rm -rf \~"
 alias update="sudo apt-get update && sudo apt-get upgrade"
