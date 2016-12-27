@@ -5,7 +5,7 @@ set from="Jethro Sun <jethro.sun7@gmail.com>"
 # .muttrc
 # ================  IMAP ====================
 set imap_user = 'jethro.sun7@gmail.com'
-set imap_pass = 'vo1dchris'
+set imap_pass = 'bigsecret'
 
 set spoolfile = imaps://imap.gmail.com/INBOX
 set folder = imaps://imap.gmail.com/
