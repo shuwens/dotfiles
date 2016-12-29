@@ -247,6 +247,47 @@ alias fixterm="export LC_CTYPE=zh_CN.GB2312"
 export LSCOLORS=dxFxBxDxCxegedabagacad
 alias ls="ls -FG --color"
 
+
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..='cd ..'
+alias ...="cd ..."
+alias sduo="sudo"
+alias gits="git status"
+alias workon="source .venv/bin/activate"
+alias walkaway="deactivate"
+alias jn="jupyter notebook"
+alias F="nautilus ."
+alias cls="clear"
+alias vi="vim"
+alias ee="emacsclient"
+
+alias Cl="rm -rf \~"
+alias update="sudo apt-get update && sudo apt-get upgrade"
+alias gs="git status"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gcam="git commit -am"
+alias gl="git log --graph --decorate --oneline"
+
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias todo="head -10 ~/.todo"
+
+
+
+
+
 PATH=$PATH:/usr/local/google_appengine/:$HOME/.rvm/bin:$HOME/bin # Add RVM to PATH for scripting
 DYLD_LIBRARY_PATH=/opt/local/lib:$DYLD_LIBRARY_PATH
 OPENSTACK_CLUSTER=(caesar cleopatra geriatrix vitalstatistix myopia rome0 rome1 rome2 rome3 rome4 rome5 rome6 rome7 rome8 rome9)
