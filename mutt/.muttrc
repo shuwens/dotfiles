@@ -1,11 +1,16 @@
 set sendmail="/usr/bin/esmtp"
 set envelope_from=yes
-set from="Jethro Sun <jethro.sun7@gmail.com>"
+set from="Jethro Shuwen Sun <shwsun@bu.edu>"
 
 # .muttrc
 # ================  IMAP ====================
-set imap_user = 'jethro.sun7@gmail.com'
-set imap_pass = 'bigsecret'
+# shwsun
+set imap_user = 'shwsun@bu.edu'
+set imap_pass = 'secret_chars'
+
+# jethro sun
+#set imap_user = 'jethro.sun7@gmail.com'
+#set imap_pass = 'secret_chars'
 
 set spoolfile = imaps://imap.gmail.com/INBOX
 set folder = imaps://imap.gmail.com/
@@ -24,6 +29,12 @@ set edit_headers = yes  # See the headers when editing
 set charset = UTF-8     # value of $LANG; also fallback for send_charset
 # Sender, email address, and sign-off line must match
 unset use_domain        # because joe@localhost is just embarrassing
-#set realname = "Jethro Sun"
+set realname = "(Jethro) Shuwen Sun"
+
+# shwsun
+#set from = "shwsun@bu.edu"
+
+# Jethro Sun
 #set from = "jethro.sun7@gmail.com"
+
 set use_from = yes
