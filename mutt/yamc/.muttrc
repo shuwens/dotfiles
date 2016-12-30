@@ -1,0 +1,88 @@
+
+## General options
+set header_cache = "~/.cache/mutt"
+set imap_check_subscribed
+set imap_keepalive = 300
+unset imap_passive
+set mail_check = 60
+set mbox_type=Maildir
+
+source "gpg2 -dq $HOME/.my-pwds.gpg |"
+
+## ACCOUNT1
+source "~/.mutt/work"
+folder-hook $folder 'source ~/.mutt/work'
+
+## ACCOUNT2
+source "~/.mutt/personal"
+
+#folder-hook *jethro.sun7@gmail.com/ 'source ~/.mutt/personal'
+#folder-hook *jethro.sun7@gmail.com/Family 'set realname="Jethro"'
+
+## alternative settings
+
+## Shortcuts
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/personal<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/work<enter><change-folder>!<enter>'
+
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+
+bind pager j next-line
+bind pager k previous-line
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
+
+set date_format="%y-%m-%d %T"
+set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"
+
+set my_index_format_pre='set my_col_from = `echo $((30 * ($(tput cols)-35-24) / 100))`; set my_col_subject = `echo $((70 * ($(tput cols)-35-24) / 100))`; set index_format="%2C | %Z [%d] %-$my_col_from.${my_col_from}'
+set my_index_format_post=' (%-4.4c) %?M?<%M> ?%-$my_col_subject.${my_col_subject}s"'
+
+folder-hook .*[sS]ent.* "$my_index_format_pre"t"$my_index_format_post"
+folder-hook ! .*[sS]ent.* "$my_index_format_pre"F"$my_index_format_post"
+
+folder-hook .*[sS]ent.* "$my_index_format_pre"t"$my_index_format_post"
+folder-hook ! .*[sS]ent.* "$my_index_format_pre"F"$my_index_format_post"
+
+bind index "^" imap-fetch-mail
+folder-hook . 'uncolor index "~b \"Hi Joe\" ~R !~T !~F !~p !~P"'
+folder-hook ""!"" 'color index brightyellow black "~b \"Hi Joe\" ~N !~T !~F !~p !~P"'
+
+set sleep_time = 0
+
+set sidebar_visible = yes
+#:bind index,pager B sidebar-toggle-visible
+
+# Ctrl-n, Ctrl-p to select next, previous folder.
+# Ctrl-o to open selected folder.
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+
+
+set crypt_use_gpgme=yes
+set crypt_replysign=yes
+set crypt_replysignencrypted=yes
+set pgp_timeout=3600
+
+set sort=threads
+set sort_aux=last-date-received
+
+set message_cachedir=~/.cache/mutt/messages
+source "~/.mutt/purgecache.sh '$message_cachedir'|"
+
+
+
+
+
+
+
+
+
+
+
+

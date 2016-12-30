@@ -112,6 +112,9 @@ alias gcm="git commit -m"
 alias gcam="git commit -am"
 alias gl="git log --graph --decorate --oneline"
 
+# workon
+alias devhaas="ssh hack-n-hil.prb.massopencloud.org"
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
