@@ -136,9 +136,9 @@ alias myip="lynx -dump http://davis.cc.gt.atl.ga.us/ip.php|grep your|cut -d\| -f
 alias setbg="xsetbg -border black -fork -type jpeg -fit -onroot -fullscreen "
 
 export EDITOR=vim
-export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w[\A]\$(parse_git_branch)\$ "
+#export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w[\A]\$(parse_git_branch)\$ "
 export HOSTFILE=/etc/hosts
-
+export PS1="[\u@\h: \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\]]$ "
 ### PROGRAMMABLE COMPLETION ###
 
 set +o nounset
@@ -189,8 +189,8 @@ complete -f -o default -X '!*.+(py)' 	python
 # This is a 'universal' completion function - it works when commands have
 # a so-called 'long options' mode , ie: 'ls --all' instead of 'ls -a'
 
-_get_longopts () 
-{ 
+_get_longopts ()
+{
     $1 --help | sed  -e '/--/!d' -e 's/.*--\([^[:space:].,]*\).*/--\1/'| \
 grep ^"$2" |sort -u ;
 }
@@ -209,15 +209,15 @@ _longopts_func ()
     COMPREPLY=( $(_get_longopts ${1} ${2} ) )
 }
 
-complete  -o default -F _longopts_func configure bash gcc ssh 
+complete  -o default -F _longopts_func configure bash gcc ssh
 complete  -o default -F _longopts_func wget id info a2ps ls recode
 
 
 # EOF
 
 
-#PROMPT_HOSTNAME='ME'
-#PROMPT_COLOR1='1;38m'
+PROMPT_HOSTNAME='ME'
+PROMPT_COLOR1='1;38m'
 
 # If I am root, set the prompt to bright red
 #if [ ${UID} -eq 0 ]; then
@@ -226,16 +226,16 @@ complete  -o default -F _longopts_func wget id info a2ps ls recode
 #fi
 
 #case ${TERM} in
-	#xterm*)
-	#PS1='\[\e]1;${PROMPT_HOSTNAME}\a\e]2;${PROMPT_HOSTNAME}:${PWD}\a\
-	#\e[${PROMPT_COLOR}\][\u@${PROMPT_HOSTNAME} \w] \#\$ \[\e[m\]'
-	#;;
-	#vt100)
-	#PS1='[\u@${PROMPT_HOSTNAME} \w] \#\$ '
-	#;;
-	#*)
-	#PS1='\[\e[${PROMPT_COLOR}\][\u@${PROMPT_HOSTNAME} \w] \#\$ \[\e[m\]'
-	#;;
+#	xterm*)
+#	PS1='\[\e]1;${PROMPT_HOSTNAME}\a\e]2;${PROMPT_HOSTNAME}:${PWD}\a\
+#	\e[${PROMPT_COLOR}\][\u@${PROMPT_HOSTNAME} \w] \#\$ \[\e[m\]'
+#	;;
+#	vt100)
+#	PS1='[\u@${PROMPT_HOSTNAME} \w] \#\$ '
+#	;;
+#	*)
+#	PS1='\[\e[${PROMPT_COLOR}\][\u@${PROMPT_HOSTNAME} \w] \#\$ \[\e[m\]'
+#	;sh ;
 #esac
 
 
