@@ -37,7 +37,6 @@ fi
 
 # I load Xmodmao here
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
-synclient MaxTapTime=0
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
