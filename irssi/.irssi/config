@@ -1,0 +1,94 @@
+#  ██                        ██
+# ░░                        ░░
+#  ██ ██████  ██████  ██████ ██
+# ░██░░██░░█ ██░░░░  ██░░░░ ░██
+# ░██ ░██ ░ ░░█████ ░░█████ ░██
+# ░██ ░██    ░░░░░██ ░░░░░██░██
+# ░██░███    ██████  ██████ ░██
+# ░░ ░░░    ░░░░░░  ░░░░░░  ░░
+#
+#  ▓▓▓▓▓▓▓▓▓▓
+# ░▓ author ▓ xero <x@xero.nu>
+# ░▓ code   ▓ http://code.xero.nu/dotfiles
+# ░▓ mirror ▓ http://git.io/.files
+# ░▓▓▓▓▓▓▓▓▓▓
+# ░░░░░░░░░░
+
+utf8 = "on";
+
+servers = (
+  {
+    address = "unix.chat";
+    chatnet = "unixchat";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_verify = "yes";
+    ssl_capath = "/etc/ssl/certs/";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.freenode.net";
+    chatnet = "Freenode";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+
+);
+
+chatnets = {
+  Freenode = {
+    type = "IRC";
+    nick = "jethro7";
+    autosendcmd = "/msg nickserv identify <password removed> ;wait 2000";
+  };
+  unixchat = { type = "IRC"; nick = "neongold"; }; };
+
+channels = (
+  { name = "#moc"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#openstack-performance"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#openstack-dev"; chatnet = "Freenode"; autojoin = "yes"; },
+  #{ name = "#unix"; chatnet = "unixchat"; autojoin = "Yes"; }
+);
+
+aliases = {
+  emote = "exec -o emote";
+  ascii = "exec -o toilet -f future --irc";
+  rusto = "exec -o toilet -f rusto --irc";
+  rustofat = "exec -o toilet -f rustofat --irc";
+  gay = "exec -o toilet -f term --gay --irc";
+  toilet = "exec -o toilet";
+};
+
+settings = {
+core = { real_name = "jethro-sun"; user_name = "jethro-ubuntu"; nick = "jethro7"; };
+"fe-text" = {
+actlist_sort = "refnum";
+term_force_colors = "yes";
+indent = "12";
+};
+"fe-common/core" = {
+theme = "neongold.theme";
+bell_beeps = "no";
+autolog_path = "/var/logs/irc/$tag/$0.log";
+autolog = "yes";
+};
+};
+logs = { };
+statusbar = {
+default = {
+window = {
+items = {
+barstart = { priority = "100"; };
+user = { };
+window = { };
+window_empty = { };
+lag = { priority = "-1"; };
+act = { priority = "10"; };
+more = { priority = "-1"; alignment = "right"; };
+barend = { priority = "100"; alignment = "right"; };
+};
+};
+};
+};

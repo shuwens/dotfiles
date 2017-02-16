@@ -188,3 +188,4 @@ export PATSHOMERELOC=/home/jethro/ATS2-contrib
 export PATSHOME_contrib=/home/jethro/ATS2-contrib
 export PATH=${PATSHOME}/bin:${PATH}
 
+. ~/.vim/bash_global
