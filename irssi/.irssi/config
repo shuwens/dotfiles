@@ -52,6 +52,11 @@ channels = (
   #{ name = "#unix"; chatnet = "unixchat"; autojoin = "Yes"; }
 );
 
+ignores = ( {
+   level = "JOINS PARTS QUITS";
+   network = "Freenode";
+}
+);
 aliases = {
   emote = "exec -o emote";
   ascii = "exec -o toilet -f future --irc";
