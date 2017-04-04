@@ -1,0 +1,10 @@
+# -*- shell-script -*-
+# Google-related profile settings
+
+# Google Go setup
+export GOPATH=$HOME/r/go
+path=($HOME/r/go/bin $path)
+
+rego() {
+    eval $(command rego $*)
+}
