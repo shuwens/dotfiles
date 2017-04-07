@@ -328,7 +328,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list '' 'l:|=* r:|=*'
 zstyle ':completion:*' verbose true
-zstyle :compinstall filename '/home/amthrax/.zshrc'
+zstyle :compinstall filename '/home/jethro/.zshrc'
 
 autoload -Uz compinit
 compinit
