@@ -62,7 +62,7 @@ tmx() {
   [[ $# -eq 0 ]] && bash ~/bin/tmx 0 || bash ~/bin/tmx $#
 }
 email() {
-	echo $3 | mutt -s $2 $1
+  echo $3 | mutt -s $2 $1
 }
 # colorized cat
 c() {
@@ -77,7 +77,7 @@ lesssss() {
 }
 # read markdown files like manpages
 md() {
-    pandoc -s -f markdown -t man "$*" | man -l -
+  pandoc -s -f markdown -t man "$*" | man -l -
 }
 # nullpointer url shortener
 short() {
@@ -217,6 +217,8 @@ alias ,='make'
 # file handlers
 #alias o='xdg-open'
 o() { xdg-open "$@" & }
+#alias Disk-Usage="du -cBM --max-depth=1 2> >(grep -v 'Permission denied') | sort -n | grep G"
+alias Disk-Usage='du -h --max-depth=3 | grep G'
 
 if [ -e /usr/bin/yaourt ]; then
   alias up="yaourt -Syu --aur"
@@ -230,44 +232,19 @@ alias mv='mv -i'
 
 # Type - to move up to top parent dir which is a repository
 function - {
-  local p=""
-  for f in `pwd | tr '/' ' '`; do
-    p="$p/$f"
-    if [ -e "$p/.git" ]; then
-      cd "$p"
-      break
-    fi
-  done
+local p=""
+for f in `pwd | tr '/' ' '`; do
+  p="$p/$f"
+  if [ -e "$p/.git" ]; then
+    cd "$p"
+    break
+  fi
+done
 }
 # Replace part of current path and cd to it
 function cdd {
   cd `pwd | sed "s/$1/$2/"`
 }
-# Clever way of watching for file read/pipe progress
-# Kudos to https://coderwall.com/p/g-drlg
-function watch_progress {
-  local file=$1
-  local size=`sudo du -b $file | awk '{print $1}'`
-  local pid=${2:-`
-    sudo lsof -F p $file | cut -c 2- | head -n 1
-  `}
 
-  local watcher=/tmp/watcher-$$
-  cat <<EOF > $watcher
-file=$file
-size=$size
-pid=$pid
-EOF
-
-  cat <<'EOF' >> $watcher
-line=`sudo lsof -o -o 0 -p $pid | grep $file`
-position=`echo $line | awk '{print $7}' | cut -c 3-`
-progress=`echo "scale=2; 100 * $position / $size" | bc`
-echo pid $pid reading $file: $progress% done
-EOF
-
-  chmod +x /tmp/watcher-$$
-  watch /tmp/watcher-$$
-}
 
 # end of [aliases.zsh]

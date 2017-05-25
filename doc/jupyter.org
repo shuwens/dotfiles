@@ -1,0 +1,6 @@
+* Jupyter Notebook working within virtualenv
+[[http://help.pythonanywhere.com/pages/IPythonNotebookVirtualenvs]]
+
+
+** python read file line by line
+[[https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list]]

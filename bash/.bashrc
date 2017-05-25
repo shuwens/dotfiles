@@ -21,10 +21,10 @@ if [[ -e $HOME/dev/others/base16/builder/templates/shell ]]; then
   source "$HOME/dev/others/base16/builder/templates/shell/scripts/base16-atelier-dune.sh"
 else
   if [[ "$TERM" == "linux" ]]; then
-	  echo -en "\e]P0002b36\e]P1dc322f\e]P2859900\e]P3b58900\e]P4268bd2\e]P5d33682\e]P62aa198\e]P7eee8d5\e]P9cb4b16\e]P8002b36\e]PA586e75\e]PB657b83\e]PC839496\e]PD6c71c4\e]PE93a1a1\e]PFfdf6e3"
-	  echo -e '\e[37mbtw: base16 shell style not available, emulating solarized\e[0m';
+    echo -en "\e]P0002b36\e]P1dc322f\e]P2859900\e]P3b58900\e]P4268bd2\e]P5d33682\e]P62aa198\e]P7eee8d5\e]P9cb4b16\e]P8002b36\e]PA586e75\e]PB657b83\e]PC839496\e]PD6c71c4\e]PE93a1a1\e]PFfdf6e3"
+    echo -e '\e[37mbtw: base16 shell style not available, emulating solarized\e[0m';
   else
-	  echo -e '\e[37mbtw: base16 shell style not available\e[0m';
+    echo -e '\e[37mbtw: base16 shell style not available\e[0m';
   fi
 fi
 
@@ -50,7 +50,7 @@ if [ -e "$HOME/.local/bashrc" ]; then
 fi
 
 # Weston needs some custom vars
-if [[ ! -z $(pgrep weston) ]]; then
+if [[ ! -z `pgrep weston` ]]; then
   export GDK_BACKEND="wayland"
   export CLUTTER_BACKEND="wayland"
   export SDL_VIDEODRIVER="wayland"
@@ -65,23 +65,13 @@ alias github="((git config --local --get remote.origin.url | sed -e 's/^.*git@gi
 PS1='\[\e[37m\][\A] \[\e[0;33m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[32m\]\w'
 
 # Prompt
-# Git prompt try
 if [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
-    source /usr/share/git-core/contrib/completion/git-prompt.sh
-    # For unstaged(*) and staged(+) values next to branch name in __git_ps1
-    GIT_PS1_SHOWDIRTYSTATE="enabled"
-    GIT_PS1_SHOWUNTRACKEDFILES="enabled"
-    PS1=$PS1'\[\e[35m\]`__git_ps1`'
-    echo -e "\e[37mbtw: enabling git completion in prompt...\e[0m";
-fi
-# Git prompt trg again
-if [ -e ~/.git-prompt.sh ]; then
-    source ~/.git-prompt.sh
-    # For unstaged(*) and staged(+) values next to branch name in __git_ps1
-    GIT_PS1_SHOWDIRTYSTATE="enabled"
-    GIT_PS1_SHOWUNTRACKEDFILES="enabled"
-    PS1=$PS1'\[\e[35m\]`__git_ps1`'
-    echo -e "\e[37mbtw: enabling git completion in prompt...\e[0m";
+  source /usr/share/git-core/contrib/completion/git-prompt.sh
+  # For unstaged(*) and staged(+) values next to branch name in __git_ps1
+  GIT_PS1_SHOWDIRTYSTATE="enabled"
+  GIT_PS1_SHOWUNTRACKEDFILES="enabled"
+  PS1=$PS1'\[\e[35m\]`__git_ps1`'
+  echo -e "\e[37mbtw: enabling git completion in prompt...\e[0m";
 fi
 
 PS1=$PS1' \[\e[31m\]\$\[\e[0m\] '
@@ -93,9 +83,9 @@ fi
 
 # Solarized ls
 if [ -e .dir_colors ]; then
-    eval "$(dircolors -b .dir_colors)"
+  eval "$(dircolors -b .dir_colors)"
 else
-    echo -e '\e[37mbtw: no dircolors available...\e[0m';
+  echo -e '\e[37mbtw: no dircolors available...\e[0m';
 fi
 
 # colored man output
@@ -148,17 +138,17 @@ alias run='sudo systemctl start'
 alias restart='sudo systemctl restart'
 alias stop='sudo systemctl stop'
 alias x='sudo netctl'
-alias gc='git checkout'
-alias gs='git status -s'
-alias ca='git commit -a -m'
 alias xt='date +%s'
 alias ..='cd ..'
+alias sduo='sudo'
 # make
 alias ,='make'
 # file handlers
-alias o='xdg-open'
+#alias o='xdg-open'
+o() { xdg-open "$@" & }
+
 # update command
-#alias p="sudo pacman"
+alias p="sudo pacman"
 alias y="yaourt"
 if [ -e /usr/bin/yaourt ]; then
   alias up="yaourt -Syu --aur"
@@ -169,47 +159,31 @@ fi
 alias e='$EDITOR'
 # Safety first
 alias mv='mv -i'
+# git alias
+alias gits="git status"
+alias gl="git log --graph --decorate --oneline"
+alias gc='git checkout'
+alias gs='git status -s'
+alias ca='git commit -a -m'
+alias lazy="git add -A && git commit -m 'Update some files' && git push "
+
 
 # Type - to move up to top parent dir which is a repository
 function - {
-  local p=""
-	for f in $(pwd | tr '/' ' '); do
-    p="$p/$f"
-    if [ -e "$p/.git" ]; then
-      cd "$p"
-      break
-    fi
-  done
+local p=""
+for f in `pwd | tr '/' ' '`; do
+  p="$p/$f"
+  if [ -e "$p/.git" ]; then
+    cd "$p"
+    break
+  fi
+done
 }
 
 # Replace part of current path and cd to it
 function cdd {
-	cd $(pwd | sed "s/$1/$2/")
+  cd `pwd | sed "s/$1/$2/"`
 }
 
-# Clever way of watching for file read/pipe progress
-# Kudos to https://coderwall.com/p/g-drlg
-function watch_progress {
-  local file=$1
-  local size=$(sudo du -b $file | awk '{print $1}')
-  local pid=${2:-`
-    sudo lsof -F p $file | cut -c 2- | head -n 1
-  `}
 
-  local watcher=/tmp/watcher-$$
-  cat <<EOF > $watcher
-file=$file
-size=$size
-pid=$pid
-EOF
-
-  cat <<'EOF' >> $watcher
-line=`sudo lsof -o -o 0 -p $pid | grep $file`
-position=`echo $line | awk '{print $7}' | cut -c 3-`
-progress=`echo "scale=2; 100 * $position / $size" | bc`
-echo pid $pid reading $file: $progress% done
-EOF
-
-  chmod +x /tmp/watcher-$$
-  watch /tmp/watcher-$$
-}
+# end of [.bashrc]

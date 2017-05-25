@@ -49,9 +49,10 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 # For notetaking
 export NOTES_DIR=$HOME/Dropbox/GS
 
-export GTK_MODULES=unity-gtk-module
+#export GTK_MODULES=unity-gtk-module
 
-export SHARED=/home/jethro/git/651/src/shardmaster
+# For Wine to run windows program
+export WINEARCH=win32
 
 
 
