@@ -1,0 +1,69 @@
+#!/usr/bin/python
+
+## gnome-keyring-query : v0.1
+
+## http://devsec.org/software/misc/gnome-keyring-query
+
+## gnome-keyring-query is a simple command to store and fetch passwords
+## from the GNOME kering.
+## based on a class from: http://www.rittau.org/blog/20070726-01
+##
+## - Thor Kooda
+##   2008-10-23
+
+import gtk # ensure that the application name is correctly set
+import gnomekeyring
+
+class Keyring( object ):
+    def __init__( self, user, server, protocol ):
+        self._user = user
+        self._server = server
+        self._protocol = protocol
+        self._keyring = gnomekeyring.get_default_keyring_sync()
+
+    def has_credentials( self ):
+        try:
+            attrs = { "user": self._user, "server": self._server,
+                      "protocol": self._protocol }
+            items = gnomekeyring.find_items_sync( gnomekeyring.ITEM_NETWORK_PASSWORD, attrs )
+            return len( items ) > 0
+        except gnomekeyring.DeniedError:
+            return False
+
+    def get_credentials( self ):
+        attrs = { "user": self._user, "server": self._server,
+                  "protocol": self._protocol }
+        items = gnomekeyring.find_items_sync( gnomekeyring.ITEM_NETWORK_PASSWORD, attrs )
+        return items[0].secret
+
+    def set_credentials( self, password ):
+        attrs = { "user": self._user, "server": self._server,
+                  "protocol": self._protocol }
+        gnomekeyring.item_create_sync( gnomekeyring.get_default_keyring_sync(),
+                                       gnomekeyring.ITEM_NETWORK_PASSWORD,
+                                       self._user, attrs, password, True )
+
+def bail( str, err = 1 ):
+    print >>sys.stderr, str
+    sys.exit( err )
+
+def usage():
+    bail( "usage: %s <get|set> <protocol> <username> <hostname> [password]" \
+            % os.path.basename( sys.argv[0] ), 2 )
+
+if __name__ == '__main__':
+    import sys
+    import os
+    if len( sys.argv ) == 5 and sys.argv[1] == "get":
+        k = Keyring( sys.argv[3], sys.argv[4], sys.argv[2] )
+        try:
+            if k.has_credentials():
+                print k.get_credentials() # print password
+        except gnomekeyring.NoMatchError:
+            bail( "no match" )
+    elif len( sys.argv ) == 6 and sys.argv[1] == "set":
+        k = Keyring( sys.argv[3], sys.argv[4], sys.argv[2] )
+        k.set_credentials( sys.argv[5] )
+    else:
+        usage()
+

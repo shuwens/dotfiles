@@ -50,7 +50,7 @@ if [ -e "$HOME/.local/bashrc" ]; then
 fi
 
 # Weston needs some custom vars
-if [[ ! -z `pgrep weston` ]]; then
+if [[ ! -z $(pgrep weston) ]]; then
   export GDK_BACKEND="wayland"
   export CLUTTER_BACKEND="wayland"
   export SDL_VIDEODRIVER="wayland"
@@ -65,8 +65,18 @@ alias github="((git config --local --get remote.origin.url | sed -e 's/^.*git@gi
 PS1='\[\e[37m\][\A] \[\e[0;33m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[32m\]\w'
 
 # Prompt
-if [ -e /usr/share/git/completion/git-prompt.sh ]; then
-    source /usr/share/git/completion/git-prompt.sh
+# Git prompt try
+if [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
+    # For unstaged(*) and staged(+) values next to branch name in __git_ps1
+    GIT_PS1_SHOWDIRTYSTATE="enabled"
+    GIT_PS1_SHOWUNTRACKEDFILES="enabled"
+    PS1=$PS1'\[\e[35m\]`__git_ps1`'
+    echo -e "\e[37mbtw: enabling git completion in prompt...\e[0m";
+fi
+# Git prompt trg again
+if [ -e ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
     # For unstaged(*) and staged(+) values next to branch name in __git_ps1
     GIT_PS1_SHOWDIRTYSTATE="enabled"
     GIT_PS1_SHOWUNTRACKEDFILES="enabled"
@@ -148,7 +158,7 @@ alias ,='make'
 # file handlers
 alias o='xdg-open'
 # update command
-alias p="sudo pacman"
+#alias p="sudo pacman"
 alias y="yaourt"
 if [ -e /usr/bin/yaourt ]; then
   alias up="yaourt -Syu --aur"
@@ -163,7 +173,7 @@ alias mv='mv -i'
 # Type - to move up to top parent dir which is a repository
 function - {
   local p=""
-  for f in `pwd | tr '/' ' '`; do
+	for f in $(pwd | tr '/' ' '); do
     p="$p/$f"
     if [ -e "$p/.git" ]; then
       cd "$p"
@@ -174,14 +184,14 @@ function - {
 
 # Replace part of current path and cd to it
 function cdd {
-  cd `pwd | sed "s/$1/$2/"`
+	cd $(pwd | sed "s/$1/$2/")
 }
 
 # Clever way of watching for file read/pipe progress
 # Kudos to https://coderwall.com/p/g-drlg
 function watch_progress {
   local file=$1
-  local size=`sudo du -b $file | awk '{print $1}'`
+  local size=$(sudo du -b $file | awk '{print $1}')
   local pid=${2:-`
     sudo lsof -F p $file | cut -c 2- | head -n 1
   `}
