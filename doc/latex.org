@@ -1,0 +1,2 @@
+* latex resources
+  [[http://web.mit.edu/ariels/Public/6.803/]]
