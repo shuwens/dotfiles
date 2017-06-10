@@ -3,3 +3,27 @@
 
 * Bootable USB
   [[https://help.ubuntu.com/community/Installation/FromUSBStick]]
+
+* Utils
+** zsh
+$ chsh -s $(which zsh)
+$ chsh -s `which zsh`
+
+** Power save
+[[https://askubuntu.com/questions/285434/is-there-a-power-saving-application-similar-to-jupiter]]
+
+* Yubikey
+https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html
+
+
+
+* Terminal
+** sudo update-alternatives --config x-terminal-emulator
+
+** tools
+urlview
+pathpicker
+
+fking tool taht enhanced contrl r
+** [[https://gist.github.com/tsabat/1498393]]
+** [[https://github.com/junegunn/fzf/issues/214]]

@@ -162,7 +162,7 @@ alias hack-n-hil="ssh hack-n-hil.prb.massopencloud.org"
 alias haas-beta="ssh haas-beta.prb.massopencloud.org"
 
 # t-tasks
-alias tt='python ~/Public/t/t.py --task-dir ~/tasks --list tasks'
+alias t='python ~/Public/t/t.py --task-dir ~/Public/tasks --list tasks'
 
 # ubuntu special
 alias open="gnome-open"

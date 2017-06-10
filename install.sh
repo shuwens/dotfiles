@@ -1,19 +1,21 @@
-#!/usr/bin/sh
+#!/bin/bash
+set -e
 
-stow zsh        -t ~
-stow X          -t ~
-stow awesome35  -t ~/.config/
-#stow emacs      -t ~
-stow scripts    -t ~
-stow esmtp      -t ~
-stow screen     -t ~
-stow mutt       -t ~
-stow XMonad     -t ~
-stow urxvt      -t ~
-#stow bin        -t ~
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 
-##---------------
-#    Optional:
-##---------------
-#stow ssh        -t ~
-#stow config     -t ~/.config
+# install font 
+sudo apt remove thunderbird
+sudo apt-add-repository -y ppa:rael-gc/scudcloud
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+sudo add-apt-repository ppa:linrunner/tlp
+
+sudo apt-get update
+
+# install my personal utils 
+sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
+  mercurial zathura exuberant-ctags stow scudcloud tp-smapi-dkms \
+  tlp tlp-rdw smartmontools ethtool console-setup-linux
+#console-setup-linux
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+

@@ -15,7 +15,8 @@
 # ░░░░░░░░░░
 #
 #█▓▒░ source the plugin https://github.com/zsh-users/zsh-syntax-highlighting
-source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-syntax-highlighting.zsh
 
 #█▓▒░ color overrides
 ZSH_HIGHLIGHT_STYLES[default]='none'
