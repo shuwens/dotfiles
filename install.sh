@@ -13,8 +13,11 @@ sudo apt-get update
 
 # install my personal utils 
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
-  mercurial zathura exuberant-ctags stow scudcloud tp-smapi-dkms \
-  tlp tlp-rdw smartmontools ethtool console-setup-linux
+  mercurial zathura exuberant-ctags stow scudcloud 
+
+sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
+
+
 #console-setup-linux
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
