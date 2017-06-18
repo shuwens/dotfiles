@@ -1,12 +1,8 @@
 #!/bin/bash 
 
-
-
-
 # ZSH
 stow zsh        -t ~
-
-#stow X          -t ~
+stow X          -t ~
 #stow awesome35  -t ~/.config/
 #stow emacs      -t ~
 #stow scripts    -t ~
