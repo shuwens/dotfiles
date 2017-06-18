@@ -1,10 +1,11 @@
 # -*- mode: conf; indent-tabs-mode: t -*-
 
 [user]
-	name = Jethro Sun
+	name = shwsun
 	# Require email to be configured in either .gitconfig-local or
 	# .git/config (Git >= 2.8)
 	useConfigOnly = true
+	email = shwsun@bu.edu
 [color]
 	ui = true
 [merge]
