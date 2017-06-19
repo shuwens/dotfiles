@@ -27,3 +27,6 @@ pathpicker
 fking tool taht enhanced contrl r
 ** [[https://gist.github.com/tsabat/1498393]]
 ** [[https://github.com/junegunn/fzf/issues/214]]
+
+* Ubuntu general setting
+  $ exo-preferred-applications

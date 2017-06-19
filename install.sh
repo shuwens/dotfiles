@@ -15,7 +15,11 @@ sudo apt-get update
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
   mercurial zathura exuberant-ctags stow scudcloud 
 
+# tlp
 sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
+
+# mendeley
+sudo apt install -y qt4-dev-tools libqtsvg4-perl libqtwebkit4
 
 
 #console-setup-linux

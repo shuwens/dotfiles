@@ -20,6 +20,8 @@
 #█▓▒░ paths
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/home/jethro/git/dotfiles/misc:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
+
 #export MANPATH=/uso/local/man:$MANPATH
 
 #█▓▒░ preferred editor for local and remote sessions

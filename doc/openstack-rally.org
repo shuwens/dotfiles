@@ -1,0 +1,15 @@
+* insights on rally from openstack team
+
+"CinderVolumes.create_and_delete_volume" can be good as well for statistic. 
+First of all, it operates simple actions(not simple, but more stable). And 
+another big advantage - it removes the volume in each iteration, so you can 
+exucute this scenario with a bit number of total iterations without usage of 
+all resources of your cloud
+bigger number of iterations -> smoother timings
+
+* Answers:
+ Andrey Kurilin @andreykurilin 04:30
+@shwsun hi! To be honest, VM at random hardware is used for our CI + all 
+openstack projects are used from master branches, which means a lot of random 
+factors. if you test openstack at real hardware with fixed version, the results 
+will be more stable
