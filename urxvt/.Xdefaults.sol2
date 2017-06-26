@@ -1,0 +1,56 @@
+! terminal colors --------------------------------------------------------------
+*background:           #272822
+*foreground:           #00B7EB
+*color0:               #000000
+*color8:               #555753
+*color1:               #ff6565
+*color9:               #ff8d8d
+*color2:               #93d44f
+*color10:              #c8e7a8
+*color3:               #eab93d
+*color11:              #ffc123
+*color4:               #204a87
+*color12:              #3465a4
+*color5:               #ce5c00
+*color13:              #f57900
+*color6:               #89b6e2
+*color14:              #46a4ff
+*color7:               #cccccc
+*color15:              #ffffff
+
+! xterm settings ---------------------------------------------------------------
+xterm*dynamicColors:   true
+xterm*utf8:            2
+xterm*eightBitInput:   true
+xterm*saveLines:       4096
+xterm*scrollKey:       true
+xterm*scrollTtyOutput: false
+xterm*scrollBar:       true
+xterm*rightScrollBar:  true
+xterm*jumpScroll:      true
+xterm*multiScroll:     true
+xterm*toolBar:         false
+xterm*cursorBlink:     true
+xterm*cursorOffTime:   500
+xterm*cursoronTime:    500
+xterm*metaSendsEscape: true
+
+! bold and underline -----------------------------------------------------------
+XTerm*colorBDMode:     true
+XTerm*colorBD:         #00FFFF
+XTerm*colorULMode:     true
+XTerm*colorUL:         rgb:e4/e4/e4
+
+! font -------------------------------------------------------------------------
+Xft.dpi:               196
+Xft.antialias:         true
+Xft.rgba:              rgb
+Xft.hinting:           true
+Xft.hintstyle:         hintslight
+URxvt*font:  -*-terminus-*-*-*-*-20-*-*-*-*-*-*-*
+
+! ext --------------------------------------------------------------------------
+URxvt.perl-ext-common: ...,tabbed,...
+
+
+!xterm*faceName:        xft: Droid Sans Mono:size=16

@@ -13,3 +13,8 @@ bigger number of iterations -> smoother timings
 openstack projects are used from master branches, which means a lot of random 
 factors. if you test openstack at real hardware with fixed version, the results 
 will be more stable
+
+* Nova cell problem
+Run $ nova-manage cell_v2 discover_hosts
+
+

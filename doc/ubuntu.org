@@ -9,6 +9,14 @@
 $ chsh -s $(which zsh)
 $ chsh -s `which zsh`
 
+** print github markdown
+[[https://kevin.deldycke.com/2012/01/how-to-generate-pdf-markdown/]]
+
+$ apt install rubygems wkhtmltopdf
+or 
+$ pip install grip
+
+
 ** Power save
 [[https://askubuntu.com/questions/285434/is-there-a-power-saving-application-similar-to-jupiter]]
 
@@ -30,3 +38,15 @@ fking tool taht enhanced contrl r
 
 * Ubuntu general setting
   $ exo-preferred-applications
+
+* Golang 
+[[http://installfights.blogspot.com/2017/03/how-to-install-go-18-on-ubuntu-1604.html]]
+
+
+* Ubuntu Keyring
+gpg --keyserver pgp.mit.edu  --recv-keys
+
+* Image processing
+[[http://www.darktable.org/install/#ubuntu]]
+[[https://inkscape.org/en/download/linux/]]
+

@@ -4,3 +4,9 @@
 
 ** python read file line by line
 [[https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list]]
+
+** plot charts
+[[http://matplotlib.org/examples/pylab_examples/table_demo.html]]
+
+** example plots
+[[http://matplotlib.org/users/screenshots.html]]

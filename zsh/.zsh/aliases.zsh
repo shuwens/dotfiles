@@ -90,9 +90,10 @@ alias gl="git log --pretty=oneline --abbrev-commit"
 # ------------------------------
 # personal utils
 # ------------------------------
-alias g11='g++ -std=c++11 -O2'
-alias g+="g++ -std=gnu++11 -Wall -Wextra -g"
+alias UpdateResume="scp ~/Documents/my_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
 alias leet="./~/workspace/practise-cpp/leetcode/comments.sh"
+alias virtualenv3="virtualenv -p /usr/bin/python3 .venv"
+
 
 # careful! bugs!
 # alias scrape="wget -A pdf,jpg -m -p -E -k -K -np "
@@ -125,7 +126,7 @@ alias grep="grep --color=auto"
 #alias cfinp="f() {find . -iname "${@:2}"};f"
 #alias fin="f() {find "$1" -iname "*${@:2}*"};f"
 #alias cfin="f() {find . -iname "*${@:1}*"};f"
-alias rgp="f() {rg -p "$@" | less -r};f"
+#alias rgp="f() {rg -p "$@" | less -r};f"
 
 # for zsh
 alias Z="zsh"
@@ -136,17 +137,23 @@ alias Eg="source ~/.zgoogle"
 # git alias
 alias gits="git status"
 alias gs="git status"
+alias gb="git branch"
 alias gl="git log --graph --decorate --oneline"
 alias lazy="git add -A && git commit -m 'Update some files' && git push "
 # ========================================================
-alias gc="git checkout"
+#alias gc="git checkout"
+
+#alias gs='git status -s'
+#alias ca='git commit -a -m'
+
 alias gcb="git checkout -b"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gcam="git commit -am"
 alias gl="git log --graph --decorate --oneline"
 #alias g="hub"
-alias gc="git commit -m"
+#alias gc="git commit -m"
+alias gc="git clone"
 alias gd="git diff"
 alias gf="git fetch"
 alias gm="git merge"
@@ -172,6 +179,14 @@ alias StatDropbox="~/.dropbox/dropbox.py status"
 
 # utils
 alias Docker-clean="docker ps --filter 'status=exited' | grep 'weeks ago' | awk '{print $1}' | xargs --no-run-if-empty docker rm"
+
+
+# ----------------------------------
+# Compiling stuff
+# ----------------------------------
+alias ghcd="ghc -dynamic"
+alias g11='g++ -std=c++11 -O2'
+alias g+="g++ -std=gnu++11 -Wall -Wextra -g"
 
 
 #----------------------------------
@@ -208,8 +223,6 @@ alias restart='sudo systemctl restart'
 alias stop='sudo systemctl stop'
 alias x='sudo netctl'
 #alias gc='git checkout'
-alias gs='git status -s'
-alias ca='git commit -a -m'
 alias xt='date +%s'
 alias ..='cd ..'
 # make
@@ -246,5 +259,9 @@ function cdd {
   cd `pwd | sed "s/$1/$2/"`
 }
 
+# haskell vim
+alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc" 
+
+alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
 
 # end of [aliases.zsh]

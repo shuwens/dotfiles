@@ -1,2 +1,10 @@
 * latex resources
   [[http://web.mit.edu/ariels/Public/6.803/]]
+
+
+** Using minted to syntax highlight
+[[https://github.com/gpoore/minted/issues/92]]
+
+
+
+

@@ -1,7 +1,10 @@
 ! urxvt
-
 URxvt*geometry:                53x20
-URxvt*font:  xft:Terminus:pixelsize=18
+! Use this for general case
+URxvt*font:  xft:Terminus:size=12
+! Use this in Arch Linux
+!URxvt.font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
+!URxvt*font:  -*-terminus-medium-*-*-*-20-*-*-*-*-*-iso8859-1
 URxvt*depth:                32
 URxvt*background:            [85]#000000
 URxvt*foreground:            [100]#ffffff
@@ -10,7 +13,7 @@ URxvt*scrollBar:            false
 URxvt*saveLines:  5000
 URxvt*termName:    rxvt-unicode
 URxvt.transparent:   true
-URxvt.shading:       60
+URxvt.shading:       20
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: firefox 
 !chromium-browser
@@ -26,10 +29,10 @@ URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 3
 URxvt.tabbed.tab-bg: 0
 
-URxvt.keysym.Control-Up:     \033[1;5A
-URxvt.keysym.Control-Down:   \033[1;5B
-URxvt.keysym.Control-Left:   \033[1;5D
-URxvt.keysym.Control-Right:  \033[1;5C
+!URxvt.keysym.Control-Up:     \033[1;5A
+!URxvt.keysym.Control-Down:   \033[1;5B
+!URxvt.keysym.Control-Left:   \033[1;5D
+!URxvt.keysym.Control-Right:  \033[1;5C
 
 
 

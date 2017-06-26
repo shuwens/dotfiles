@@ -21,6 +21,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/home/jethro/git/dotfiles/misc:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 #export MANPATH=/uso/local/man:$MANPATH
 
@@ -41,9 +42,9 @@ export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
 
 # golang
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/workspace/goto
+export GOPATH=$HOME/r
 export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # java
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
