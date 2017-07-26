@@ -19,9 +19,12 @@
 
 #█▓▒░ paths
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/home/jethro/git/dotfiles/misc:$PATH
+export PATH=$HOME/git/dotfiles/misc:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+
+# For notetaking
+export NOTES_DIR=$HOME/Dropbox/GS
 
 #export MANPATH=/uso/local/man:$MANPATH
 
@@ -43,19 +46,15 @@ export LESSCHARSET=utf-8
 
 # golang
 export GOPATH=$HOME/r
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+#export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+#export GOROOT=/usr/local/go
 
 # java
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-# For notetaking
-export NOTES_DIR=$HOME/Dropbox/GS
-
-#export GTK_MODULES=unity-gtk-module
-
-# For Wine to run windows program
-export WINEARCH=win32
+#█▓▒░ rust lang
+export PATH=$HOME/.cargo/bin:$PATH
 
 
 

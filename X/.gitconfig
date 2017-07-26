@@ -40,3 +40,5 @@
 [core]
   excludesfile = ~/.gitignore_global
 	editor = /usr/bin/vim
+[http]
+	cookiefile = /home/jethros/.gitcookies

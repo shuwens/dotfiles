@@ -3,8 +3,16 @@
 
 
 ** Using minted to syntax highlight
-[[https://github.com/gpoore/minted/issues/92]]
+ [[https://github.com/gpoore/minted/issues/92]]
+
+** latex pdf output size
+ [[https://tex.stackexchange.com/questions/31973/latex-how-do-i-force-pdf-page-height-width#31976]]
+
+** create separate fig file
+
+[[https://tex.stackexchange.com/questions/173131/how-to-save-a-figure-with-multiple-sub-floats-to-a-single-pdf-file]]
 
 
+[[https://tex.stackexchange.com/questions/140796/generating-a-separate-pdf-file-of-tables-and-figures-from-a-latex-file]]
 
 

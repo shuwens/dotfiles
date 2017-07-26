@@ -44,6 +44,7 @@ fking tool taht enhanced contrl r
 
 
 * Ubuntu Keyring
+[[https://stackoverflow.com/questions/1139127/how-to-trust-a-apt-repository-debian-apt-get-update-error-public-key-is-not-av#1139148]]
 gpg --keyserver pgp.mit.edu  --recv-keys
 
 * Image processing

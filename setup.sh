@@ -11,7 +11,7 @@ stow screen     -t ~
 #stow mutt       -t ~
 #stow XMonad     -t ~
 stow urxvt      -t ~
-#stow bin        -t ~
+stow bin        -t ~
 
 ##---------------
 #    Optional:

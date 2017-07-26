@@ -15,10 +15,15 @@
 # ░░░░░░░░░░
 #
 #█▓▒░ aliases
-alias ll="ls -lahF --color=auto"
-alias ls="ls -hF --color=auto"
-alias la="ls -a"
-alias lsl="ls -lhF --color=auto"
+alias ll="/bin/ls -lahF --color=auto"
+alias la='/bin/ls -A --color=auto'
+alias l='/bin/ls -CF'
+#alias lll='/bin/ls -la'
+alias lsl="/bin/ls -lhF --color=auto"
+#alias ls="ls -hF --color=auto"
+# Use exa !
+alias ls="exa"
+alias le="exa -abghHliS"
 alias sduo="sudo"
 alias "cd.."="cd ../"
 alias up="cd ../"
@@ -101,9 +106,7 @@ alias virtualenv3="virtualenv -p /usr/bin/python3 .venv"
 # alias Docker-clean="docker rm $(docker ps -a -q) && docker rmi $(docker images -q)"
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+#
 alias ..='cd ..'
 alias ...="cd ..."
 alias sduo="sudo"
@@ -209,15 +212,11 @@ alias tkss="tmux kill-session -t"
 export LESS="-F -X -R"
 
 # Color aliases
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias mplayer='mplayer -msgcolor'
 # Common aliases
 alias more='less'
 # Convenience aliases
-alias lll='ls -la'
-alias ll='ls -l'
-alias l='ls'
 alias run='sudo systemctl start'
 alias restart='sudo systemctl restart'
 alias stop='sudo systemctl stop'
