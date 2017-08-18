@@ -57,4 +57,6 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export PATH=$HOME/.cargo/bin:$PATH
 
 
+# MIT Scheme
+export MITSCHEME_6001_DIRECTORY=$HOME/workspace/sicp
 

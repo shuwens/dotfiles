@@ -16,3 +16,5 @@
 [[https://tex.stackexchange.com/questions/140796/generating-a-separate-pdf-file-of-tables-and-figures-from-a-latex-file]]
 
 
+** How to influence the position of float environments like figure and table in LaTeX?
+[[https://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat]]

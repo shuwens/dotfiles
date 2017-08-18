@@ -36,7 +36,8 @@ alias xsel="xsel -b"
 #alias fuck='sudo $(fc -ln -1)'
 
 alias ag="ag --color --color-line-number '0;35' --color-match '46;30' --color-path '4;36'"
-alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
+#alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
+alias tree='exa --tree'
 alias rock="ncmpcpp"
 alias mixer="alsamixer"
 alias genplaylist="cd ~/music;find . -name '*.mp3' -o -name '*.flac'|sed -e 's%^./%%g' > ~/.mpd/playlists/all.m3u"
@@ -262,5 +263,7 @@ function cdd {
 alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc" 
 
 alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
+
+alias Scheme="scheme -large -band 6001.com -edit"
 
 # end of [aliases.zsh]

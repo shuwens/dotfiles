@@ -51,3 +51,5 @@ gpg --keyserver pgp.mit.edu  --recv-keys
 [[http://www.darktable.org/install/#ubuntu]]
 [[https://inkscape.org/en/download/linux/]]
 
+* time zone
+[[https://askubuntu.com/questions/738513/how-can-i-make-ubuntu-automatically-detect-the-correct-timezone-based-on-my-inte]]
