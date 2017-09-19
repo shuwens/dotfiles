@@ -51,7 +51,7 @@ export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 #export GOROOT=/usr/local/go
 
 # java
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 #█▓▒░ rust lang
 export PATH=$HOME/.cargo/bin:$PATH

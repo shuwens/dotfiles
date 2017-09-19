@@ -4,7 +4,7 @@ set -e
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 
 # install font 
-sudo apt remove thunderbird
+sudo apt remove thunderbird nano
 sudo apt-add-repository -y ppa:rael-gc/scudcloud
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 sudo add-apt-repository ppa:linrunner/tlp
@@ -13,7 +13,7 @@ sudo apt-get update
 
 # install my personal utils 
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
-  mercurial zathura exuberant-ctags stow scudcloud meld vlc
+  mercurial zathura exuberant-ctags stow scudcloud meld vlc python-pip zsh exa
 
 # tlp
 sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
@@ -32,7 +32,12 @@ sudo apt-get install texlive-latex-extra  python-pygments
 sudo apt install -y haskell-stack darcs
 stack install ghc-mod
 
+# python pip
+sudo apt install -y python-pip
 sudo pip install pylint pyflakes
+
+# java
+sudo apt-get install openjdk-8-jdk
 
 
 #console-setup-linux

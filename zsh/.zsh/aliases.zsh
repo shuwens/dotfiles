@@ -52,7 +52,7 @@ alias future="toilet -t -f future"
 alias rusto="toilet -t -f rusto"
 alias rustofat="toilet -t -f rustofat"
 alias lol="base64 </dev/urandom | lolcat"
-alias apt="sudo apt"
+#alias apt="sudo apt"
 #alias update="sudo apt update "   #"pacman-colors && yaourt -Syua"
 alias docker="sudo docker"
 alias systemctl="sudo systemctl"
@@ -265,5 +265,23 @@ alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc"
 alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
 
 alias Scheme="scheme -large -band 6001.com -edit"
+
+
+# ----------------------
+# Just my thing
+# ----------------------
+
+function sudo() {
+  if [ -z "$1" ]; then
+    command sudo;
+  elif [[ $1 == "apt" ]]; then
+    if [[ $2 == "in" ]]; then
+      command sudo apt install;
+    else
+      command sudo "$@";
+    fi
+  fi
+}
+
 
 # end of [aliases.zsh]
