@@ -277,6 +277,8 @@ function sudo() {
   elif [[ $1 == "apt" ]]; then
     if [[ $2 == "in" ]]; then
       command sudo apt install;
+    elif [[ $2 == "up" ]]; then
+      command sudo apt update;
     else
       command sudo "$@";
     fi
