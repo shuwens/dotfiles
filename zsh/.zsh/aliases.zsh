@@ -276,12 +276,14 @@ function sudo() {
     command sudo;
   elif [[ $1 == "apt" ]]; then
     if [[ $2 == "in" ]]; then
-      command sudo apt install;
+      command sudo apt install ${@:3};
     elif [[ $2 == "up" ]]; then
       command sudo apt update;
     else
-      command sudo "$@";
+      command sudo "$@"
     fi
+  else
+    command sudo "$@";
   fi
 }
 
