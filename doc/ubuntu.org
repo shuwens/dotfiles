@@ -55,6 +55,8 @@ gpg --keyserver pgp.mit.edu  --recv-keys
 [[https://askubuntu.com/questions/738513/how-can-i-make-ubuntu-automatically-detect-the-correct-timezone-based-on-my-inte]]
 
 * Virtualbox
+enable VT-x
+disable secure boot
 
 * Pdf file
 xdg-mime query default application/pdf   
