@@ -1,6 +1,7 @@
 #!/bin/bash 
 
 # ZSH
+rm ~/.zshrc
 stow zsh        -t ~
 stow X          -t ~
 #stow awesome35  -t ~/.config/

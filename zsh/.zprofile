@@ -152,3 +152,5 @@ fi
 export atc_profile_loaded=1
 
 export zprofile_generation=1
+
+export PATH="$HOME/.cargo/bin:$PATH"

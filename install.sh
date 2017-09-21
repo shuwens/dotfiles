@@ -13,7 +13,8 @@ sudo apt-get update
 
 # install my personal utils 
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
-  mercurial zathura exuberant-ctags stow scudcloud meld vlc python-pip zsh exa
+  mercurial zathura exuberant-ctags stow meld vlc python-pip zsh \
+  chromium-browser
 
 # tlp
 sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
@@ -38,6 +39,10 @@ sudo pip install pylint pyflakes
 
 # java
 sudo apt-get install openjdk-8-jdk
+
+# install rust first, then install exa
+curl https://sh.rustup.rs -sSf | sh
+cargo install --no-default-features --git https://github.com/ogham/exa
 
 
 #console-setup-linux
