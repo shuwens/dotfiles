@@ -91,7 +91,7 @@ short() {
 }
 
 # Add linux kernel dev aliaes
-alias gl="git log --pretty=oneline --abbrev-commit"
+#alias gl="git log --pretty=oneline --abbrev-commit"
 
 # ------------------------------
 # personal utils
@@ -154,7 +154,9 @@ alias gcb="git checkout -b"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gcam="git commit -am"
-alias gl="git log --graph --decorate --oneline"
+#alias gl="git log --graph --decorate --oneline"
+alias gl="git lg1"
+alias gg="git lg2"
 #alias g="hub"
 #alias gc="git commit -m"
 alias gc="git clone"
@@ -164,7 +166,6 @@ alias gm="git merge"
 alias gr="git rebase"
 alias gp="git push"
 alias gu="git unstage"
-alias gg="git graph"
 alias gco="git checkout"
 alias gpr="hub pull-request"
 
