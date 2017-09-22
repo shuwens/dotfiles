@@ -22,6 +22,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/git/dotfiles/misc:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=/opt:$PATH
 
 # For notetaking
 export NOTES_DIR=$HOME/Dropbox/GS

@@ -227,6 +227,7 @@ alias xt='date +%s'
 alias ..='cd ..'
 # make
 alias ,='make'
+alias ,,='make clean'
 # file handlers
 #alias o='xdg-open'
 o() { xdg-open "$@" & }
