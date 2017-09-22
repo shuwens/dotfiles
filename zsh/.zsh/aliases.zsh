@@ -143,7 +143,17 @@ alias gits="git status"
 alias gs="git status"
 alias gb="git branch"
 alias gl="git log --graph --decorate --oneline"
-alias lazy="git add -A && git commit -m 'Update some files' && git push "
+#alias lazy=" git add -A && git commit -m 'Update some files' && git push"
+function lazy() {
+  if [ -z "$1" ]; then
+    echo "1"
+    command git add -A && git commit -m 'Update some files' && git push;
+  else
+    echo "$@"
+    command git add -A && git commit -m "Update some files of $@" && git push;
+  fi
+}
+
 # ========================================================
 #alias gc="git checkout"
 
@@ -272,7 +282,7 @@ alias Scheme="scheme -large -band 6001.com -edit"
 # ----------------------
 # Just my thing
 # ----------------------
-
+#
 function sudo() {
   if [ -z "$1" ]; then
     command sudo;
