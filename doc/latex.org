@@ -20,6 +20,8 @@
 [[https://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat]]
 
 ** fancy referecen
+** space in
+[[https://www.sharelatex.com/learn/Spacing_in_math_mode]]
 [[https://tex.stackexchange.com/questions/59938/fancy-cross-referencing]]
 * figures
   [[https://tex.stackexchange.com/questions/119905/insert-multiple-figures-in-latex]]
