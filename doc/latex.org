@@ -21,3 +21,5 @@
 
 ** fancy referecen
 [[https://tex.stackexchange.com/questions/59938/fancy-cross-referencing]]
+* figures
+  [[https://tex.stackexchange.com/questions/119905/insert-multiple-figures-in-latex]]

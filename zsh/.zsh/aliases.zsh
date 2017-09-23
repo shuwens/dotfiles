@@ -146,7 +146,7 @@ alias gl="git log --graph --decorate --oneline"
 #alias lazy=" git add -A && git commit -m 'Update some files' && git push"
 function lazy() {
   if [ -z "$1" ]; then
-    echo "1"
+    echo "0"
     command git add -A && git commit -m 'Update some files' && git push;
   else
     echo "$@"
