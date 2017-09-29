@@ -23,7 +23,7 @@ sudo apt-add-repository -y ppa:teejee2008/ppa
 # install my personal utils 
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
   mercurial zathura exuberant-ctags stow meld vlc python-pip zsh \
-  chromium-browser gnome-tweak-tool golang-glide docker.io
+  chromium-browser gnome-tweak-tool golang-glide docker.io fonts-roboto
 
 # tlp
 sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
