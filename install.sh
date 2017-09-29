@@ -3,18 +3,27 @@ set -e
 
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 
-# install font 
 sudo apt remove thunderbird nano
-sudo apt-add-repository -y ppa:rael-gc/scudcloud
+#sudo apt-add-repository -y ppa:rael-gc/scudcloud
+
+# install font 
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+
+# Thinkpad tlp
 sudo add-apt-repository ppa:linrunner/tlp
 
-sudo apt-get update
+# sublime text
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+# linux kernel 
+sudo apt-add-repository -y ppa:teejee2008/ppa
 
 # install my personal utils 
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
   mercurial zathura exuberant-ctags stow meld vlc python-pip zsh \
-  chromium-browser gnome-tweak-tool
+  chromium-browser gnome-tweak-tool golang-glide docker.io
 
 # tlp
 sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
@@ -27,7 +36,7 @@ sudo apt install -y qt4-dev-tools libqtsvg4-perl libqtwebkit4
 sudo apt install -y golang-glide
 
 # latex
-sudo apt-get install texlive-latex-extra  python-pygments
+sudo apt-get install -y texlive-full texlive-latex-extra  python-pygments texlive-science
 
 # haskell
 sudo apt install -y haskell-stack darcs
@@ -38,18 +47,20 @@ sudo apt install -y python-pip
 sudo pip install pylint pyflakes
 
 # java
-sudo apt-get install openjdk-8-jdk
+sudo apt-get install openjdk-8-jdk maven
 
 # install rust first, then install exa
 curl https://sh.rustup.rs -sSf | sh
 cargo install --no-default-features --git https://github.com/ogham/exa
 
-# sublime text
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-sudo apt-get install apt-transport-https
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt-get update
-sudo apt-get install sublime-text
+
+#
+# Do the update
+#
+sudo apt update
+
+
+sudo apt-get install -y sublime-text
 
 # instlal magic wormhole
 pip install --user magic-wormhole
@@ -57,6 +68,7 @@ pip install --user magic-wormhole
 # I need talk to switches
 sudo apt-get install minicom
 
+sudo apt-get install -y ukuu
 
 #console-setup-linux
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

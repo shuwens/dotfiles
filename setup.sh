@@ -14,6 +14,8 @@ stow screen     -t ~
 stow urxvt      -t ~
 stow bin        -t ~
 
+ln -s  ~/git/dotfiles/misc/zathurarc ~/.config/zathura/zathurarc
+
 ##---------------
 #    Optional:
 ##---------------

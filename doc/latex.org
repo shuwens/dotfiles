@@ -25,3 +25,8 @@
 [[https://tex.stackexchange.com/questions/59938/fancy-cross-referencing]]
 * figures
   [[https://tex.stackexchange.com/questions/119905/insert-multiple-figures-in-latex]]
+
+* searc
+  $ apt-cache show texlive-science | grep siunitx
+  siunitx -- A comprehensive (SI) units package.</pre> 
+

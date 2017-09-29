@@ -1,0 +1,55 @@
+# zathurarc-light
+
+#set font                        "xos4 Terminus Bold 12"
+
+# Base16 colours
+set default-bg                  "#dfe1e8"
+set default-fg                  "#343d46"
+
+set statusbar-bg                "#c0c5ce"
+set statusbar-fg                "#343d46"
+
+set inputbar-bg                 "#343d46"
+set inputbar-fg                 "#dfe1e8"
+
+set notification-error-bg       "#bf616a"
+set notification-error-fg       "#343d46"
+
+set notification-warning-bg     "#bf616a"
+set notification-warning-fg     "#343d46"
+
+set highlight-color             "#ebcb8b"
+set highlight-active-color      "#bf616a"
+
+set completion-highlight-bg     "#343d46"
+set completion-highlight-fg     "#c0c5ce"
+
+set completion-bg               "#c0c5ce"
+set completion-fg               "#343d46"
+
+set notification-bg             "#a3be8c"
+set notification-fg             "#343d46"
+
+set recolor-lightcolor          "#dfe1e8"
+set recolor-darkcolor           "#4f5b66"
+# set recolor                     "true"
+
+# setting recolor-keephue true will keep any color your pdf
+# has.  If it is set to false, it will just be shades of gray
+set recolor-keephue             "true"
+
+# Rest of your configs go here:
+set selection-clipboard         "clipboard"
+set adjust-open                 "width"
+
+
+
+# key bindings
+map <PageUp> navigate previous
+map <PageDown> navigate next
+
+map = zoom in
+map - zoom out
+map <C-o> focus_inputbar ":exec acroread $FILE"
+
+map <C-q> quit
