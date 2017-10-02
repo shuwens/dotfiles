@@ -1,11 +1,8 @@
 ! urxvt
-URxvt*geometry:              53x20
+!URxvt*geometry:              53x20
 ! Use this for general case
-URxvt*font:                  xft:Terminus:size=14
-! Use this in X1C
-!URxvt.font:           xft:Terminus:size=13:antialias=true
-
-
+URxvt*font:                  xft:Terminus:size=12
+!
 ! Use this in Arch Linux
 !URxvt.font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
 !URxvt*font:  -*-terminus-medium-*-*-*-16-*-*-*-*-*-iso8859-1

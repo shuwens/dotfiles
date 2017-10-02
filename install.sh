@@ -44,7 +44,7 @@ stack install ghc-mod
 
 # python pip
 sudo apt install -y python-pip
-sudo pip install pylint pyflakes
+sudo pip install -y  pylint pyflakes virtualenv 
 
 # java
 sudo apt-get install openjdk-8-jdk maven

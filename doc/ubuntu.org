@@ -54,7 +54,12 @@ gpg --keyserver pgp.mit.edu  --recv-keys
 * time zone
 [[https://askubuntu.com/questions/738513/how-can-i-make-ubuntu-automatically-detect-the-correct-timezone-based-on-my-inte]]
 
+* QEMU
+  [[https://www.unixmen.com/how-to-install-and-configure-qemu-in-ubuntu/]]
+
 * Virtualbox
+  [[https://askubuntu.com/questions/920689/how-to-issue-modprobe-vboxdrv-error-in-virtualbox#920713]]
+
 enable VT-x
 disable secure boot
 

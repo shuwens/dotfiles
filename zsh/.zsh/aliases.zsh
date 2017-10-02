@@ -282,7 +282,7 @@ alias Scheme="scheme -large -band 6001.com -edit"
 # ----------------------
 # Just my thing
 # ----------------------
-#
+
 function sudo() {
   if [ -z "$1" ]; then
     command sudo;
@@ -299,5 +299,6 @@ function sudo() {
   fi
 }
 
+alias virtualenv3="virtualenv -p /usr/bin/python3"
 
 # end of [aliases.zsh]
