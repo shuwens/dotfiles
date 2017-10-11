@@ -153,6 +153,16 @@ function lazy() {
     command git add -A && git commit -m "Update some files of $@" && git push;
   fi
 }
+function check() {
+  if [ -z "$1" ]; then
+    echo "0"
+    command git add -A && git commit -m 'checkpoint: update' && git push;
+  else
+    echo "$@"
+    command git add -A && git commit -m "checkpoint: changed some files of $@" && git push;
+  fi
+}
+
 
 # ========================================================
 #alias gc="git checkout"
@@ -187,7 +197,7 @@ alias haas-beta="ssh haas-beta.prb.massopencloud.org"
 alias t='python ~/Public/t/t.py --task-dir ~/Public/tasks --list tasks'
 
 # ubuntu special
-alias open="gnome-open"
+alias open="xdg-open"
 
 # dropbox shortcut
 alias StatDropbox="~/.dropbox/dropbox.py status"
