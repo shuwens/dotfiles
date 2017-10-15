@@ -72,3 +72,5 @@ xdg-mime default zathura.desktop application/pdf
 
 * Jetbrains
 [[https://github.com/mmk2410/intellij-idea-community]]
+* Thinkpad
+  [[http://www.thinkwiki.org/wiki/X1_Linux_Tweaks]]
