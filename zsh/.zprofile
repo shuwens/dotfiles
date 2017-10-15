@@ -154,3 +154,6 @@ export atc_profile_loaded=1
 export zprofile_generation=1
 
 export PATH="$HOME/.cargo/bin:$PATH"
+# Ubuntu make installation of Ubuntu Make binary symlink
+PATH=/home/jethros/.local/share/umake/bin:$PATH
+

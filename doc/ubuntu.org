@@ -69,3 +69,6 @@ xdg-mime default zathura.desktop application/pdf
 
 * unsupported version
   [[https://github.com/Soundnode/soundnode-app/issues/1012]]
+
+* Jetbrains
+[[https://github.com/mmk2410/intellij-idea-community]]

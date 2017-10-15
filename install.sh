@@ -53,6 +53,12 @@ sudo apt-get install openjdk-8-jdk maven
 curl https://sh.rustup.rs -sSf | sh
 cargo install --no-default-features --git https://github.com/ogham/exa
 
+# Ubuntu make
+sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+
+# IntelliJ Idea
+sudo apt-add-repository ppa:mmk2410/intellij-idea
+
 
 #
 # Do the update
@@ -60,15 +66,25 @@ cargo install --no-default-features --git https://github.com/ogham/exa
 sudo apt update
 
 
-sudo apt-get install -y sublime-text
+sudo apt-get install -y sublime-text ubuntu-make
 
 # instlal magic wormhole
 pip install --user magic-wormhole
 
 # I need talk to switches
-sudo apt-get install minicom
+sudo apt-get install -y minicom
 
 sudo apt-get install -y ukuu
+
+
+# IntelliJ Idea
+sudo apt-get install -y intellij-idea-ultimate
+# Umake pycharm
+umake ide pycharm-professional
+
+
+
+
 
 #console-setup-linux
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
