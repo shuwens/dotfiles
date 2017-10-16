@@ -122,8 +122,8 @@ alias F="thunar ."
 alias cls="clear"
 alias vi="vim"
 #alias ee="emacsclient"
-alias ee="emacsclient -t"                      # used to be "emacs -nw"
-alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
+alias ee="emacsclient -t"                    # used to be "emacs -nw"
+alias semac="sudo emacsclient -t"            # used to be "sudo emacs -nw"
 alias EE="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
 
 # grep and find
