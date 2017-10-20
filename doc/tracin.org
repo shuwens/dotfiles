@@ -1,0 +1,6 @@
+* Language feature
+** Golang
+  [[https://www.youtube.com/watch?v=xyDkyFjzFVc]]
+
+** Rust
+[[https://www.reddit.com/r/rust/comments/257xvg/decorators/]]
