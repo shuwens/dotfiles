@@ -148,6 +148,7 @@ alias Eg="source ~/.zgoogle"
 alias gits="git status"
 alias gs="git status"
 alias gb="git blame"
+alias g..="git checkout -- ."
 #alias gl="git log --graph --decorate --oneline"
 #alias lazy=" git add -A && git commit -m 'Update some files' && git push"
 function lazy() {

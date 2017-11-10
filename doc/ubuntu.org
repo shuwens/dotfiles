@@ -1,3 +1,11 @@
+On setting up new Ubuntu environment:
+
+** Install fonts:
+  [[https://www.linuxhint.com/install-fonts-ubuntu/]]
+
+
+
+
 * RollingLTSUbuntu
   [[https://askubuntu.com/questions/885054/upgrade-16-04-2-lts-to-kernel-version-4-8]]
 
