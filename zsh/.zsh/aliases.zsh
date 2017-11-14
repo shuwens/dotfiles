@@ -204,7 +204,8 @@ alias haas-beta="ssh haas-beta.prb.massopencloud.org"
 alias t='python ~/Public/t/t.py --task-dir ~/Public/tasks --list tasks'
 
 # ubuntu special
-alias open="xdg-open"
+o() { xdg-open "$@" & }
+open() { xdg-open "$@" & }
 
 # dropbox shortcut
 alias StatDropbox="~/.dropbox/dropbox.py status"
@@ -257,8 +258,6 @@ alias ..='cd ..'
 alias ,='make'
 alias ,,='make clean'
 # file handlers
-#alias o='xdg-open'
-o() { xdg-open "$@" & }
 #alias Disk-Usage="du -cBM --max-depth=1 2> >(grep -v 'Permission denied') | sort -n | grep G"
 alias Disk-Usage='du -h --max-depth=3 | grep G'
 
