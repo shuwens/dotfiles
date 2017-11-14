@@ -306,7 +306,7 @@ function sudo() {
     if [[ $2 == "in" ]]; then
       command sudo apt install ${@:3};
     elif [[ $2 == "up" ]]; then
-      command sudo apt update;
+      command sudo apt update && sudo apt list --upgradable;
     else
       command sudo "$@"
     fi
