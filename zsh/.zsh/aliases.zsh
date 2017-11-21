@@ -289,9 +289,7 @@ function cdd {
 
 # haskell vim
 alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc" 
-
 alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
-
 alias Scheme="scheme -large -band 6001.com -edit"
 
 
@@ -316,5 +314,8 @@ function sudo() {
 }
 
 alias virtualenv3="virtualenv -p /usr/bin/python3"
+
+# dir aliases
+hash -d sop=~/writing/phd-application/sop
 
 # end of [aliases.zsh]

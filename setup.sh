@@ -15,6 +15,7 @@ stow urxvt      -t ~
 stow bin        -t ~
 
 ln -s  ~/git/dotfiles/misc/zathurarc ~/.config/zathura/zathurarc
+ln -s ~/git/dotfiles/emacs/.spacemacs  ~/.spacemacs
 
 ##---------------
 #    Optional:
