@@ -336,7 +336,8 @@ you should place your code here."
   (setq org-ref-open-pdf-function
   (lambda (fpath)
     (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
- ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
+ (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
+
  ;; compile buffer auto-close if succeed
  (defun bury-compile-buffer-if-successful (buffer string)
  "Bury a compilation buffer if succeeded without warnings "
@@ -354,9 +355,8 @@ you should place your code here."
                       (delete-windows-on buf))
                     buffer)))
   (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
-
- ;; I want smartparen mode in LaTeX
- (add-hook 'text-mode-hook 'smartparens-mode)
+  ;; I want smartparen mode in LaTeX
+  (add-hook 'text-mode-hook 'smartparens-mode)
   )
 
 (custom-set-variables
