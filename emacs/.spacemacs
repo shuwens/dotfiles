@@ -358,6 +358,8 @@ you should place your code here."
   (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
   ;; I want smartparen mode in LaTeX
   (add-hook 'text-mode-hook 'smartparens-mode)
+ ;; experimental: auto-revert
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
   )
 
 (custom-set-variables
