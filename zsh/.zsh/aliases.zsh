@@ -316,6 +316,9 @@ function sudo() {
 alias virtualenv3="virtualenv -p /usr/bin/python3"
 
 # dir aliases
+hash -d ps=~/writing/phd-application/ps
+hash -d cv=~/writing/phd-application/my_cv
 hash -d sop=~/writing/phd-application/sop
+hash -d talk=~/writing/slides/moc-reading-group-talk
 
 # end of [aliases.zsh]
