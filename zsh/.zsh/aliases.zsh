@@ -96,7 +96,8 @@ short() {
 # ------------------------------
 # personal utils
 # ------------------------------
-alias UpdateResume="scp ~/Documents/my_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
+alias UpdateResume="scp ~/writing/phd-application/my_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
+alias UpdateStatement="scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
 alias leet="./~/workspace/practise-cpp/leetcode/comments.sh"
 alias virtualenv3="virtualenv -p /usr/bin/python3 .venv"
 
