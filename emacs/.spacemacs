@@ -44,9 +44,9 @@ values."
      markdown
      org
      (shell :variables
-             shell-default-height 30
-             shell-default-term-shell "/usr/bin/zsh ~/.zshrc"
-             shell-default-position 'bottom)
+            shell-default-height 30
+            shell-default-term-shell "/usr/bin/zsh ~/.zshrc"
+            shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
@@ -60,7 +60,7 @@ values."
      go
      graphviz
      haskell
-     ;;java
+     (java :variables java-backend 'meghanada)
      (latex :variables latex-enable-auto-fill t)
      markdown
      python
@@ -74,7 +74,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -335,33 +335,39 @@ you should place your code here."
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (setq doc-view-resolution 144)
   (setq org-ref-open-pdf-function
-  (lambda (fpath)
-    (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
- (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
+        (lambda (fpath)
+          (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
 
- ;; compile buffer auto-close if succeed
- (defun bury-compile-buffer-if-successful (buffer string)
- "Bury a compilation buffer if succeeded without warnings "
- (when (and
-         (buffer-live-p buffer)
-         (string-match "compilation" (buffer-name buffer))
-         (string-match "finished" string)
-         (not
-          (with-current-buffer buffer
-            (goto-char (point-min))
-            (search-forward "warning" nil t))))
-    (run-with-timer 1 nil
-                    (lambda (buf)
-                      (bury-buffer buf)
-                      (delete-windows-on buf))
-                    buffer)))
+  ;; compile buffer auto-close if succeed
+  ;; ---------------------------------------------
+  (defun bury-compile-buffer-if-successful (buffer string)
+    "Bury a compilation buffer if succeeded without warnings "
+    (when (and
+           (buffer-live-p buffer)
+           (string-match "compilation" (buffer-name buffer))
+           (string-match "finished" string)
+           (not
+            (with-current-buffer buffer
+              (goto-char (point-min))
+              (search-forward "warning" nil t))))
+      (run-with-timer 1 nil
+                      (lambda (buf)
+                        (bury-buffer buf)
+                        (delete-windows-on buf))
+                      buffer)))
   (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
   ;; I want smartparen mode in LaTeX
   (add-hook 'text-mode-hook 'smartparens-mode)
- ;; experimental: auto-revert
-(add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  )
+  ;; experimental: auto-revert
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
+  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -369,10 +375,11 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yapfify xterm-color ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org spaceline powerline smex smeargle shell-pop restart-emacs request rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-ref pdf-tools key-chord tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file noflet neotree mwim multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint ivy-hydra intero insert-shebang info+ indent-guide hy-mode dash-functional hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-make helm-bibtex parsebib helm helm-core haskell-snippets graphviz-dot-mode google-translate golden-ratio go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-rust flycheck-pos-tip pos-tip flycheck-haskell flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode counsel-projectile projectile counsel swiper ivy company-statistics company-shell company-go go-mode company-ghci company-ghc ghc haskell-mode company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode cmm-mode cmake-mode clojure-snippets clj-refactor hydra inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider seq spinner queue pkg-info clojure-mode epl cargo rust-mode bind-map bind-key biblio biblio-core auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex async anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup))))
+    (org-brain yapfify xterm-color ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org symon string-inflection spaceline smex smeargle shell-pop sayid restart-emacs request realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-download org-bullets open-junk-file noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint ivy-purpose ivy-hydra intero insert-shebang info+ indent-guide hy-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime elisp-slime-nav editorconfig dumb-jump disaster diminish diff-hl define-word dante cython-mode counsel-projectile company-statistics company-shell company-go company-ghci company-ghc company-emacs-eclim company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+)

@@ -1,3 +1,19 @@
+* Spacemacs
+** New Java mode (not eclim)
+** official
+[[https://github.com/syl20bnr/spacemacs/blob/develop/layers/+lang/java/README.org#choosing-a-backend]]
+
+
+
+*** Mendagmad
+[[https://github.com/syl20bnr/spacemacs/issues/7806]]
+
+
+*** enism
+[[https://github.com/syl20bnr/spacemacs/pull/7755]]
+
+[[https://github.com/syl20bnr/spacemacs/issues/5708]]
+
 * Emacs config notes
 
 ** C programming style
@@ -16,4 +32,3 @@ setup the eshell prompot
 ** find file in proj
 C-x f to be find-file-in-project
 
-**
