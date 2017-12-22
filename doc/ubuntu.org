@@ -84,3 +84,10 @@ xdg-mime default zathura.desktop application/pdf
 [[https://github.com/mmk2410/intellij-idea-community]]
 * Thinkpad
   [[http://www.thinkwiki.org/wiki/X1_Linux_Tweaks]]
+
+* Eclipse
+[[https://itsfoss.com/install-latest-eclipse-ubuntu/]]
+sudo apt update    
+sudo apt install ubuntu-make    
+umake ide eclipse
+
