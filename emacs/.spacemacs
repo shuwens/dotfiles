@@ -37,7 +37,18 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ivy
-     auto-completion
+
+     ;; config auto completion
+     ;; ----------------------
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-enable-sort-by-usage t
+                      spacemacs-default-company-backends '(company-files company-capf)
+                      auto-completion-private-snippets-directory nil)
+
      better-defaults
      emacs-lisp
      git
@@ -64,7 +75,9 @@ values."
      (java :variables java-backend 'meghanada)
      (latex :variables latex-enable-auto-fill t)
      markdown
-     python
+     (python :variables python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t
+             )
      rust
      scala
      shell-scripts
@@ -331,6 +344,12 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; globally enable company
+  ;; -----------------------
+  (global-company-mode)
+
+  ;; personal note and bib setting
+  ;; -----------------------------
   (setq org-ref-default-bibliography '("~/writing/papers/references.bib")
         org-ref-pdf-directory "~/writing/papers"
         org-ref-bibliography-notes "~/writing/papers/notes.org")
@@ -367,5 +386,8 @@ you should place your code here."
   ;; turn on crosshairs mode by default
   ;; -----------------------------------
   ;;(add-hook 'prog-mode-hook 'crosshairs-mode)
+
+  ;;(add-hook 'python-mode-hook 'anaconda-mode)
+
   )
 
