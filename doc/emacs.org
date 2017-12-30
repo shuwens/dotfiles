@@ -1,12 +1,11 @@
 * Spacemacs
+[[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org]]
 
 ** New Java mode (not eclim)
 [[https://github.com/syl20bnr/spacemacs/blob/develop/layers/+lang/java/README.org#meghanada-1]]
+
 *** official
 [[https://github.com/syl20bnr/spacemacs/blob/develop/layers/+lang/java/README.org#choosing-a-backend]]
-
-
-
 
 ** Projectile guide
 [[https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#managing-projects]]
