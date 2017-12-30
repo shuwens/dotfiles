@@ -350,9 +350,31 @@ you should place your code here."
 
   ;; Org mode setting
   ;; -----------------------------
+
+  ;; Org capture setting
+  ;; https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
+  (setq org-directory "~/Documents/org/")
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+
+  ;;(setq org-todo-keywords         '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED")))
   (setq org-todo-keywords
         '((sequence "TODO(t)" "SUBTREE(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c@/!)")
           (sequence "CRASH(c)" "BUG(b)" "REQUEST(r)" "TEST(e)" "|" "FIXED(f)")))
+
+  (setq org-capture-templates
+        '(("a" "My TODO task format." entry
+           (file "todo.org")
+           "* TODO %?
+SCHEDULED: %t")))
+
+  (defun air-org-task-capture ()
+    "Capture a task with my default template."
+    (interactive)
+    (org-capture nil "a"))
+  (define-key global-map (kbd "C-c c") 'air-org-task-capture)
+
+  ;; end of org setting
+
   (setq org-todo-keyword-faces
         '(("WAIT" . "white")
           ("CRASH" . "red")

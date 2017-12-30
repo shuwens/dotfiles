@@ -18,6 +18,7 @@
 ** org 
 [[http://blog.hourglasslab.com/2016/10/19/how%20do%20i%20organize%20my%20tasks%20and%20notes/]]
 
+[[https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html]]
 
 
 *** Mendagmad
