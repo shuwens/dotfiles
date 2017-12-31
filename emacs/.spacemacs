@@ -30,16 +30,45 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+
+     ;; ----------------------------------------
+     ;;     Major programming lang layers
+     ;; ----------------------------------------
+
+     (c-c++ :variables
+            c-c++-enable-clang-support t
+            c-c++-enable-google-style t
+            c-c++-enable-google-newline t)
+
+     (python :variables
+             python-fill-column 80
+             python-test-runner 'pytest
+             ;; yapf and auto indent are evil!!!
+             ;;python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t)
+
+     go
+
+     (java :variables java-backend 'meghanada)
+
+
+     ;; --------------------------
+     ;;   Major tool layers
+     ;; --------------------------
+     better-defaults
      ivy
+     (shell :variables
+            shell-default-height 30
+            shell-default-term-shell "/usr/bin/zsh ~/.zshrc"
+            shell-default-position 'bottom)
 
      ;; config auto completion
-     ;; ----------------------
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
@@ -48,36 +77,25 @@ values."
                       auto-completion-enable-sort-by-usage t
                       spacemacs-default-company-backends '(company-files company-capf)
                       auto-completion-private-snippets-directory nil)
-
-     better-defaults
-     emacs-lisp
      git
-     markdown
-     (org :variables org-projectile-file "TODOs.org")
-     (shell :variables
-            shell-default-height 30
-            shell-default-term-shell "/usr/bin/zsh ~/.zshrc"
-            shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
-     ;; ----------------
-     ;; lang
-     ;; ----------------
+
+     ;; --------------------------------
+     ;;      Additional langs
+     ;; --------------------------------
      bibtex
-     c-c++
+     html
+     markdown
+     (org :variables org-projectile-file "TODOs.org")
      clojure
      erlang
-     go
+     emacs-lisp
      graphviz
      haskell
-     ;;(java :variables java-backend 'meghanada)
-     (java :variables java-backend 'meghanada)
      (latex :variables latex-enable-auto-fill t)
      markdown
-     (python :variables python-enable-yapf-format-on-save t
-             python-sort-imports-on-save t
-             )
      rust
      scala
      shell-scripts
@@ -431,7 +449,24 @@ SCHEDULED: %t")))
   ;; -----------------------------------
   ;;(add-hook 'prog-mode-hook 'crosshairs-mode)
 
-  ;;(add-hook 'python-mode-hook 'anaconda-mode)
+  ;; Hack: anaconda mode is not enabled in python by default?
+  ;; --------------------------------------------------------
+  (add-hook 'python-mode-hook 'anaconda-mode)
+
+  (add-hook 'prog-mode-hook 
+            (lambda ()
+              ;; Enable fill column indicator
+              (fci-mode t)
+              ;; Turn off line numbering, it makes org so slow
+              (linum-mode -1)
+              ;; Set fill column to 79
+              (setq fill-column 79)
+              ;; Enable automatic line wrapping at fill column
+              (auto-fill-mode t)))
+
+  ;; Activate column indicator in prog-mode and text-mode
+  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'text-mode-hook 'turn-on-fci-mode)
 
   )
 
