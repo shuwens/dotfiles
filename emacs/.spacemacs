@@ -99,7 +99,6 @@ values."
      rust
      scala
      shell-scripts
-     ;; tools
      pdf-tools
      )
    ;; List of additional packages that will be installed without being
