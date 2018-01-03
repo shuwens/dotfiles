@@ -53,7 +53,7 @@ values."
              ;;python-enable-yapf-format-on-save t
              python-sort-imports-on-save t)
 
-     go
+     (go :variables go-tab-width 4)
 
      (java :variables java-backend 'meghanada)
 
@@ -76,6 +76,8 @@ values."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-enable-sort-by-usage t
                       spacemacs-default-company-backends '(company-files company-capf)
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip 'manual
                       auto-completion-private-snippets-directory nil)
      git
      spell-checking
@@ -93,8 +95,10 @@ values."
      erlang
      emacs-lisp
      graphviz
-     haskell
-     (latex :variables latex-enable-auto-fill t)
+     (haskell :variables haskell-completion-backend 'intero)
+     (latex :variables
+            latex-enable-magic t
+            latex-enable-auto-fill t)
      markdown
      rust
      scala
