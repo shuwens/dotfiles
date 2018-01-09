@@ -70,18 +70,23 @@ values."
 
      ;; config auto completion
      (auto-completion :variables
+                      ;; key setting
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-complete-with-key-sequence nil
                       auto-completion-complete-with-key-sequence-delay 0.1
+                      ;; feature
                       auto-completion-enable-sort-by-usage t
+                      ;; backend config
                       spacemacs-default-company-backends '(company-files company-capf)
+                      ;;auto-completion-enable-help-tooltip 'manual
+                      auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip 'manual
                       auto-completion-private-snippets-directory nil)
+     ycmd
      git
      spell-checking
-     syntax-checking
+     syntax-checking 
      version-control
 
      ;; --------------------------------
@@ -97,7 +102,6 @@ values."
      graphviz
      (haskell :variables haskell-completion-backend 'intero)
      (latex :variables
-            latex-enable-magic t
             latex-enable-auto-fill t)
      markdown
      rust
@@ -369,6 +373,9 @@ you should place your code here."
   ;; -----------------------
   (global-company-mode)
 
+  ;; convienant keybinding for functions:
+  ;; ------------------------------------
+
   ;; Org mode setting
   ;; -----------------------------
 
@@ -471,7 +478,38 @@ SCHEDULED: %t")))
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
 
+  ;; ycmd config
+  ;; ------------
+  (setq ycmd-server-command '("python" "~/git/ycmd/ycmd"))
+  (setq ycmd-extra-conf-whitelist '("~/workspace/*"))
+  (setq ycmd-extra-conf-whitelist '("~/git/*"))
+  (setq ycmd-force-semantic-completion t)
+  ;; if company-ycmd
+  (global-set-key (kbd "<C-tab>") 'ycmd/manual-semantic-company-completer)
+
+  (add-hook 'c++-mode-hook 'ycmd-mode)
+
   )
 
 
 ;; end of [.spacemacs]
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (flycheck-ycmd company-ycmd ycmd request-deferred deferred yapfify xterm-color ws-butler winum which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org tagedit symon string-inflection spaceline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode ivy-purpose ivy-hydra intero insert-shebang info+ indent-guide impatient-mode hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diminish diff-hl define-word dante cython-mode counsel-projectile company-web company-statistics company-shell company-quickhelp company-go company-ghci company-ghc company-emacs-eclim company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
