@@ -31,3 +31,23 @@
   siunitx -- A comprehensive (SI) units package.</pre> 
 
 * timeline table
+
+** cool exmplex
+[[https://tex.stackexchange.com/questions/302851/how-to-get-vertical-timeline-work-in-beamer]]
+[[https://tex.stackexchange.com/questions/159835/milestone-graphic-in-tikz]]
+[[https://tex.stackexchange.com/questions/136882/how-to-use-the-chronology-sty-package]]
+
+** others
+[[https://tex.stackexchange.com/questions/161480/events-overlap-on-chronology-with-chronosys]]
+[[https://tex.stackexchange.com/questions/233781/creating-a-timeline-with-chronology]]
+[[https://tex.stackexchange.com/questions/183046/how-do-i-develop-a-complex-time-line/227149#227149]]
+
+[[http://latex.org/forum/viewtopic.php?t=12059]]
+[[http://www.calcblog.com/business-finance-math-1-future-value-of-annuity-due/]]
+
+[[https://tex.stackexchange.com/questions/156878/timeline-in-beamer-presentation]]
+
+[[https://tex.stackexchange.com/questions/199556/multi-level-timeline]]
+
+just a beautiful example
+[[http://www.tiki-toki.com/timeline/entry/158086/The-Modern-and-the-Postmodern#vars!date=1784-12-01_00:00:00!]]

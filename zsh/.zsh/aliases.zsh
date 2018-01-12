@@ -292,6 +292,7 @@ function cdd {
 alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc" 
 alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
 alias Scheme="scheme -large -band 6001.com -edit"
+alias tm="tmux attach || tmux new"
 
 
 # ----------------------
@@ -320,7 +321,7 @@ alias virtualenv3="virtualenv -p /usr/bin/python3"
 hash -d ps=~/writing/phd-application/ps
 hash -d cv=~/writing/phd-application/my_cv
 hash -d sop=~/writing/phd-application/sop
-hash -d talk=~/writing/slides/moc-reading-group-talk
+hash -d talk=~/writing/slides/moc-reading-group-talk-2
 hash -d leetcode=~/workspace/practise-cpp/leetcode
 
 
