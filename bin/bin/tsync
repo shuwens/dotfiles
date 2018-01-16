@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -x
+
+
+rsync -P -r trace-src:/mnt/traces/atc  /media/jethros/LACIE\ SHARE1/Professional/traces
+rsync -P -r trace-src:/mnt/traces/Categorization  /media/jethros/LACIE\ SHARE1/Professional/traces
+rsync -P -r trace-src:/mnt/traces/rally_traces_event_model  /media/jethros/LACIE\ SHARE1/Professional/traces
