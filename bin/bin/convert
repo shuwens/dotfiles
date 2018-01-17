@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+echo "Trace ID is: "
+echo $1
+
+mkdir -p figures
+dot -Tps2 $1.dot -o figures/$1.ps
+
