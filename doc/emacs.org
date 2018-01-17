@@ -1,6 +1,11 @@
 * Spacemacs
 [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org]]
 
+** Deft mode
+[[https://github.com/syl20bnr/spacemacs/tree/develop/layers/+tools/deft]]
+
+** C++ 
+[[https://github.com/syl20bnr/spacemacs/tree/develop/layers/+lang/c-c++]]
 ** New Java mode (not eclim)
 [[https://github.com/syl20bnr/spacemacs/blob/develop/layers/+lang/java/README.org#meghanada-1]]
 

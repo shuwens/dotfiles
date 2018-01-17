@@ -96,7 +96,7 @@ short() {
 # ------------------------------
 # personal utils
 # ------------------------------
-alias UpdateResume="scp ~/writing/phd-application/my_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
+alias UpdateResume="scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
 alias UpdateStatement="scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
 alias leet="./~/workspace/practise-cpp/leetcode/comments.sh"
 alias virtualenv3="virtualenv -p /usr/bin/python3 .venv"
@@ -315,11 +315,11 @@ function sudo() {
   fi
 }
 
-alias virtualenv3="virtualenv -p /usr/bin/python3"
+#alias virtualenv3="virtualenv -p /usr/bin/python3"
 
 # dir aliases
 hash -d ps=~/writing/phd-application/ps
-hash -d cv=~/writing/phd-application/my_cv
+hash -d cv=~/writing/phd-application/nice_cv
 hash -d sop=~/writing/phd-application/sop
 hash -d talk=~/writing/slides/moc-reading-group-talk-2
 hash -d leetcode=~/workspace/practise-cpp/leetcode

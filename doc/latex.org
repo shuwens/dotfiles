@@ -51,3 +51,8 @@
 
 just a beautiful example
 [[http://www.tiki-toki.com/timeline/entry/158086/The-Modern-and-the-Postmodern#vars!date=1784-12-01_00:00:00!]]
+
+* beautifyk arrow
+
+  [[http://www.texample.net/tikz/examples/beamer-arrows/]]
+  [[https://tex.stackexchange.com/questions/61507/drawing-arrows-in-beamer]]
