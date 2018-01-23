@@ -134,7 +134,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode )
+   dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode
+                                                dumb-jump ujelly-theme
+     color-theme-sanityinc-tomorrow) 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -207,7 +209,8 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-light
-                         spacemacs-dark)
+                         ujelly-theme)
+                         ;spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -403,6 +406,10 @@ you should place your code here."
   ;; Rust ()
   (global-set-key (kbd "C-x C-i") 'ido-imenu)
 
+  ;; Dumb Jump
+  (dumb-jump-mode)
+  (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-aggressive nil)
 
   ;; globally enable company
   ;; -----------------------
@@ -593,9 +600,10 @@ Symbols matching the text at point are put first in the completion list."
              (position (cdr (assoc selected-symbol name-and-pos))))
         (goto-char position))))
 
-;; --------------------- FUNC ENDS HERE -----------------------
+  ;; --------------------- FUNC ENDS HERE -----------------------
 
   )
-
 ;; end of [.spacemacs]
+
+
 
