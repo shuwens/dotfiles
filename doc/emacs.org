@@ -40,6 +40,8 @@
 
 * Emacs config notes
 
+** Global key 
+[[https://stackoverflow.com/questions/3124844/what-are-your-favorite-global-key-bindings-in-emacs]]
 ** C programming style
 adopting google-c-style, however, set tab width to 8 if in ~/git/kernel
 
@@ -55,4 +57,5 @@ setup the eshell prompot
 
 ** find file in proj
 C-x f to be find-file-in-project
+
 

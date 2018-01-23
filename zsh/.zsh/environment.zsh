@@ -32,6 +32,9 @@ export NOTES_DIR=$HOME/Dropbox/GS
 #█▓▒░ preferred editor for local and remote sessions
 export EDITOR=vim
 export VISUAL=vim
+export CSCOPE_EDITOR=emacs
+#`which emacs`  # emacs for cscope
+
 
 #█▓▒░ language
 export LC_COLLATE=en_US.UTF-8
