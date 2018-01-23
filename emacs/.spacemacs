@@ -100,9 +100,11 @@ values."
                       auto-completion-private-snippets-directory nil)
      ycmd
      git
-     spell-checking
+     (spell-checking :variables
+                     enable-flyspell-auto-completion t
+                     spell-checking-enable-auto-dictionary t)
      syntax-checking 
-     version-control
+     ;;version-control
 
      ;; --------------------------------
      ;;      Additional langs
@@ -378,7 +380,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
+  (setq-default git-magit-status-fullscreen t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -405,6 +407,10 @@ you should place your code here."
   ;; globally enable company
   ;; -----------------------
   (global-company-mode)
+
+  ;; Git and Magit
+  (setq magit-repository-directories '("~/repos/","~/openstack","~/git/","~/workspace"))
+
 
   ;; convienant keybinding for functions:
   ;; ------------------------------------
@@ -492,6 +498,17 @@ SCHEDULED: %t")))
   ;; experimental: auto-revert
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
+  ;; FAV GLOBAL from SO
+  ;; https://stackoverflow.com/questions/3124844/what-are-your-favorite-global-key-bindings-in-emacs
+  ;; Magit rules!
+  (global-set-key (kbd "C-x g") 'magit-status)
+
+  ;; cycle through buffers
+  (global-set-key (kbd "<C-tab>") 'bury-buffer)
+
+  ;; use hippie-expand instead of dabbrev
+  (global-set-key (kbd "M-/") 'hippie-expand)
+
   ;; turn on crosshairs mode by default
   ;; -----------------------------------
   ;;(add-hook 'prog-mode-hook 'crosshairs-mode)
@@ -576,40 +593,9 @@ Symbols matching the text at point are put first in the completion list."
              (position (cdr (assoc selected-symbol name-and-pos))))
         (goto-char position))))
 
-
-
-
-
-
-
-
-
-
-
-
-
+;; --------------------- FUNC ENDS HERE -----------------------
 
   )
 
 ;; end of [.spacemacs]
 
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (protobuf-mode yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toml-mode toc-org tagedit symon string-inflection spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode ivy-rtags ivy-purpose ivy-hydra intero insert-shebang info+ indent-guide importmagic impatient-mode hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diminish diff-hl deft define-word dante cython-mode counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-statistics company-shell company-rtags company-quickhelp company-go company-ghci company-ghc company-emacs-eclim company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode cmm-mode clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
