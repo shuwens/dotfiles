@@ -323,6 +323,6 @@ hash -d cv=~/writing/phd-application/nice_cv
 hash -d sop=~/writing/phd-application/sop
 hash -d talk=~/writing/slides/moc-reading-group-talk-2
 hash -d leetcode=~/workspace/practise-cpp/leetcode
-
+hash -d brown_tracing=~/git/BROWN_TRACING
 
 # end of [aliases.zsh]
