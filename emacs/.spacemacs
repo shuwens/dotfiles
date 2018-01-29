@@ -103,6 +103,7 @@ values."
      ycmd
      git
      (spell-checking :variables
+                     spell-checking-enable-by-default nil
                      enable-flyspell-auto-completion t
                      spell-checking-enable-auto-dictionary t)
      syntax-checking 
@@ -387,6 +388,8 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default git-magit-status-fullscreen t)
+  (setq-default evil-escape-key-sequence "jk")
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -401,13 +404,173 @@ you should place your code here."
   ;;
   ;;   Enabling global definition and reference finding
   ;;
+  ;; I always make sure the major programming languages have a consistent
+  ;;keybinds:
+  ;;
+  ;; ``C-M-i'' -- completion at point
+  ;; ``C-M-.'' -- find definitions
+  ;; ``C-M-r'' -- find references
+  ;; ``C-M-*'' -- go back
+  ;; ``C-M-?'' -- show doc
+  ;;
   ;; -----------------------------------------------------
-  ;; Golang ()
+
+  ;; ------------------  Golang (guru) Starts --------------------------------
+
+  ;; missing: describe and bunch of stuff
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-i")
+                                    #'go-doc-at-point)))) ;; FIXME
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-.")
+                                    #'go-guru-definition))))
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-,")
+                                    #'go-guru-callers)))) ;; FIXME
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-r")
+                                    #'go-guru-referrers))))
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-*")
+                                    #'pop-tag-mark))))
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-?")
+                                    #'godoc-at-point))))
+  ;; -------------------------- Spare ones ---------------------------------
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-x C-.")
+                                    #'go-guru-definition))))
+
+  ;; ----------------------- Golang Ends Here -------------------------------
+
   ;; C++ (Gtags)
-  ;; Python (Anaconda-mode)
+
+  ;; -------------------- Python (Anaconda-mode) ------------------------------
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-i")
+                                    #'anaconda-mode-complete))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-.")
+                                    #'anaconda-mode-find-definitions))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-,")
+                                    #'anaconda-mode-find-assignments))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-r")
+                                    #'anaconda-mode-find-references))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-*")
+                                    #'anaconda-mode-go-back))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-M-?")
+                                    #'anaconda-mode-show-doc))))
+  ;; ---------------- Spare ones ----------------------- 
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda()
+                                  (define-key
+                                    evil-normal-state-local-map
+                                    (kbd "C-x C-.")
+                                    #'anaconda-mode-find-definitions))))
+
+  ;; -----------------------Python Ends Here ----------------------------------
+
+  ;; not working
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-." 'anaconda-mode-find-definitions)
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-," 'anaconda-mode-find-assignments)
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-r" 'anaconda-mode-find-references)
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-*" 'anaconda-mode-go-back)
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-?" 'anaconda-mode-show-doc)
+
+  ;;  (spacemacs/set-leader-keys "M-." 'anaconda-mode-find-definitions)
+
+  ;;   (defun python-key-mode-hook ()
+  ;;     ;;(define-key evil-normal-state-map (kbd "M") nil) ;; I use C-g anyway
+  ;;     (define-key evil-normal-state-map "M" 'nil)
+  ;;     ;;(unbind-key (kbd "M") evil-normal-state-map)
+  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-." 'anaconda-mode-find-definitions)
+  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-," 'anaconda-mode-find-assignments)
+  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-r" 'anaconda-mode-find-references)
+  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-*" 'anaconda-mode-go-back)
+  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-?" 'anaconda-mode-show-doc)
+  ;;    )
+  ;;   (add-hook 'python-mode-hook 'python-key-mode-hook)
+
+
+  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-i" 'anaconda-mode-complete)
+
+  ;;   ;; not working
+  ;; ;;  (with-eval-after-load 'evil
+  ;;  ;;   (bind key ....)
+
+  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-." 'anaconda-mode-find-definitions)
+  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-," 'anaconda-mode-find-assignments)
+  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-r" 'anaconda-mode-find-references)
+  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-*" 'anaconda-mode-go-back)
+  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-?" 'anaconda-mode-show-doc)
+
+  ;;   (define-key evil-normal-state-map (kbd "M-.") 'anaconda-mode-find-definitions)
+  ;;   (spacemacs/set-leader-keys "M-." 'anaconda-mode-find-definitions)
+  ;;   (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
+
+  ;;------------------------------ END ---------------------------------------
+
   ;; Java ()
+  (defun java-key-mode-hook ()
+    (meghanada-mode)
+    ;; Make shortcuts the same as in IDEA
+    (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
+    (define-key meghanada-mode-map (kbd "C-M-t") 'meghanada-import-all)
+    ;; since imenu is not working ...
+    (define-key meghanada-mode-map (kbd "C-x C-i") 'meghanada-jump-declaration)
+    (define-key meghanada-mode-map (kbd "C-x C-.") 'meghanada-jump-declaration)
+    (define-key meghanada-mode-map (kbd "C-M-.") 'meghanada-jump-declaration)
+    (define-key meghanada-mode-map (kbd "C-x C-,") 'meghanada-back-jump)
+    (define-key meghanada-mode-map (kbd "C-M-,") 'meghanada-back-jump)
+    )
+  (add-hook 'java-mode-hook 'java-key-mode-hook)
+
+
   ;; Rust ()
-  (global-set-key (kbd "C-x C-i") 'ido-imenu)
+  ;;(global-set-key (kbd "C-x C-i") 'ido-imenu)
 
   ;; Dumb Jump
   (dumb-jump-mode)
@@ -561,10 +724,6 @@ SCHEDULED: %t")))
     (flycheck-mode))
   ;;(add-hook 'java-mode-hook 'java-meghanda-mode-hook)
 
-  ;; Make shortcuts the same as in IDEA
-  (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
-  (define-key meghanada-mode-map (kbd "C-M-t") 'meghanada-import-all)
-
   
   ;; ---------------------------------------------------------------
   ;;
@@ -620,24 +779,3 @@ Symbols matching the text at point are put first in the completion list."
 ;; end of [.spacemacs]
 
 
-
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(package-selected-packages
-     (quote
-      (geiser yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode ivy-rtags ivy-purpose ivy-hydra intero insert-shebang info+ indent-guide importmagic impatient-mode hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diminish deft define-word dante cython-mode counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-statistics company-shell company-rtags company-quickhelp company-go company-ghci company-ghc company-emacs-eclim company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
-  )
