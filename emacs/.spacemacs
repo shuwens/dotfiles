@@ -139,8 +139,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode
-                                                dumb-jump ujelly-theme 
-                                                color-theme-sanityinc-tomorrow) 
+                                      dumb-jump ujelly-theme counsel-gtags
+                                      color-theme-sanityinc-tomorrow) 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -419,97 +419,108 @@ you should place your code here."
 
   ;; missing: describe and bunch of stuff
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-i")
-                                    #'go-doc-at-point)))) ;; FIXME
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-i")
+                                        #'go-doc-at-point)))) ;; FIXME
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-.")
-                                    #'go-guru-definition))))
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-.")
+                                        #'go-guru-definition))))
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-,")
-                                    #'go-guru-callers)))) ;; FIXME
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-,")
+                                        #'go-guru-callers)))) ;; FIXME
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-r")
-                                    #'go-guru-referrers))))
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-r")
+                                        #'go-guru-referrers))))
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-*")
-                                    #'pop-tag-mark))))
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-*")
+                                        #'pop-tag-mark))))
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-?")
-                                    #'godoc-at-point))))
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-?")
+                                        #'godoc-at-point))))
   ;; -------------------------- Spare ones ---------------------------------
   (with-eval-after-load 'go-mode
-    (add-hook 'go-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-x C-.")
-                                    #'go-guru-definition))))
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-x C-.")
+                                        #'go-guru-definition))))
 
   ;; ----------------------- Golang Ends Here -------------------------------
 
-  ;; C++ (Gtags)
+  ;; ------------------------ C++ (Gtags) Starts ------------------------------
+  ;; counsel-gtags-create-tags
+  ;; counsel-gtags-update-tags
+
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-i")
+                                        #'go-doc-at-point)))) ;; FIXME
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-.")
+                                            #'counsel-gtags-dwim))))
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-,")
+                                            #'go-guru-callers)))) ;; FIXME
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-r")
+                                            #'counsel-gtags-find-reference))))
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-*")
+                                            #'counsel-gtags-go-backward))))
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-?")
+                                            #'godoc-at-point))))
+  ;; -------------------------- Spare ones ---------------------------------
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-x C-.")
+                                            #'counsel-gtags-dwim))))
+  (with-eval-after-load 'ggtags-mode
+    (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-t")
+                                            #'counsel-gtags-find-definition))))
+
+  ;; ------------------------- C++ Ends Here -------------------------------
+
 
   ;; -------------------- Python (Anaconda-mode) ------------------------------
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-i")
-                                    #'anaconda-mode-complete))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-i")
+                                            #'anaconda-mode-complete))))
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-.")
-                                    #'anaconda-mode-find-definitions))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map 
+                                            (kbd "C-M-.")
+                                            #'anaconda-mode-find-definitions))))
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-,")
-                                    #'anaconda-mode-find-assignments))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-,")
+                                            #'anaconda-mode-find-assignments))))
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-r")
-                                    #'anaconda-mode-find-references))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-r")
+                                            #'anaconda-mode-find-references))))
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-*")
-                                    #'anaconda-mode-go-back))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-*")
+                                            #'anaconda-mode-go-back))))
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-M-?")
-                                    #'anaconda-mode-show-doc))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-?")
+                                            #'anaconda-mode-show-doc))))
   ;; ---------------- Spare ones ----------------------- 
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda()
-                                  (define-key
-                                    evil-normal-state-local-map
-                                    (kbd "C-x C-.")
-                                    #'anaconda-mode-find-definitions))))
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-x C-.")
+                                            #'anaconda-mode-find-definitions))))
 
   ;; -----------------------Python Ends Here ----------------------------------
 
