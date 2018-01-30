@@ -717,25 +717,29 @@ SCHEDULED: %t")))
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
 
   ;; ycmd config
+  ;;
+  ;; $ ./build.py --clang-completer --go-completer --rust-completer --system-libclang
   ;; ------------
-  (setq ycmd-server-command '("python" "~/git/ycmd/ycmd"))
-  (setq ycmd-extra-conf-whitelist '("~/workspace/*"))
-  (setq ycmd-extra-conf-whitelist '("~/git/*"))
+
+  (setq ycmd-server-command '("python" "/home/jethros/git/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "/home/jethros/.ycm_extra_conf.py")
+
+  (setq ycmd-extra-conf-whitelist '("/home/jethros/workspace/*"))
+  (setq ycmd-extra-conf-whitelist '("/home/jethros/git/*"))
   (setq ycmd-force-semantic-completion t)
   ;; if company-ycmd
   (global-set-key (kbd "<C-tab>") 'ycmd/manual-semantic-company-completer)
 
-  (add-hook 'c++-mode-hook 'ycmd-mode)
+  (defun ycmd-setup-completion-at-point-function ()
+    "Setup `completion-at-point-functions' for `ycmd-mode'."
+    (add-hook 'completion-at-point-functions
+              #'ycmd-complete-at-point nil :local))
+  (add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
+
+  ;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
   (add-hook 'c-mode-hook 'ycmd-mode)
-
-  ;; Java meghanda fix
-  ;;(require 'meghanada)
-  (defun java-meghanda-mode-hook ()
-    (meghanada-mode)
-    (flycheck-mode))
-  ;;(add-hook 'java-mode-hook 'java-meghanda-mode-hook)
-
-  
+  (add-hook 'rust-mode-hook 'ycmd-mode)
+ 
   ;; ---------------------------------------------------------------
   ;;
   ;;       Here goes some boring definition of functions
@@ -788,5 +792,6 @@ Symbols matching the text at point are put first in the completion list."
 
   )
 ;; end of [.spacemacs]
+
 
 
