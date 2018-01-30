@@ -139,8 +139,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode
-                                      dumb-jump ujelly-theme counsel-gtags
-                                      color-theme-sanityinc-tomorrow) 
+                                                dumb-jump ujelly-theme counsel-gtags
+                                                color-theme-sanityinc-tomorrow) 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -387,8 +387,12 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;;(setq-default evil-escape-key-sequence "jk")
+
+  ;; git magit
   (setq-default git-magit-status-fullscreen t)
-  (setq-default evil-escape-key-sequence "jk")
+  ;; deft mode always on
+  ;;(require 'deft)
 
   )
 
@@ -602,8 +606,11 @@ you should place your code here."
   ;; Deft/Org mode setting
   ;; -----------------------------
   ;;(setq deft-directory "~/Documents/org")
+  (require 'deft)
   (setq deft-directory "~/Dropbox/GS/18spring")
-
+  (global-set-key (kbd "C-c C-n") 'deft-new-file)
+  (global-set-key (kbd "C-c C-m") 'deft-new-file-named)
+  (global-set-key (kbd "C-c C-r") 'deft-rename-file)
 
   ;; Org capture setting
   ;; https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
@@ -739,7 +746,7 @@ SCHEDULED: %t")))
   ;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'rust-mode-hook 'ycmd-mode)
- 
+  
   ;; ---------------------------------------------------------------
   ;;
   ;;       Here goes some boring definition of functions
