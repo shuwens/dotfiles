@@ -139,8 +139,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode
-                                                dumb-jump ujelly-theme counsel-gtags
-                                                color-theme-sanityinc-tomorrow) 
+                                      dumb-jump ujelly-theme counsel-gtags
+                                      color-theme-sanityinc-tomorrow) 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -602,6 +602,13 @@ you should place your code here."
 
   ;; convienant keybinding for functions:
   ;; ------------------------------------
+
+  ;; Auto Yasnippet
+  ;;(require 'auto-yasnippet-mode)
+  ;;(global-set-key (kbd "H-w") #'aya-create)
+  ;;(global-set-key (kbd "H-y") #'aya-expand)
+  ;;(global-set-key (kbd "C-o") #'aya-open-line)
+
 
   ;; Deft/Org mode setting
   ;; -----------------------------
