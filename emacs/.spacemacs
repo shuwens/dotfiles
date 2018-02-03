@@ -73,7 +73,6 @@ values."
 
      ;; GNU globals
      gtags
-     counsel-gtags
 
      ;; need to be helm and cscope
      ;;helm
@@ -139,8 +138,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode
-                                      dumb-jump ujelly-theme counsel-gtags
-                                      color-theme-sanityinc-tomorrow) 
+                                                dumb-jump ujelly-theme counsel-gtags
+                                                color-theme-sanityinc-tomorrow) 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -219,7 +218,9 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro" 
+   dotspacemacs-default-font '("Dejavu Sans Mono" ; preferred
+                               ;;"Ubuntu Mono" ;
+                               ;;"Source Code Pro"
                                :size 15
                                :weight normal 
                                :width normal
@@ -495,6 +496,56 @@ you should place your code here."
   ;; ------------------------- C++ Ends Here -------------------------------
 
 
+  ;; -------------------- Java (meghanada mode) ------------------------------
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-i")
+                                          #'anaconda-mode-complete))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map 
+                                          (kbd "C-M-.")
+                                          #'meghanada-jump-declaration))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-,")
+                                          #'meghanada-switch-testcase))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-r")
+                                          #'meghanada-local-variable))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-*")
+                                          #'meghanada-back-jump))))
+  (with-eval-after-load 'java
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-?")
+                                          #'anaconda-mode-show-doc))))
+  ;; ---------------- Spare ones ----------------------- 
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-x C-.")
+                                          #'meghanada-jump-declaration))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-c C-r i")
+                                          #'meghanada-import-all))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-c C-r o")
+                                          #'meghanada-optimize-import))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-c C-r r")
+                                          #'meghanada-local-variable))))
+  (with-eval-after-load 'java-mode
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-c C-c c")
+                                          #'meghanada-project-compile))))
+
+  ;; ----------------------- Java Ends Here ----------------------------------
+
+
   ;; -------------------- Python (Anaconda-mode) ------------------------------
   (with-eval-after-load 'python
     (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
@@ -528,61 +579,6 @@ you should place your code here."
 
   ;; -----------------------Python Ends Here ----------------------------------
 
-  ;; not working
-  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-." 'anaconda-mode-find-definitions)
-  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-," 'anaconda-mode-find-assignments)
-  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-r" 'anaconda-mode-find-references)
-  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-*" 'anaconda-mode-go-back)
-  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-?" 'anaconda-mode-show-doc)
-
-  ;;  (spacemacs/set-leader-keys "M-." 'anaconda-mode-find-definitions)
-
-  ;;   (defun python-key-mode-hook ()
-  ;;     ;;(define-key evil-normal-state-map (kbd "M") nil) ;; I use C-g anyway
-  ;;     (define-key evil-normal-state-map "M" 'nil)
-  ;;     ;;(unbind-key (kbd "M") evil-normal-state-map)
-  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-." 'anaconda-mode-find-definitions)
-  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-," 'anaconda-mode-find-assignments)
-  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-r" 'anaconda-mode-find-references)
-  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-*" 'anaconda-mode-go-back)
-  ;;     (spacemacs/set-leader-keys-for-major-mode 'python-mode "M-?" 'anaconda-mode-show-doc)
-  ;;    )
-  ;;   (add-hook 'python-mode-hook 'python-key-mode-hook)
-
-
-  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-i" 'anaconda-mode-complete)
-
-  ;;   ;; not working
-  ;; ;;  (with-eval-after-load 'evil
-  ;;  ;;   (bind key ....)
-
-  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-." 'anaconda-mode-find-definitions)
-  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-," 'anaconda-mode-find-assignments)
-  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-r" 'anaconda-mode-find-references)
-  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-x C-*" 'anaconda-mode-go-back)
-  ;;   (spacemacs/set-leader-keys-for-major-mode 'python-mode "C-M-?" 'anaconda-mode-show-doc)
-
-  ;;   (define-key evil-normal-state-map (kbd "M-.") 'anaconda-mode-find-definitions)
-  ;;   (spacemacs/set-leader-keys "M-." 'anaconda-mode-find-definitions)
-  ;;   (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
-
-  ;;------------------------------ END ---------------------------------------
-
-  ;; Java ()
-  (defun java-key-mode-hook ()
-    (meghanada-mode)
-    ;; Make shortcuts the same as in IDEA
-    (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
-    (define-key meghanada-mode-map (kbd "C-M-t") 'meghanada-import-all)
-    ;; since imenu is not working ...
-    (define-key meghanada-mode-map (kbd "C-x C-i") 'meghanada-jump-declaration)
-    (define-key meghanada-mode-map (kbd "C-x C-.") 'meghanada-jump-declaration)
-    (define-key meghanada-mode-map (kbd "C-M-.") 'meghanada-jump-declaration)
-    (define-key meghanada-mode-map (kbd "C-x C-,") 'meghanada-back-jump)
-    (define-key meghanada-mode-map (kbd "C-M-,") 'meghanada-back-jump)
-    )
-  (add-hook 'java-mode-hook 'java-key-mode-hook)
-
 
   ;; Rust ()
   ;;(global-set-key (kbd "C-x C-i") 'ido-imenu)
@@ -602,6 +598,48 @@ you should place your code here."
 
   ;; convienant keybinding for functions:
   ;; ------------------------------------
+
+  ;; -------------------- Flycheck (Anaconda-mode) ------------------------------
+
+  ;; Not working
+
+  (defun flycheck-my-load ()
+    (flycheck-mode t)
+    
+    ;; Utility key bindings for navigating errors reported by flycheck.
+    (local-set-key (kbd "C-c C-d") 'flycheck-explain-error-at-point)
+    (local-set-key (kbd "C-c C-n") 'flycheck-error-list-next-error)
+    (local-set-key (kbd "C-c C-p") 'flycheck-error-list-previous-error)
+    (local-set-key (kbd "C-c C-c") 'flycheck-list-errors)
+    ;; Prevents flymake from throwing a configuration error
+    ;; This must be done because atsopt returns a non-zero return value
+    ;; when it finds an error, flymake expects a zero return value.
+    ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
+    ;;(setq flymake-check-was-interrupted t))
+    ;;(ad-activate 'flymake-post-syntax-check)
+   )
+  (add-hook 'prog-mode-hook 'flycheck-my-load)
+
+
+  (with-eval-after-load 'flycheck-mode
+    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                              (kbd "C-c C-d")
+                                              #'flycheck-explain-error-at-point))))
+  (with-eval-after-load 'flycheck-mode
+    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                              (kbd "C-c C-c")
+                                              #'flycheck-list-errors))))
+  (with-eval-after-load 'flycheck-mode
+    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                              (kbd "C-c C-n")
+                                              #'flycheck-error-list-next-error))))
+  (with-eval-after-load 'flycheck-mode
+    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                              (kbd "C-c C-p")
+                                              #'flycheck-error-list-previous-error))))
+
+  ;; ----------------------- Flycheck Ends Here ----------------------------------
+
 
   ;; Auto Yasnippet
   ;;(require 'auto-yasnippet-mode)
@@ -707,6 +745,9 @@ SCHEDULED: %t")))
   ;; use hippie-expand instead of dabbrev
   (global-set-key (kbd "M-/") 'hippie-expand)
 
+  ;; eshell simple
+  (global-set-key (kbd "C-x m") 'eshell)
+
   ;; turn on crosshairs mode by default
   ;; -----------------------------------
   ;;(add-hook 'prog-mode-hook 'crosshairs-mode)
@@ -753,7 +794,7 @@ SCHEDULED: %t")))
   ;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'rust-mode-hook 'ycmd-mode)
-  
+
   ;; ---------------------------------------------------------------
   ;;
   ;;       Here goes some boring definition of functions
@@ -808,7 +849,6 @@ Symbols matching the text at point are put first in the completion list."
 ;; end of [.spacemacs]
 
 
-
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -821,7 +861,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yapfify xterm-color ws-butler winum wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd hy-mode dash-functional hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig dumb-jump disaster deft define-word dante flycheck cython-mode counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred let-alist request deferred company-web web-completion-data company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider seq spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo rust-mode biblio biblio-core auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async))))
+    (yasnippet-snippets yapfify xterm-color ws-butler winum wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd hy-mode dash-functional hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig dumb-jump disaster deft define-word dante lcr flycheck cython-mode counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred let-alist request deferred company-web web-completion-data company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider seq spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo rust-mode biblio biblio-core auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
