@@ -2,6 +2,14 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+;; NOTE(jethros):
+;;
+;; KEYBINDING:
+;;  * Python: working
+;;  * Java: working
+;;  * C++: ?
+
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -17,9 +25,9 @@ values."
    ;; not listed in variable `dotspacemacs-configuration-layers'), `all' will
    ;; lazy install any layer that support lazy installation even the layers
    ;; listed in `dotspacemacs-configuration-layers'. `nil' disable the lazy
-   ;; installation feature and you have to explicitly list a layer in the
+   ;; instal;; GNU globalslation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
-   ;; (default 'unused)
+   ;; (default ;; GNU globals'unused)
    dotspacemacs-enable-lazy-installation 'unused
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
@@ -76,13 +84,10 @@ values."
               ibuffer-group-buffers-by 'projects)
      semantic
 
-     ;; GNU globals
-     gtags
-
-     ;; need to be helm and cscope
-     ;;helm
+     ;; Tagging
+     ;; ----------
      ;;cscope
-
+     ;;gtags
 
      (shell :variables
             shell-default-height 30
@@ -146,7 +151,7 @@ values."
                                                 stickyfunc-enhance dumb-jump
                                                 cpputils-cmake function-args
                                                 ujelly-theme counsel-gtags
-     color-theme-sanityinc-tomorrow)  
+                                                color-theme-sanityinc-tomorrow)  
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -523,6 +528,33 @@ you should place your code here."
 
 
   ;; -------------------- Java (meghanada mode) ------------------------------
+
+  (defun java-key-mode-hook ()
+    (meghanada-mode)
+    ;; jump to declare
+    (define-key meghanada-mode-map (kbd "C-M-.") 'meghanada-jump-declaration)
+    (define-key meghanada-mode-map (kbd "C-x C-i") 'meghanada-jump-declaration)
+    (define-key meghanada-mode-map (kbd "C-x C-.") 'meghanada-jump-declaration)
+;; jump back
+    (define-key meghanada-mode-map (kbd "C-x C-*") 'meghanada-back-jump)
+    (define-key meghanada-mode-map (kbd "C-M-*") 'meghanada-back-jump)
+  ;; switch test case
+    (define-key meghanada-mode-map (kbd "C-M-,") 'meghanada-switch-testcase)
+
+    (define-key meghanada-mode-map (kbd "C-M-r") 'meghanada-local-variable)
+    (define-key meghanada-mode-map (kbd "C-c C-r r") 'meghanada-local-variable)
+    (define-key meghanada-mode-map (kbd "C-M-i") 'meghanada-import-all)
+    (define-key meghanada-mode-map (kbd "C-M-t") 'meghanada-import-all)
+    (define-key meghanada-mode-map (kbd "C-c C-r i") 'meghanada-import-all)
+
+    (define-key meghanada-mode-map (kbd "C-c C-r o") 'meghanada-optimize-import)
+    (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
+
+    (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project)
+   )
+  (add-hook 'java-mode-hook 'java-key-mode-hook)
+
+  ;; noit workign
   (with-eval-after-load 'java-mode
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-M-i")
@@ -881,23 +913,24 @@ Symbols matching the text at point are put first in the completion list."
 ;; end of [.spacemacs]
 
 
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (lispy zoutline function-args cpputils-cmake yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy font-lock+ flyspell-popup flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diminish deft define-word dante cython-mode counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-statistics company-shell company-rtags company-quickhelp company-go company-ghci company-ghc company-emacs-eclim company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     (quote
+      (xcscope yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode lispy linum-relative link-hint less-css-mode ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md geiser fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diminish deft define-word dante cython-mode cpputils-cmake counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-statistics company-shell company-rtags company-quickhelp company-go company-ghci company-ghc company-emacs-eclim company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-link ac-ispell))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
