@@ -158,7 +158,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(ensime)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -706,7 +706,6 @@ you should place your code here."
 
   ;; ----------------------- Flycheck Ends Here ----------------------------------
 
-
   ;; ------------------- Linux Kernel Coding Style ----------------------------
   (defun c-lineup-arglist-tabs-only (ignored)
     "Line up argument lists by tabs, not spaces"
@@ -715,7 +714,7 @@ you should place your code here."
            (offset (- (1+ column) anchor))
            (steps (floor offset c-basic-offset)))
       (* (max steps 1)
-         c-basic-offset)))
+         c-basic-offset . 8)))
 
   (add-hook 'c-mode-common-hook
             (lambda ()
