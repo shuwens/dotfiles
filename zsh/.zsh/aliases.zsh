@@ -290,9 +290,13 @@ function cdd {
 
 # haskell vim
 alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc" 
+# Prog Lang Emacs
+alias pemacs='emacs -q -l "~/.emacs.proglang/init.el"'
+
 alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
 alias Scheme="scheme -large -band 6001.com -edit"
 alias tm="tmux attach || tmux new"
+
 
 
 # ----------------------
@@ -325,5 +329,6 @@ hash -d talk=~/writing/slides/moc-reading-group-talk-2
 hash -d leetcode=~/workspace/practise-cpp/leetcode
 hash -d brown_tracing=~/git/BROWN_TRACING
 hash -d jaeger=~/git/JAEGER_TRACING
+hash -d survey=~/writing/various-surveys
 
 # end of [aliases.zsh]

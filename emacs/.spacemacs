@@ -147,11 +147,14 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(meghanada groovy-mode gradle-mode lispy
-                                                stickyfunc-enhance dumb-jump
-                                                cpputils-cmake function-args
-                                                ujelly-theme counsel-gtags
-                                                color-theme-sanityinc-tomorrow)  
+   dotspacemacs-additional-packages '(lispy meghanada groovy-mode gradle-mode 
+                                            stickyfunc-enhance dumb-jump
+                                            cpputils-cmake function-args
+                                            counsel-gtags
+                                            ;; theme
+                                            nord-theme ujelly-theme 
+                                            darktooth-theme
+                                            color-theme-sanityinc-tomorrow)  
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -224,8 +227,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-light
-                         ujelly)
-                                        ;spacemacs-dark)
+                         darktooth)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -535,10 +537,10 @@ you should place your code here."
     (define-key meghanada-mode-map (kbd "C-M-.") 'meghanada-jump-declaration)
     (define-key meghanada-mode-map (kbd "C-x C-i") 'meghanada-jump-declaration)
     (define-key meghanada-mode-map (kbd "C-x C-.") 'meghanada-jump-declaration)
-;; jump back
+    ;; jump back
     (define-key meghanada-mode-map (kbd "C-x C-*") 'meghanada-back-jump)
     (define-key meghanada-mode-map (kbd "C-M-*") 'meghanada-back-jump)
-  ;; switch test case
+    ;; switch test case
     (define-key meghanada-mode-map (kbd "C-M-,") 'meghanada-switch-testcase)
 
     (define-key meghanada-mode-map (kbd "C-M-r") 'meghanada-local-variable)
@@ -551,7 +553,7 @@ you should place your code here."
     (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
 
     (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project)
-   )
+    )
   (add-hook 'java-mode-hook 'java-key-mode-hook)
 
   ;; noit workign
@@ -704,6 +706,39 @@ you should place your code here."
 
   ;; ----------------------- Flycheck Ends Here ----------------------------------
 
+
+  ;; ------------------- Linux Kernel Coding Style ----------------------------
+  (defun c-lineup-arglist-tabs-only (ignored)
+    "Line up argument lists by tabs, not spaces"
+    (let* ((anchor (c-langelem-pos c-syntactic-element))
+           (column (c-langelem-2nd-pos c-syntactic-element))
+           (offset (- (1+ column) anchor))
+           (steps (floor offset c-basic-offset)))
+      (* (max steps 1)
+         c-basic-offset)))
+
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              ;; Add kernel style
+              (c-add-style
+               "linux-tabs-only"
+               '("linux" (c-offsets-alist
+                          (arglist-cont-nonempty
+                           c-lineup-gcc-asm-reg
+                           c-lineup-arglist-tabs-only))))))
+
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (let ((filename (buffer-file-name)))
+                ;; Enable kernel mode for the appropriate files
+                (when (and filename
+                           (string-match (expand-file-name "~/git/kernels")
+                                         filename))
+                  (setq indent-tabs-mode t)
+                  (setq show-trailing-whitespace t)
+                  (c-set-style "linux-tabs-only")))))
+
+  ;; ----------------- Linux Kernel Style Ends Here --------------------------
 
   ;; Auto Yasnippet
   ;;(require 'auto-yasnippet-mode)
@@ -859,6 +894,9 @@ SCHEDULED: %t")))
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'rust-mode-hook 'ycmd-mode)
 
+
+
+
   ;; ---------------------------------------------------------------
   ;;
   ;;       Here goes some boring definition of functions
@@ -906,6 +944,8 @@ Symbols matching the text at point are put first in the completion list."
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
         (goto-char position))))
+
+
 
   ;; --------------------- FUNC ENDS HERE -----------------------
 

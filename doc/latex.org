@@ -56,3 +56,6 @@ just a beautiful example
 
   [[http://www.texample.net/tikz/examples/beamer-arrows/]]
   [[https://tex.stackexchange.com/questions/61507/drawing-arrows-in-beamer]]
+
+* comments 
+  [[https://github.com/CCI-MOC/papers/commit/5208eb8816bb729c5af94af34ec1027844aea1fd]]
