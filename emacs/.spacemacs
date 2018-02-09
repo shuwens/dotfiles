@@ -714,7 +714,7 @@ you should place your code here."
            (offset (- (1+ column) anchor))
            (steps (floor offset c-basic-offset)))
       (* (max steps 1)
-         c-basic-offset . 8)))
+         c-basic-offset  8)))
 
   (add-hook 'c-mode-common-hook
             (lambda ()
