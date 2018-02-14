@@ -153,7 +153,7 @@ values."
                                             counsel-gtags
                                             ;; theme
                                             nord-theme ujelly-theme 
-                                            darktooth-theme
+                                            darktooth-theme cyberpunk-theme
                                             color-theme-sanityinc-tomorrow)  
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -950,6 +950,7 @@ Symbols matching the text at point are put first in the completion list."
 
   )
 ;; end of [.spacemacs]
+
 
 
 

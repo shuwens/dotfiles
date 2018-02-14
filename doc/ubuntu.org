@@ -91,3 +91,13 @@ sudo apt update
 sudo apt install ubuntu-make    
 umake ide eclipse
 
+* C++
+  clangd 
+#+begin_src
+sudo apt purge clang
+sudo apt autoremove
+sudo apt install clang-5.0
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-5.0 100
+sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-5.0 100
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-5.0 100
+#+end_src
