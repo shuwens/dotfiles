@@ -96,10 +96,12 @@ short() {
 # ------------------------------
 # personal utils
 # ------------------------------
-alias UpdateResume="scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
-alias UpdateStatement="scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/resrcs"
+o() { xdg-open "$@" & }
+UpdateFile() {scp "$@"  shwsun@csa2.bu.edu:~/public_html/tmp}
+alias UpdateResume="scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+alias UpdateStatement="scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias leet="./~/workspace/practise-cpp/leetcode/comments.sh"
-alias virtualenv3="virtualenv -p /usr/bin/python3 .venv"
+alias virtualenv3="virtualenv -p /usr/bin/python3"
 
 
 # careful! bugs!
