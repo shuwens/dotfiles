@@ -38,7 +38,7 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(javascript
+   '(;;javascript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -60,6 +60,7 @@ values."
      ;;c-c++-enable-rtags-support t)
 
      (python :variables
+              python-backend 'lsp
              python-fill-column 80
              python-test-runner 'pytest
              ;; yapf and auto indent are evil!!!
@@ -83,6 +84,7 @@ values."
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      semantic
+lsp
 
      ;; Tagging
      ;; ----------
@@ -863,7 +865,7 @@ SCHEDULED: %t")))
 
   ;; Hack: anaconda mode is not enabled in python by default?
   ;; --------------------------------------------------------
-  (add-hook 'python-mode-hook 'anaconda-mode)
+  ;;(add-hook 'python-mode-hook 'anaconda-mode)
 
   (add-hook 'prog-mode-hook 
             (lambda ()
@@ -963,22 +965,4 @@ Symbols matching the text at point are put first in the completion list."
 ;; end of [.spacemacs]
 
 
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(web-beautify livid-mode skewer-mode json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc helm-gtags ggtags company-tern tern coffee-mode add-node-modules-path yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs realgud rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml nord-theme noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode lispy linum-relative link-hint ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports grayscale-theme graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md geiser fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diminish deft define-word darktooth-theme dante cython-mode cyberpunk-theme cpputils-cmake counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-statistics company-shell company-rtags company-quickhelp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-link ac-ispell)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+
