@@ -332,5 +332,7 @@ hash -d leetcode=~/workspace/practise-cpp/leetcode
 hash -d brown_tracing=~/git/BROWN_TRACING
 hash -d jaeger=~/git/JAEGER_TRACING
 hash -d survey=~/writing/various-surveys
+hash -d proglang=~/git/supreme-octo-pancake/proglang-nu
+hash -d hotcloud=~/writing/shared_tracing_docs/hot_cloud_18/submit
 
 # end of [aliases.zsh]

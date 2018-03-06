@@ -53,6 +53,11 @@ sudo apt-get install openjdk-8-jdk maven
 curl https://sh.rustup.rs -sSf | sh
 #cargo install --no-default-features --git https://github.com/ogham/exa
 
+# racket
+sudo add-apt-repository ppa:plt/racket -y
+sudo apt install -y racket
+
+
 # ----------------------
 #   Do the update
 # ----------------------

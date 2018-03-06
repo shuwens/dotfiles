@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -x
+
+
+rsync -P --exclude ".*/"  -r /home/jethros/  /media/jethros/Data/X1-Carbon/

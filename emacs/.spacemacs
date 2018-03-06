@@ -60,7 +60,7 @@ values."
      ;;c-c++-enable-rtags-support t)
 
      (python :variables
-              python-backend 'lsp
+             python-backend 'lsp
              python-fill-column 80
              python-test-runner 'pytest
              ;; yapf and auto indent are evil!!!
@@ -72,19 +72,21 @@ values."
      (java :variables java-backend 'meghanada)
 
      sml
+     racket
 
 
      ;; --------------------------
      ;;   Major tool layers
      ;; --------------------------
+     ivy
+
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
-     ivy
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      semantic
-lsp
+     lsp
 
      ;; Tagging
      ;; ----------
@@ -153,6 +155,7 @@ lsp
                                             stickyfunc-enhance dumb-jump
                                             cpputils-cmake function-args
                                             counsel-gtags company-childframe
+                                      hydra aggressive-indent
                                             ;; theme
                                             nord-theme ujelly-theme 
                                             ;; next a few 
@@ -162,7 +165,7 @@ lsp
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(ensime)
+   dotspacemacs-excluded-packages '(ensime helm)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -235,9 +238,8 @@ values."
    ;;   material-light, spacemacs-light
    ;; dark:
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso
-   dotspacemacs-themes '(spacemacs-light
-                         grayscale deeper-blue darktooth
-                         )
+   dotspacemacs-themes '(spacemacs-light darktooth grayscale deeper-blue 
+                                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -809,6 +811,12 @@ SCHEDULED: %t")))
           ;;("pe" "无所谓做不做的任务" tags "+PRIORITY=\"E\"")
           ))
 
+;; aggressive indent mode
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
+
+
   ;; forget what they are for
   ;; ------------------------
   (setq org-ref-default-bibliography '("~/git/reference/references.bib")
@@ -963,6 +971,7 @@ Symbols matching the text at point are put first in the completion list."
 
   )
 ;; end of [.spacemacs]
+
 
 
 
