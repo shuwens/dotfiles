@@ -27,7 +27,11 @@ export PATH=/opt:$PATH
 # For notetaking
 export NOTES_DIR=$HOME/Dropbox/GS
 
+## commented?
 #export MANPATH=/uso/local/man:$MANPATH
+## Try most
+export MANPAGER=most # in ~/.bashrc or similar
+
 
 #█▓▒░ preferred editor for local and remote sessions
 export EDITOR=vim

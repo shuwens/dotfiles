@@ -326,7 +326,8 @@ function sudo() {
 # dir aliases
 hash -d ps=~/writing/phd-application/ps
 hash -d cv=~/writing/phd-application/nice_cv
-hash -d sop=~/writing/phd-application/sop
+hash -d compact_cv=~/writing/phd-application/compact_cv
+hash -d sop=~/writing/phd-application/phd-app/sop
 hash -d talk=~/writing/slides/moc-reading-group-talk-2
 hash -d leetcode=~/workspace/practise-cpp/leetcode
 hash -d brown_tracing=~/git/BROWN_TRACING
