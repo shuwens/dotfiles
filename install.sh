@@ -23,7 +23,9 @@ sudo apt-add-repository -y ppa:teejee2008/ppa
 # install my personal utils 
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
   mercurial zathura exuberant-ctags stow meld vlc python-pip zsh vagrant \
-  chromium-browser gnome-tweak-tool golang-glide docker.io fonts-roboto curl
+  chromium-browser gnome-tweak-tool golang-glide docker.io fonts-roboto curl \
+  tree
+
 
 # tlp
 sudo apt-get install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
@@ -56,6 +58,9 @@ curl https://sh.rustup.rs -sSf | sh
 # racket
 sudo add-apt-repository ppa:plt/racket -y
 sudo apt install -y racket
+
+# dev env emacs cpp etc
+sudo apt -y install cppman w3m w3m-el
 
 
 # ----------------------

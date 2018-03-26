@@ -65,7 +65,8 @@ values."
              python-test-runner 'pytest
              ;; yapf and auto indent are evil!!!
              ;;python-enable-yapf-format-on-save t
-             python-sort-imports-on-save t)
+             ;;python-sort-imports-on-save t
+      )
 
      (go :variables go-tab-width 4)
 
@@ -155,7 +156,7 @@ values."
                                             stickyfunc-enhance dumb-jump
                                             cpputils-cmake function-args
                                             counsel-gtags company-childframe
-                                      hydra aggressive-indent
+                                      hydra aggressive-indent anything academic-phrases
                                             ;; theme
                                             nord-theme ujelly-theme 
                                             ;; next a few 
@@ -914,64 +915,124 @@ SCHEDULED: %t")))
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'rust-mode-hook 'ycmd-mode)
 
-  ;; Parinfer
+;; C++ reference look up : kinda broken
+;; ==================================================================
+(require 'anything)
+(require 'anything-config)
+(global-set-key (kbd "C-c I")  ;; i -> info
+ (lambda () (interactive)
+  (anything
+   :prompt "Info about: "
+   :candidate-number-limit 100
+   :sources
+      '(anything-c-source-man-pages
+        anything-c-source-boost-html))))
+
+;; boost documentation
+(require 'w3m)
+
+(defvar boost-documentation-directory
+  "/usr/share/doc/libboost1.63-doc/"
+  "defines boost directory location")
 
 
-  ;; ---------------------------------------------------------------
-  ;;
-  ;;       Here goes some boring definition of functions
-  ;;
-  ;; ---------------------------------------------------------------
+(defun recursive-file-list (dir)
+  (let ((files-list '())
+        (current-entries (directory-files dir t)))
+    (dolist (entry current-entries)
+      (cond ((and (file-regular-p entry)
+                  (string-match "html?$" entry))
+             (setq files-list
+                   (cons entry files-list)))
+            ((and (file-directory-p entry)
+                  (not (string-equal ".." (substring entry -2)))
+                  (not (string-equal "." (substring entry -1))))
+             (setq files-list (append files-list (recursive-file-list entry))))))
+      files-list))
 
-  (defun ido-imenu ()
-    "Update the imenu index and then use ido to select a symbol to navigate to.
+(defvar anything-c-source-boost-html
+  '((name . "boost html documentation")
+    (requires-pattern . 3)
+    (candidates . (lambda ()
+                    (recursive-file-list boost-documentation-directory)))
+    (delayed)
+    (action . (lambda (entry)
+                (w3m-browse-url entry)))))
+;; ---------------------------------------------------------------------------
+
+;; ---------------------------------------------------------------
+;;
+;;       Here goes some boring definition of functions
+;;
+;; ---------------------------------------------------------------
+
+(defun ido-imenu ()
+  "Update the imenu index and then use ido to select a symbol to navigate to.
 Symbols matching the text at point are put first in the completion list."
-    (interactive)
-    (imenu--make-index-alist)
-    (let ((name-and-pos '())
-          (symbol-names '()))
-      (flet ((addsymbols (symbol-list)
-                         (when (listp symbol-list)
-                           (dolist (symbol symbol-list)
-                             (let ((name nil) (position nil))
-                               (cond
-                                ((and (listp symbol) (imenu--subalist-p symbol))
-                                 (addsymbols symbol))
+  (interactive)
+  (imenu--make-index-alist)
+  (let ((name-and-pos '())
+        (symbol-names '()))
+    (flet ((addsymbols (symbol-list)
+                       (when (listp symbol-list)
+                         (dolist (symbol symbol-list)
+                           (let ((name nil) (position nil))
+                             (cond
+                              ((and (listp symbol) (imenu--subalist-p symbol))
+                               (addsymbols symbol))
 
-                                ((listp symbol)
-                                 (setq name (car symbol))
-                                 (setq position (cdr symbol)))
+                              ((listp symbol)
+                               (setq name (car symbol))
+                               (setq position (cdr symbol)))
 
-                                ((stringp symbol)
-                                 (setq name symbol)
-                                 (setq position (get-text-property 1 'org-imenu-marker symbol))))
+                              ((stringp symbol)
+                               (setq name symbol)
+                               (setq position (get-text-property 1 'org-imenu-marker symbol))))
 
-                               (unless (or (null position) (null name))
-                                 (add-to-list 'symbol-names name)
-                                 (add-to-list 'name-and-pos (cons name position))))))))
-        (addsymbols imenu--index-alist))
-      ;; If there are matching symbols at point, put them at the beginning of `symbol-names'.
-      (let ((symbol-at-point (thing-at-point 'symbol)))
-        (when symbol-at-point
-          (let* ((regexp (concat (regexp-quote symbol-at-point) "$"))
-                 (matching-symbols (delq nil (mapcar (lambda (symbol)
-                                                       (if (string-match regexp symbol) symbol))
-                                                     symbol-names))))
-            (when matching-symbols
-              (sort matching-symbols (lambda (a b) (> (length a) (length b))))
-              (mapc (lambda (symbol) (setq symbol-names (cons symbol (delete symbol symbol-names))))
-                    matching-symbols)))))
-      (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
-             (position (cdr (assoc selected-symbol name-and-pos))))
-        (goto-char position))))
+                             (unless (or (null position) (null name))
+                               (add-to-list 'symbol-names name)
+                               (add-to-list 'name-and-pos (cons name position))))))))
+      (addsymbols imenu--index-alist))
+    ;; If there are matching symbols at point, put them at the beginning of `symbol-names'.
+    (let ((symbol-at-point (thing-at-point 'symbol)))
+      (when symbol-at-point
+        (let* ((regexp (concat (regexp-quote symbol-at-point) "$"))
+               (matching-symbols (delq nil (mapcar (lambda (symbol)
+                                                     (if (string-match regexp symbol) symbol))
+                                                   symbol-names))))
+          (when matching-symbols
+            (sort matching-symbols (lambda (a b) (> (length a) (length b))))
+            (mapc (lambda (symbol) (setq symbol-names (cons symbol (delete symbol symbol-names))))
+                  matching-symbols)))))
+    (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
+           (position (cdr (assoc selected-symbol name-and-pos))))
+      (goto-char position))))
 
 
 
-  ;; --------------------- FUNC ENDS HERE -----------------------
+;; --------------------- FUNC ENDS HERE -----------------------
 
-  )
+)
 ;; end of [.spacemacs]
 
 
 
-
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(yasnippet-snippets yapfify xterm-color ws-butler winum wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons all-the-icons memoize spaceline powerline smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode nord-theme noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui markdown-mode lsp-python lorem-ipsum live-py-mode lispy zoutline linum-relative link-hint ivy-xref ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile hy-mode dash-functional hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache grayscale-theme graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump disaster deft define-word darktooth-theme autothemer dante lcr flycheck cython-mode cyberpunk-theme cpputils-cmake counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred request deferred company-web web-completion-data company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo rust-mode biblio biblio-core auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anything anaconda-mode pythonic f aggressive-indent adaptive-wrap ace-window ace-link avy academic-phrases ht s dash ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
