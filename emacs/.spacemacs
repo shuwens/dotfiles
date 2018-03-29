@@ -129,6 +129,7 @@ values."
      deft
      bibtex
      html
+     yaml
      markdown
      (org :variables org-projectile-file "TODOs.org")
      (clojure :variables clojure-enable-fancify-symbols t)
@@ -156,7 +157,7 @@ values."
                                             stickyfunc-enhance dumb-jump
                                             cpputils-cmake function-args
                                             counsel-gtags company-childframe
-                                      hydra aggressive-indent anything academic-phrases
+                                      hydra aggressive-indent academic-phrases
                                             ;; theme
                                             nord-theme ujelly-theme 
                                             ;; next a few 
@@ -818,115 +819,115 @@ SCHEDULED: %t")))
 
 
 
-  ;; forget what they are for
-  ;; ------------------------
-  (setq org-ref-default-bibliography '("~/git/reference/references.bib")
-        org-ref-pdf-directory "~/Documents/files"
-        org-ref-bibliography-notes "~/Documents/notes.org")
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  (setq doc-view-resolution 144)
-  (setq org-ref-open-pdf-function
-        (lambda (fpath)
-          (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
-  (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
+;; forget what they are for
+;; ------------------------
+(setq org-ref-default-bibliography '("~/git/reference/references.bib")
+      org-ref-pdf-directory "~/Documents/files"
+      org-ref-bibliography-notes "~/Documents/notes.org")
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+(setq doc-view-resolution 144)
+(setq org-ref-open-pdf-function
+      (lambda (fpath)
+        (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
+(add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
 
-  ;; compile buffer auto-close if succeed
-  ;; ---------------------------------------------
-  (defun bury-compile-buffer-if-successful (buffer string)
-    "Bury a compilation buffer if succeeded without warnings "
-    (when (and
-           (buffer-live-p buffer)
-           (string-match "compilation" (buffer-name buffer))
-           (string-match "finished" string)
-           (not
-            (with-current-buffer buffer
-              (goto-char (point-min))
-              (search-forward "warning" nil t))))
-      (run-with-timer 1 nil
-                      (lambda (buf)
-                        (bury-buffer buf)
-                        (delete-windows-on buf))
-                      buffer)))
-  (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+;; compile buffer auto-close if succeed
+;; ---------------------------------------------
+(defun bury-compile-buffer-if-successful (buffer string)
+  "Bury a compilation buffer if succeeded without warnings "
+  (when (and
+         (buffer-live-p buffer)
+         (string-match "compilation" (buffer-name buffer))
+         (string-match "finished" string)
+         (not
+          (with-current-buffer buffer
+            (goto-char (point-min))
+            (search-forward "warning" nil t))))
+    (run-with-timer 1 nil
+                    (lambda (buf)
+                      (bury-buffer buf)
+                      (delete-windows-on buf))
+                    buffer)))
+(add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
 
-  ;; I want smartparen mode in LaTeX
-  (add-hook 'text-mode-hook 'smartparens-mode)
-  ;; experimental: auto-revert
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+;; I want smartparen mode in LaTeX
+(add-hook 'text-mode-hook 'smartparens-mode)
+;; experimental: auto-revert
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-  ;; FAV GLOBAL from SO
-  ;; https://stackoverflow.com/questions/3124844/what-are-your-favorite-global-key-bindings-in-emacs
-  ;; Magit rules!
-  (global-set-key (kbd "C-x g") 'magit-status)
+;; FAV GLOBAL from SO
+;; https://stackoverflow.com/questions/3124844/what-are-your-favorite-global-key-bindings-in-emacs
+;; Magit rules!
+(global-set-key (kbd "C-x g") 'magit-status)
 
-  ;; cycle through buffers
-  (global-set-key (kbd "<C-tab>") 'bury-buffer)
+;; cycle through buffers
+(global-set-key (kbd "<C-tab>") 'bury-buffer)
 
-  ;; use hippie-expand instead of dabbrev
-  (global-set-key (kbd "M-/") 'hippie-expand)
+;; use hippie-expand instead of dabbrev
+(global-set-key (kbd "M-/") 'hippie-expand)
 
-  ;; eshell simple
-  (global-set-key (kbd "C-x m") 'eshell)
+;; eshell simple
+(global-set-key (kbd "C-x m") 'eshell)
 
-  ;; turn on crosshairs mode by default
-  ;; -----------------------------------
-  ;;(add-hook 'prog-mode-hook 'crosshairs-mode)
+;; turn on crosshairs mode by default
+;; -----------------------------------
+;;(add-hook 'prog-mode-hook 'crosshairs-mode)
 
-  ;; Hack: anaconda mode is not enabled in python by default?
-  ;; --------------------------------------------------------
-  ;;(add-hook 'python-mode-hook 'anaconda-mode)
+;; Hack: anaconda mode is not enabled in python by default?
+;; --------------------------------------------------------
+;;(add-hook 'python-mode-hook 'anaconda-mode)
 
-  (add-hook 'prog-mode-hook 
-            (lambda ()
-              ;; Enable fill column indicator
-              (fci-mode t)
-              ;; Turn off line numbering, it makes org so slow
-              (linum-mode -1)
-              ;; Set fill column to 79
-              (setq fill-column 79)
-              ;; Enable automatic line wrapping at fill column
-              (auto-fill-mode t)))
+(add-hook 'prog-mode-hook 
+          (lambda ()
+            ;; Enable fill column indicator
+            (fci-mode t)
+            ;; Turn off line numbering, it makes org so slow
+            (linum-mode -1)
+            ;; Set fill column to 79
+            (setq fill-column 79)
+            ;; Enable automatic line wrapping at fill column
+            (auto-fill-mode t)))
 
-  ;; Activate column indicator in prog-mode and text-mode
-  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
-  (add-hook 'text-mode-hook 'turn-on-fci-mode)
+;; Activate column indicator in prog-mode and text-mode
+(add-hook 'prog-mode-hook 'turn-on-fci-mode)
+(add-hook 'text-mode-hook 'turn-on-fci-mode)
 
-  ;; ycmd config
-  ;;
-  ;; $ ./build.py --clang-completer --go-completer --rust-completer --system-libclang
-  ;; ------------
+;; ycmd config
+;;
+;; $ ./build.py --clang-completer --go-completer --rust-completer --system-libclang
+;; ------------
 
-  (setq ycmd-server-command '("python" "/home/jethros/git/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "/home/jethros/.ycm_extra_conf.py")
+(setq ycmd-server-command '("python" "/home/jethros/git/ycmd/ycmd"))
+(set-variable 'ycmd-global-config "/home/jethros/.ycm_extra_conf.py")
 
-  (setq ycmd-extra-conf-whitelist '("/home/jethros/workspace/*"))
-  (setq ycmd-extra-conf-whitelist '("/home/jethros/git/*"))
-  (setq ycmd-force-semantic-completion t)
-  ;; if company-ycmd
-  (global-set-key (kbd "<C-tab>") 'ycmd/manual-semantic-company-completer)
+(setq ycmd-extra-conf-whitelist '("/home/jethros/workspace/*"))
+(setq ycmd-extra-conf-whitelist '("/home/jethros/git/*"))
+(setq ycmd-force-semantic-completion t)
+;; if company-ycmd
+(global-set-key (kbd "<C-tab>") 'ycmd/manual-semantic-company-completer)
 
-  (defun ycmd-setup-completion-at-point-function ()
-    "Setup `completion-at-point-functions' for `ycmd-mode'."
-    (add-hook 'completion-at-point-functions
-              #'ycmd-complete-at-point nil :local))
-  (add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
+(defun ycmd-setup-completion-at-point-function ()
+  "Setup `completion-at-point-functions' for `ycmd-mode'."
+  (add-hook 'completion-at-point-functions
+            #'ycmd-complete-at-point nil :local))
+(add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
 
-  ;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
-  (add-hook 'c-mode-hook 'ycmd-mode)
-  (add-hook 'rust-mode-hook 'ycmd-mode)
+;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
+(add-hook 'c-mode-hook 'ycmd-mode)
+(add-hook 'rust-mode-hook 'ycmd-mode)
 
 ;; C++ reference look up : kinda broken
 ;; ==================================================================
-(require 'anything)
-(require 'anything-config)
-(global-set-key (kbd "C-c I")  ;; i -> info
- (lambda () (interactive)
-  (anything
-   :prompt "Info about: "
-   :candidate-number-limit 100
-   :sources
-      '(anything-c-source-man-pages
-        anything-c-source-boost-html))))
+;; (require 'anything)
+;; (require 'anything-config)
+;; (global-set-key (kbd "C-c I")  ;; i -> info
+;;  (lambda () (interactive)
+;;   (anything
+;;    :prompt "Info about: "
+;;    :candidate-number-limit 100
+;;    :sources
+;;       '(anything-c-source-man-pages
+;;         anything-c-source-boost-html))))
 
 ;; boost documentation
 (require 'w3m)
@@ -1028,7 +1029,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yasnippet-snippets yapfify xterm-color ws-butler winum wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons all-the-icons memoize spaceline powerline smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode nord-theme noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui markdown-mode lsp-python lorem-ipsum live-py-mode lispy zoutline linum-relative link-hint ivy-xref ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile hy-mode dash-functional hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache grayscale-theme graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump disaster deft define-word darktooth-theme autothemer dante lcr flycheck cython-mode cyberpunk-theme cpputils-cmake counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred request deferred company-web web-completion-data company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo rust-mode biblio biblio-core auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anything anaconda-mode pythonic f aggressive-indent adaptive-wrap ace-window ace-link avy academic-phrases ht s dash ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
+   '(yasnippet-snippets yapfify xterm-color ws-butler winum wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons all-the-icons memoize spaceline powerline smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode nord-theme noflet neotree nameless mwim mvn multi-term move-text mmm-mode meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui markdown-mode lsp-python lorem-ipsum live-py-mode lispy zoutline linum-relative link-hint ivy-xref ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile hy-mode dash-functional hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache grayscale-theme graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump disaster deft define-word darktooth-theme autothemer dante lcr flycheck cython-mode cyberpunk-theme cpputils-cmake counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred request deferred company-web web-completion-data company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow cmm-mode clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo rust-mode biblio biblio-core auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f aggressive-indent adaptive-wrap ace-window ace-link avy academic-phrases ht s dash ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

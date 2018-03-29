@@ -291,7 +291,7 @@ function cdd {
 }
 
 # haskell vim
-alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc" 
+alias hvim="vim -u ~/.config/haskell-vim-now/.vimrc"
 # Prog Lang Emacs
 alias pemacs='env HOME=$HOME/.proglang emacs-snapshot &'
 
@@ -299,7 +299,7 @@ alias pemacs='env HOME=$HOME/.proglang emacs-snapshot &'
 alias WgetScrape="wget -A pdf -m -p -E -k -K -np"
 alias Scheme="scheme -large -band 6001.com -edit"
 alias tm="tmux attach || tmux new"
-
+alias word-find="find . -type f -exec grep --color -nH --null -e $@ \{\} +"
 
 
 # ----------------------
