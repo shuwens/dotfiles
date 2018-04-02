@@ -6,6 +6,7 @@
   # .git/config (Git >= 2.8)
   useConfigOnly = true
   email = shwsun@bu.edu
+  signingkey = A12A9012444F0E74
 [color]
   ui = true
 [merge]
@@ -35,6 +36,17 @@
   attributesfile = ~/.gitattributes
 [diff "elisp"]
   xfuncname="^(\\(def.*)$"
+
+[help]
+  autocorrect = 1
+[url "git@github.com:"]
+  insteadOf = gh:
+[diff]
+  algorithm = patience
+  compactionHeuristic = true
+[commit]
+  gpgsign = true
+
 
 [include]
   path = ~/.gitconfig-local

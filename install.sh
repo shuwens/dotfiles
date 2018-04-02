@@ -24,7 +24,7 @@ sudo apt-add-repository -y ppa:teejee2008/ppa
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
   mercurial zathura exuberant-ctags stow meld vlc python-pip zsh vagrant \
   chromium-browser gnome-tweak-tool golang-glide docker.io fonts-roboto curl \
-  tree
+  tree htop
 
 
 # tlp

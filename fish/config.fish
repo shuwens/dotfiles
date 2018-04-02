@@ -1,11 +1,11 @@
 . ~/.config/fish/aliases.fish
 
 set -U fish_user_abbreviations
-set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
+#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
 set -U fish_user_abbreviations $fish_user_abbreviations 'g=git'
-set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git checkout'
+set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
-set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
+#set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
 set -U fish_user_abbreviations $fish_user_abbreviations 'cargot=cargo t'
 complete --command yaourt --wraps pacman
 complete --command pacaur --wraps pacman
