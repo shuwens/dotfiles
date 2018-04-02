@@ -5,7 +5,7 @@
   # Require email to be configured in either .gitconfig-local or
   # .git/config (Git >= 2.8)
   useConfigOnly = true
-  email = shwsun@bu.edu
+  email = jethro.s.sun@gmail.com
   signingkey = A12A9012444F0E74
 [color]
   ui = true
