@@ -326,6 +326,14 @@ alias gc "git clone"
 alias cls "clear"
 alias , "make"
 alias ,, "make clean"
+alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+alias workon "source .venv/bin/activate"
+alias walkaway "deactivate"
+
+function UpdateFile -a filename
+  scp $filename  shwsun@csa2.bu.edu:~/public_html/tmp
+end 
 
 function ,,,
   /bin/sh -c "make clean && make "
@@ -338,3 +346,15 @@ function open -a filename
   xdg-open $filename &
 end
 
+
+# ----------------------------------
+ # Compiling stuff
+ # ----------------------------------
+ alias ghcd "ghc -dynamic"
+ alias g11 'g++ -std=c++11 -O2'
+ alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
+
+ # Convenience aliases
+  alias run='sudo systemctl start'
+  alias restart='sudo systemctl restart'
+  alias stop='sudo systemctl stop'
