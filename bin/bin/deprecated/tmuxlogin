@@ -33,7 +33,7 @@
 #     make 'tmuxlogin' a bad name.
 #
 # BUGS:
-#   o Even if you give a new name, creating a new session does not work if you 
+#   o Even if you give a new name, creating a new session does not work if you
 #     are attached to any existing session. This is becuase the existance of
 #     $TMUX is tested before the arguments are parsed.
 #
@@ -118,7 +118,7 @@ open_windows() {
     tmux list-windows -t "$SESSION" | grep "$WINDOW" > /dev/null
     if [ $? -eq 0 ]; then
         echo "Window '$SESSION:$WINDOW' already exists. Aborting."
-	return 
+	return
     fi
 
     # get the base-index value, in case it has been customized
@@ -126,7 +126,7 @@ open_windows() {
     if [ $BASE_INDEX -lt 1 ]; then
 	BASE_INDEX=0
     fi
-    
+
     # if this is a new session then there is no point in creating a new window
     if [ -n "$new_session" ]; then
         # this is a brand new session with only 1 window, so just rename it
@@ -142,7 +142,7 @@ open_windows() {
         tmux split-window  -t "$SESSION:$WINDOW" -h
         tmux send-keys     -t "$SESSION:$WINDOW" "ssh $SSH_USER@$server"
         # split -h seems to stop at 5 unless layout is changed
-    	tmux select-layout -t "$SESSION:$WINDOW" tiled 
+    	tmux select-layout -t "$SESSION:$WINDOW" tiled
     done
 
     tmux kill-pane     -t "$SESSION:$WINDOW.0"     # remove the original pane
@@ -151,7 +151,7 @@ open_windows() {
 
     # synchronize input to all panes unless turned off
     if [ "$SYNC" -gt 0 ]; then
-        tmux set-window-option -t "$SESSION:$WINDOW" synchronize-panes on 
+        tmux set-window-option -t "$SESSION:$WINDOW" synchronize-panes on
     fi
 }
 
@@ -172,7 +172,7 @@ if [ $? -ne 0 ]; then
 	# session does not exist. create it.
 	# this won't work if we are attached. even if the session name is different
 	# the hack is to remove $TMUX temporarily
-	tmux new-session -d -s "$SESSION" 
+	tmux new-session -d -s "$SESSION"
 	split_only=1
     fi
 fi

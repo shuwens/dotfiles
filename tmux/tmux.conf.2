@@ -1,0 +1,90 @@
+# set scroll history to 100,000 lines
+set-option -g history-limit 100000
+
+# modern colors
+set -g default-terminal    "alacritty-256color"
+set -ga terminal-overrides ",alacritty-256color:Tc"
+set escape-time 0
+
+# unbind the prefix and bind it to Ctrl-a like screen
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# cycle through panels with ^h and ^k
+# bind-key -nr C-h select-pane -t :.-
+# bind-key -nr C-k select-pane -t :.+
+
+# copy to X clipboard
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-pipe "xclip -sel clip -i &>/dev/null"
+
+# shortcut for moving tmux buffer to clipboard
+# useful if you've selected with the mouse
+bind-key -nr C-y run "tmux show-buffer | xclip -sel clip -i &>/dev/null"
+
+# Avoid ESC delay
+set -s escape-time 0
+
+# Fix titlebar
+set -g set-titles on
+set -g set-titles-string "#T"
+
+# VIM mode
+set -g mode-keys vi
+
+# Mouse friendly
+set -g mouse on
+
+# Move between panes with shift
+bind -n S-Left select-window -p
+bind -n S-Right select-window -n
+bind -n S-Down new-window
+bind -n S-Up command-prompt "rename-window %%"
+
+# Move panes
+bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
+bind-key s command-prompt -p "send pane to:"  "join-pane -t '%%'"
+
+######################
+### DESIGN CHANGES ###
+######################
+
+# Avoid date/time taking up space
+set -g status-right ''
+set -g status-right-length 0
+
+#### COLOUR (Solarized 256)
+
+# default statusbar colors
+set-option -g status-bg colour235 #base02
+set-option -g status-fg colour136 #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour240 #base01
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg colour166 #orange
+
+# pane number display
+set-option -g display-panes-active-colour colour33 #blue
+set-option -g display-panes-colour colour166 #orange
+
+# clock
+set-window-option -g clock-mode-colour colour64 #green
+
+# bell
+set-window-option -g window-status-bell-style fg=colour235,bg=colour160 #base02, red
