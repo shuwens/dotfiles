@@ -1,10 +1,10 @@
 # Quick edits
-alias ea 'vim ~/.config/fish/aliases.fish'
-alias ef 'vim ~/.config/fish/config.fish'
-alias eg 'vim ~/.gitconfig'
-alias ev 'vim ~/.vimrc'
-alias es 'vim ~/bin/autosort'
-alias et 'vim ~/.tmux.conf'
+alias Ea 'vim ~/.config/fish/aliases.fish'
+alias Ef 'vim ~/.config/fish/config.fish'
+alias Eg 'vim ~/.gitconfig'
+alias Ev 'vim ~/.vimrc'
+alias Es 'vim ~/bin/autosort'
+alias Et 'vim ~/.tmux.conf'
 
 alias vim-norc 'vim -u NORC'
 alias vim-none 'vim -u NONE'
@@ -320,4 +320,15 @@ function wtf -d "Print which and --version output for the given command"
     end
 end
 
+## My own stuff!
 alias gs "git status"
+alias , "make"
+alias ,, "make clean"
+
+function ,,,
+ /bin/sh -c "make clean && make "
+end
+
+function open -a filename 
+  xdg-open $filename &
+end

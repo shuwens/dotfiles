@@ -14,7 +14,7 @@ if [ $? != 0 ]; then
   tmux send-keys -t ${SESSION_NAME} 'fish' C-m
 
   # shell (1)
-  tmux new-window -n zsh -t ${SESSION_NAME}
+  tmux new-window -n bar -t ${SESSION_NAME}
   #tmux send-keys -t ${SESSION_NAME}:1 'git status' C-m
 
   # mysql (2)
@@ -25,7 +25,7 @@ if [ $? != 0 ]; then
   tmux new-window -n server -t ${SESSION_NAME}
   tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
   tmux split-window -v -t ${SESSION_NAME}:3
-  tmux send-keys -t ${SESSION_NAME}:3.1 'ssh bucs' C-m
+  tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 10 ; ssh bucs' C-m
 
   # rails console (4)
   #tmux new-window -n console -t ${SESSION_NAME}
