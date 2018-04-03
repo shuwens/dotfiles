@@ -30,6 +30,7 @@
   ov = -c core.pager='less -S' log --graph --pretty=format:'%C(auto)%d %s' --abbrev-commit --simplify-by-decoration --all
   ovk = !gitk --all --simplify-by-decoration
   random = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
+  m = !"git commit -m"
 
 # Type-specific diff settings
 [core]
@@ -39,8 +40,10 @@
 
 [help]
   autocorrect = 1
+[url "https://github.com/"]
+  insteadOf = h:
 [url "git@github.com:"]
-  insteadOf = gh:
+  insteadOf = g:
 [diff]
   algorithm = patience
   compactionHeuristic = true
