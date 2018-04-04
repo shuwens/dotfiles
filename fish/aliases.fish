@@ -17,12 +17,12 @@ function serve
   if test (count $argv) -ge 1
     if python -c 'import sys; sys.exit(sys.version_info[0] != 3)'
       /bin/sh -c "(cd $argv[1] && python -m http.server)"
-      else
-        /bin/sh -c "(cd $argv[1] && python -m SimpleHTTPServer)"
-      end
-  else
-    python -m SimpleHTTPServer
-  end
+    else
+      /bin/sh -c "(cd $argv[1] && python -m SimpleHTTPServer)"
+    end
+else
+  python -m SimpleHTTPServer
+end
 end
 
 function timestamp
@@ -88,50 +88,50 @@ function va
   set pattern $argv[1]
   if test (count $argv) -gt 1
     set argv $argv[2..-1]
-  else
-    set argv
-  end
+else
+  set argv
+end
 
-  set ag_pattern (echo $pattern | sed -Ee 's/[<>]/\\\\b/g')
-  set vim_pattern (echo $pattern | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
-  ag -l --smart-case --null $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
+set ag_pattern (echo $pattern | sed -Ee 's/[<>]/\\\\b/g')
+set vim_pattern (echo $pattern | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
+ag -l --smart-case --null $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
 end
 
 function vaa
   set pattern $argv[1]
   if test (count $argv) -gt 1
     set argv $argv[2..-1]
-  else
-    set argv
-  end
+else
+  set argv
+end
 
-  set ag_pattern (echo $argv | sed -Ee 's/[<>]/\\\\b/g')
-  set vim_pattern (echo $argv | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
-  ag -l --smart-case --null -a $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
+set ag_pattern (echo $argv | sed -Ee 's/[<>]/\\\\b/g')
+set vim_pattern (echo $argv | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
+ag -l --smart-case --null -a $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
 end
 
 function vc
   if git modified -q $argv
     vim (git modified $argv | sed -Ee 's/^"(.*)"$/\1/')
-  else
-    echo '(nothing changed)'
-  end
+else
+  echo '(nothing changed)'
+end
 end
 
 function vca
   if git modified -qi
     vim (git modified -i | sed -Ee 's/^"(.*)"$/\1/')
-  else
-    echo '(nothing changed)'
-  end
+else
+  echo '(nothing changed)'
+end
 end
 
 function vci
   if git modified -qi
     vim (begin; git modified -i; git modified; end | sort | uniq -u | sed -Ee 's/^"(.*)"$/\1/')
-  else
-    echo '(nothing changed)'
-  end
+else
+  echo '(nothing changed)'
+end
 end
 
 alias vch 'vc head'
@@ -141,9 +141,9 @@ alias vch2 'vc head~2'
 function vu
   if git modified -u $argv
     vim (git modified -u $argv | sed -Ee 's/^"(.*)"$/\1/')
-  else
-    echo 'no files with conflicts'
-  end
+else
+  echo 'no files with conflicts'
+end
 end
 
 function vw
@@ -190,50 +190,50 @@ function p -d "Start the best Python shell that is available"
   if test -f manage.py
     if pip freeze ^/dev/null | grep -iq 'django-extensions'
       set cmd (which python) manage.py shell_plus
-      else
-        if pip freeze ^/dev/null | grep -iq 'flask-script'
-          # do nothing, use manage.py, fall through
-          set -e cmd
-          else
-            set cmd (which python) manage.py shell
-          end
-      end
-  end
+    else
+      if pip freeze ^/dev/null | grep -iq 'flask-script'
+        # do nothing, use manage.py, fall through
+        set -e cmd
+        else
+          set cmd (which python) manage.py shell
+        end
+    end
+end
 
-  if test -z $cmd
-    set -l interpreters (which bpython ^/dev/null; which ipython ^/dev/null; which python ^/dev/null)
+if test -z $cmd
+  set -l interpreters (which bpython ^/dev/null; which ipython ^/dev/null; which python ^/dev/null)
 
-    if test -z "$interpreters"
-      set_color red
-      echo "No python interpreters found on the PATH."
-      set_color normal
-      return 127
-      end
+  if test -z "$interpreters"
+    set_color red
+    echo "No python interpreters found on the PATH."
+    set_color normal
+    return 127
+    end
 
-      # Try to find the first interpreter within the current virtualenv
-      # Rationale: it's more important to start a Python interpreter in the
-      # current virtualenv than it is to start an _IPython_ interpreter (for
-      # example, when the current virtualenv has no ipython installed, but such
-      # would be installed system-wide).
-      for interp in $interpreters
-        #echo '-' $interp
-        #echo '-' (dirname (dirname $interp))
-        if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
-          set cmd $interp
-          break
-          end
-      end
+    # Try to find the first interpreter within the current virtualenv
+    # Rationale: it's more important to start a Python interpreter in the
+    # current virtualenv than it is to start an _IPython_ interpreter (for
+    # example, when the current virtualenv has no ipython installed, but such
+    # would be installed system-wide).
+    for interp in $interpreters
+      #echo '-' $interp
+      #echo '-' (dirname (dirname $interp))
+      if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
+        set cmd $interp
+        break
+        end
+    end
 
-      # If they all fall outside the virtualenv, pick the first match
-      # (preferring ipython over python)
-      if test -z "$cmd"
-        set cmd $interpreters[1]
-      end
-  end
+    # If they all fall outside the virtualenv, pick the first match
+    # (preferring ipython over python)
+    if test -z "$cmd"
+      set cmd $interpreters[1]
+    end
+end
 
-  # Run the command
-  printf "Using "; set_color green; echo $cmd; set_color normal
-  eval $cmd $argv
+# Run the command
+printf "Using "; set_color green; echo $cmd; set_color normal
+eval $cmd $argv
 end
 
 alias pm 'python manage.py'
@@ -247,15 +247,15 @@ function pipr -d "Find & install all requirements for this project"
   begin
     if test -f requirements.txt
       command pip install -r requirements.txt
-      end
-      if test -f dev-requirements.txt
-        command pip install -r dev-requirements.txt
-      end
-      if test -f .pipignore
-        command pip install -r .pipignore
-      end
-  end
-  popd
+    end
+    if test -f dev-requirements.txt
+      command pip install -r dev-requirements.txt
+    end
+    if test -f .pipignore
+      command pip install -r .pipignore
+    end
+end
+popd
 end
 
 # Directories {{{
@@ -269,11 +269,11 @@ function ff
   tell application "Finder"
   if (1 <= (count Finder windows)) then
     get POSIX path of (target of window 1 as alias)
-      else
-        get POSIX path of (desktop as alias)
-      end if
-  end tell
-  ' | osascript -
+    else
+      get POSIX path of (desktop as alias)
+    end if
+end tell
+' | osascript -
 end
 
 alias cd.. 'cd ..'
@@ -295,19 +295,19 @@ alias 'c-x' 'chmod -x'
 function colorize-pboard
   if test (count $argv) -gt 0
     set lang $argv[1]
-  else
-    set lang 'python'
-  end
-  pbpaste | strip-indents | color-syntax | pbcopy
+else
+  set lang 'python'
+end
+pbpaste | strip-indents | color-syntax | pbcopy
 end
 
 function color-syntax
   if test (count $argv) -gt 0
     set lang $argv[1]
-  else
-    set lang 'python'
-  end
-  pygmentize -f rtf -l $lang
+else
+  set lang 'python'
+end
+pygmentize -f rtf -l $lang
 end
 
 alias h=heroku
@@ -317,7 +317,7 @@ function wtf -d "Print which and --version output for the given command"
   for arg in $argv
     echo $arg: (which $arg)
     echo $arg: (sh -c "$arg --version")
-  end
+end
 end
 
 ## My own stuff!
@@ -326,17 +326,19 @@ alias gc "git clone"
 alias cls "clear"
 alias , "make"
 alias ,, "make clean"
+alias vi "vim"
 alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias workon "source .venv/bin/activate"
 alias walkaway "deactivate"
+alias up '"update"; and "sudo apt --list-upgrades"'
 
 function UpdateFile -a filename
   scp $filename  shwsun@csa2.bu.edu:~/public_html/tmp
 end 
 
 function ,,,
-  /bin/sh -c "make clean && make "
+  COMMAND "make clean" ; COMMAND " make "
 end
 
 function o -a filename 
@@ -348,13 +350,15 @@ end
 
 
 # ----------------------------------
- # Compiling stuff
- # ----------------------------------
- alias ghcd "ghc -dynamic"
- alias g11 'g++ -std=c++11 -O2'
- alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
+# Compiling stuff
+# ----------------------------------
+alias ghcd "ghc -dynamic"
+alias g11 'g++ -std=c++11 -O2'
+alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
 
- # Convenience aliases
-  alias run='sudo systemctl start'
-  alias restart='sudo systemctl restart'
-  alias stop='sudo systemctl stop'
+# Convenience aliases
+alias run='sudo systemctl start'
+alias restart='sudo systemctl restart'
+alias stop='sudo systemctl stop'
+
+
