@@ -67,7 +67,6 @@ values."
              ;; yapf and auto indent are evil!!!
              ;;python-enable-yapf-format-on-save t
              ;;python-sort-imports-on-save t
-             python-auto-set-local-pyvenv-virtualenv 'on-project-switch
              )
 
      (go :variables go-tab-width 4)
@@ -242,20 +241,16 @@ values."
    ;;   material-light, spacemacs-light
    ;; dark:
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso
-   dotspacemacs-themes '(spacemacs-light
-                         nord
-                         ;;ujelly
-                         deeper-blue
-                         darktooth
-                         )
+   dotspacemacs-themes '(spacemacs-light darktooth grayscale deeper-blue 
+                                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '(;"Dejavu Sans Mono" ; size 15
-                               "Noto Mono" ; size 16
+   dotspacemacs-default-font '("Dejavu Sans Mono" ; preferred
+                               ;;"Ubuntu Mono" ;
                                ;;"Source Code Pro"
-                               :size 16
+                               :size 15
                                :weight normal 
                                :width normal
                                :powerline-scale 1)
@@ -628,7 +623,7 @@ you should place your code here."
 
   ;; -------------------- Python (Anaconda-mode) ------------------------------
   (with-eval-after-load 'python
-    ;; https://github.com/proofit404/pyenv-mode
+    (pyenv-mode)
     (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-i")
                                             #'anaconda-mode-complete))))

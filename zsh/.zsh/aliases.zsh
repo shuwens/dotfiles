@@ -301,6 +301,7 @@ alias Scheme="scheme -large -band 6001.com -edit"
 alias tm="tmux attach || tmux new"
 alias word-find="find . -type f -exec grep --color -nH --null -e $@ \{\} +"
 alias ,,,="make clean && make "
+alias gt="gnome-terminal &"
 
 
 # ----------------------

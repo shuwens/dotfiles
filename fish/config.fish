@@ -224,6 +224,15 @@ set FISH_CLIPBOARD_CMD "cat"
 #    eval sh $HOME/dev/others/base16/shell/scripts/base16-atelier-dune.sh
 #end
 
+## virtualfish
+eval (python -m virtualfish)
+
+## pyenv
+set -x PATH "/home/jethros/.pyenv/bin" $PATH
+status --is-interactive; and . (pyenv init -|psub)
+status --is-interactive; and . (pyenv virtualenv-init -|psub)
+
+
 # Pretty ls colors
 if test -e ~/.dir_colors
   setenv LS_COLORS (sh --noprofile -c 'eval "$(dircolors -b ~/.dir_colors)"; echo $LS_COLORS')

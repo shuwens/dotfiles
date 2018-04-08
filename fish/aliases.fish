@@ -326,25 +326,33 @@ alias gc "git clone"
 alias cls "clear"
 alias , "make"
 alias ,, "make clean"
+#alias ,,, '"make clean"; and "make"'
 alias vi "vim"
+
 alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
-alias workon "source .venv/bin/activate"
-alias walkaway "deactivate"
+
+## python stuff 
+#install virtualfish
+alias virtualenv3 "virtualenv -p /usr/bin/python3"
+alias workon "vf activate"
+alias walkaway "vf deactivate"
+
 alias up '"update"; and "sudo apt --list-upgrades"'
+alias upgrade 'sudo apt upgrade'
+
+function ,,,
+  make clean; and make
+end
 
 function UpdateFile -a filename
   scp $filename  shwsun@csa2.bu.edu:~/public_html/tmp
-end 
-
-function ,,,
-  COMMAND "make clean" ; COMMAND " make "
 end
 
-function o -a filename 
+function o -a filename
   xdg-open $filename &
 end
-function open -a filename 
+function open -a filename
   xdg-open $filename &
 end
 
@@ -360,5 +368,4 @@ alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
 alias run='sudo systemctl start'
 alias restart='sudo systemctl restart'
 alias stop='sudo systemctl stop'
-
 

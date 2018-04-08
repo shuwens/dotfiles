@@ -68,3 +68,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 # MIT Scheme
 export MITSCHEME_6001_DIRECTORY=$HOME/workspace/sicp
 
+## pyenv
+export PATH="/home/jethros/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+

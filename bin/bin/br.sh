@@ -3,10 +3,13 @@
 
 SESSION_NAME="universe"
 
+
 #cd ~/Sites/within3/big_red
 
 tmux has-session -t ${SESSION_NAME}
 if [ $? != 0 ]; then
+  echo "Creating the session"
+
   # Create the session
   tmux new-session -s ${SESSION_NAME} -n foo -d
 
@@ -36,4 +39,5 @@ if [ $? != 0 ]; then
   tmux select-window -t ${SESSION_NAME}:0
 fi
 
+#tmux -2 attach-session -d -t ${SESSION_NAME}
 tmux attach -t ${SESSION_NAME}
