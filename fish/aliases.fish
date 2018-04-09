@@ -331,6 +331,7 @@ alias vi "vim"
 
 alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
 
 ## python stuff 
 #install virtualfish

@@ -160,11 +160,15 @@ values."
                                             cpputils-cmake function-args
                                             counsel-gtags company-childframe pyenv-mode
                                             hydra aggressive-indent academic-phrases
+                                            color-identifiers-mode pcap-mode
                                             ;; theme
-                                            nord-theme ujelly-theme 
+                                            nord-theme ujelly-theme melancholy-theme
+                                            ;; new batch
+                                            base16-theme doom-themes kaolin-themes
+                                            alect-themes 
                                             ;; next a few 
-                                            material-theme grayscale-theme
-                                            darktooth-theme cyberpunk-theme
+                                            ;; material-theme grayscale-theme
+                                            ;; darktooth-theme cyberpunk-theme
                                             color-theme-sanityinc-tomorrow)  
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -243,16 +247,14 @@ values."
    ;; dark:
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso
    dotspacemacs-themes '(spacemacs-light
-                         nord
-                         ;;ujelly
-                         deeper-blue
-                         darktooth
+                         melancholy  misterioso 
+                         ujelly deeper-blue darktooth
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '(;"Dejavu Sans Mono" ; size 15
+   dotspacemacs-default-font '(;;"Dejavu Sans Mono" ; size 15
                                "Noto Mono" ; size 16
                                ;;"Source Code Pro"
                                :size 16
@@ -428,6 +430,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq-default git-magit-status-fullscreen t)
   ;; deft mode always on
   ;;(require 'deft)
+  (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
   )
 
@@ -1022,5 +1025,4 @@ Symbols matching the text at point are put first in the completion list."
 
   )
 ;; end of [.spacemacs]
-
 
