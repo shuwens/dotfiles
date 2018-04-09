@@ -245,9 +245,9 @@ values."
    ;; light:
    ;;   material-light, spacemacs-light
    ;; dark:
-   ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso
-   dotspacemacs-themes '(spacemacs-light
-                         melancholy  misterioso 
+   ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
+   dotspacemacs-themes '(spacemacs-light 
+                         melancholy  misterioso geeko
                          ujelly deeper-blue darktooth
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -1025,4 +1025,5 @@ Symbols matching the text at point are put first in the completion list."
 
   )
 ;; end of [.spacemacs]
+
 
