@@ -5,6 +5,10 @@
 ;; NOTE(jethros):
 ;;
 ;; KEYBINDING:
+;;  `C-M-.': find definition
+;;  `C-M-*': go back
+;;  `C-M-,': find reference
+;; STATUS:
 ;;  * Python: working
 ;;  * Java: working
 ;;  * C++: ?
@@ -122,7 +126,7 @@ values."
                      spell-checking-enable-by-default nil
                      enable-flyspell-auto-completion t
                      spell-checking-enable-auto-dictionary t)
-     syntax-checking 
+     syntax-checking
      ;;version-control
 
      ;; --------------------------------
@@ -150,17 +154,22 @@ values."
      ;; Additional Tools
      pdf-tools
      protobuf
+     (colors :variables
+             colors-colorize-identifiers 'variables
+             colors-default-rainbow-identifiers-sat 42
+             colors-enable-nyan-cat-progress-bar (display-graphic-p)
+             colors-default-rainbow-identifiers-light 86)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(lispy meghanada groovy-mode gradle-mode 
+   dotspacemacs-additional-packages '(lispy meghanada groovy-mode gradle-mode
                                             stickyfunc-enhance dumb-jump
                                             cpputils-cmake function-args
                                             counsel-gtags company-childframe pyenv-mode
                                             hydra aggressive-indent academic-phrases
-                                            color-identifiers-mode pcap-mode
+                                            pcap-mode
                                             ;; theme
                                             nord-theme ujelly-theme melancholy-theme
                                             ;; new batch
@@ -169,7 +178,8 @@ values."
                                             ;; next a few 
                                             ;; material-theme grayscale-theme
                                             ;; darktooth-theme cyberpunk-theme
-                                            color-theme-sanityinc-tomorrow)  
+                                            color-theme-sanityinc-tomorrow
+                                            )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -247,8 +257,9 @@ values."
    ;; dark:
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
    dotspacemacs-themes '(spacemacs-light 
-                         melancholy  misterioso geeko
-                         ujelly deeper-blue darktooth
+                         melancholy   
+                         misterioso ; geeko ;; error msg is so annoying
+                         deeper-blue darktooth ;;ujelly 
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -430,7 +441,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq-default git-magit-status-fullscreen t)
   ;; deft mode always on
   ;;(require 'deft)
-  (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
   )
 
@@ -683,7 +693,7 @@ you should place your code here."
   (global-company-mode)
 
   ;; Git and Magit
-  (setq magit-repository-directories '("~/repos/","~/openstack","~/git/","~/workspace"))
+  (setq magit-repository-directories '("~/repos/","~/dev/","~/git/","~/workspace/"))
 
 
   ;; convienant keybinding for functions:
@@ -707,6 +717,9 @@ you should place your code here."
     ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
     ;;(setq flymake-check-was-interrupted t))
     ;;(ad-activate 'flymake-post-syntax-check)
+    ;; deal with color id mode
+
+
     )
   (add-hook 'prog-mode-hook 'flycheck-my-load)
 
@@ -970,6 +983,10 @@ SCHEDULED: %t")))
       (action . (lambda (entry)
                   (w3m-browse-url entry)))))
   ;; ---------------------------------------------------------------------------
+
+
+
+
 
   ;; ---------------------------------------------------------------
   ;;
