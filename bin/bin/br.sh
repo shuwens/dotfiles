@@ -26,8 +26,8 @@ if [ $? != 0 ]; then
 
   # server/debug log (3)
   tmux new-window -n server -t ${SESSION_NAME}
-  #tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
-  tmux send-keys -t ${SESSION_NAME}:3 'htop' C-m
+  tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
+  #tmux send-keys -t ${SESSION_NAME}:3 'htop' C-m
   tmux split-window -v -t ${SESSION_NAME}:3
   tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 42 ; ssh bucs' C-m
 

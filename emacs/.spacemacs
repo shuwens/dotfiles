@@ -43,6 +43,13 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(yaml
+     ;; only testing
+
+     (languagetool :variables
+                   langtool-language-tool-jar "/home/jethros/repos/tools/LanguageTool-4.1/languagetool-commandline.jar"
+                   languagetool-show-error-on-jump t)
+
+
      ;;javascript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
