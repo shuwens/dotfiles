@@ -328,6 +328,7 @@ alias , "make"
 alias ,, "make clean"
 #alias ,,, '"make clean"; and "make"'
 alias vi "vim"
+alias :q "reboot"
 
 alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"

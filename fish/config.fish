@@ -1,8 +1,11 @@
+## let me get my aliases
 . ~/.config/fish/aliases.fish
+## let me get fishmarks
+. ~/.fishmarks/marks.fish
 
 set -U fish_user_abbreviations
 #set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
-set -U fish_user_abbreviations $fish_user_abbreviations 'g=git'
+set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
 #set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
@@ -27,7 +30,7 @@ else
 end
 
 if [ -e ~/.cargo/bin/exa ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'l=exa'
+  #set -U fish_user_abbreviations $fish_user_abbreviations 'l=exa'
   set -U fish_user_abbreviations $fish_user_abbreviations 'ls=exa'
   set -U fish_user_abbreviations $fish_user_abbreviations 'll=exa -l'
   set -U fish_user_abbreviations $fish_user_abbreviations 'lll=exa -la'
@@ -334,3 +337,6 @@ end
 
 set_color normal
 end
+
+# Load fishmarks (http://github.com/techwizrd/fishmarks)
+. $HOME/.fishmarks/marks.fish
