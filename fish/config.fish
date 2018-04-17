@@ -14,19 +14,19 @@ complete --command yaourt --wraps pacman
 complete --command pacaur --wraps pacman
 
 if status --is-interactive
-  tmux ^ /dev/null; and exec true
+    tmux ^ /dev/null; and exec true
 end
 
 if [ -e /usr/bin/pacaur ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
+    set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
+    set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
 else if [ -e /usr/bin/yaourt ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
+    set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+    set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
 else
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
-  #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+    set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
+    #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
+    set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 end
 
 if [ -e ~/.cargo/bin/exa ]
@@ -300,6 +300,26 @@ function fish_greeting
     set_color blue
     echo "  [project] <description>"
     echo
+end
+
+
+# Add this to your ~/.config/fish/config.fish
+# Syntax:
+# To just rerun your last command, simply type '!!'
+# '!! sudo' will prepend sudo to your most recent command
+# Running !! with anything other than sudo will append the argument to your most recent command
+# To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
+function !!;
+    set prevcmd (history | head -n 1)
+    if test "$argv"
+        if test "$argv" = "sudo"        #; or "any other command you want to prepend"
+            eval "$argv $prevcmd"
+        else
+            eval "$var $argv"
+        end
+    else
+        eval "$var"
+    end
 end
 
 set_color normal

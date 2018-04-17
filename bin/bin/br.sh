@@ -14,7 +14,7 @@ if [ $? != 0 ]; then
   tmux new-session -s ${SESSION_NAME} -n foo -d
 
   # First window (0) -- vim and console
-  tmux send-keys -t ${SESSION_NAME} 'fish' C-m
+  #tmux send-keys -t ${SESSION_NAME} 'fish' C-m
 
   # shell (1)
   tmux new-window -n bar -t ${SESSION_NAME}
@@ -22,7 +22,7 @@ if [ $? != 0 ]; then
 
   # mysql (2)
   tmux new-window -n workspace -t ${SESSION_NAME}
-  tmux send-keys -t ${SESSION_NAME}:2 'fish' C-m
+  #tmux send-keys -t ${SESSION_NAME}:2 'fish' C-m
 
   # server/debug log (3)
   tmux new-window -n server -t ${SESSION_NAME}
