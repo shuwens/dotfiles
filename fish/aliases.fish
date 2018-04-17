@@ -17,9 +17,9 @@ function serve
   if test (count $argv) -ge 1
     if python -c 'import sys; sys.exit(sys.version_info[0] != 3)'
       /bin/sh -c "(cd $argv[1] && python -m http.server)"
-    else
-      /bin/sh -c "(cd $argv[1] && python -m SimpleHTTPServer)"
-    end
+  else
+    /bin/sh -c "(cd $argv[1] && python -m SimpleHTTPServer)"
+  end
 else
   python -m SimpleHTTPServer
 end
@@ -190,14 +190,14 @@ function p -d "Start the best Python shell that is available"
   if test -f manage.py
     if pip freeze ^/dev/null | grep -iq 'django-extensions'
       set cmd (which python) manage.py shell_plus
-    else
-      if pip freeze ^/dev/null | grep -iq 'flask-script'
-        # do nothing, use manage.py, fall through
-        set -e cmd
-        else
-          set cmd (which python) manage.py shell
-        end
-    end
+  else
+    if pip freeze ^/dev/null | grep -iq 'flask-script'
+      # do nothing, use manage.py, fall through
+      set -e cmd
+      else
+        set cmd (which python) manage.py shell
+      end
+  end
 end
 
 if test -z $cmd
@@ -208,27 +208,27 @@ if test -z $cmd
     echo "No python interpreters found on the PATH."
     set_color normal
     return 127
-    end
+  end
 
-    # Try to find the first interpreter within the current virtualenv
-    # Rationale: it's more important to start a Python interpreter in the
-    # current virtualenv than it is to start an _IPython_ interpreter (for
-    # example, when the current virtualenv has no ipython installed, but such
-    # would be installed system-wide).
-    for interp in $interpreters
-      #echo '-' $interp
-      #echo '-' (dirname (dirname $interp))
-      if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
-        set cmd $interp
-        break
-        end
-    end
+  # Try to find the first interpreter within the current virtualenv
+  # Rationale: it's more important to start a Python interpreter in the
+  # current virtualenv than it is to start an _IPython_ interpreter (for
+  # example, when the current virtualenv has no ipython installed, but such
+  # would be installed system-wide).
+  for interp in $interpreters
+    #echo '-' $interp
+    #echo '-' (dirname (dirname $interp))
+    if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
+      set cmd $interp
+      break
+      end
+  end
 
-    # If they all fall outside the virtualenv, pick the first match
-    # (preferring ipython over python)
-    if test -z "$cmd"
-      set cmd $interpreters[1]
-    end
+  # If they all fall outside the virtualenv, pick the first match
+  # (preferring ipython over python)
+  if test -z "$cmd"
+    set cmd $interpreters[1]
+  end
 end
 
 # Run the command
@@ -247,13 +247,13 @@ function pipr -d "Find & install all requirements for this project"
   begin
     if test -f requirements.txt
       command pip install -r requirements.txt
-    end
-    if test -f dev-requirements.txt
-      command pip install -r dev-requirements.txt
-    end
-    if test -f .pipignore
-      command pip install -r .pipignore
-    end
+  end
+  if test -f dev-requirements.txt
+    command pip install -r dev-requirements.txt
+  end
+  if test -f .pipignore
+    command pip install -r .pipignore
+  end
 end
 popd
 end
@@ -269,9 +269,9 @@ function ff
   tell application "Finder"
   if (1 <= (count Finder windows)) then
     get POSIX path of (target of window 1 as alias)
-    else
-      get POSIX path of (desktop as alias)
-    end if
+  else
+    get POSIX path of (desktop as alias)
+  end if
 end tell
 ' | osascript -
 end
@@ -354,10 +354,22 @@ end
 function o -a filename
   xdg-open $filename &
 end
+
 function open -a filename
   xdg-open $filename &
 end
 
+function lazy -a msg
+  git add -A
+  git commit -m "Update: $msg"
+  git push
+end
+
+function check -a msg
+  git add -A
+  git commit -m "Checkpoint: $msg"
+  git push
+end
 
 # ----------------------------------
 # Compiling stuff
