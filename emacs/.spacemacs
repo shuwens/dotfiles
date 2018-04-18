@@ -447,6 +447,13 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+
+  ;; To fix the exec-path-from-shell problem.
+  (setq explicit-shell-file-name "/bin/bash")
+  (setq shell-file-name "bash")
+  ;;(setq explicit-shell-file-name "/bin/zsh")
+  ;;(setq shell-file-name "zsh")
+
   ;;(setq-default evil-escape-key-sequence "jk")
 
   ;; git magit
@@ -1091,3 +1098,5 @@ Symbols matching the text at point are put first in the completion list."
 
 (provide '.spacemacs)
 ;;; .spacemacs ends here
+
+
