@@ -324,11 +324,12 @@ end
 alias gs "git status"
 alias gc "git clone"
 alias cls "clear"
+alias ls "exa"
 alias , "make"
 alias ,, "make clean"
 #alias ,,, '"make clean"; and "make"'
 alias vi "vim"
-alias :q "reboot"
+alias :q "sudo reboot"
 
 function bar
   eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"

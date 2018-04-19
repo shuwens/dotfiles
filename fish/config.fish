@@ -10,8 +10,13 @@ set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
 #set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
 set -U fish_user_abbreviations $fish_user_abbreviations 'cargot=cargo t'
+set -U fish_user_abbreviations $fish_user_abbreviations 'emacs=emacs-snapshot'
 complete --command yaourt --wraps pacman
 complete --command pacaur --wraps pacman
+
+## let's setup path variable
+set --universal FONTCONFIG_PATH /etc/fonts/
+
 
 if status --is-interactive
     tmux ^ /dev/null; and exec true
