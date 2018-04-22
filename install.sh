@@ -62,6 +62,8 @@ sudo apt install -y racket
 # dev env emacs cpp etc
 sudo apt -y install cppman w3m w3m-el
 
+# Install LS_COLORS
+
 
 # ----------------------
 #   Do the update

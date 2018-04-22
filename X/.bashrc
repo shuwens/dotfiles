@@ -65,8 +65,8 @@ alias github="((git config --local --get remote.origin.url | sed -e 's/^.*git@gi
 PS1='\[\e[37m\][\A] \[\e[0;33m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[32m\]\w'
 
 # Prompt
-if [ -e ~/bin/lib/git-prompt.sh ]; then
-    source ~/bin/git-prompt.sh
+if [ -e /usr/share/git/completion/git-prompt.sh ]; then
+    source /usr/share/git/completion/git-prompt.sh
     # For unstaged(*) and staged(+) values next to branch name in __git_ps1
     GIT_PS1_SHOWDIRTYSTATE="enabled"
     GIT_PS1_SHOWUNTRACKEDFILES="enabled"
@@ -203,9 +203,5 @@ EOF
   chmod +x /tmp/watcher-$$
   watch /tmp/watcher-$$
 }
-
-# LS_COLORS
-eval $(dircolors -b $HOME/.dircolors)
-
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

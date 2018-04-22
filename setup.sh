@@ -1,8 +1,9 @@
 #!/bin/bash 
 
 # ZSH
-rm ~/.zshrc
 stow zsh        -t ~
+stow bash        -t ~
+stow tmux         -t ~
 stow X          -t ~
 #stow awesome35  -t ~/.config/
 #stow emacs      -t ~
