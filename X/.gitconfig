@@ -31,6 +31,7 @@
   ovk = !gitk --all --simplify-by-decoration
   random = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
   m = !"git add -A; git commit -m"
+  open = !vim `git-open.sh`
 
 # Type-specific diff settings
 [core]

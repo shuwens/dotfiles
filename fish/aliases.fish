@@ -45,7 +45,7 @@ end
 # Colorized cat (will guess file type based on contents)
 alias ccat 'pygmentize -g'
 
-alias g git
+#alias g git
 alias c clear
 alias v vim
 alias x 'tig HEAD'

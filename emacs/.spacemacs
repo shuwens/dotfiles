@@ -269,7 +269,7 @@ values."
    ;; dark:
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
    dotspacemacs-themes '(spacemacs-light
-                         melancholy
+                         ;;melancholy
                          misterioso ; geeko ;; error msg is so annoying
                          deeper-blue darktooth ;;ujelly
                          )

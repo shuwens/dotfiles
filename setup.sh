@@ -23,4 +23,8 @@ ln -s ~/git/dotfiles/emacs/.spacemacs  ~/.spacemacs
 #stow ssh        -t ~
 #stow config     -t ~/.config
 
+## Gnome setting changes!
+# screenshots..
+mkdir -p ~/Templates/Pictures/screenshots/
+gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/$USER/Templates/Pictures/screenshots/"
 
