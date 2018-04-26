@@ -96,6 +96,9 @@ sudo apt-get install -y intellij-idea-ultimate
 # Umake pycharm
 umake ide pycharm-professional
 
+# dir colors
+wget https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O $HOME/.dircolors
+
 #console-setup-linux
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install

@@ -83,7 +83,7 @@ fi
 
 # Solarized ls
 if [ -e .dir_colors ]; then
-    eval "$(dircolors -b .dir_colors)"
+    eval "$(dircolors -b $HOME/.dir_colors)"
 else
     echo -e '\e[37mbtw: no dircolors available...\e[0m';
 fi
