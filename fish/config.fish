@@ -300,10 +300,11 @@ function fish_greeting
   echo
 
   set r (random 0 100)
-  if [ $r -lt 2 ] # only occasionally show backlog (2%)
+  if [ $r -lt 10 ] # only occasionally show backlog (10%)
     echo -e " \e[1mBacklog\e[0;32m"
     set_color blue
-    echo "  [project] <description>"
+    #echo "  [project] <description>"
+    echo "  [Pythia Tracing] Unleashing tracing in OpenStack"
     echo
 end
 
@@ -351,12 +352,13 @@ set_color red
 
 echo
 
-if test -s ~/todo
-  set_color normal
-  echo -e " \e[1mImmediate\e[0;32m"
+# Huh, show me some todo
+if test -s ~/.todo
+  #set_color normal
+  #echo -e " \e[1mImmediate\e[0;32m"
   set_color magenta
-  echo
-  cat todo | sed 's/^/  /'
+  #echo
+  cat ~/.todo | sed 's/^/  /'
   echo
 end
 

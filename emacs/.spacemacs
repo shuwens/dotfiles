@@ -61,10 +61,12 @@ values."
      (c-c++ :variables
             ;; clang
             c-c++-enable-clang-support t
+            c-c++-enable-clang-format-on-save t
             c-c++-enable-cmake-ide-support t
             ;; google c style
             c-c++-enable-google-style t
             c-c++-enable-google-newline t)
+
      ;; rtags
      ;;c-c++-enable-rtags-support t)
 
@@ -75,8 +77,8 @@ values."
              ;; yapf and auto indent are evil!!!
              ;;python-enable-yapf-format-on-save t
              ;;python-sort-imports-on-save t
-             python-auto-set-local-pyvenv-virtualenv 'on-project-switch
-             )
+             python-auto-set-local-pyvenv-virtualenv 'on-project-switch)
+     
 
      (go :variables go-tab-width 4)
 
@@ -117,6 +119,9 @@ values."
      lsp
      ivy
 
+     ;; email -- notmuch
+     gnus
+
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
@@ -130,7 +135,7 @@ values."
      ;; Tagging
      ;; ----------
      ;;cscope
-     ;;gtags
+     gtags
 
      (shell :variables
             shell-default-height 30
@@ -162,15 +167,16 @@ values."
      ;;version-control
 
      ;; Minor
-     
+     (treemacs :variables treemacs-use-follow-mode t)
+     parinfer
      pdf-tools
      protobuf
      (colors :variables
              colors-colorize-identifiers 'variables
              colors-default-rainbow-identifiers-sat 42
              colors-enable-nyan-cat-progress-bar (display-graphic-p)
-             colors-default-rainbow-identifiers-light 86)
-     )
+             colors-default-rainbow-identifiers-light 86))
+   
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -181,7 +187,7 @@ values."
                                       cpputils-cmake function-args
                                       counsel-gtags company-childframe pyenv-mode
                                       hydra aggressive-indent academic-phrases
-                                      pcap-mode
+                                      pcap-mode fix-word
                                       ;; theme
                                       nord-theme ujelly-theme melancholy-theme
                                       ;; new batch
@@ -190,8 +196,8 @@ values."
                                       ;; next a few
                                       ;; material-theme grayscale-theme
                                       ;; darktooth-theme cyberpunk-theme
-                                      color-theme-sanityinc-tomorrow
-                                      )
+                                      color-theme-sanityinc-tomorrow)
+   
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -457,10 +463,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;(setq-default evil-escape-key-sequence "jk")
 
   ;; git magit
-  (setq-default git-magit-status-fullscreen t)
+  (setq-default git-magit-status-fullscreen t))
   ;; deft mode always on
   ;;(require 'deft)
-  )
+  
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -533,8 +539,8 @@ you should place your code here."
   (add-hook 'c-mode-common-hook
             (lambda ()
               (if (derived-mode-p 'c-mode 'c++-mode)
-                  (cppcm-reload-all)
-                )))
+                  (cppcm-reload-all))))
+  
   ;; OPTIONAL, somebody reported that they can use this package with Fortran
   (add-hook 'c90-mode-hook (lambda () (cppcm-reload-all)))
   ;; OPTIONAL, avoid typing full path when starting gdb
@@ -603,8 +609,8 @@ you should place your code here."
     (define-key meghanada-mode-map (kbd "C-c C-r o") 'meghanada-optimize-import)
     (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
 
-    (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project)
-    )
+    (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project))
+  
   (add-hook 'java-mode-hook 'java-key-mode-hook)
 
   ;; noit workign
@@ -761,6 +767,38 @@ you should place your code here."
   ;; Git and Magit
   (setq magit-repository-directories '("~/repos/","~/dev/","~/git/","~/workspace/"))
 
+  ;; Gnus
+  ;; -------------------------------
+  ;; Get email, and store in nnml
+  (setq gnus-secondary-select-methods
+        '(
+          (nnimap "gmail"
+                  (nnimap-address
+                   "imap.gmail.com")
+                  (nnimap-server-port 993)
+                  (nnimap-stream ssl))
+          ))
+
+  ;; Send email via Gmail:
+  (setq message-send-mail-function 'smtpmail-send-it
+        smtpmail-default-smtp-server "smtp.gmail.com")
+
+  ;; Archive outgoing email in Sent folder on imap.gmail.com:
+  (setq gnus-message-archive-method '(nnimap "imap.gmail.com")
+        gnus-message-archive-group "[Gmail]/Sent Mail")
+
+  ;; Set return email address based on incoming email address
+  (setq gnus-posting-styles
+        '(((header "to" "address@outlook.com")
+           (address "address@outlook.com"))
+          ((header "to" "address@gmail.com")
+           (address "address@gmail.com"))))
+
+  ;; Store email in ~/gmail directory
+  (setq nnml-directory "~/gmail")
+  (setq message-directory "~/gmail")
+  
+
 
   ;; convienant keybinding for functions:
   ;; ------------------------------------
@@ -776,15 +814,15 @@ you should place your code here."
     (local-set-key (kbd "C-c C-d") 'flycheck-explain-error-at-point)
     (local-set-key (kbd "C-c C-n") 'flycheck-error-list-next-error)
     (local-set-key (kbd "C-c C-p") 'flycheck-error-list-previous-error)
-    (local-set-key (kbd "C-c C-c") 'flycheck-list-errors)
-    ;; Prevents flymake from throwing a configuration error
-    ;; This must be done because atsopt returns a non-zero return value
-    ;; when it finds an error, flymake expects a zero return value.
-    ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
-    ;;(setq flymake-check-was-interrupted t))
-    ;;(ad-activate 'flymake-post-syntax-check)
-    ;; deal with color id mode
-    )
+    (local-set-key (kbd "C-c C-c") 'flycheck-list-errors))
+  ;; Prevents flymake from throwing a configuration error
+  ;; This must be done because atsopt returns a non-zero return value
+  ;; when it finds an error, flymake expects a zero return value.
+  ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
+  ;;(setq flymake-check-was-interrupted t))
+  ;;(ad-activate 'flymake-post-syntax-check)
+  ;; deal with color id mode
+  
 
   (add-hook 'prog-mode-hook 'flycheck-my-load)
 
@@ -885,17 +923,17 @@ SCHEDULED: %t")))
           ("CRASH" . "red")
           ("BUG" . "red")
           ("SUBTREE" . "grey")
-          ("TEST" . "turquoise1")
-          ))
+          ("TEST" . "turquoise1")))
+  
   (setq org-agenda-custom-commands
         '(
           ("p" . "筛选任务(目前无效果，需要修复)")
           ("pa" "Important but not Urgent" tags "+PRIORITY=\"A\"")
-          ("pb" "Urgent" tags "+PRIORITY=\"B\"")
-          ;;("pc" "一定要完成但是不着急的任务" tags "+PRIORITY=\"C\"")
-          ;;("pd" "做完有好处的任务" tags "+PRIORITY=\"D\"")
-          ;;("pe" "无所谓做不做的任务" tags "+PRIORITY=\"E\"")
-          ))
+          ("pb" "Urgent" tags "+PRIORITY=\"B\"")))
+  ;;("pc" "一定要完成但是不着急的任务" tags "+PRIORITY=\"C\"")
+  ;;("pd" "做完有好处的任务" tags "+PRIORITY=\"D\"")
+  ;;("pe" "无所谓做不做的任务" tags "+PRIORITY=\"E\"")
+  
 
   ;; aggressive indent mode
   (global-aggressive-indent-mode 1)
@@ -1020,6 +1058,12 @@ SCHEDULED: %t")))
     "/usr/share/doc/libboost1.63-doc/"
     "defines boost directory location")
 
+  ;; fix-word
+  (require 'fix-word)
+  (global-set-key (kbd "M-u") #'fix-word-upcase)
+  (global-set-key (kbd "M-l") #'fix-word-downcase)
+  (global-set-key (kbd "M-c") #'fix-word-capitalize)
+
 
   (defun recursive-file-list (dir)
     (let ((files-list '())
@@ -1092,11 +1136,10 @@ Symbols matching the text at point are put first in the completion list."
                     matching-symbols)))))
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
-        (goto-char position))))
+        (goto-char position)))))
   ;; --------------------- FUNC ENDS HERE -----------------------
-  )
+  
 
 (provide '.spacemacs)
 ;;; .spacemacs ends here
-
 

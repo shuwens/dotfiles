@@ -45,7 +45,6 @@ end
 # Colorized cat (will guess file type based on contents)
 alias ccat 'pygmentize -g'
 
-#alias g git
 alias c clear
 alias v vim
 alias x 'tig HEAD'
@@ -161,6 +160,8 @@ alias a 'git amend --allow-empty --no-verify'
 alias gb 'git recent-branches 2.days.ago'
 alias ggco 'git switch'
 alias fl 'clear; and flow-limit'
+alias gl 'git lg1'
+alias gg 'git lg2'
 
 function git-search
   git log -S"$argv" --pretty=format:%H | map git show 

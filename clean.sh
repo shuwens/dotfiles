@@ -1,5 +1,6 @@
-#!/usr/bin/sh
+#!/bin/bash
 
+## I really need to rework this!
 rm ~/.xinitrc
 
 rm -rf ~/.Xdefaults  ~/.Xmodmap  ~/.Xresources

@@ -1,0 +1,8 @@
+* Defer
+
+[[https://stackoverflow.com/questions/34625089/python-equivalent-of-golangs-defer-statement?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa]]
+
+[[https://pythonhosted.org/defer/defer.html]]
+
+[[https://golang.org/doc/effective_go.html#defer]]
+
