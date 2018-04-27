@@ -164,7 +164,7 @@ set PATH /usr/local/bin/ $PATH
 set PATH $PATH ~/bin
 set PATH $PATH ~/.local/bin
 set PATH $PATH ~/.cargo/bin
-#set PATH $PATH ~/.npm-global/bin
+set PATH $PATH /home/linuxbrew/.linuxbrew/bin
 #set PATH $PATH ~/dev/go/bin
 
 # For RLS
