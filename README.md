@@ -10,3 +10,11 @@ cd dotfiles && ./install.sh
 
 ### exa
 See [exa](https://github.com/ogham/exa)
+
+
+## Basic vim
+
+
+To use the basic vim, ```sh
+wget -O ~/.vimrc https://bit.ly/2HnB5Ap
+```
