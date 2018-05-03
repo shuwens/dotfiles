@@ -109,6 +109,8 @@ set vim_pattern (echo $argv | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
 ag -l --smart-case --null -a $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
 end
 
+## Git aliases
+
 function vc
   if git modified -q $argv
     vim (git modified $argv | sed -Ee 's/^"(.*)"$/\1/')
@@ -154,7 +156,7 @@ function vconflicts
   va '^([<]{7}|[>]{7}|[=]{7})([ ].*)?$'
 end
 
-#alias git hub
+alias git hub
 alias gti git
 alias a 'git amend --allow-empty --no-verify'
 alias gb 'git recent-branches 2.days.ago'
@@ -162,10 +164,13 @@ alias ggco 'git switch'
 alias fl 'clear; and flow-limit'
 alias gl 'git lg1'
 alias gg 'git lg2'
+alias push 'git push'
+alias pull 'git pull'
 
 function git-search
   git log -S"$argv" --pretty=format:%H | map git show 
 end
+
 
 function cleanpycs
   find . -name '.git' -prune -o -name '__pycache__' -delete

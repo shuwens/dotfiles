@@ -58,17 +58,24 @@ values."
      ;; ----------------------------------------
 
      ;; Major
-     (c-c++ :variables
-            ;; clang
-            c-c++-enable-clang-support t
-            c-c++-enable-clang-format-on-save t
-            c-c++-enable-cmake-ide-support t
-            ;; google c style
-            c-c++-enable-google-style t
-            c-c++-enable-google-newline t)
-
+                                        ;(c-c++ :variables
+                                        ;       ;; clang
+                                        ;       c-c++-enable-clang-support t
+                                        ;       c-c++-enable-clang-format-on-save t
+                                        ;       c-c++-enable-cmake-ide-support t
+                                        ;       ;; google c style
+                                        ;       c-c++-enable-google-style t
+                                        ;       c-c++-enable-google-newline t)
      ;; rtags
      ;;c-c++-enable-rtags-support t)
+
+     ;; C++ 
+     (lsp :variables
+          lsp-ui-peek-expand-by-default t)
+     cquery
+     cmake
+
+
 
      (python :variables
              python-backend 'lsp
@@ -116,7 +123,6 @@ values."
 
      ;; Major
      semantic
-     lsp
      ivy
 
      ;; email -- notmuch
@@ -464,9 +470,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; git magit
   (setq-default git-magit-status-fullscreen t))
-  ;; deft mode always on
-  ;;(require 'deft)
-  
+;; deft mode always on
+;;(require 'deft)
+
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -1137,8 +1143,8 @@ Symbols matching the text at point are put first in the completion list."
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
         (goto-char position)))))
-  ;; --------------------- FUNC ENDS HERE -----------------------
-  
+;; --------------------- FUNC ENDS HERE -----------------------
+
 
 (provide '.spacemacs)
 ;;; .spacemacs ends here
