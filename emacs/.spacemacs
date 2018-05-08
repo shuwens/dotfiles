@@ -100,6 +100,7 @@ values."
 
 
      ;; Minor
+     javascript
      sml
      yaml
      deft
@@ -126,7 +127,7 @@ values."
      ivy
 
      ;; email -- notmuch
-     gnus
+     ;;gnus
 
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
