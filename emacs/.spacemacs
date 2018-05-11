@@ -704,35 +704,36 @@ you should place your code here."
 
 
   ;; ----------------------- Rust Starts Here ---------------------------------
-  ;; (with-eval-after-load 'rust-mode
-  ;;   (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                         (kbd "C-M-i")
-  ;;                                         #'anaconda-mode-complete))))
-  ;; (with-eval-after-load 'rust-mode
-  ;;   (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                         (kbd "C-M-.")
-  ;;                                         #'anaconda-mode-find-definitions))))
-  ;; (with-eval-after-load 'rust-mode
-  ;;   (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                         (kbd "C-M-,")
-  ;;                                         #'anaconda-mode-find-assignments))))
-  ;; (with-eval-after-load 'python
-  ;;   (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                           (kbd "C-M-r")
-  ;;                                           #'anaconda-mode-find-references))))
-  ;; (with-eval-after-load 'python
-  ;;   (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                           (kbd "C-M-*")
-  ;;                                           #'anaconda-mode-go-back))))
-  ;; (with-eval-after-load 'python
-  ;;   (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                           (kbd "C-M-?")
-  ;;                                           #'anaconda-mode-show-doc))))
-  ;; ;; ---------------- Spare ones -----------------------
-  ;; (with-eval-after-load 'python
-  ;;   (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
-  ;;                                           (kbd "C-x C-.")
-  ;;                                           #'anaconda-mode-find-definitions))))
+  ;; https://github.com/racer-rust/emacs-racer/blob/master/racer.el
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-i")
+                                          #'racer-complete-at-point))))
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-.")
+                                          #'racer-find-definition))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-,")
+                                            #'anaconda-mode-find-assignments))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-r")
+                                            #'anaconda-mode-find-references))))
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-*")
+                                          #'pop-tag-mark))))
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-?")
+                                          #'racer-eldoc))))
+  ;; ---------------- Spare ones -----------------------
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-x C-.")
+                                          #'racer-find-definition))))
 
   ;; SPC m =	reformat the buffer
   ;; SPC m c .	repeat the last Cargo command
@@ -783,8 +784,8 @@ you should place your code here."
                   (nnimap-address
                    "imap.gmail.com")
                   (nnimap-server-port 993)
-                  (nnimap-stream ssl))
-          ))
+                  (nnimap-stream ssl))))
+  
 
   ;; Send email via Gmail:
   (setq message-send-mail-function 'smtpmail-send-it
@@ -1045,6 +1046,17 @@ SCHEDULED: %t")))
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'rust-mode-hook 'ycmd-mode)
 
+  ;; fix-word
+  (require 'fix-word)
+  (global-set-key (kbd "M-u") #'fix-word-upcase)
+  (global-set-key (kbd "M-l") #'fix-word-downcase)
+  (global-set-key (kbd "M-c") #'fix-word-capitalize)
+
+  ;; HACK: cppman
+  (global-set-key (kbd "C-c i") #'man)
+
+
+
   ;; C++ reference look up : kinda broken
   ;; ==================================================================
   ;; (require 'anything)
@@ -1064,14 +1076,7 @@ SCHEDULED: %t")))
   (defvar boost-documentation-directory
     "/usr/share/doc/libboost1.63-doc/"
     "defines boost directory location")
-
-  ;; fix-word
-  (require 'fix-word)
-  (global-set-key (kbd "M-u") #'fix-word-upcase)
-  (global-set-key (kbd "M-l") #'fix-word-downcase)
-  (global-set-key (kbd "M-c") #'fix-word-capitalize)
-
-
+  
   (defun recursive-file-list (dir)
     (let ((files-list '())
           (current-entries (directory-files dir t)))
@@ -1095,6 +1100,13 @@ SCHEDULED: %t")))
       (action . (lambda (entry)
                   (w3m-browse-url entry)))))
   ;; ---------------------------------------------------------------------------
+
+
+  ;; enable ansi colors in compile-mode
+  (defun colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 
   ;; ---------------------------------------------------------------
@@ -1149,4 +1161,5 @@ Symbols matching the text at point are put first in the completion list."
 
 (provide '.spacemacs)
 ;;; .spacemacs ends here
+
 

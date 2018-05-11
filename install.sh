@@ -64,6 +64,10 @@ sudo apt -y install cppman w3m w3m-el
 
 # Install LS_COLORS
 
+# Neovim
+sudo apt -y install neovim python-neovim python3-neovim
+
+
 
 # ----------------------
 #   Do the update

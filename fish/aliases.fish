@@ -334,7 +334,7 @@ alias ls "exa"
 alias , "make"
 alias ,, "make clean"
 #alias ,,, '"make clean"; and "make"'
-alias vi "vim"
+alias vi "nvim"
 alias :q "sudo reboot"
 
 function bar
@@ -343,6 +343,12 @@ end
 alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
+
+## tips function
+# tips tar
+# https://wiki.archlinux.org/index.php/Core_utilities#tar
+# https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/
+
 
 ## python stuff 
 #install virtualfish
