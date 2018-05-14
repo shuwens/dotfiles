@@ -19,19 +19,19 @@ set --universal FONTCONFIG_PATH /etc/fonts/
 
 
 if status --is-interactive
-    tmux ^ /dev/null; and exec true
+  tmux ^ /dev/null; and exec true
 end
 
 if [ -e /usr/bin/pacaur ]
-    set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
-    set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
 else if [ -e /usr/bin/yaourt ]
-    set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
-    set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
 else
-    set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
-    #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
-    set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
+  #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 end
 
 if [ -e ~/.cargo/bin/exa ]
@@ -111,7 +111,7 @@ function px
   ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
 end
 function athena
-  env SSHPASS=(pass www/mit) sshpass -e ssh athena $argv
+  env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
 end
 
 set nooverride PATH PWD
@@ -122,28 +122,28 @@ function onchdir -v PWD
       set envn (basename -- $e | sed 's/^\.setenv-//')
       if contains $envn $nooverride
         continue
-    end
-
-    if not test -s $e
-      # setenv is empty
-      # var value is file's dir
-      set envv (readlink -e $dr)
-    else if test -L $e; and test -d $e
-      # setenv is symlink to directory
-      # var value is target directory
-      set envv (readlink -e $e)
-    else
-      # setenv is non-empty file
-      # var value is file content
-      set envv (cat $e)
-    end
-
-    if not contains $envn $wasset
-      set wasset $wasset $envn
-      setenv $envn $envv
-    end
   end
-  set dr (dirname $dr)
+
+  if not test -s $e
+    # setenv is empty
+    # var value is file's dir
+    set envv (readlink -e $dr)
+  else if test -L $e; and test -d $e
+    # setenv is symlink to directory
+    # var value is target directory
+    set envv (readlink -e $e)
+  else
+    # setenv is non-empty file
+    # var value is file content
+    set envv (cat $e)
+  end
+
+  if not contains $envn $wasset
+    set wasset $wasset $envn
+    setenv $envn $envv
+  end
+end
+set dr (dirname $dr)
 end
 end
 
@@ -175,8 +175,8 @@ setenv RLS_ROOT ~/dev/others/rls
 
 setenv EDITOR nvim
 setenv BROWSER firefox-developer-edition
-setenv EMAIL jon@tsp.io
-setenv NAME "Jon Gjengset"
+setenv EMAIL sun.shuw@husky.neu.edu
+setenv NAME "Jethro S. Sun"
 setenv GOPATH "$HOME/dev/go:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
 setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
@@ -242,8 +242,8 @@ status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 
 # Pretty ls colors
-if test -e ~/.dir_colors
-  setenv LS_COLORS (sh --noprofile -c 'eval "$(dircolors -b ~/.dir_colors)"; echo $LS_COLORS')
+if test -e $HOME/.dircolors
+  setenv LS_COLORS (sh --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
 end
 
 function fish_user_key_bindings
@@ -316,16 +316,16 @@ end
 # Running !! with anything other than sudo will append the argument to your most recent command
 # To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
 function !!;
-    set prevcmd (history | head -n 1)
-    if test "$argv"
-        if test "$argv" = "sudo"        #; or "any other command you want to prepend"
-            eval "$argv $prevcmd"
-        else
-            eval "$var $argv"
-        end
-    else
-        eval "$var"
-    end
+  set prevcmd (history | head -n 1)
+  if test "$argv"
+    if test "$argv" = "sudo"        #; or "any other command you want to prepend"
+      eval "$argv $prevcmd"
+      else
+        eval "$var $argv"
+      end
+  else
+    eval "$var"
+  end
 end
 
 set_color normal

@@ -62,11 +62,19 @@ sudo apt install -y racket
 # dev env emacs cpp etc
 sudo apt -y install cppman w3m w3m-el
 
-# Install LS_COLORS
+## Install LS_COLORS
+wget https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O $HOME/.dircolors
+
 
 # Neovim
 sudo apt -y install neovim python-neovim python3-neovim
 
+## pass and sshpass
+sudo apt -y pass sshpass
+
+## firefox dev
+sudo apt -y remove firefox
+umake web firefox-dev
 
 
 # ----------------------
