@@ -3,8 +3,9 @@ On setting up new Ubuntu environment:
 ** Install fonts:
   [[https://www.linuxhint.com/install-fonts-ubuntu/]]
 
+https://askubuntu.com/questions/4989/how-do-i-reset-gnome-font-configuration/5004
 
-
+https://ubuntuforums.org/showthread.php?t=1556880
 
 * RollingLTSUbuntu
   [[https://askubuntu.com/questions/885054/upgrade-16-04-2-lts-to-kernel-version-4-8]]

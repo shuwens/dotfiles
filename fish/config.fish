@@ -243,7 +243,7 @@ status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 # Pretty ls colors
 if test -e $HOME/.dircolors
-  setenv LS_COLORS (sh --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+  setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
 end
 
 function fish_user_key_bindings
