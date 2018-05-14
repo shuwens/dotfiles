@@ -114,6 +114,7 @@ function athena
   env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
 end
 
+## what is this for again?
 set nooverride PATH PWD
 function onchdir -v PWD
   set dr $PWD
@@ -160,6 +161,7 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 
+## PATH variable
 set PATH /usr/local/bin/ $PATH
 set PATH $PATH ~/bin
 set PATH $PATH ~/.local/bin
@@ -177,7 +179,7 @@ setenv EDITOR nvim
 setenv BROWSER firefox-developer-edition
 setenv EMAIL sun.shuw@husky.neu.edu
 setenv NAME "Jethro S. Sun"
-setenv GOPATH "$HOME/dev/go:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
+setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
 setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native"

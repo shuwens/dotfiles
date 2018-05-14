@@ -340,8 +340,6 @@ alias :q "sudo reboot"
 function bar
   eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"
 end
-alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
-alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
 
 ## tips function
@@ -362,11 +360,6 @@ alias upgrade 'sudo apt upgrade'
 function ,,,
   make clean; and make
 end
-
-function UpdateFile -a filename
-  scp $filename  shwsun@csa2.bu.edu:~/public_html/tmp
-end
-
 function o -a filename
   xdg-open $filename &
 end
@@ -410,4 +403,15 @@ alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
 alias run='sudo systemctl start'
 alias restart='sudo systemctl restart'
 alias stop='sudo systemctl stop'
+
+
+## my ssh utils
+function UpdateFile -a filename
+  env SSHPASS=(pass www/bucs) sshpass -e scp $filename bucs:~/public_html/tmp
+end
+
+## DEPRECATED
+#alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+#alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+
 
