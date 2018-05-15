@@ -1,6 +1,5 @@
 #!/bin/bash 
 
-# ZSH
 stow bash        -t ~
 stow zsh         -t ~
 stow fish        -t ~
@@ -11,8 +10,11 @@ stow screen      -t ~
 stow urxvt       -t ~
 stow bin         -t ~
 
-mkdir -p ~/.config/zathura/
-ln -s  ~/git/dotfiles/misc/zathurarc ~/.config/zathura/zathurarc
+## dot config
+cd config
+stow -t ~/.config  .config
+
+#ln -s  ~/git/dotfiles/misc/zathurarc ~/.config/zathura/zathurarc
 ln -s ~/git/dotfiles/emacs/.spacemacs  ~/.spacemacs
 
 ## Gnome setting changes!

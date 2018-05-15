@@ -1,6 +1,6 @@
 # zathurarc-light
 
-#set font                        "xos4 Terminus Bold 12"
+set font                        "xos4 Noto Mono Regular 12"
 
 # Base16 colours
 set default-bg                  "#dfe1e8"
