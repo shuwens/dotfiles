@@ -123,26 +123,26 @@ function onchdir -v PWD
       set envn (basename -- $e | sed 's/^\.setenv-//')
       if contains $envn $nooverride
         continue
-  end
+end
 
-  if not test -s $e
-    # setenv is empty
-    # var value is file's dir
-    set envv (readlink -e $dr)
-  else if test -L $e; and test -d $e
-    # setenv is symlink to directory
-    # var value is target directory
-    set envv (readlink -e $e)
-  else
-    # setenv is non-empty file
-    # var value is file content
-    set envv (cat $e)
-  end
+if not test -s $e
+  # setenv is empty
+  # var value is file's dir
+  set envv (readlink -e $dr)
+else if test -L $e; and test -d $e
+  # setenv is symlink to directory
+  # var value is target directory
+  set envv (readlink -e $e)
+else
+  # setenv is non-empty file
+  # var value is file content
+  set envv (cat $e)
+end
 
-  if not contains $envn $wasset
-    set wasset $wasset $envn
-    setenv $envn $envv
-  end
+if not contains $envn $wasset
+  set wasset $wasset $envn
+  setenv $envn $envv
+end
 end
 set dr (dirname $dr)
 end
@@ -302,14 +302,16 @@ function fish_greeting
   echo
 
   set r (random 0 100)
-  if [ $r -lt 10 ] # only occasionally show backlog (10%)
-    echo -e " \e[1mBacklog\e[0;32m"
-    set_color blue
-    #echo "  [project] <description>"
-    echo "  [Pythia Tracing] Unleashing tracing in OpenStack"
-    echo
-end
-
+  if test -s ~/.todo
+    if [ $r -lt 10 ] # only occasionally show backlog (10%)
+      echo -e " \e[1mBacklog\e[0;32m"
+      set_color blue
+      echo
+      #echo "  [project] <description>"
+      cat ~/.backlog| sed 's/^/  /'
+      echo
+    end
+  end
 
 # Add this to your ~/.config/fish/config.fish
 # Syntax:
@@ -322,12 +324,12 @@ function !!;
   if test "$argv"
     if test "$argv" = "sudo"        #; or "any other command you want to prepend"
       eval "$argv $prevcmd"
-      else
-        eval "$var $argv"
-      end
-  else
-    eval "$var"
-  end
+    else
+      eval "$var $argv"
+    end
+else
+  eval "$var"
+end
 end
 
 set_color normal

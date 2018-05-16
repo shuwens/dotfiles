@@ -17,3 +17,20 @@ noremap <leader>c :w !xsel -ib<cr><cr>
 command! -nargs=+ Cppman silent! call system("tmux split-window cppman " . expand(<q-args>))
 autocmd FileType cpp nnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
 " }}}
+
+" map wincmd {{
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+" using ctrl hj"
+"nmap <leader>j :wincmd j<CR>
+"nmap <leader>k :wincmd k<CR>
+"nmap <leader>h :wincmd h<CR>
+"nmap <leader>l :wincmd l<CR>
+" The right windcmd (I like it the most..
+nmap <silent>J :wincmd j<CR>
+nmap <silent>K :wincmd k<CR>
+nmap <silent>H :wincmd h<CR>
+nmap <silent>L :wincmd l<CR>
+"}}

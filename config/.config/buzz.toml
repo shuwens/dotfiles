@@ -1,0 +1,5 @@
+[gmail]
+server = "imap.gmail.com"
+port = 993
+username = "jethro.sun7@gmail.com"
+pwcmd = "pass gmail/jsun7"

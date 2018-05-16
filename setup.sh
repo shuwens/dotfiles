@@ -5,6 +5,7 @@ stow zsh         -t ~
 stow fish        -t ~
 stow tmux        -t ~
 stow todo        -t ~
+stow backlog     -t ~
 stow X           -t ~
 stow screen      -t ~
 stow urxvt       -t ~
