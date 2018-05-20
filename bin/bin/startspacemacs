@@ -4,7 +4,7 @@
 xhost +SI:localuser:$USER
 
 # Swap esc and caps lock
-setxkbmap -option "caps:swapescape"
+setxkbmap -option "ctrl:swapcaps"
 
 # Source profile
 . $HOME/.profile
