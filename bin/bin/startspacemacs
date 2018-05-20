@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Disable access control
+xhost +SI:localuser:$USER
+
+# Swap esc and caps lock
+setxkbmap -option "caps:swapescape"
+
+# Source profile
+. $HOME/.profile
+
+# Start Emacs
+exec dbus-launch --exit-with-session emacs
+

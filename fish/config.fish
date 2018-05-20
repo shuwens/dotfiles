@@ -22,6 +22,17 @@ if status --is-interactive
   tmux ^ /dev/null; and exec true
 end
 
+if [ -e /usr/bin/apt ]
+  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+else if [ -e /usr/bin/yaourt ]
+  set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+  set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
+else
+  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
+  #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
+end
+
 if [ -e /usr/bin/pacaur ]
   set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
   set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
@@ -33,6 +44,8 @@ else
   #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
   set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 end
+
+
 
 if [ -e ~/.cargo/bin/exa ]
   #set -U fish_user_abbreviations $fish_user_abbreviations 'l=exa'
@@ -165,6 +178,7 @@ set __fish_git_prompt_showupstream 'none'
 set PATH /usr/local/bin/ $PATH
 set PATH $PATH ~/bin
 set PATH $PATH ~/.local/bin
+set PATH $PATH ~/.local/share/umake/bin
 set PATH $PATH ~/.cargo/bin
 set PATH $PATH /home/linuxbrew/.linuxbrew/bin
 #set PATH $PATH ~/dev/go/bin

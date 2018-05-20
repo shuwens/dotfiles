@@ -3,8 +3,8 @@ alias Ea 'vim ~/.config/fish/aliases.fish'
 alias Ef 'vim ~/.config/fish/config.fish'
 alias Eg 'vim ~/.gitconfig'
 alias Ev 'vim ~/git/dotfiles/config/.config/nvim/personal.vim'
-alias Es 'vim ~/bin/autosort'
-alias Et 'vim ~/.tmux.conf'
+#alias Es 'vim ~/bin/autosort'
+#alias Et 'vim ~/.tmux.conf'
 
 alias vim-norc 'vim -u NORC'
 alias vim-none 'vim -u NONE'
@@ -29,7 +29,7 @@ function timestamp
   python -c 'import time; print(int(time.time()))'
 end
 
-set LS_COLORS dxfxcxdxbxegedabagacad
+#set LS_COLORS dxfxcxdxbxegedabagacad
 
 alias df 'command df -m'
 alias j jobs
@@ -400,10 +400,9 @@ alias g11 'g++ -std=c++11 -O2'
 alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
 
 # Convenience aliases
-alias run='sudo systemctl start'
-alias restart='sudo systemctl restart'
-alias stop='sudo systemctl stop'
-
+alias run 'sudo systemctl start'
+alias restart 'sudo systemctl restart'
+alias stop 'sudo systemctl stop'
 
 ## my ssh utils
 function UpdateFile -a filename
@@ -414,4 +413,5 @@ end
 #alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 #alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 
-
+#alias jn "jupyter notebook --browser=google-chromium-browser"
+alias jn "jupyter notebook --browser=chromium-browser"

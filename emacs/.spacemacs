@@ -203,7 +203,17 @@ values."
                                       ;; next a few
                                       ;; material-theme grayscale-theme
                                       ;; darktooth-theme cyberpunk-theme
-                                      color-theme-sanityinc-tomorrow)
+                                      color-theme-sanityinc-tomorrow
+                                      ;; Spacemacs OS
+                                      alert
+                                      (xelb
+                                       :location (recipe :fetcher github :repo
+                                                         "ch11ng/xelb")) 
+                                      (exwm
+                                       :location (recipe :fetcher github :repo
+                                                         "ch11ng/exwm"))
+                                      )
+   
    
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -482,6 +492,78 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+
+  ;; EXWM starts here
+  (defun setup-exwm ()
+    (require 'exwm)
+    (require 'exwm-config)
+    (setq exwm-input--line-mode-passthrough t)
+
+    ;; Pull up the buffer list
+    (spacemacs/set-leader-keys "b l" 'list-buffers)
+
+    ;; Set the initial workspace number.
+    (setq exwm-workspace-number 2)
+    ;; Make class name the buffer name
+    (add-hook 'exwm-update-class-hook
+              (lambda ()
+                (setq exwm-input--line-mode-passthrough t)
+                (exwm-workspace-rename-buffer exwm-class-name)))
+    
+
+    ;; 's-w': Switch workspace
+    ;; (exwm-input-set-key (kbd "s-w") #'exwm-workspace-switch)
+    (exwm-input-set-key (kbd "s-w") #'spacemacs/workspaces-transient-state/body)
+    ;; s-h, s-j, s-k, s-l: move around
+    (exwm-input-set-key (kbd "s-h") #'evil-window-left)
+    (exwm-input-set-key (kbd "s-j") #'evil-window-down)
+    (exwm-input-set-key (kbd "s-k") #'evil-window-up)
+    (exwm-input-set-key (kbd "s-l") #'evil-window-right)
+    ;; lock screen
+    (exwm-input-set-key (kbd "C-M-l") #'lock-screen)
+    (define-key global-map (kbd "C-M-l") #'lock-screen)
+    (push ?\s-\  exwm-input-prefix-keys)
+
+    ;; fn key bindings
+    (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") #'turn-volume-up)
+    (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") #'turn-volume-down)
+    (exwm-input-set-key (kbd "<XF86AudioMute>") #'toggle-volume-mute)
+    (exwm-input-set-key (kbd "<XF86AudioPlay>") #'spotify-playpause)
+    (exwm-input-set-key (kbd "<XF86AudioNext>") #'spotify-next)
+    (exwm-input-set-key (kbd "<XF86AudioPrev>") #'spotify-previous)
+    (exwm-input-set-key (kbd "<XF86KbdBrightnessUp>") #'kbd-brightness-up)
+    (exwm-input-set-key (kbd "<XF86KbdBrightnessDown>") #'kbd-brightness-down)
+    (exwm-input-set-key (kbd "<XF86LaunchA>") #'lock-screen)
+    (exwm-input-set-key (kbd "<XF86LaunchB>") #'spacemacs/toggle-maximize-buffer)
+
+    ;; 's-&': Launch application
+    (exwm-input-set-key (kbd "s-&")
+                        (lambda (command)
+                          (interactive (list (read-shell-command "$ ")))
+                          (start-process-shell-command command nil command)))
+
+    ;; Enable EXWM
+    (exwm-enable)
+    ;; Configure Ido
+    (exwm-config-ido)
+    ;; Other configurations
+    (exwm-config-misc))
+  ;; Try
+  (setup-exwm)
+
+  ;; s-h, s-j, s-k, s-l: move around
+  ;; also defined below in exwm (defined both places for terminal mode compat)
+  (define-key evil-motion-state-map (kbd "s-h") #'evil-window-left)
+  (define-key evil-motion-state-map (kbd "s-j") #'evil-window-down)
+  (define-key evil-motion-state-map (kbd "s-k") #'evil-window-up)
+  (define-key evil-motion-state-map (kbd "s-l") #'evil-window-right)
+
+  (require 'term)
+  (define-key term-raw-map (kbd "s-c") (lambda () (interactive) (term-send-raw-string "\C-c")))
+  (define-key term-raw-map (kbd "s-d") (lambda () (interactive) (term-send-raw-string "\C-d")))
+  (define-key term-raw-map (kbd "s-r") (lambda () (interactive) (term-send-raw-string "\C-r")))
+
 
   ;; -----------------------------------------------------
   ;;
@@ -1162,7 +1244,13 @@ Symbols matching the text at point are put first in the completion list."
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
         (goto-char position)))))
+
 ;; --------------------- FUNC ENDS HERE -----------------------
+
+
+
+
+;; EXWM starts here
 
 
 (provide '.spacemacs)
@@ -1175,17 +1263,17 @@ Symbols matching the text at point are put first in the completion list."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcap-mode password-generator parinfer paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode markdown-toc magit-gitflow macrostep lsp-ui markdown-mode lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum livid-mode skewer-mode live-py-mode lispy zoutline linum-relative link-hint langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile hy-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes all-the-icons memoize disaster deft define-word darktooth-theme autothemer darkroom dante lcr flycheck cython-mode cquery cpputils-cmake counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred request deferred company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide levenshtein clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo rust-mode biblio biblio-core base16-theme auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f alect-themes aggressive-indent adaptive-wrap ace-window ace-link avy academic-phrases ht s dash ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(exwm yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator parinfer paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode markdown-toc magit-gitflow macrostep lsp-ui lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy linum-relative link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent adaptive-wrap ace-link academic-phrases ac-ispell)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
