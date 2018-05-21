@@ -598,10 +598,10 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-pretty-docs nil)
 
-  ;;(when (and (display-graphic-p) (eq system-type 'gnu/linux))
-  ;; (with-eval-after-load 'exec-path-from-shell
-  ;;  (exec-path-from-shell-setenv "SHELL" "/bin/bash"))
-  )
+  (when (and (display-graphic-p) (eq system-type 'gnu/linux))
+   (with-eval-after-load 'exec-path-from-shell
+    (exec-path-from-shell-setenv "SHELL" "/bin/bash")))
+)
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -620,17 +620,28 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;(setq-default evil-escape-key-sequence "jk")
 
   ;; git magit
-  (setq-default git-magit-status-fullscreen t)
+  (setq-default git-magit-status-fullscreen t))
   ;; deft mode always on
   ;;(require 'deft)
-  )
+  
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included
 in the dump."
+
+  ;; require things that I remember
+  (require 'evil)
+  (require 'magit)
+  (require 'evil-magit)
+
+  ;;(load "~/.emacs.d/languages/latex.el")
+  (load "~/.emacs.d/core/core-versions.el")
+  (load "~/.emacs.d/core/core-load-paths.el")
+  (load "~/.emacs.d/core/core-dumper.el")
   )
+
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:

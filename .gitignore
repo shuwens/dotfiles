@@ -4,3 +4,6 @@ xmonad-x86_64-linux
 *.hi
 zsh-syntax-highlighting/
 tags
+
+*#*
+*.#*
