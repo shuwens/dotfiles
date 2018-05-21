@@ -620,10 +620,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;(setq-default evil-escape-key-sequence "jk")
 
   ;; git magit
-  (setq-default git-magit-status-fullscreen t))
+  (setq-default git-magit-status-fullscreen t)
   ;; deft mode always on
   ;;(require 'deft)
-  
+  )
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
