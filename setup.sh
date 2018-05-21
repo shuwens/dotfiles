@@ -11,12 +11,13 @@ stow screen      -t ~
 stow urxvt       -t ~
 stow bin         -t ~
 
+stow -t ~   spacemacs
+
 ## dot config
 cd config
 stow -t ~/.config  .config
 
-#ln -s  ~/git/dotfiles/misc/zathurarc ~/.config/zathura/zathurarc
-ln -s ~/git/dotfiles/emacs/.spacemacs  ~/.spacemacs
+
 
 ## Gnome setting changes!
 # screenshots..
