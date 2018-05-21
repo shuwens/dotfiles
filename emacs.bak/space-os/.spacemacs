@@ -1,15 +1,23 @@
-;; -*- mode: emacs-lisp -*-
+;;; package --- Summary
+;; Packages are managed using Spacemacs' layers.
+
+;;; Commentary:
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
-
+;;
 ;; NOTE(jethros):
 ;;
 ;; KEYBINDING:
+;;  `C-M-.': find definition
+;;  `C-M-*': go back
+;;  `C-M-,': find reference
+;; STATUS:
 ;;  * Python: working
 ;;  * Java: working
 ;;  * C++: ?
 
-
+;;; Code:
+;; -*- mode: emacs-lisp -*-
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -38,8 +46,7 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
-     ;;javascript
+   '(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -47,18 +54,28 @@ values."
      ;; ----------------------------------------------------------------
 
      ;; ----------------------------------------
-     ;;     Major programming lang layers
+     ;;     Programming lang layers
      ;; ----------------------------------------
 
-     (c-c++ :variables
-            ;; clang
-            c-c++-enable-clang-support t
-            c-c++-enable-cmake-ide-support t
-            ;; google c style
-            c-c++-enable-google-style t
-            c-c++-enable-google-newline t)
+     ;; Major
+                                        ;(c-c++ :variables
+                                        ;       ;; clang
+                                        ;       c-c++-enable-clang-support t
+                                        ;       c-c++-enable-clang-format-on-save t
+                                        ;       c-c++-enable-cmake-ide-support t
+                                        ;       ;; google c style
+                                        ;       c-c++-enable-google-style t
+                                        ;       c-c++-enable-google-newline t)
      ;; rtags
      ;;c-c++-enable-rtags-support t)
+
+     ;; C++ 
+     (lsp :variables
+          lsp-ui-peek-expand-by-default t)
+     cquery
+     cmake
+
+
 
      (python :variables
              python-backend 'lsp
@@ -67,33 +84,65 @@ values."
              ;; yapf and auto indent are evil!!!
              ;;python-enable-yapf-format-on-save t
              ;;python-sort-imports-on-save t
-             )
+             python-auto-set-local-pyvenv-virtualenv 'on-project-switch)
+     
 
      (go :variables go-tab-width 4)
 
+     (rust :variables rust-format-on-save t)
+
      (java :variables java-backend 'meghanada)
 
+     (haskell :variables haskell-completion-backend 'intero)
+
+     (latex :variables
+            latex-enable-auto-fill t)
+
+
+     ;; Minor
+     (javascript :variables tern-command '("node" "/usr/local/bin/tern"))
      sml
+     yaml
+     deft
+     bibtex
+     html
+     markdown
+     (org :variables org-projectile-file "TODOs.org")
+     (clojure :variables clojure-enable-fancify-symbols t)
+     erlang
+     emacs-lisp
+     graphviz
+     markdown
+     scala
+     shell-scripts
+     scheme
      racket
 
+     ;; --------------------------
+     ;;   Tool layers
+     ;; --------------------------
 
-     ;; --------------------------
-     ;;   Major tool layers
-     ;; --------------------------
+     ;; Major
+     semantic
      ivy
+
+     ;; email -- notmuch
+     ;;gnus
 
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
-     semantic
-     lsp
+     
+     (languagetool :variables          ; I need my grammer checker!!
+                   langtool-language-tool-jar "/home/jethros/repos/TOOLS/LanguageTool-4.1/languagetool-commandline.jar"
+                   languagetool-show-error-on-jump t)
 
      ;; Tagging
      ;; ----------
      ;;cscope
-     ;;gtags
+     gtags
 
      (shell :variables
             shell-default-height 30
@@ -121,50 +170,51 @@ values."
                      spell-checking-enable-by-default nil
                      enable-flyspell-auto-completion t
                      spell-checking-enable-auto-dictionary t)
-     syntax-checking 
+     syntax-checking
      ;;version-control
 
-     ;; --------------------------------
-     ;;      Additional langs
-     ;; --------------------------------
-     deft
-     bibtex
-     html
-     yaml
-     markdown
-     (org :variables org-projectile-file "TODOs.org")
-     (clojure :variables clojure-enable-fancify-symbols t)
-     erlang
-     emacs-lisp
-     graphviz
-     (haskell :variables haskell-completion-backend 'intero)
-     (latex :variables
-            latex-enable-auto-fill t)
-     markdown
-     rust
-     scala
-     shell-scripts
-     scheme
-
-     ;; Additional Tools
+     ;; Minor
+     (treemacs :variables treemacs-use-follow-mode t)
+     parinfer
      pdf-tools
      protobuf
-     )
+     (colors :variables
+             colors-colorize-identifiers 'variables
+             colors-default-rainbow-identifiers-sat 42
+             colors-enable-nyan-cat-progress-bar (display-graphic-p)
+             colors-default-rainbow-identifiers-light 86))
+   
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(lispy meghanada groovy-mode gradle-mode 
-                                            stickyfunc-enhance dumb-jump
-                                            cpputils-cmake function-args
-                                            counsel-gtags company-childframe pyenv-mode
-                                            hydra aggressive-indent academic-phrases
-                                            ;; theme
-                                            nord-theme ujelly-theme 
-                                            ;; next a few 
-                                            material-theme grayscale-theme
-                                            darktooth-theme cyberpunk-theme
-                                            color-theme-sanityinc-tomorrow)  
+   dotspacemacs-additional-packages '(
+                                      lispy meghanada groovy-mode gradle-mode
+                                      stickyfunc-enhance dumb-jump
+                                      cpputils-cmake function-args
+                                      counsel-gtags company-childframe pyenv-mode
+                                      hydra aggressive-indent academic-phrases
+                                      pcap-mode fix-word darkroom
+                                      ;; theme
+                                      nord-theme ujelly-theme melancholy-theme
+                                      ;; new batch
+                                      base16-theme doom-themes kaolin-themes
+                                      alect-themes
+                                      ;; next a few
+                                      ;; material-theme grayscale-theme
+                                      ;; darktooth-theme cyberpunk-theme
+                                      color-theme-sanityinc-tomorrow
+                                      ;; Spacemacs OS
+                                      alert
+                                      (xelb
+                                       :location (recipe :fetcher github :repo
+                                                         "ch11ng/xelb")) 
+                                      (exwm
+                                       :location (recipe :fetcher github :repo
+                                                         "ch11ng/exwm"))
+                                      )
+   
+   
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -240,18 +290,21 @@ values."
    ;; light:
    ;;   material-light, spacemacs-light
    ;; dark:
-   ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso
-   dotspacemacs-themes '(spacemacs-light darktooth grayscale deeper-blue 
-                                         )
+   ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
+   dotspacemacs-themes '(spacemacs-light
+                         ;;melancholy
+                         misterioso ; geeko ;; error msg is so annoying
+                         deeper-blue darktooth ;;ujelly
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Dejavu Sans Mono" ; preferred
-                               ;;"Ubuntu Mono" ;
+   dotspacemacs-default-font '(;;"Dejavu Sans Mono" ; size 15
+                               "Noto Mono" ; size 16
                                ;;"Source Code Pro"
-                               :size 15
-                               :weight normal 
+                               :size 16
+                               :weight normal
                                :width normal
                                :powerline-scale 1)
    ;; The leader key
@@ -417,14 +470,20 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+
+  ;; To fix the exec-path-from-shell problem.
+  (setq explicit-shell-file-name "/bin/bash")
+  (setq shell-file-name "bash")
+  ;;(setq explicit-shell-file-name "/bin/zsh")
+  ;;(setq shell-file-name "zsh")
+
   ;;(setq-default evil-escape-key-sequence "jk")
 
   ;; git magit
-  (setq-default git-magit-status-fullscreen t)
-  ;; deft mode always on
-  ;;(require 'deft)
+  (setq-default git-magit-status-fullscreen t))
+;; deft mode always on
+;;(require 'deft)
 
-  )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -433,6 +492,78 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+
+  ;; EXWM starts here
+  (defun setup-exwm ()
+    (require 'exwm)
+    (require 'exwm-config)
+    (setq exwm-input--line-mode-passthrough t)
+
+    ;; Pull up the buffer list
+    (spacemacs/set-leader-keys "b l" 'list-buffers)
+
+    ;; Set the initial workspace number.
+    (setq exwm-workspace-number 2)
+    ;; Make class name the buffer name
+    (add-hook 'exwm-update-class-hook
+              (lambda ()
+                (setq exwm-input--line-mode-passthrough t)
+                (exwm-workspace-rename-buffer exwm-class-name)))
+    
+
+    ;; 's-w': Switch workspace
+    ;; (exwm-input-set-key (kbd "s-w") #'exwm-workspace-switch)
+    (exwm-input-set-key (kbd "s-w") #'spacemacs/workspaces-transient-state/body)
+    ;; s-h, s-j, s-k, s-l: move around
+    (exwm-input-set-key (kbd "s-h") #'evil-window-left)
+    (exwm-input-set-key (kbd "s-j") #'evil-window-down)
+    (exwm-input-set-key (kbd "s-k") #'evil-window-up)
+    (exwm-input-set-key (kbd "s-l") #'evil-window-right)
+    ;; lock screen
+    (exwm-input-set-key (kbd "C-M-l") #'lock-screen)
+    (define-key global-map (kbd "C-M-l") #'lock-screen)
+    (push ?\s-\  exwm-input-prefix-keys)
+
+    ;; fn key bindings
+    (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") #'turn-volume-up)
+    (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") #'turn-volume-down)
+    (exwm-input-set-key (kbd "<XF86AudioMute>") #'toggle-volume-mute)
+    (exwm-input-set-key (kbd "<XF86AudioPlay>") #'spotify-playpause)
+    (exwm-input-set-key (kbd "<XF86AudioNext>") #'spotify-next)
+    (exwm-input-set-key (kbd "<XF86AudioPrev>") #'spotify-previous)
+    (exwm-input-set-key (kbd "<XF86KbdBrightnessUp>") #'kbd-brightness-up)
+    (exwm-input-set-key (kbd "<XF86KbdBrightnessDown>") #'kbd-brightness-down)
+    (exwm-input-set-key (kbd "<XF86LaunchA>") #'lock-screen)
+    (exwm-input-set-key (kbd "<XF86LaunchB>") #'spacemacs/toggle-maximize-buffer)
+
+    ;; 's-&': Launch application
+    (exwm-input-set-key (kbd "s-&")
+                        (lambda (command)
+                          (interactive (list (read-shell-command "$ ")))
+                          (start-process-shell-command command nil command)))
+
+    ;; Enable EXWM
+    (exwm-enable)
+    ;; Configure Ido
+    (exwm-config-ido)
+    ;; Other configurations
+    (exwm-config-misc))
+  ;; Try
+  (setup-exwm)
+
+  ;; s-h, s-j, s-k, s-l: move around
+  ;; also defined below in exwm (defined both places for terminal mode compat)
+  (define-key evil-motion-state-map (kbd "s-h") #'evil-window-left)
+  (define-key evil-motion-state-map (kbd "s-j") #'evil-window-down)
+  (define-key evil-motion-state-map (kbd "s-k") #'evil-window-up)
+  (define-key evil-motion-state-map (kbd "s-l") #'evil-window-right)
+
+  (require 'term)
+  (define-key term-raw-map (kbd "s-c") (lambda () (interactive) (term-send-raw-string "\C-c")))
+  (define-key term-raw-map (kbd "s-d") (lambda () (interactive) (term-send-raw-string "\C-d")))
+  (define-key term-raw-map (kbd "s-r") (lambda () (interactive) (term-send-raw-string "\C-r")))
+
 
   ;; -----------------------------------------------------
   ;;
@@ -446,6 +577,10 @@ you should place your code here."
   ;; ``C-M-r'' -- find references
   ;; ``C-M-*'' -- go back
   ;; ``C-M-?'' -- show doc
+  ;;
+  ;; Additionaly, I want to use:
+  ;;
+  ;; ``C-x C-g'' -- dumb-jump
   ;;
   ;; -----------------------------------------------------
 
@@ -481,11 +616,9 @@ you should place your code here."
     (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
                                         (kbd "C-x C-.")
                                         #'go-guru-definition))))
-
   ;; ----------------------- Golang Ends Here -------------------------------
 
   ;; ------------------------ C++ (Gtags) Starts ------------------------------
-
   ;; function-args
   (fa-config-default)
 
@@ -495,8 +628,8 @@ you should place your code here."
   (add-hook 'c-mode-common-hook
             (lambda ()
               (if (derived-mode-p 'c-mode 'c++-mode)
-                  (cppcm-reload-all)
-                )))
+                  (cppcm-reload-all))))
+  
   ;; OPTIONAL, somebody reported that they can use this package with Fortran
   (add-hook 'c90-mode-hook (lambda () (cppcm-reload-all)))
   ;; OPTIONAL, avoid typing full path when starting gdb
@@ -540,12 +673,10 @@ you should place your code here."
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-t")
                                             #'counsel-gtags-find-definition))))
-
   ;; ------------------------- C++ Ends Here -------------------------------
 
 
   ;; -------------------- Java (meghanada mode) ------------------------------
-
   (defun java-key-mode-hook ()
     (meghanada-mode)
     ;; jump to declare
@@ -567,17 +698,17 @@ you should place your code here."
     (define-key meghanada-mode-map (kbd "C-c C-r o") 'meghanada-optimize-import)
     (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
 
-    (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project)
-    )
+    (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project))
+  
   (add-hook 'java-mode-hook 'java-key-mode-hook)
 
-  ;; noit workign
+  ;; not working
   (with-eval-after-load 'java-mode
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-M-i")
                                           #'anaconda-mode-complete))))
   (with-eval-after-load 'java-mode
-    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map 
+    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-M-.")
                                           #'meghanada-jump-declaration))))
   (with-eval-after-load 'java-mode
@@ -596,7 +727,7 @@ you should place your code here."
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-M-?")
                                           #'anaconda-mode-show-doc))))
-  ;; ---------------- Spare ones ----------------------- 
+  ;; ---------------- Spare ones -----------------------
   (with-eval-after-load 'java-mode
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-x C-.")
@@ -617,18 +748,17 @@ you should place your code here."
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-c C-c c")
                                           #'meghanada-project-compile))))
-
   ;; ----------------------- Java Ends Here ----------------------------------
 
 
   ;; -------------------- Python (Anaconda-mode) ------------------------------
   (with-eval-after-load 'python
-    (pyenv-mode)
+    ;; https://github.com/proofit404/pyenv-mode
     (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-i")
                                             #'anaconda-mode-complete))))
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map 
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-.")
                                             #'anaconda-mode-find-definitions))))
   (with-eval-after-load 'python
@@ -647,17 +777,67 @@ you should place your code here."
     (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-?")
                                             #'anaconda-mode-show-doc))))
-  ;; ---------------- Spare ones ----------------------- 
+  ;; ---------------- Spare ones -----------------------
   (with-eval-after-load 'python
     (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-x C-.")
                                             #'anaconda-mode-find-definitions))))
-
   ;; -----------------------Python Ends Here ----------------------------------
 
 
-  ;; Rust ()
-  ;;(global-set-key (kbd "C-x C-i") 'ido-imenu)
+  ;; ----------------------- Rust Starts Here ---------------------------------
+  ;; https://github.com/racer-rust/emacs-racer/blob/master/racer.el
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-i")
+                                          #'racer-complete-at-point))))
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-.")
+                                          #'racer-find-definition))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-,")
+                                            #'anaconda-mode-find-assignments))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-r")
+                                            #'anaconda-mode-find-references))))
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-*")
+                                          #'pop-tag-mark))))
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-M-?")
+                                          #'racer-eldoc))))
+  ;; ---------------- Spare ones -----------------------
+  (with-eval-after-load 'rust-mode
+    (add-hook 'rust-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                          (kbd "C-x C-.")
+                                          #'racer-find-definition))))
+
+  ;; SPC m =	reformat the buffer
+  ;; SPC m c .	repeat the last Cargo command
+  ;; SPC m c C	remove build artifacts with Cargo
+  ;; SPC m c X	execute a project example with Cargo
+  ;; SPC m c c	compile project with Cargo
+  ;; SPC m c d	generate documentation with Cargo
+  ;; SPC m c e	run benchmarks with Cargo
+  ;; SPC m c f	format all project files with rustfmt
+  ;; SPC m c i	create a new project with Cargo (init)
+  ;; SPC m c l	run linter (cargo-clippy) with Cargo
+  ;; SPC m c n	create a new project with Cargo (new)
+  ;; SPC m c o	run all tests in current file with Cargo
+  ;; SPC m c s	search for packages on crates.io with Cargo
+  ;; SPC m c t	run the current test with Cargo
+  ;; SPC m c u	update dependencies with Cargo
+  ;; SPC m c x	execute a project with Cargo
+  ;; SPC m c v	check (verify) a project with Cargo
+  ;; SPC m g g	jump to definition
+  ;; SPC m h h	describe symbol at point
+  ;; SPC m t	run tests with Cargo
+  ;; ----------------------- Rust Ends Here -----------------------------------
 
   ;;
   ;; semanticsemantic
@@ -675,7 +855,39 @@ you should place your code here."
   (global-company-mode)
 
   ;; Git and Magit
-  (setq magit-repository-directories '("~/repos/","~/openstack","~/git/","~/workspace"))
+  (setq magit-repository-directories '("~/repos/","~/dev/","~/git/","~/workspace/"))
+
+  ;; Gnus
+  ;; -------------------------------
+  ;; Get email, and store in nnml
+  (setq gnus-secondary-select-methods
+        '(
+          (nnimap "gmail"
+                  (nnimap-address
+                   "imap.gmail.com")
+                  (nnimap-server-port 993)
+                  (nnimap-stream ssl))))
+  
+
+  ;; Send email via Gmail:
+  (setq message-send-mail-function 'smtpmail-send-it
+        smtpmail-default-smtp-server "smtp.gmail.com")
+
+  ;; Archive outgoing email in Sent folder on imap.gmail.com:
+  (setq gnus-message-archive-method '(nnimap "imap.gmail.com")
+        gnus-message-archive-group "[Gmail]/Sent Mail")
+
+  ;; Set return email address based on incoming email address
+  (setq gnus-posting-styles
+        '(((header "to" "address@outlook.com")
+           (address "address@outlook.com"))
+          ((header "to" "address@gmail.com")
+           (address "address@gmail.com"))))
+
+  ;; Store email in ~/gmail directory
+  (setq nnml-directory "~/gmail")
+  (setq message-directory "~/gmail")
+  
 
 
   ;; convienant keybinding for functions:
@@ -692,16 +904,17 @@ you should place your code here."
     (local-set-key (kbd "C-c C-d") 'flycheck-explain-error-at-point)
     (local-set-key (kbd "C-c C-n") 'flycheck-error-list-next-error)
     (local-set-key (kbd "C-c C-p") 'flycheck-error-list-previous-error)
-    (local-set-key (kbd "C-c C-c") 'flycheck-list-errors)
-    ;; Prevents flymake from throwing a configuration error
-    ;; This must be done because atsopt returns a non-zero return value
-    ;; when it finds an error, flymake expects a zero return value.
-    ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
-    ;;(setq flymake-check-was-interrupted t))
-    ;;(ad-activate 'flymake-post-syntax-check)
-    )
-  (add-hook 'prog-mode-hook 'flycheck-my-load)
+    (local-set-key (kbd "C-c C-c") 'flycheck-list-errors))
+  ;; Prevents flymake from throwing a configuration error
+  ;; This must be done because atsopt returns a non-zero return value
+  ;; when it finds an error, flymake expects a zero return value.
+  ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
+  ;;(setq flymake-check-was-interrupted t))
+  ;;(ad-activate 'flymake-post-syntax-check)
+  ;; deal with color id mode
+  
 
+  (add-hook 'prog-mode-hook 'flycheck-my-load)
 
   (with-eval-after-load 'flycheck-mode
     (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
@@ -719,7 +932,6 @@ you should place your code here."
     (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
                                               (kbd "C-c C-p")
                                               #'flycheck-error-list-previous-error))))
-
   ;; ----------------------- Flycheck Ends Here ----------------------------------
 
   ;; ------------------- Linux Kernel Coding Style ----------------------------
@@ -752,7 +964,6 @@ you should place your code here."
                   (setq indent-tabs-mode t)
                   (setq show-trailing-whitespace t)
                   (c-set-style "linux-tabs-only")))))
-
   ;; ----------------- Linux Kernel Style Ends Here --------------------------
 
   ;; Auto Yasnippet
@@ -795,7 +1006,6 @@ SCHEDULED: %t")))
     (interactive)
     (org-capture nil "a"))
   (define-key global-map (kbd "C-c c") 'air-org-task-capture)
-
   ;; end of org setting
 
   (setq org-todo-keyword-faces
@@ -803,17 +1013,17 @@ SCHEDULED: %t")))
           ("CRASH" . "red")
           ("BUG" . "red")
           ("SUBTREE" . "grey")
-          ("TEST" . "turquoise1")
-          ))
+          ("TEST" . "turquoise1")))
+  
   (setq org-agenda-custom-commands
         '(
           ("p" . "筛选任务(目前无效果，需要修复)")
           ("pa" "Important but not Urgent" tags "+PRIORITY=\"A\"")
-          ("pb" "Urgent" tags "+PRIORITY=\"B\"")
-          ;;("pc" "一定要完成但是不着急的任务" tags "+PRIORITY=\"C\"")
-          ;;("pd" "做完有好处的任务" tags "+PRIORITY=\"D\"")
-          ;;("pe" "无所谓做不做的任务" tags "+PRIORITY=\"E\"")
-          ))
+          ("pb" "Urgent" tags "+PRIORITY=\"B\"")))
+  ;;("pc" "一定要完成但是不着急的任务" tags "+PRIORITY=\"C\"")
+  ;;("pd" "做完有好处的任务" tags "+PRIORITY=\"D\"")
+  ;;("pe" "无所谓做不做的任务" tags "+PRIORITY=\"E\"")
+  
 
   ;; aggressive indent mode
   (global-aggressive-indent-mode 1)
@@ -831,7 +1041,13 @@ SCHEDULED: %t")))
   (setq org-ref-open-pdf-function
         (lambda (fpath)
           (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
+
+  ;; fix
   (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
+
+  (require 'darkroom)  ; darkroom try
+  (global-set-key [f11] 'darkroom-tentative-mode)
+
 
   ;; compile buffer auto-close if succeed
   ;; ---------------------------------------------
@@ -918,6 +1134,17 @@ SCHEDULED: %t")))
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'rust-mode-hook 'ycmd-mode)
 
+  ;; fix-word
+  (require 'fix-word)
+  (global-set-key (kbd "M-u") #'fix-word-upcase)
+  (global-set-key (kbd "M-l") #'fix-word-downcase)
+  (global-set-key (kbd "M-c") #'fix-word-capitalize)
+
+  ;; HACK: cppman
+  (global-set-key (kbd "C-c i") #'man)
+
+
+
   ;; C++ reference look up : kinda broken
   ;; ==================================================================
   ;; (require 'anything)
@@ -937,8 +1164,7 @@ SCHEDULED: %t")))
   (defvar boost-documentation-directory
     "/usr/share/doc/libboost1.63-doc/"
     "defines boost directory location")
-
-
+  
   (defun recursive-file-list (dir)
     (let ((files-list '())
           (current-entries (directory-files dir t)))
@@ -962,6 +1188,14 @@ SCHEDULED: %t")))
       (action . (lambda (entry)
                   (w3m-browse-url entry)))))
   ;; ---------------------------------------------------------------------------
+
+
+  ;; enable ansi colors in compile-mode
+  (defun colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 
   ;; ---------------------------------------------------------------
   ;;
@@ -1009,13 +1243,37 @@ Symbols matching the text at point are put first in the completion list."
                     matching-symbols)))))
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
-        (goto-char position))))
+        (goto-char position)))))
+
+;; --------------------- FUNC ENDS HERE -----------------------
 
 
 
-  ;; --------------------- FUNC ENDS HERE -----------------------
 
+;; EXWM starts here
+
+
+(provide '.spacemacs)
+;;; .spacemacs ends here
+
+
+
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(exwm yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode scala-mode sbt-mode sayid sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator parinfer paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode markdown-toc magit-gitflow macrostep lsp-ui lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy linum-relative link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hy-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-projectile counsel-gtags counsel-css company-ycmd company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent adaptive-wrap ace-link academic-phrases ac-ispell)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
   )
-;; end of [.spacemacs]
-
-
