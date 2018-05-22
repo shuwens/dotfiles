@@ -200,7 +200,7 @@ This function should only modify configuration layer settings."
                                       nord-theme ujelly-theme melancholy-theme
                                       ;; new batch
                                       base16-theme doom-themes kaolin-themes
-                                      alect-themes
+                                      alect-themes material-theme
                                       ;; next a few
                                       ;; material-theme grayscale-theme
                                       ;; darktooth-theme cyberpunk-theme
@@ -331,10 +331,11 @@ It should only modify the values of Spacemacs settings."
    ;; dark:
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
    dotspacemacs-themes '(spacemacs-light
-                         ;;melancholy
-                         misterioso ; geeko ;; error msg is so annoying
-                         deeper-blue darktooth ;;ujelly
-                         )
+                         sanityinc-tomorrow-night material
+                         base16-gruvbox-dark-hard
+                         ;; doomm, base16
+                         deeper-blue darktooth) ;;ujelly
+   
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -599,9 +600,9 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-pretty-docs nil)
 
   (when (and (display-graphic-p) (eq system-type 'gnu/linux))
-   (with-eval-after-load 'exec-path-from-shell
-    (exec-path-from-shell-setenv "SHELL" "/bin/bash")))
-)
+    (with-eval-after-load 'exec-path-from-shell
+      (exec-path-from-shell-setenv "SHELL" "/bin/bash"))))
+
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -613,42 +614,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; To fix the exec-path-from-shell problem.
   (setq explicit-shell-file-name "/bin/bash")
-  (setq shell-file-name "bash")
-  ;;(setq explicit-shell-file-name "/bin/zsh")
-  ;;(setq shell-file-name "zsh")
+  (setq shell-file-name "bash"))
 
-  ;;(setq-default evil-escape-key-sequence "jk")
 
-  ;; git magit
-  (setq-default git-magit-status-fullscreen t)
-  ;; deft mode always on
-  ;;(require 'deft)
-  )
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included
 in the dump."
-
-  ;; require things that I remember
-  (require 'evil)
-  (require 'magit)
-  (require 'evil-magit)
-
-  ;;(load "~/.emacs.d/languages/latex.el")
-  (load "~/.emacs.d/core/core-versions.el")
-  (load "~/.emacs.d/core/core-load-paths.el")
-  (load "~/.emacs.d/core/core-dumper.el")
-  )
-
-
-(defun dotspacemacs/user-config ()
-  "Configuration for user code:
-This function is called at the very end of Spacemacs startup, after layer
-configuration.
-Put your configuration code here, except for variables that should be set
-before packages are loaded."
+  ;; git magit
+  (setq-default git-magit-status-fullscreen t)
+  ;; deft mode always on
+  ;;(require 'deft)
 
   ;; -----------------------------------------------------
   ;;
@@ -714,7 +692,7 @@ before packages are loaded."
             (lambda ()
               (if (derived-mode-p 'c-mode 'c++-mode)
                   (cppcm-reload-all))))
-  
+
   ;; OPTIONAL, somebody reported that they can use this package with Fortran
   (add-hook 'c90-mode-hook (lambda () (cppcm-reload-all)))
   ;; OPTIONAL, avoid typing full path when starting gdb
@@ -784,7 +762,7 @@ before packages are loaded."
     (define-key meghanada-mode-map (kbd "C-M-o") 'meghanada-optimize-import)
 
     (define-key meghanada-mode-map (kbd "C-c C-c c") 'meghanada-compile-project))
-  
+
   (add-hook 'java-mode-hook 'java-key-mode-hook)
 
   ;; not working
@@ -937,7 +915,7 @@ before packages are loaded."
 
   ;; globally enable company
   ;; -----------------------
-  (global-company-mode)
+  ;;(global-company-mode)
 
   ;; Git and Magit
   (setq magit-repository-directories '("~/repos/","~/dev/","~/git/","~/workspace/"))
@@ -952,7 +930,7 @@ before packages are loaded."
                    "imap.gmail.com")
                   (nnimap-server-port 993)
                   (nnimap-stream ssl))))
-  
+
 
   ;; Send email via Gmail:
   (setq message-send-mail-function 'smtpmail-send-it
@@ -972,7 +950,6 @@ before packages are loaded."
   ;; Store email in ~/gmail directory
   (setq nnml-directory "~/gmail")
   (setq message-directory "~/gmail")
-  
 
 
   ;; convienant keybinding for functions:
@@ -997,7 +974,7 @@ before packages are loaded."
   ;;(setq flymake-check-was-interrupted t))
   ;;(ad-activate 'flymake-post-syntax-check)
   ;; deal with color id mode
-  
+
 
   (add-hook 'prog-mode-hook 'flycheck-my-load)
 
@@ -1099,7 +1076,7 @@ SCHEDULED: %t")))
           ("BUG" . "red")
           ("SUBTREE" . "grey")
           ("TEST" . "turquoise1")))
-  
+
   (setq org-agenda-custom-commands
         '(
           ("p" . "筛选任务(目前无效果，需要修复)")
@@ -1108,12 +1085,11 @@ SCHEDULED: %t")))
   ;;("pc" "一定要完成但是不着急的任务" tags "+PRIORITY=\"C\"")
   ;;("pd" "做完有好处的任务" tags "+PRIORITY=\"D\"")
   ;;("pe" "无所谓做不做的任务" tags "+PRIORITY=\"E\"")
-  
+
 
   ;; aggressive indent mode
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-
 
 
   ;; forget what they are for
@@ -1226,9 +1202,7 @@ SCHEDULED: %t")))
   (global-set-key (kbd "M-c") #'fix-word-capitalize)
 
   ;; HACK: cppman
-  (global-set-key (kbd "C-c i") #'man)
-
-
+  ;;(global-set-key (kbd "C-c i") #'man)
 
   ;; C++ reference look up : kinda broken
   ;; ==================================================================
@@ -1249,7 +1223,7 @@ SCHEDULED: %t")))
   (defvar boost-documentation-directory
     "/usr/share/doc/libboost1.63-doc/"
     "defines boost directory location")
-  
+
   (defun recursive-file-list (dir)
     (let ((files-list '())
           (current-entries (directory-files dir t)))
@@ -1332,6 +1306,17 @@ Symbols matching the text at point are put first in the completion list."
 ;; --------------------- FUNC ENDS HERE -----------------------
 
 
+(defun dotspacemacs/user-config ()
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
+
+  )
+
+
+
 ;;(provide '.spacemacs)
 ;;; .spacemacs ends here
 
@@ -1348,8 +1333,47 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
+   '(ansi-color-faces-vector
+     [default bold shadow italic underline bold bold-italic bold])
+   '(ansi-color-names-vector
+     ["#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"])
+   '(ansi-term-color-vector
+     [unspecified "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"])
+   '(beacon-color "#cc6666")
+   '(custom-safe-themes
+     '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "0c3b1358ea01895e56d1c0193f72559449462e5952bded28c81a8e09b53f103f" "ef04dd1e33f7cbd5aa3187981b18652b8d5ac9e680997b45dc5d00443e6a46e3" "eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "cbd8e65d2452dfaed789f79c92d230aa8bdf413601b261dbb1291fb88605110c" "196df8815910c1a3422b5f7c1f45a72edfa851f6a1d672b7b727d9551bb7c7ba" "d9dab332207600e49400d798ed05f38372ec32132b3f7d2ba697e59088021555" "d96587ec2c7bf278269b8ec2b800c7d9af9e22d816827639b332b0e613314dfd" "6271fc9740379f8e2722f1510d481c1df1fcc43e48fa6641a5c19e954c21cc8f" "fee4e306d9070a55dce4d8e9d92d28bd9efe92625d2ba9d4d654fc9cd8113b7f" "50d07ab55e2b5322b2a8b13bc15ddf76d7f5985268833762c500a90e2a09e7aa" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" "6daa09c8c2c68de3ff1b83694115231faa7e650fdbb668bc76275f0f2ce2a437" "12670281275ea7c1b42d0a548a584e23b9c4e1d2dabb747fd5e2d692bcd0d39b" "aea30125ef2e48831f46695418677b9d676c3babf43959c8e978c0ad672a7329" "36282815a2eaab9ba67d7653cf23b1a4e230e4907c7f110eebf3cdf1445d8370" "ffac21ab88a0f4603969a24b96993bd73a13fe0989db7ed76d94c305891fad64" "45a8b89e995faa5c69aa79920acff5d7cb14978fbf140cdd53621b09d782edcf" "41eb3fe4c6b80c7ad156a8c52e9dd6093e8856c7bbf2b92cc3a4108ceb385087" "fc7fd2530b82a722ceb5b211f9e732d15ad41d5306c011253a0ba43aaf93dccc" "3e34e9bf818cf6301fcabae2005bba8e61b1caba97d95509c8da78cff5f2ec8e" "1d079355c721b517fdc9891f0fda927fe3f87288f2e6cc3b8566655a64ca5453" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "8891c81848a6cf203c7ac816436ea1a859c34038c39e3cf9f48292d8b1c86528" "527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "cabc32838ccceea97404f6fcb7ce791c6e38491fd19baa0fcfb336dcc5f6e23c" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "a4d03266add9a1c8f12b5309612cbbf96e1291773c7bc4fb685bfdaf83b721c6" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f72ccaa311763cb943de5f9f56a0d53b0009b772f4d05f47835aa08011797aa8" "10a0ea0ae9fd29052b2a485dd32f34c2796de9e3cb5c92ec850188cd852a158a" "748d0e2ffdaf95015a539dcc95ab888283284ad7b076963760422cbe5e21903a" "7527f3308a83721f9b6d50a36698baaedc79ded9f6d5bd4e9a28a22ab13b3cb1" "9deeab438d1d798c26d41c759d74a2406802427ff6acb7dec8cec961bcb4e7d5" default))
+   '(evil-want-Y-yank-to-eol nil)
+   '(fci-rule-color "#373b41")
+   '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+   '(frame-background-mode 'dark)
+   '(jdee-db-active-breakpoint-face-colors (cons "#0d0d0d" "#41728e"))
+   '(jdee-db-requested-breakpoint-face-colors (cons "#0d0d0d" "#b5bd68"))
+   '(jdee-db-spec-breakpoint-face-colors (cons "#0d0d0d" "#5a5b5a"))
    '(package-selected-packages
-     '(yasnippet-snippets yapfify yaml-mode xterm-color wgrep web-mode web-beautify unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode tagedit stickyfunc-enhance srefactor smex smeargle slim-mode shell-pop scss-mode sayid sass-mode rainbow-mode rainbow-identifiers racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode pippel pipenv pip-requirements pcap-mode parinfer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain ob-sml sml-mode nord-theme noflet mwim mvn multi-term mmm-mode melancholy-theme meghanada maven-test-mode markdown-toc magit-gitflow lsp-ui lsp-python lsp-javascript-typescript typescript-mode livid-mode skewer-mode live-py-mode lispy zoutline langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile htmlize hlint-refactor hindent haskell-snippets haml-mode groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-c-style godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate fix-word fish-mode evil-org evil-magit magit magit-popup git-commit ghub with-editor eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode doom-themes disaster deft darktooth-theme autothemer darkroom dante lcr flycheck cython-mode cquery cpputils-cmake counsel-gtags counsel-css company-ycmd ycmd request-deferred deferred company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide levenshtein clojure-snippets clojure-cheatsheet clj-refactor inflections edn multiple-cursors peg clang-format cider-eval-sexp-fu cider queue clojure-mode cargo markdown-mode rust-mode biblio biblio-core base16-theme auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex anaconda-mode pythonic alect-themes academic-phrases ht ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file neotree nameless move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line)))
+     '(material-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcap-mode password-generator parinfer paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode markdown-toc magit-gitflow macrostep lsp-ui lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum livid-mode skewer-mode live-py-mode lispy zoutline linum-relative link-hint langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes all-the-icons memoize disaster deft define-word darktooth-theme autothemer darkroom dante lcr flycheck cython-mode cquery cpputils-cmake counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred request deferred company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide levenshtein clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo markdown-mode rust-mode biblio biblio-core base16-theme auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f alect-themes aggressive-indent ace-window ace-link avy academic-phrases ht s dash ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async))
+   '(pos-tip-background-color "#36473A")
+   '(pos-tip-foreground-color "#FFFFC8")
+   '(vc-annotate-background nil)
+   '(vc-annotate-color-map
+     '((20 . "#cc6666")
+       (40 . "#de935f")
+       (60 . "#f0c674")
+       (80 . "#b5bd68")
+       (100 . "#8abeb7")
+       (120 . "#81a2be")
+       (140 . "#b294bb")
+       (160 . "#cc6666")
+       (180 . "#de935f")
+       (200 . "#f0c674")
+       (220 . "#b5bd68")
+       (240 . "#8abeb7")
+       (260 . "#81a2be")
+       (280 . "#b294bb")
+       (300 . "#cc6666")
+       (320 . "#de935f")
+       (340 . "#f0c674")
+       (360 . "#b5bd68")))
+   '(vc-annotate-very-old-color nil))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
