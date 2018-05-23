@@ -3,6 +3,7 @@ alias Ea 'vim ~/.config/fish/aliases.fish'
 alias Ef 'vim ~/.config/fish/config.fish'
 alias Eg 'vim ~/.gitconfig'
 alias Ev 'vim ~/git/dotfiles/config/.config/nvim/personal.vim'
+alias Es 'vim ~/.spacemacs'
 #alias Es 'vim ~/bin/autosort'
 #alias Et 'vim ~/.tmux.conf'
 

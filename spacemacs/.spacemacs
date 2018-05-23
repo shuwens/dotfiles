@@ -154,18 +154,19 @@ This function should only modify configuration layer settings."
      (auto-completion :variables
                       ;; key setting
                       auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-tab-key-behavior 'complete
                       auto-completion-complete-with-key-sequence nil
                       auto-completion-complete-with-key-sequence-delay 0.1
                       ;; feature
                       auto-completion-enable-sort-by-usage t
                       ;; backend config
                       spacemacs-default-company-backends '(company-files company-capf)
-                      ;;auto-completion-enable-help-tooltip 'manual
-                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-help-tooltip 'manual
+                      ;;auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-private-snippets-directory nil)
-     ycmd
+
+     ;;ycmd
      git
      (spell-checking :variables
                      spell-checking-enable-by-default nil
@@ -1176,24 +1177,24 @@ SCHEDULED: %t")))
   ;; $ ./build.py --clang-completer --go-completer --rust-completer --system-libclang
   ;; ------------
 
-  (setq ycmd-server-command '("python" "/home/jethros/git/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "/home/jethros/.ycm_extra_conf.py")
+  ;; (setq ycmd-server-command '("python" "/home/jethros/git/ycmd/ycmd"))
+  ;; (set-variable 'ycmd-global-config "/home/jethros/.ycm_extra_conf.py")
 
-  (setq ycmd-extra-conf-whitelist '("/home/jethros/workspace/*"))
-  (setq ycmd-extra-conf-whitelist '("/home/jethros/git/*"))
-  (setq ycmd-force-semantic-completion t)
-  ;; if company-ycmd
-  (global-set-key (kbd "<C-tab>") 'ycmd/manual-semantic-company-completer)
+  ;; (setq ycmd-extra-conf-whitelist '("/home/jethros/workspace/*"))
+  ;; (setq ycmd-extra-conf-whitelist '("/home/jethros/git/*"))
+  ;; (setq ycmd-force-semantic-completion t)
+  ;; ;; if company-ycmd
+  ;; (global-set-key (kbd "<C-tab>") 'ycmd/manual-semantic-company-completer)
 
-  (defun ycmd-setup-completion-at-point-function ()
-    "Setup `completion-at-point-functions' for `ycmd-mode'."
-    (add-hook 'completion-at-point-functions
-              #'ycmd-complete-at-point nil :local))
-  (add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
+  ;; (defun ycmd-setup-completion-at-point-function ()
+  ;;   "Setup `completion-at-point-functions' for `ycmd-mode'."
+  ;;   (add-hook 'completion-at-point-functions
+  ;;             #'ycmd-complete-at-point nil :local))
+  ;; (add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
 
-  ;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
-  (add-hook 'c-mode-hook 'ycmd-mode)
-  (add-hook 'rust-mode-hook 'ycmd-mode)
+  ;; ;;(add-hook 'c++-mode-hook 'ycmd-mode) ; redundent?
+  ;; (add-hook 'c-mode-hook 'ycmd-mode)
+  ;; (add-hook 'rust-mode-hook 'ycmd-mode)
 
   ;; fix-word
   (require 'fix-word)
@@ -1333,47 +1334,8 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(ansi-color-faces-vector
-     [default bold shadow italic underline bold bold-italic bold])
-   '(ansi-color-names-vector
-     ["#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"])
-   '(ansi-term-color-vector
-     [unspecified "#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#81a2be" "#c5c8c6"])
-   '(beacon-color "#cc6666")
-   '(custom-safe-themes
-     '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "0c3b1358ea01895e56d1c0193f72559449462e5952bded28c81a8e09b53f103f" "ef04dd1e33f7cbd5aa3187981b18652b8d5ac9e680997b45dc5d00443e6a46e3" "eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "cbd8e65d2452dfaed789f79c92d230aa8bdf413601b261dbb1291fb88605110c" "196df8815910c1a3422b5f7c1f45a72edfa851f6a1d672b7b727d9551bb7c7ba" "d9dab332207600e49400d798ed05f38372ec32132b3f7d2ba697e59088021555" "d96587ec2c7bf278269b8ec2b800c7d9af9e22d816827639b332b0e613314dfd" "6271fc9740379f8e2722f1510d481c1df1fcc43e48fa6641a5c19e954c21cc8f" "fee4e306d9070a55dce4d8e9d92d28bd9efe92625d2ba9d4d654fc9cd8113b7f" "50d07ab55e2b5322b2a8b13bc15ddf76d7f5985268833762c500a90e2a09e7aa" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" "6daa09c8c2c68de3ff1b83694115231faa7e650fdbb668bc76275f0f2ce2a437" "12670281275ea7c1b42d0a548a584e23b9c4e1d2dabb747fd5e2d692bcd0d39b" "aea30125ef2e48831f46695418677b9d676c3babf43959c8e978c0ad672a7329" "36282815a2eaab9ba67d7653cf23b1a4e230e4907c7f110eebf3cdf1445d8370" "ffac21ab88a0f4603969a24b96993bd73a13fe0989db7ed76d94c305891fad64" "45a8b89e995faa5c69aa79920acff5d7cb14978fbf140cdd53621b09d782edcf" "41eb3fe4c6b80c7ad156a8c52e9dd6093e8856c7bbf2b92cc3a4108ceb385087" "fc7fd2530b82a722ceb5b211f9e732d15ad41d5306c011253a0ba43aaf93dccc" "3e34e9bf818cf6301fcabae2005bba8e61b1caba97d95509c8da78cff5f2ec8e" "1d079355c721b517fdc9891f0fda927fe3f87288f2e6cc3b8566655a64ca5453" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "8891c81848a6cf203c7ac816436ea1a859c34038c39e3cf9f48292d8b1c86528" "527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "cabc32838ccceea97404f6fcb7ce791c6e38491fd19baa0fcfb336dcc5f6e23c" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "a4d03266add9a1c8f12b5309612cbbf96e1291773c7bc4fb685bfdaf83b721c6" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f72ccaa311763cb943de5f9f56a0d53b0009b772f4d05f47835aa08011797aa8" "10a0ea0ae9fd29052b2a485dd32f34c2796de9e3cb5c92ec850188cd852a158a" "748d0e2ffdaf95015a539dcc95ab888283284ad7b076963760422cbe5e21903a" "7527f3308a83721f9b6d50a36698baaedc79ded9f6d5bd4e9a28a22ab13b3cb1" "9deeab438d1d798c26d41c759d74a2406802427ff6acb7dec8cec961bcb4e7d5" default))
-   '(evil-want-Y-yank-to-eol nil)
-   '(fci-rule-color "#373b41")
-   '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
-   '(frame-background-mode 'dark)
-   '(jdee-db-active-breakpoint-face-colors (cons "#0d0d0d" "#41728e"))
-   '(jdee-db-requested-breakpoint-face-colors (cons "#0d0d0d" "#b5bd68"))
-   '(jdee-db-spec-breakpoint-face-colors (cons "#0d0d0d" "#5a5b5a"))
    '(package-selected-packages
-     '(material-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcap-mode password-generator parinfer paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ob-sml sml-mode nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode markdown-toc magit-gitflow macrostep lsp-ui lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum livid-mode skewer-mode live-py-mode lispy zoutline linum-relative link-hint langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-rtags ivy-purpose window-purpose imenu-list ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent impatient-mode simple-httpd ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido flx fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes all-the-icons memoize disaster deft define-word darktooth-theme autothemer darkroom dante lcr flycheck cython-mode cquery cpputils-cmake counsel-projectile projectile counsel-gtags counsel-css counsel swiper ivy company-ycmd ycmd request-deferred request deferred company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-lsp lsp-mode company-go go-mode company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-childframe posframe company-cabal company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide levenshtein clojure-snippets clojure-cheatsheet helm helm-core clj-refactor inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo markdown-mode rust-mode biblio biblio-core base16-theme auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f alect-themes aggressive-indent ace-window ace-link avy academic-phrases ht s dash ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async))
-   '(pos-tip-background-color "#36473A")
-   '(pos-tip-foreground-color "#FFFFC8")
-   '(vc-annotate-background nil)
-   '(vc-annotate-color-map
-     '((20 . "#cc6666")
-       (40 . "#de935f")
-       (60 . "#f0c674")
-       (80 . "#b5bd68")
-       (100 . "#8abeb7")
-       (120 . "#81a2be")
-       (140 . "#b294bb")
-       (160 . "#cc6666")
-       (180 . "#de935f")
-       (200 . "#f0c674")
-       (220 . "#b5bd68")
-       (240 . "#8abeb7")
-       (260 . "#81a2be")
-       (280 . "#b294bb")
-       (300 . "#cc6666")
-       (320 . "#de935f")
-       (340 . "#f0c674")
-       (360 . "#b5bd68")))
-   '(vc-annotate-very-old-color nil))
+     '(flycheck-ycmd company-ycmd ycmd request-deferred yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator parinfer paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy linum-relative link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-projectile counsel-gtags counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
