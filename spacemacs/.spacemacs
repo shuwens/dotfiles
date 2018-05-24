@@ -61,18 +61,18 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------
 
      ;; Major
-                                        (c-c++ :variables
-                                               ;; clang
-                                               c-c++-enable-clang-support t
-                                               c-c++-enable-clang-format-on-save t
-                                               c-c++-enable-cmake-ide-support t
-                                               ;; google c style
-                                               c-c++-enable-google-style t
-                                               c-c++-enable-google-newline t)
+     (c-c++ :variables
+            ;; clang
+            c-c++-enable-clang-support t
+            c-c++-enable-clang-format-on-save t
+            c-c++-enable-cmake-ide-support t
+            ;; google c style
+            c-c++-enable-google-style t
+            c-c++-enable-google-newline t)
      ;; rtags
      ;;c-c++-enable-rtags-support t)
 
-     ;; C++ 
+     ;; C++
      (lsp :variables
           lsp-ui-peek-expand-by-default t)
      cquery
