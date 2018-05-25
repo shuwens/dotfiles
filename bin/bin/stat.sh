@@ -10,11 +10,11 @@ echo "_main dir_"
 tree ${file_path} -d -L 1
 
 # Use () to represent Array, and space separate array elements
-declare -a name=( "Go" "Java" "Ruby" "Python" "C" "C++" "JSON" "Lua" "Shell" "Gradle" "YAML" )
-declare -a ext=( "go" "java" "rb" "py" "c" "cpp" "json" "lua" "sh" "gradle" "yml" )
-declare -a test_str=( "*test*." "*Test*." "*spec*." "*test*." "*test*." "*test*." "*test*." "*test*." "*test*." "*test*." "*test*." )
-total=( 0 0 0 0 0 0 0 0 0 0 0 )
-run=( 0 0 0 0 0 0 0 0 0 0 0 )
+declare -a name=( "Go" "Java" "Ruby" "Python" "C" "C++" "JSON" "Lua" "Shell" "Gradle" "YAML" "Rust")
+declare -a ext=( "go" "java" "rb" "py" "c" "cpp" "json" "lua" "sh" "gradle" "yml" "rs")
+declare -a test_str=( "*test*." "*Test*." "*spec*." "*test*." "*test*." "*test*." "*test*." "*test*." "*test*." "*test*." "*test*."  "*test*." )
+total=( 0 0 0 0 0 0 0 0 0 0 0 0 )
+run=( 0 0 0 0 0 0 0 0 0 0 0 0 )
 test=( 0 0 0 0 0 0 0 0 0 0 0 )
 declare -a grep_c=( "^//.*\|" "^//.*\|" "^#.*\|" "^#.*\|" "^//.*\|" "^//.*\|" "" "^#.*\|" "^#.*\|" "" "" )
 

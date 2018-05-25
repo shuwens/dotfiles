@@ -1,6 +1,7 @@
 # zathurarc-light
 
-set font                        "xos4 Noto Mono Regular 12"
+#set font                        "xos4 Noto Mono Regular 12"
+set font                        "monospace normal 12"
 
 # Base16 colours
 set default-bg                  "#dfe1e8"
@@ -43,13 +44,12 @@ set selection-clipboard         "clipboard"
 set adjust-open                 "width"
 
 
-
 # key bindings
 map <PageUp> navigate previous
 map <PageDown> navigate next
 
 map = zoom in
 map - zoom out
-map <C-o> focus_inputbar ":exec acroread $FILE"
 
+map <C-o> focus_inputbar ":exec acroread $FILE"
 map <C-q> quit
