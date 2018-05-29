@@ -1,7 +1,7 @@
 ## let me get my aliases
 . ~/.config/fish/aliases.fish
 ## let me get fishmarks
-. ~/.fishmarks/marks.fish
+
 
 set -U fish_user_abbreviations
 #set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
@@ -58,8 +58,14 @@ else
   set -U fish_user_abbreviations $fish_user_abbreviations 'lll=ls -la'
 end
 
-if [ -e /usr/share/fish/functions/fzf_key_bindings.fish ]; and status --is-interactive
-  source /usr/share/fish/functions/fzf_key_bindings.fish
+# Load fishmarks (http://github.com/techwizrd/fishmarks)
+if [ -e $HOME/.fishmarks/marks.fish ]; and status --is-interactive
+. $HOME/.fishmarks/marks.fish
+end
+
+## fzf
+if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
+. $HOME/.fzf/shell/key-bindings.fish
 end
 
 function ssh
@@ -383,5 +389,4 @@ end
 set_color normal
 end
 
-# Load fishmarks (http://github.com/techwizrd/fishmarks)
-. $HOME/.fishmarks/marks.fish
+

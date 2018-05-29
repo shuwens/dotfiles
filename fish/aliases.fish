@@ -59,6 +59,8 @@ alias mm 'make run'
 
 alias reset-mailbox 'rm -v ~/Library/Caches/com.dropbox.mbd.external-beta/mailbox.db'
 
+alias wifi 'nmcli d wifi list'
+
 function da -d "Allow or disallow .envrc after printing it."
   echo "------------------------------------------------"
   cat .envrc

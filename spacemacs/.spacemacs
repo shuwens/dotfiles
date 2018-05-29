@@ -61,6 +61,11 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------
 
      ;; Major
+     (lsp :variables
+          lsp-ui-peek-expand-by-default t)
+     cquery
+
+     ;; C++
      (c-c++ :variables
             ;; clang
             c-c++-enable-clang-support t
@@ -69,13 +74,6 @@ This function should only modify configuration layer settings."
             ;; google c style
             c-c++-enable-google-style t
             c-c++-enable-google-newline t)
-     ;; rtags
-     ;;c-c++-enable-rtags-support t)
-
-     ;; C++
-     (lsp :variables
-          lsp-ui-peek-expand-by-default t)
-     cquery
      cmake
 
      (python :variables
@@ -83,7 +81,7 @@ This function should only modify configuration layer settings."
              python-fill-column 80
              python-test-runner 'pytest
              ;; yapf and auto indent are evil!!!
-             ;;python-enable-yapf-format-on-save t
+             python-enable-yapf-format-on-save nil
              ;;python-sort-imports-on-save t
              python-auto-set-local-pyvenv-virtualenv 'on-project-switch)
 
@@ -101,7 +99,7 @@ This function should only modify configuration layer settings."
 
      ;; Minor
      (javascript :variables tern-command '("node" "/usr/local/bin/tern"))
-     sml
+     ;;sml
      yaml
      deft
      bibtex
@@ -113,10 +111,11 @@ This function should only modify configuration layer settings."
      emacs-lisp
      graphviz
      markdown
-     scala
+     ;;scala
      shell-scripts
-     scheme
-     racket
+     ;;scheme
+     ;;racket
+     ;;coq
 
      ;; --------------------------
      ;;   Tool layers
@@ -126,12 +125,10 @@ This function should only modify configuration layer settings."
      semantic
      ivy
 
-     ;; email -- notmuch
-     ;;gnus
-
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
+
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
 
@@ -144,7 +141,6 @@ This function should only modify configuration layer settings."
 
      ;; Tagging
      ;; ----------
-     ;;cscope
      gtags
 
      (shell :variables
@@ -180,7 +176,7 @@ This function should only modify configuration layer settings."
 
      ;; Minor
      (treemacs :variables treemacs-use-follow-mode t)
-     parinfer
+     ;;parinfer ;; perf problem
      pdf-tools
      protobuf
      (colors :variables
@@ -200,6 +196,7 @@ This function should only modify configuration layer settings."
                                       counsel-gtags company-childframe pyenv-mode
                                       hydra aggressive-indent academic-phrases
                                       pcap-mode fix-word darkroom lsp-rust
+                                      py-yapf
                                       ;; theme
                                       nord-theme ujelly-theme melancholy-theme
                                       ;; new batch
@@ -213,7 +210,7 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(painfer helm)
+   dotspacemacs-excluded-packages '(helm)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -854,6 +851,10 @@ in the dump."
     (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-x C-.")
                                             #'anaconda-mode-find-definitions))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-c C-f")
+                                            #'yapfify-buffer))))
   ;; -----------------------Python Ends Here ----------------------------------
 
 
@@ -1334,14 +1335,11 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
   )
 
 ;;(provide '.spacemacs)
 ;;; .spacemacs ends here
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -1352,10 +1350,8 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(custom-safe-themes
-     '("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
    '(package-selected-packages
-     '(load-theme-buffer-local yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator parinfer paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-sml nord-theme noflet nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy linum-relative link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags geiser fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-projectile counsel-gtags counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
+     '(impatient-mode dumb-jump counsel-projectile skewer-mode simple-httpd flycheck helm org-plus-contrib async yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-yapf py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy linum-relative link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make helm-core haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-gtags counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
