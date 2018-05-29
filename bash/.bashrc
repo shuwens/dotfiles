@@ -205,8 +205,18 @@ EOF
   watch /tmp/watcher-$$
 }
 
+## load zsh env
+if [[ -e $HOME/.zsh/environment.zsh ]]; then
+  echo -e '\e[37mbtw: enabling zsh environments \e[0m';
+  source "$HOME/.zsh/environment.zsh"
+else
+  echo -e '\e[37mbtw: zsh environment not available\e[0m';
+fi
+
+
 # LS_COLORS
 #/eval $(dircolors -b $HOME/.dircolors)
 
+#echo $PATH=$HOME/.pyenv/bin:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

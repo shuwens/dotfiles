@@ -62,8 +62,11 @@ This function should only modify configuration layer settings."
 
      ;; Major
      (lsp :variables
-          lsp-ui-peek-expand-by-default t)
-     cquery
+         lsp-ui-peek-expand-by-default t)
+
+     ;;TESTING
+     ;;(cquery :variables cquery-executable "/home/linuxbrew/.linuxbrew/bin/cquery")
+     ;;lsp
 
      ;; C++
      (c-c++ :variables
@@ -197,6 +200,8 @@ This function should only modify configuration layer settings."
                                       hydra aggressive-indent academic-phrases
                                       pcap-mode fix-word darkroom lsp-rust
                                       py-yapf
+                                      ;;TEST
+                                      cquery
                                       ;; theme
                                       nord-theme ujelly-theme melancholy-theme
                                       ;; new batch
@@ -345,7 +350,9 @@ It should only modify the values of Spacemacs settings."
    ;; to create your own spaceline theme. Value can be a symbol or list with\
    ;; additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(all-the-icons ;;spacemacs
+                                  ;;:separator-scale 2
+                                  :separator slant)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -617,13 +624,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq shell-file-name "bash"))
 
 
-
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included
 in the dump."
-
 
   ;; evil hack
   (define-key evil-normal-state-map (kbd "M-.") nil)
@@ -651,6 +656,14 @@ in the dump."
   ;; ``C-x C-g'' -- dumb-jump
   ;;
   ;; -----------------------------------------------------
+
+  ;; C++
+
+  ;; emacs-cquery
+  (require 'cquery)
+  (setq cquery-executable "/home/linuxbrew/.linuxbrew/bin/cquery")
+  (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack"))
+
 
   ;; ------------------  Golang (guru) Starts --------------------------------
 
@@ -1325,8 +1338,14 @@ Symbols matching the text at point are put first in the completion list."
                     matching-symbols)))))
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
-        (goto-char position)))))
-;; --------------------- FUNC ENDS HERE -----------------------
+        (goto-char position))))
+  ;; --------------------- FUNC ENDS HERE -----------------------
+  (use-package ivy-xref
+    :ensure t
+    :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -1351,7 +1370,7 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(impatient-mode dumb-jump counsel-projectile skewer-mode simple-httpd flycheck helm org-plus-contrib async yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-yapf py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy linum-relative link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make helm-core haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-gtags counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
+     '(cquery yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-yapf py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-svn magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cpputils-cmake counsel-projectile counsel-gtags counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo base16-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
