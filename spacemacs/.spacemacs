@@ -64,14 +64,10 @@ This function should only modify configuration layer settings."
      (lsp :variables
           lsp-ui-peek-expand-by-default t)
 
-     ;;TESTING
-     (cpp2 :variables
-           c-c++-default-mode-for-headers 'c++-mode
-           )
+     (cquery :variables
+             cquery-sem-highlight-method 'overlay)
+     cmake
 
-     (cmake
-      ;; :variables cmake-enable-cmake-ide-support nil
-      )
 
      ;;(cquery :variables cquery-executable "/home/linuxbrew/.linuxbrew/bin/cquery")
      ;;lsp
@@ -133,6 +129,22 @@ This function should only modify configuration layer settings."
      ;; --------------------------
 
      ;; Major
+     ;; config auto completion
+     (auto-completion :variables
+                      ;; key setting
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-complete-with-key-sequence "jk"
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      ;; feature
+                      ;;auto-completion-enable-sort-by-usage t
+                      ;; backend config
+                      ;;spacemacs-default-company-backends '(company-files company-capf)
+                      auto-completion-enable-help-tooltip 'manual
+                      ;;auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup nil
+                      auto-completion-private-snippets-directory nil)
+
      semantic
      ivy
      ;;helm
@@ -160,22 +172,6 @@ This function should only modify configuration layer settings."
             ;;shell-default-term-shell "/usr/bin/zsh ~/.zshrc"
             shell-default-term-shell "/bin/bash"
             shell-default-position 'bottom)
-
-     ;; config auto completion
-     (auto-completion :variables
-                      ;; key setting
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'complete
-                      auto-completion-complete-with-key-sequence "jk"
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      ;; feature
-                      auto-completion-enable-sort-by-usage t
-                      ;; backend config
-                      spacemacs-default-company-backends '(company-files company-capf)
-                      auto-completion-enable-help-tooltip 'manual
-                      ;;auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-private-snippets-directory nil)
 
      ;;ycmd
      git
@@ -208,9 +204,8 @@ This function should only modify configuration layer settings."
                                       counsel-gtags company-childframe pyenv-mode
                                       hydra aggressive-indent academic-phrases
                                       pcap-mode fix-word darkroom lsp-rust
-                                      py-yapf ivy-xref
+                                      py-yapf 
                                       ;;TEST
-                                      ;;cquery
                                       ;; theme
                                       nord-theme ujelly-theme melancholy-theme
                                       ;; new batch
@@ -347,9 +342,9 @@ It should only modify the values of Spacemacs settings."
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
    dotspacemacs-themes '(;; just better indentation
                          sanityinc-tomorrow-night spacemacs-light
-                         base16-gruvbox-dark-hard material
+                         ;;base16-gruvbox-dark-hard 
                          ;; doomm, base16
-                         deeper-blue darktooth) ;;ujelly
+                         deeper-blue darktooth  material) ;;ujelly
    
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -655,6 +650,7 @@ in the dump."
   ;;keybinds:
   ;;
   ;; ``C-M-i'' -- completion at point
+  ;; ``C-x C-i'' -- completion at point
   ;; ``C-M-.'' -- find definitions
   ;; ``C-M-r'' -- find references
   ;; ``C-M-*'' -- go back
@@ -663,17 +659,66 @@ in the dump."
   ;; Additionaly, I want to use:
   ;;
   ;; ``C-x C-g'' -- dumb-jump
+  ;; ``C-c C-'' -- dumb-jump
   ;;
   ;; -----------------------------------------------------
 
-  ;; C++
+  ;; lsp config
+  (setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
+  (setq lsp-ui-sideline-show-symbol nil)  ; don't show symbol on the right of info
+  (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
+  (setq cquery-extra-init-params '(:completion (:detailedLabel t)))
 
-  ;; emacs-cquery
-  ;; (require 'cquery)
-  ;; (setq cquery-executable "/home/linuxbrew/.linuxbrew/bin/cquery")
-  ;; (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack"))
+
+  ;; -------------------------  C++ Starts --------------------------------
+
+  ;; missing: describe and bunch of stuff
+  (with-eval-after-load 'go-mode
+    (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                        (kbd "C-M-i")
+                                        #'go-doc-at-point)))) ;; FIXME
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-M-.")
+                                         #'lsp-ui-peek-find-definitions))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-M-,")
+                                         #'lsp-ui-peek-find-workspace-symbol))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-M-r")
+                                         #'lsp-ui-peek-find-references))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-M-*")
+                                         #'pop-tag-mark))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-M-?")
+                                         #'spacemacs/lsp-ui-doc-func))))
+  ;; -------------------------- Spare ones ---------------------------------
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-x C-.")
+                                         #'xref-find-definitions))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-x C-*")
+                                         #'xref-pop-tag-mark))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-x C-r")
+                                         #'xref-find-references))))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-c ! c")
+                                         #'lsp-ui-flycheck-list))))
+  
+  ;; ----------------------- C++ Ends Here -------------------------------
 
 
+  
   ;; ------------------  Golang (guru) Starts --------------------------------
 
   ;; missing: describe and bunch of stuff
@@ -1364,4 +1409,5 @@ before packages are loaded."
 
 ;;(provide '.spacemacs)
 ;;; .spacemacs ends here
+
 
