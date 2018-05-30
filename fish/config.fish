@@ -255,7 +255,7 @@ set FISH_CLIPBOARD_CMD "cat"
 #end
 
 ## virtualfish
-eval (python -m virtualfish)
+#eval (python -m virtualfish)
 
 ## pyenv
 set -x PATH "/home/jethros/.pyenv/bin" $PATH

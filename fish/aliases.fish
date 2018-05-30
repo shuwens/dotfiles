@@ -353,9 +353,9 @@ alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
 
 ## python stuff 
 #install virtualfish
-alias virtualenv3 "virtualenv -p /usr/bin/python3"
-alias workon "vf activate"
-alias walkaway "vf deactivate"
+#alias virtualenv3 "virtualenv -p /usr/bin/python3"
+#alias workon "vf activate"
+#alias walkaway "vf deactivate"
 
 alias up '"sudo apt update"; and "sudo apt --list-upgrades"'
 alias upgrade 'sudo apt upgrade'
