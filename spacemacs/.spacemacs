@@ -165,7 +165,7 @@ This function should only modify configuration layer settings."
 
      ;; Tagging
      ;; ----------
-     gtags
+     ;;gtags
 
      (shell :variables
             shell-default-height 30
@@ -342,9 +342,8 @@ It should only modify the values of Spacemacs settings."
    ;;   nord, grayscale, ujelly, cyberpunk, deeper-blue, misterioso srcery
    dotspacemacs-themes '(;; just better indentation
                          sanityinc-tomorrow-night spacemacs-light
-                         ;;base16-gruvbox-dark-hard 
-                         ;; doomm, base16
-                         deeper-blue darktooth  material) ;;ujelly
+                         ;;base16-gruvbox-dark-hard
+                         deeper-blue darktooth  material)
    
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -610,6 +609,7 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-pretty-docs nil)
 
+  ;; necessary for portable dumper feature
   (when (and (display-graphic-p) (eq system-type 'gnu/linux))
     (with-eval-after-load 'exec-path-from-shell
       (exec-path-from-shell-setenv "SHELL" "/bin/bash"))))
@@ -633,6 +633,18 @@ before packages are loaded. If you are unsure, you should try in setting them in
 This function is called while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included
 in the dump."
+
+  ;; language server protocol config
+  ;; (setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
+  ;; (setq lsp-ui-sideline-show-symbol nil)  ; don't show symbol on the right of info
+  ;; (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
+
+  (setq cquery-extra-init-params '(:completion (:detailedLabel t)))
+  (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
+  (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
+
+
+  ;; ===========================================================
 
   ;; evil hack
   (define-key evil-normal-state-map (kbd "M-.") nil)
@@ -663,13 +675,6 @@ in the dump."
   ;;
   ;; -----------------------------------------------------
 
-  ;; lsp config
-  (setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
-  (setq lsp-ui-sideline-show-symbol nil)  ; don't show symbol on the right of info
-  (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
-  (setq cquery-extra-init-params '(:completion (:detailedLabel t)))
-
-
   ;; -------------------------  C++ Starts --------------------------------
 
   ;; missing: describe and bunch of stuff
@@ -688,7 +693,7 @@ in the dump."
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-r")
-                                         #'lsp-ui-peek-find-references))))
+                                         #'xref-find-references))))
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-*")
@@ -709,7 +714,7 @@ in the dump."
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-x C-r")
-                                         #'xref-find-references))))
+                                         #'lsp-ui-peek-find-references))))
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-c ! c")
@@ -757,22 +762,22 @@ in the dump."
   ;; function-args
   (fa-config-default)
 
-  ;; Cpp utils
-  (require 'cpputils-cmake)
+  ;; ;; Cpp utils
+  ;; (require 'cpputils-cmake)
 
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (if (derived-mode-p 'c-mode 'c++-mode)
-                  (cppcm-reload-all))))
+  ;; (add-hook 'c-mode-common-hook
+  ;;           (lambda ()
+  ;;             (if (derived-mode-p 'c-mode 'c++-mode)
+  ;;                 (cppcm-reload-all))))
 
   ;; OPTIONAL, somebody reported that they can use this package with Fortran
-  (add-hook 'c90-mode-hook (lambda () (cppcm-reload-all)))
+  ;;(add-hook 'c90-mode-hook (lambda () (cppcm-reload-all)))
   ;; OPTIONAL, avoid typing full path when starting gdb
   ;; (global-set-key (kbd "C-c C-g")
   ;;                 '(lambda ()(interactive) (gud-gdb (concat "gdb --fullname " (cppcm-get-exe-path-current-buffer)))))
 
   ;; OPTIONAL, some users need specify extra flags forwarded to compiler
-  (setq cppcm-extra-preprocss-flags-from-user '("-I/usr/src/linux/include" "-DNDEBUG"))
+  ;;(setq cppcm-extra-preprocss-flags-from-user '("-I/usr/src/linux/include" "-DNDEBUG"))
 
   ;; counsel-gtags-create-tags
   ;; counsel-gtags-update-tags
@@ -927,11 +932,11 @@ in the dump."
 
   ;; ----------------------- Rust Starts Here ---------------------------------
   ;; lsp imenu
-  (require 'lsp-imenu)
-  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  ;; (require 'lsp-imenu)
+  ;; (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
 
   ;; lsp rust
-  (require 'lsp-mode) 
+  (require 'lsp-mode)
   (with-eval-after-load 'lsp-mode
     (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
     (require 'lsp-rust))
@@ -992,19 +997,16 @@ in the dump."
   ;; SPC m t	run tests with Cargo
   ;; ----------------------- Rust Ends Here -----------------------------------
 
-  ;;
-  ;; semanticsemantic
-  (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-  (semantic-mode 1)
-  (require 'stickyfunc-enhance)
+  ;; ;; semanticsemantic
+  ;; (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+  ;; (semantic-mode 1)
+  ;; (require 'stickyfunc-enhance)
 
   ;; Dumb Jump
   (dumb-jump-mode)
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-aggressive nil)
 
-  ;; globally enable company
-  ;; -----------------------
   ;;(global-company-mode)
 
   ;; Git and Magit
@@ -1020,7 +1022,6 @@ in the dump."
                    "imap.gmail.com")
                   (nnimap-server-port 993)
                   (nnimap-stream ssl))))
-
 
   ;; Send email via Gmail:
   (setq message-send-mail-function 'smtpmail-send-it
@@ -1065,8 +1066,7 @@ in the dump."
   ;;(ad-activate 'flymake-post-syntax-check)
   ;; deal with color id mode
 
-
-  (add-hook 'prog-mode-hook 'flycheck-my-load)
+  ;;(add-hook 'prog-mode-hook 'flycheck-my-load)
 
   (with-eval-after-load 'flycheck-mode
     (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
@@ -1411,22 +1411,3 @@ before packages are loaded."
 ;;; .spacemacs ends here
 
 
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(package-selected-packages
-     '(srcery-theme gruvbox-theme doneburn-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-yapf py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-svn magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery cpputils-cmake counsel-projectile counsel-gtags counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
-  )
