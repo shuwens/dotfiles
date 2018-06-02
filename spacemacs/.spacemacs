@@ -145,7 +145,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup nil
                       auto-completion-private-snippets-directory nil)
 
-     semantic
+     ;;semantic
      ivy
      ;;helm
 
@@ -200,11 +200,11 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       lispy meghanada groovy-mode gradle-mode
                                       stickyfunc-enhance dumb-jump
-                                      cpputils-cmake function-args
-                                      company-childframe
-                                      hydra aggressive-indent academic-phrases
+                                      function-args company-childframe
+                                      aggressive-indent academic-phrases
                                       pcap-mode fix-word darkroom lsp-rust
                                       ;;TEST
+                                      minimap
                                       ;;popular theme
                                       material-theme
                                       ;; dark theme
@@ -634,7 +634,20 @@ This function is called while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included
 in the dump."
 
+  ;; interesting: sublimity
+
+  ;; Minimap
+  (minimap-mode t)
+  (setq-default minimap-window-location 'right)
+  (setq-default minimap-minimum-width 13)
+  (setq-default minimap-recreate-window t)
+  (setq-default minimap-width-fraction 0.10)
+  (unless (display-graphic-p)                                                               
+    (minimap-mode -1))
+  (add-hook 'minimap-sb-mode-hook (lambda () (setq mode-line-format nil)))
+
   ;; language server protocol config
+  ;; -------------------------------
   ;; (setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
   ;; (setq lsp-ui-sideline-show-symbol nil)  ; don't show symbol on the right of info
   ;; (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
@@ -693,7 +706,7 @@ in the dump."
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-r")
-                                         #'xref-find-references))))
+                                         #'lsp-ui-peek-find-references))))
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-*")
@@ -714,12 +727,11 @@ in the dump."
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-x C-r")
-                                         #'lsp-ui-peek-find-references))))
+                                         #'xref-find-references))))
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-c ! c")
                                          #'lsp-ui-flycheck-list))))
-  
   ;; ----------------------- C++ Ends Here -------------------------------
 
 
@@ -760,7 +772,7 @@ in the dump."
 
   ;; ------------------------ C++ (Gtags) Starts ------------------------------
   ;; function-args
-  (fa-config-default)
+  ;;(fa-config-default)
 
   ;; ;; Cpp utils
   ;; (require 'cpputils-cmake)
@@ -975,7 +987,7 @@ in the dump."
                                           (kbd "C-x C-.")
                                           #'racer-find-definition))))
 
-  ;; SPC m =	reformat the buffer
+  ;; SPC m =	  reformat the buffer
   ;; SPC m c .	repeat the last Cargo command
   ;; SPC m c C	remove build artifacts with Cargo
   ;; SPC m c X	execute a project example with Cargo
@@ -994,7 +1006,7 @@ in the dump."
   ;; SPC m c v	check (verify) a project with Cargo
   ;; SPC m g g	jump to definition
   ;; SPC m h h	describe symbol at point
-  ;; SPC m t	run tests with Cargo
+  ;; SPC m t	  run tests with Cargo
   ;; ----------------------- Rust Ends Here -----------------------------------
 
   ;; ;; semanticsemantic
@@ -1012,37 +1024,7 @@ in the dump."
   ;; Git and Magit
   (setq magit-repository-directories '("~/repos/","~/dev/","~/git/","~/workspace/"))
 
-  ;; Gnus
-  ;; -------------------------------
-  ;; Get email, and store in nnml
-  (setq gnus-secondary-select-methods
-        '(
-          (nnimap "gmail"
-                  (nnimap-address
-                   "imap.gmail.com")
-                  (nnimap-server-port 993)
-                  (nnimap-stream ssl))))
-
-  ;; Send email via Gmail:
-  (setq message-send-mail-function 'smtpmail-send-it
-        smtpmail-default-smtp-server "smtp.gmail.com")
-
-  ;; Archive outgoing email in Sent folder on imap.gmail.com:
-  (setq gnus-message-archive-method '(nnimap "imap.gmail.com")
-        gnus-message-archive-group "[Gmail]/Sent Mail")
-
-  ;; Set return email address based on incoming email address
-  (setq gnus-posting-styles
-        '(((header "to" "address@outlook.com")
-           (address "address@outlook.com"))
-          ((header "to" "address@gmail.com")
-           (address "address@gmail.com"))))
-
-  ;; Store email in ~/gmail directory
-  (setq nnml-directory "~/gmail")
-  (setq message-directory "~/gmail")
-
-
+  
   ;; convienant keybinding for functions:
   ;; ------------------------------------
 
@@ -1196,6 +1178,7 @@ SCHEDULED: %t")))
   ;; fix
   (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; latex config not working
 
+  ;; darkroom
   (require 'darkroom)  ; darkroom try
   (global-set-key [f11] 'darkroom-tentative-mode)
 
@@ -1294,51 +1277,7 @@ SCHEDULED: %t")))
   ;; HACK: cppman
   ;;(global-set-key (kbd "C-c i") #'man)
 
-  ;; C++ reference look up : kinda broken
-  ;; ==================================================================
-  ;; (require 'anything)
-  ;; (require 'anything-config)
-  ;; (global-set-key (kbd "C-c I")  ;; i -> info
-  ;;  (lambda () (interactive)
-  ;;   (anything
-  ;;    :prompt "Info about: "
-  ;;    :candidate-number-limit 100
-  ;;    :sources
-  ;;       '(anything-c-source-man-pages
-  ;;         anything-c-source-boost-html))))
-
-  ;; boost documentation
-  ;;(require 'w3m)
-
-  (defvar boost-documentation-directory
-    "/usr/share/doc/libboost1.63-doc/"
-    "defines boost directory location")
-
-  (defun recursive-file-list (dir)
-    (let ((files-list '())
-          (current-entries (directory-files dir t)))
-      (dolist (entry current-entries)
-        (cond ((and (file-regular-p entry)
-                    (string-match "html?$" entry))
-               (setq files-list
-                     (cons entry files-list)))
-              ((and (file-directory-p entry)
-                    (not (string-equal ".." (substring entry -2)))
-                    (not (string-equal "." (substring entry -1))))
-               (setq files-list (append files-list (recursive-file-list entry))))))
-      files-list))
-
-  (defvar anything-c-source-boost-html
-    '((name . "boost html documentation")
-      (requires-pattern . 3)
-      (candidates . (lambda ()
-                      (recursive-file-list boost-documentation-directory)))
-      (delayed)
-      (action . (lambda (entry)
-                  (w3m-browse-url entry)))))
-  ;; ---------------------------------------------------------------------------
-
-
+  
   ;; enable ansi colors in compile-mode
   (defun colorize-compilation-buffer ()
     (when (eq major-mode 'compilation-mode)
@@ -1411,3 +1350,22 @@ before packages are loaded."
 ;;; .spacemacs ends here
 
 
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(minimap yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon sublimity string-inflection stickyfunc-enhance srcery-theme spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-svn magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets gruvbox-theme groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes doneburn-theme disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery counsel-projectile counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )

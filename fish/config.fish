@@ -199,7 +199,8 @@ setenv EDITOR nvim
 setenv BROWSER firefox-developer-edition
 setenv EMAIL sun.shuw@husky.neu.edu
 setenv NAME "Jethro S. Sun"
-setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
+setenv GOPATH "$HOME/dev/r"
+#setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
 setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native"
