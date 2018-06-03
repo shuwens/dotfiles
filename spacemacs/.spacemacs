@@ -65,11 +65,12 @@ This function should only modify configuration layer settings."
           lsp-ui-peek-expand-by-default t)
 
      (cquery :variables
+             cquery-executable "/home/linuxbrew/.linuxbrew/bin/cquery"
              cquery-sem-highlight-method 'overlay)
      cmake
 
 
-     ;;(cquery :variables cquery-executable "/home/linuxbrew/.linuxbrew/bin/cquery")
+     ;;(cquery :variables )
      ;;lsp
 
      ;; C++
@@ -129,21 +130,22 @@ This function should only modify configuration layer settings."
      ;; --------------------------
 
      ;; Major
-     ;; config auto completion
-     (auto-completion :variables
-                      ;; key setting
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'complete
-                      auto-completion-complete-with-key-sequence "jk"
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      ;; feature
-                      ;;auto-completion-enable-sort-by-usage t
-                      ;; backend config
-                      ;;spacemacs-default-company-backends '(company-files company-capf)
-                      auto-completion-enable-help-tooltip 'manual
-                      ;;auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup nil
-                      auto-completion-private-snippets-directory nil)
+
+     ;; trying to complete at point by hand
+     ;; (auto-completion :variables
+     ;;                  ;; key setting
+     ;;                  auto-completion-return-key-behavior 'complete
+     ;;                  auto-completion-tab-key-behavior 'complete
+     ;;                  auto-completion-complete-with-key-sequence "jk"
+     ;;                  auto-completion-complete-with-key-sequence-delay 0.1
+     ;;                  ;; feature
+     ;;                  ;;auto-completion-enable-sort-by-usage t
+     ;;                  ;; backend config
+     ;;                  ;;spacemacs-default-company-backends '(company-files company-capf)
+     ;;                  auto-completion-enable-help-tooltip 'manual
+     ;;                  ;;auto-completion-enable-help-tooltip t
+     ;;                  auto-completion-enable-snippets-in-popup nil
+     ;;                  auto-completion-private-snippets-directory nil)
 
      ;;semantic
      ivy
@@ -344,7 +346,6 @@ It should only modify the values of Spacemacs settings."
                          sanityinc-tomorrow-night spacemacs-light
                          ;;base16-gruvbox-dark-hard
                          deeper-blue darktooth  material)
-   
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -636,16 +637,6 @@ in the dump."
 
   ;; interesting: sublimity
 
-  ;; Minimap
-  (minimap-mode t)
-  (setq-default minimap-window-location 'right)
-  (setq-default minimap-minimum-width 13)
-  (setq-default minimap-recreate-window t)
-  (setq-default minimap-width-fraction 0.10)
-  (unless (display-graphic-p)                                                               
-    (minimap-mode -1))
-  (add-hook 'minimap-sb-mode-hook (lambda () (setq mode-line-format nil)))
-
   ;; language server protocol config
   ;; -------------------------------
   ;; (setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
@@ -656,16 +647,36 @@ in the dump."
   (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
   (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
 
+  (setq  lsp-ui-peek-force-fontify t)
 
-  ;; ===========================================================
 
   ;; evil hack
   (define-key evil-normal-state-map (kbd "M-.") nil)
 
   ;; git magit
   (setq-default git-magit-status-fullscreen t)
-  ;; deft mode always on
-  ;;(require 'deft)
+
+  (setq ivy-display-function 'ivy-display-function-lv)
+
+  ;; ===========================================================
+
+  ;; keybinding from abo-abo
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  ;;(global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
   ;; -----------------------------------------------------
   ;;
@@ -674,7 +685,7 @@ in the dump."
   ;; I always make sure the major programming languages have a consistent
   ;;keybinds:
   ;;
-  ;; ``C-M-i'' -- completion at point
+  ;; ``C-M-i'' -- completion at point (complete-symbol in ivy)
   ;; ``C-x C-i'' -- completion at point
   ;; ``C-M-.'' -- find definitions
   ;; ``C-M-r'' -- find references
@@ -687,6 +698,8 @@ in the dump."
   ;; ``C-c C-'' -- dumb-jump
   ;;
   ;; -----------------------------------------------------
+
+
 
   ;; -------------------------  C++ Starts --------------------------------
 
@@ -735,7 +748,6 @@ in the dump."
   ;; ----------------------- C++ Ends Here -------------------------------
 
 
-  
   ;; ------------------  Golang (guru) Starts --------------------------------
 
   ;; missing: describe and bunch of stuff
@@ -856,10 +868,10 @@ in the dump."
   (add-hook 'java-mode-hook 'java-key-mode-hook)
 
   ;; not working
-  (with-eval-after-load 'java-mode
-    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                          (kbd "C-M-i")
-                                          #'anaconda-mode-complete))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-i")
+                                            #'anaconda-mode-complete))))
   (with-eval-after-load 'java-mode
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-M-.")
@@ -876,10 +888,10 @@ in the dump."
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
                                           (kbd "C-M-*")
                                           #'meghanada-back-jump))))
-  (with-eval-after-load 'java
-    (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                          (kbd "C-M-?")
-                                          #'anaconda-mode-show-doc))))
+  (with-eval-after-load 'python
+    (add-hook 'python-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-M-?")
+                                            #'anaconda-mode-show-doc))))
   ;; ---------------- Spare ones -----------------------
   (with-eval-after-load 'java-mode
     (add-hook 'java-mode-hook (lambda() (define-key evil-normal-state-local-map
@@ -1332,6 +1344,16 @@ Symbols matching the text at point are put first in the completion list."
       (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
              (position (cdr (assoc selected-symbol name-and-pos))))
         (goto-char position))))
+
+  ;; ivy mode buffer change!
+  (require 'lv)
+  (defun ivy-display-function-lv (text)
+    (let ((lv-force-update t))
+      (lv-message
+       (if (string-match "\\`\n" text)
+           (substring text 1)
+         text))))
+
   ;; --------------------- FUNC ENDS HERE -----------------------
 
 
@@ -1350,22 +1372,4 @@ before packages are loaded."
 ;;; .spacemacs ends here
 
 
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(package-selected-packages
-     '(minimap yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill ujelly-theme treemacs-projectile treemacs-evil toml-mode toc-org tagedit symon sublimity string-inflection stickyfunc-enhance srcery-theme spaceline-all-the-icons smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcre2el pcap-mode password-generator paradox overseer orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-svn magit-gitflow macrostep lsp-ui lsp-rust lsp-python lsp-javascript-typescript lorem-ipsum livid-mode live-py-mode lispy link-hint langtool kaolin-themes json-navigator json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-purpose ivy-hydra intero insert-shebang indent-guide importmagic impatient-mode ibuffer-projectile hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-make haskell-snippets gruvbox-theme groovy-mode groovy-imports graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy function-args font-lock+ flyspell-popup flyspell-correct-ivy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-bashate flx-ido fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erlang ensime emmet-mode elisp-slime-nav editorconfig dumb-jump doom-themes doneburn-theme disaster diminish deft define-word darktooth-theme darkroom dante cython-mode cquery counsel-projectile counsel-css company-web company-tern company-statistics company-shell company-rtags company-quickhelp company-lsp company-go company-ghci company-ghc company-emacs-eclim company-childframe company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide clojure-snippets clojure-cheatsheet clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu centered-cursor-mode cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk alect-themes aggressive-indent ace-link academic-phrases ac-ispell)))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
-  )
+
