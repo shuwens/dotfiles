@@ -8,8 +8,11 @@ echo YCMD_DIR=/home/jethros/git/ycmd/
 #git clone -b bleeding --single-branch git@github.com:shwsun/emacs.d.git ~/.emacs.d
 
 # Spacemacs
-git clone https://github.com/shwsun/spacemacs -b new-dev  ~/.emacs.d
+git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
 #git clone https://github.com/shwsun/spacemacs -b develop  ~/.emacs.d
+#git clone https://github.com/shwsun/spacemacs -b new-dev  ~/.emacs.d
+
+ln -s ~/git/dotfiles/emacs/.emacs.d/private/layers ~/.emacs.d/private/layers
 
 #mkdir -p ~/.emacs.d/private && cd ~/.emacs.d/private  && cp -r ~/repos/SPACE/dotspace/layers .
 #cd ~/.emacs.d/private/layers && cp -r ~/repos/SPACE/langtool/layers/+tools/languagetool .

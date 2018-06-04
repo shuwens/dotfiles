@@ -104,7 +104,6 @@ This function should only modify configuration layer settings."
      (latex :variables
             latex-enable-auto-fill t)
 
-
      ;; Minor
      (javascript :variables tern-command '("node" "/usr/local/bin/tern"))
      ;;sml
@@ -644,20 +643,36 @@ in the dump."
   ;; (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
 
   (setq cquery-extra-init-params '(:completion (:detailedLabel t)))
-  (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
-  (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
-
   (setq  lsp-ui-peek-force-fontify t)
 
 
   ;; evil hack
+  (global-set-key (kbd "C-c C-c") nil)
+  ;;(global-set-key (kbd "C-c j") 'counsel-git-grep)
+  ;;(global-set-key (kbd "C-c j") 'counsel-git-grep)
   (define-key evil-normal-state-map (kbd "M-.") nil)
+  (define-key evil-normal-state-map (kbd "M-n") nil)
+  (define-key evil-normal-state-map (kbd "M-p") nil)
 
   ;; git magit
   (setq-default git-magit-status-fullscreen t)
 
-  (setq ivy-display-function 'ivy-display-function-lv)
+  (evil-define-key 'normal evil-org-mode-map
+    (kbd "M-l") 'nil
+    (kbd "M-h") 'nil
+    (kbd "M-k") 'nil
+    (kbd "M-j") 'nil)
 
+  ;; REF: evil keymap hack
+  ;; https://stackoverflow.com/questions/24988406/unbinding-evils-c-w-mappings
+  (eval-after-load "evil-maps"
+    (define-key evil-motion-state-map "\C-w" nil))
+
+  (eval-after-load "evil-maps"
+    (dolist (map '(evil-motion-state-map
+                   evil-insert-state-map
+                   evil-emacs-state-map))
+      (define-key (eval map) "\C-w" nil)))
   ;; ===========================================================
 
   ;; keybinding from abo-abo
@@ -699,9 +714,13 @@ in the dump."
   ;;
   ;; -----------------------------------------------------
 
+  (with-eval-after-load 'neotree
+    (evil-define-key 'evilified neotree-mode-map (kbd "i") 'neotree-previous-line)
+    (evil-define-key 'evilified neotree-mode-map (kbd "k") 'neotree-next-line))
 
 
-  ;; -------------------------  C++ Starts --------------------------------
+
+  ;; -------------------------  LSP Starts --------------------------------
 
   ;; missing: describe and bunch of stuff
   (with-eval-after-load 'go-mode
@@ -711,41 +730,40 @@ in the dump."
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-.")
-                                         #'lsp-ui-peek-find-definitions))))
-  (with-eval-after-load 'lsp-mode
+                                         #'lsp-ui-peek-find-definitions)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-,")
-                                         #'lsp-ui-peek-find-workspace-symbol))))
-  (with-eval-after-load 'lsp-mode
+                                         #'lsp-ui-peek-find-workspace-symbol)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-r")
-                                         #'lsp-ui-peek-find-references))))
-  (with-eval-after-load 'lsp-mode
+                                         #'lsp-ui-peek-find-references)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-*")
-                                         #'pop-tag-mark))))
-  (with-eval-after-load 'lsp-mode
+                                         #'pop-tag-mark)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-M-?")
-                                         #'spacemacs/lsp-ui-doc-func))))
-  ;; -------------------------- Spare ones ---------------------------------
-  (with-eval-after-load 'lsp-mode
+                                         #'spacemacs/lsp-ui-doc-func)))
+    ;; -------------------------- Spare ones ---------------------------------
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-x C-.")
-                                         #'xref-find-definitions))))
-  (with-eval-after-load 'lsp-mode
+                                         #'xref-find-definitions)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-x C-*")
-                                         #'xref-pop-tag-mark))))
-  (with-eval-after-load 'lsp-mode
+                                         #'xref-pop-tag-mark)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
                                          (kbd "C-x C-r")
-                                         #'xref-find-references))))
-  (with-eval-after-load 'lsp-mode
+                                         #'xref-find-references)))
     (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                         (kbd "C-c ! c")
-                                         #'lsp-ui-flycheck-list))))
-  ;; ----------------------- C++ Ends Here -------------------------------
+                                         (kbd "C-c C-c")
+                                         #'lsp-ui-flycheck-list)))
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-p")
+                                         #'lsp-ui-peek-jump-forward)))
+    (add-hook 'lsp-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                         (kbd "C-t")
+                                         #'lsp-ui-peek-jump-backward))))
+  
+  ;; ----------------------- lsp Ends Here -------------------------------
 
 
   ;; ------------------  Golang (guru) Starts --------------------------------
@@ -782,6 +800,20 @@ in the dump."
                                         #'go-guru-definition))))
   ;; ----------------------- Golang Ends Here -------------------------------
 
+
+
+
+
+  ;; ------------------------ C++ Config Starts ------------------------------
+  ;; (add-hook 'c-mode-hook
+  ;;            (setq flycheck-gcc-language-standard "c11"
+  ;;                  flycheck-clang-language-standard "c11"))
+  ;; (add-hook 'c++-mode-hook
+  ;;            (setq flycheck-gcc-language-standard "c++14"
+  ;;                  flycheck-clang-language-standard "c++14"))
+
+  ;; ------------------------ C++ Config Starts ------------------------------
+
   ;; ------------------------ C++ (Gtags) Starts ------------------------------
   ;; function-args
   ;;(fa-config-default)
@@ -808,33 +840,26 @@ in the dump."
   (with-eval-after-load 'ggtags-mode
     (add-hook 'go-mode-hook (lambda() (define-key evil-normal-state-local-map
                                         (kbd "C-M-i")
-                                        #'go-doc-at-point)))) ;; FIXME
-  (with-eval-after-load 'ggtags-mode
+                                        #'go-doc-at-point))) ;; FIXME
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-.")
-                                            #'counsel-gtags-dwim))))
-  (with-eval-after-load 'ggtags-mode
+                                            #'counsel-gtags-dwim)))
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-,")
-                                            #'go-guru-callers)))) ;; FIXME
-  (with-eval-after-load 'ggtags-mode
+                                            #'go-guru-callers))) ;; FIXME
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-r")
-                                            #'counsel-gtags-find-reference))))
-  (with-eval-after-load 'ggtags-mode
+                                            #'counsel-gtags-find-reference)))
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-*")
-                                            #'counsel-gtags-go-backward))))
-  (with-eval-after-load 'ggtags-mode
+                                            #'counsel-gtags-go-backward)))
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-?")
-                                            #'godoc-at-point))))
-  ;; -------------------------- Spare ones ---------------------------------
-  (with-eval-after-load 'ggtags-mode
+                                            #'godoc-at-point)))
+    ;; -------------------------- Spare ones ---------------------------------
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-x C-.")
-                                            #'counsel-gtags-dwim))))
-  (with-eval-after-load 'ggtags-mode
+                                            #'counsel-gtags-dwim)))
     (add-hook 'ggtags-mode-hook (lambda() (define-key evil-normal-state-local-map
                                             (kbd "C-M-t")
                                             #'counsel-gtags-find-definition))))
@@ -1040,44 +1065,30 @@ in the dump."
   ;; convienant keybinding for functions:
   ;; ------------------------------------
 
-  ;; -------------------- Flycheck (Anaconda-mode) ------------------------------
+  ;; -------------------- Flycheck keymap config  ------------------------------
 
-  ;; Not working
-
-  (defun flycheck-my-load ()
-    (flycheck-mode t)
-    
-    ;; Utility key bindings for navigating errors reported by flycheck.
-    (local-set-key (kbd "C-c C-d") 'flycheck-explain-error-at-point)
-    (local-set-key (kbd "C-c C-n") 'flycheck-error-list-next-error)
-    (local-set-key (kbd "C-c C-p") 'flycheck-error-list-previous-error)
-    (local-set-key (kbd "C-c C-c") 'flycheck-list-errors))
-  ;; Prevents flymake from throwing a configuration error
-  ;; This must be done because atsopt returns a non-zero return value
-  ;; when it finds an error, flymake expects a zero return value.
-  ;;(defadvice flycheck-post-syntax-check (before flymake-force-check-was-interrupted)
-  ;;(setq flymake-check-was-interrupted t))
-  ;;(ad-activate 'flymake-post-syntax-check)
-  ;; deal with color id mode
-
-  ;;(add-hook 'prog-mode-hook 'flycheck-my-load)
-
-  (with-eval-after-load 'flycheck-mode
-    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                              (kbd "C-c C-d")
-                                              #'flycheck-explain-error-at-point))))
-  (with-eval-after-load 'flycheck-mode
-    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                              (kbd "C-c C-c")
-                                              #'flycheck-list-errors))))
-  (with-eval-after-load 'flycheck-mode
-    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                              (kbd "C-c C-n")
-                                              #'flycheck-error-list-next-error))))
-  (with-eval-after-load 'flycheck-mode
-    (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
-                                              (kbd "C-c C-p")
-                                              #'flycheck-error-list-previous-error))))
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-c C-d")
+                                            #'flycheck-explain-error-at-point)))
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-c d")
+                                            #'flycheck-list-errors)))
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-c ! C-c")
+                                            #'spacemacs/toggle-flycheck-error-list)))
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-c C-n")
+                                            #'flycheck-next-error)))
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "C-c C-p")
+                                            #'flycheck-previous-error)))
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "M-n")
+                                            #'flycheck-next-error))) ;; FIXME
+  (add-hook 'flycheck-mode-hook (lambda() (define-key evil-normal-state-local-map
+                                            (kbd "M-p")
+                                            #'flycheck-previous-error))) ;; FIXME
+  
   ;; ----------------------- Flycheck Ends Here ----------------------------------
 
   ;; ------------------- Linux Kernel Coding Style ----------------------------
@@ -1124,9 +1135,8 @@ in the dump."
 
   ;; Deft/Org mode setting
   ;; -----------------------------
-  ;;(setq deft-directory "~/Documents/org")
-  (require 'deft)
   (setq deft-directory "~/Dropbox/GS/18spring")
+  (global-set-key (kbd "C-c C-l") 'deft)
   (global-set-key (kbd "C-c C-n") 'deft-new-file)
   (global-set-key (kbd "C-c C-m") 'deft-new-file-named)
   (global-set-key (kbd "C-c C-r") 'deft-rename-file)
@@ -1354,7 +1364,11 @@ Symbols matching the text at point are put first in the completion list."
            (substring text 1)
          text))))
 
+  (setq ivy-display-function 'ivy-display-function-lv)
   ;; --------------------- FUNC ENDS HERE -----------------------
+
+  ;; tailing interesting links:
+  ;; https://github.com/minorugh/emacs.d/blob/273ecd2bf6b1f8ac83338aee6e7eca566aabdfaf/inits/80_darkroom-mode.el
 
 
   )
@@ -1384,7 +1398,7 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(yapfify yaml-mode xterm-color ws-butler winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode toc-org tern tagedit symon string-inflection stickyfunc-enhance srcery-theme spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcap-mode password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode minimap melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-svn magit-gitflow macrostep lsp-ui dash-functional lsp-rust lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum livid-mode skewer-mode live-py-mode lispy zoutline link-hint langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-rtags ivy-purpose window-purpose ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent deferred impatient-mode simple-httpd imenu-list ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode gruvbox-theme groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc go-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-rust flycheck-rtags rtags flycheck-pos-tip pos-tip flycheck-haskell flycheck-bashate flx-ido flx fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig eclim dumb-jump doom-themes all-the-icons memoize doneburn-theme disaster deft define-word darktooth-theme autothemer darkroom dante lcr flycheck cython-mode cquery lsp-mode counsel-projectile projectile counsel-css counsel swiper ivy company-ghci company-ghc ghc haskell-mode company-childframe posframe company column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide levenshtein clojure-cheatsheet helm helm-core popup clj-refactor inflections edn multiple-cursors paredit yasnippet peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo markdown-mode rust-mode biblio biblio-core auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f alect-themes aggressive-indent ace-window ace-link avy academic-phrases ht s dash which-key use-package pcre2el org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
+     '(yapfify yaml-mode xterm-color ws-butler winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode toc-org tern tagedit symon string-inflection stickyfunc-enhance srcery-theme spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pippel pipenv pip-requirements persp-mode pcap-mode password-generator paradox overseer orgit org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode minimap melancholy-theme meghanada maven-test-mode material-theme markdown-toc magit-svn magit-gitflow macrostep lsp-ui dash-functional lsp-rust lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum livid-mode skewer-mode live-py-mode lispy zoutline link-hint langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-rtags ivy-purpose window-purpose ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent deferred impatient-mode simple-httpd imenu-list ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode gruvbox-theme groovy-mode groovy-imports pcache graphviz-dot-mode gradle-mode google-translate google-c-style golden-ratio godoctor go-tag go-rename go-guru go-eldoc go-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-rust flycheck-rtags rtags flycheck-pos-tip pos-tip flycheck-haskell flycheck-bashate flx-ido flx fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig eclim dumb-jump doom-themes all-the-icons memoize doneburn-theme disaster deft define-word darktooth-theme autothemer darkroom dante lcr flycheck cython-mode cquery lsp-mode counsel-projectile projectile counsel-css counsel swiper ivy company-ghci company-ghc ghc haskell-mode company-childframe posframe company column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode cmake-mode cmake-ide levenshtein clojure-cheatsheet helm helm-core popup clj-refactor inflections edn multiple-cursors paredit yasnippet peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo markdown-mode rust-mode biblio biblio-core auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f alect-themes aggressive-indent ace-window ace-link avy academic-phrases ht s dash which-key use-package pcre2el org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
