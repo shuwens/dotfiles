@@ -220,3 +220,6 @@ fi
 #echo $PATH=$HOME/.pyenv/bin:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# added by Anaconda2 installer
+export PATH="/home/jethros/repos/conda2/bin:$PATH"

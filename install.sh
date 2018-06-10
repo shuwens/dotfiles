@@ -45,8 +45,11 @@ sudo apt install -y haskell-stack darcs
 stack install ghc-mod
 
 # python pip
-sudo apt install -y python-pip
+sudo apt install -y python-pip python3-pip
 sudo pip install pylint pyflakes virtualenv 
+
+# npm yarn
+sudo apt install -y yarn npm
 
 # java
 sudo apt-get install openjdk-8-jdk maven

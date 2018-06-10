@@ -187,6 +187,7 @@ set PATH $PATH ~/.local/bin
 set PATH $PATH ~/.local/share/umake/bin
 set PATH $PATH ~/.cargo/bin
 set PATH $PATH /home/linuxbrew/.linuxbrew/bin
+set PATH $PATH $NPM_PACKAGES/bin
 #set PATH $PATH ~/dev/go/bin
 
 # For RLS
@@ -194,6 +195,13 @@ set PATH $PATH /home/linuxbrew/.linuxbrew/bin
 setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
 setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
 setenv RLS_ROOT ~/dev/others/rls
+
+# Npm
+setenv NPM_PACKAGES "$HOME/.npm-packages"
+#PATH="$NPM_PACKAGES/bin:$PATH"
+# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
+#unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+#export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 setenv EDITOR nvim
 setenv BROWSER firefox-developer-edition

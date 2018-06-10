@@ -25,7 +25,7 @@ if [ $? != 0 ]; then
   #tmux send-keys -t ${SESSION_NAME}:2 'fish' C-m
 
   # server/debug log (3)
-  tmux new-window -n server -t ${SESSION_NAME}
+  tmux new-window -n athena -t ${SESSION_NAME}
   #tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
   tmux send-keys -t ${SESSION_NAME}:3 'clear ; neofetch' C-m
   tmux split-window -v -t ${SESSION_NAME}:3
