@@ -7,14 +7,19 @@
 #  ██████ ██████ ░██  ░██░███   ░░█████
 # ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 #
-# The zshrc is now bogus -- I only use it to fish
+#  ▓▓▓▓▓▓▓▓▓▓
+# ░▓ author ▓ xero <x@xero.nu>
+# ░▓ code   ▓ http://code.xero.nu/dotfiles
+# ░▓ mirror ▓ http://git.io/.files
+# ░▓▓▓▓▓▓▓▓▓▓
+# ░░░░░░░░░░
+#
 
 
 #█▓▒░ load configs
-
-source ~/.zshenv
-
-$HOME/bin/br.sh
-exec fish
+for config (~/.zsh/*.zsh) source $config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+$HOME/bin/br.sh
+
+fish

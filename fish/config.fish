@@ -1,7 +1,5 @@
 ## let me get my aliases
 . ~/.config/fish/aliases.fish
-## let me get fishmarks
-
 
 set -U fish_user_abbreviations
 #set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
@@ -10,157 +8,172 @@ set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
 #set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
 set -U fish_user_abbreviations $fish_user_abbreviations 'cargot=cargo t'
-#set -U fish_user_abbreviations $fish_user_abbreviations 'emacs=eval emacs &'
+set -U fish_user_abbreviations $fish_user_abbreviations 'vim=nvim'
+set -U fish_user_abbreviations $fish_user_abbreviations 'vi=nvim'
+set -U fish_user_abbreviations $fish_user_abbreviations 'sduo=sudo'
 complete --command yaourt --wraps pacman
 complete --command pacaur --wraps pacman
 
 ## let's setup path variable
 set --universal FONTCONFIG_PATH /etc/fonts/
 
-
-if status --is-interactive
-  tmux ^ /dev/null; and exec true
-end
+# ??? to blame
+#if status --is-interactive
+#  tmux ^ /dev/null; and exec true
+#end
 
 if [ -e /usr/bin/apt ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 else if [ -e /usr/bin/yaourt ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
 else
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
-  #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
+	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
 end
 
 if [ -e /usr/bin/pacaur ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
 else if [ -e /usr/bin/yaourt ]
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
 else
-  set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
-  #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
+	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
+	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 end
 
-
-
 if [ -e ~/.cargo/bin/exa ]
-  #set -U fish_user_abbreviations $fish_user_abbreviations 'l=exa'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'ls=exa'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'll=exa -l'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'lll=exa -la'
+	#set -U fish_user_abbreviations $fish_user_abbreviations 'l=exa'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'ls=exa'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'll=exa -l'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'lll=exa -la'
 else
-  set -U fish_user_abbreviations $fish_user_abbreviations 'l=ls'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'll=ls -l'
-  set -U fish_user_abbreviations $fish_user_abbreviations 'lll=ls -la'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'l=ls'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'll=ls -l'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'lll=ls -la'
 end
 
 # Load fishmarks (http://github.com/techwizrd/fishmarks)
 if [ -e $HOME/.fishmarks/marks.fish ]; and status --is-interactive
-. $HOME/.fishmarks/marks.fish
+	. $HOME/.fishmarks/marks.fish
 end
 
 ## fzf
 if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
-. $HOME/.fzf/shell/key-bindings.fish
+	. $HOME/.fzf/shell/key-bindings.fish
 end
 
 function ssh
-  switch $argv[1]
+	switch $argv[1]
 case "*.amazonaws.com"
-  env TERM=xterm /usr/bin/ssh $argv
+	env TERM=xterm /usr/bin/ssh $argv
 case "ec2-user@"
-  env TERM=xterm /usr/bin/ssh $argv
+	env TERM=xterm /usr/bin/ssh $argv
 case "*"
-  /usr/bin/ssh $argv
+	/usr/bin/ssh $argv
 end
 end
 
+function upgrade
+	echo (pass x1c/jethros) | sudo -S apt -y upgrade
+end
+
+
 function remote_alacritty
-  # https://gist.github.com/costis/5135502
-  set fn (mktemp)
-  infocmp alacritty-256color > $fn
-  scp $fn $argv[1]":alacritty-256color.ti"
-  ssh $argv[1] tic "alacritty-256color.ti"
-  ssh $argv[1] rm "alacritty-256color.ti"
+	# https://gist.github.com/costis/5135502
+	set fn (mktemp)
+	infocmp alacritty-256color > $fn
+	scp $fn $argv[1]":alacritty-256color.ti"
+	ssh $argv[1] tic "alacritty-256color.ti"
+	ssh $argv[1] rm "alacritty-256color.ti"
 end
 
 function remarkable
-  if test (count $argv) -ne 1
-    echo "No file given"
-    return
+	if test (count $argv) -ne 1
+		echo "No file given"
+		return
 end
 
 ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
 if test $status -ne 0
-  # not yet connected
-  echo "Connecting to reMarkable internal network"
-  sudo dhcpcd enp0s20u2
+	# not yet connected
+	echo "Connecting to reMarkable internal network"
+	sudo dhcpcd enp0s20u2
 end
 curl --form "file=@"$argv[1] http://10.11.99.1/upload
 end
 
 function md2pdf
-  set t (mktemp -t md2pdf.XXXXXXX.pdf)
-  pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
-  set --erase argv[1]
-  if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
-    mv $t $argv[1]
+	set t (mktemp -t md2pdf.XXXXXXX.pdf)
+	pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
+	set --erase argv[1]
+	if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
+		mv $t $argv[1]
 else
-  cat $t
-  rm $t
+	cat $t
+	rm $t
 end
 end
 
 function lpmd
-  set infile $argv[1]
-  set --erase argv[1]
-  md2pdf $infile - | lp $argv -
+	set infile $argv[1]
+	set --erase argv[1]
+	md2pdf $infile - | lp $argv -
 end
 
 function pdfo
-  echo $argv | xargs pdflatex
-  echo $argv | sed 's/\.tex$/.pdf/' | xargs xdg-open
+	echo $argv | xargs pdflatex
+	echo $argv | sed 's/\.tex$/.pdf/' | xargs xdg-open
 end
 
 function px
-  ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
+	ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
 end
+
+
+
+## why do I have so many web servers?
+# bu
+function bucs
+	env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
+end
+# northeastern
 function athena
-  env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
+	env SSHPASS=(pass www/ccis) sshpass -e ssh nu-ccis $argv
 end
+
 
 ## what is this for again?
 set nooverride PATH PWD
 function onchdir -v PWD
-  set dr $PWD
-  while [ "$dr" != "/" ]
-    for e in $dr/.setenv-*
-      set envn (basename -- $e | sed 's/^\.setenv-//')
-      if contains $envn $nooverride
-        continue
+	set dr $PWD
+	while [ "$dr" != "/" ]
+		for e in $dr/.setenv-*
+			set envn (basename -- $e | sed 's/^\.setenv-//')
+			if contains $envn $nooverride
+				continue
 end
 
 if not test -s $e
-  # setenv is empty
-  # var value is file's dir
-  set envv (readlink -e $dr)
+	# setenv is empty
+	# var value is file's dir
+	set envv (readlink -e $dr)
 else if test -L $e; and test -d $e
-  # setenv is symlink to directory
-  # var value is target directory
-  set envv (readlink -e $e)
+	# setenv is symlink to directory
+	# var value is target directory
+	set envv (readlink -e $e)
 else
-  # setenv is non-empty file
-  # var value is file content
-  set envv (cat $e)
+	# setenv is non-empty file
+	# var value is file content
+	set envv (cat $e)
 end
 
 if not contains $envn $wasset
-  set wasset $wasset $envn
-  setenv $envn $envv
+	set wasset $wasset $envn
+	setenv $envn $envv
 end
 end
 set dr (dirname $dr)
@@ -184,11 +197,12 @@ set __fish_git_prompt_showupstream 'none'
 set PATH /usr/local/bin/ $PATH
 set PATH $PATH ~/bin
 set PATH $PATH ~/.local/bin
-set PATH $PATH ~/.local/share/umake/bin
+#set PATH $PATH ~/.local/share/umake/rust/rust-lang/rustc/bin
 set PATH $PATH ~/.cargo/bin
 set PATH $PATH /home/linuxbrew/.linuxbrew/bin
 set PATH $PATH $NPM_PACKAGES/bin
-#set PATH $PATH ~/dev/go/bin
+set PATH $PATH ~/.local/share/umake/bin
+set PATH $PATH ~/dev/r/bin
 
 # For RLS
 # https://github.com/fish-shell/fish-shell/issues/2456
@@ -228,21 +242,21 @@ setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
 setenv OS_IMAGE_API_VERSION 1
 setenv OS_VOLUME_API_VERSION 2
 function aws -d "Set up environment for AWS"
-  env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1) $argv
+	env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1) $argv
 end
 function penv -d "Set up environment for the PDOS openstack service"
-  env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
+	env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
 end
 function pvm -d "Run nova/glance commands against the PDOS openstack service"
-  switch $argv[1]
+	switch $argv[1]
 case 'image-*'
-  penv glance $argv
+	penv glance $argv
 case 'c'
-  penv cinder $argv[2..-1]
+	penv cinder $argv[2..-1]
 case 'g'
-  penv glance $argv[2..-1]
+	penv glance $argv[2..-1]
 case '*'
-  penv nova $argv
+	penv nova $argv
 end
 end
 
@@ -259,12 +273,11 @@ setenv J2D_D3D false
 set FISH_CLIPBOARD_CMD "cat"
 
 # Base16 Shell
-#if status --is-interactive
-#    eval sh $HOME/dev/others/base16/shell/scripts/base16-atelier-dune.sh
-#end
-
-## virtualfish
-#eval (python -m virtualfish)
+if status --is-interactive
+	#set BASE16_SHELL "$HOME/dev/others/base16/shell/"
+	#source "$BASE16_SHELL/profile_helper.fish"
+	eval zsh $HOME/dev/others/base16/shell/scripts/base16-atelier-dune.sh
+end
 
 ## pyenv
 set -x PATH "/home/jethros/.pyenv/bin" $PATH
@@ -274,73 +287,73 @@ status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 # Pretty ls colors
 if test -e $HOME/.dircolors
-  setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+	setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
 end
 
 function fish_user_key_bindings
-  bind \cz 'fg>/dev/null ^/dev/null'
-  if functions -q fzf_key_bindings
-    fzf_key_bindings
+	bind \cz 'fg>/dev/null ^/dev/null'
+	if functions -q fzf_key_bindings
+		fzf_key_bindings
 end
 end
 
 function fish_greeting
-  echo
-  echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
-  echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
-  echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
-  echo -e " \\e[1mDisk usage:\\e[0m"
-  echo
-  echo -ne (\
-  df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
-  awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
-  sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
-  paste -sd ''\
-  )
-  echo
+	echo
+	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
+	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
+	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
+	echo -e " \\e[1mDisk usage:\\e[0m"
+	echo
+	echo -ne (\
+	df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
+	awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
+	sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
+	paste -sd ''\
+	)
+	echo
 
-  echo -e " \\e[1mNetwork:\\e[0m"
-  echo
-  # http://tdt.rocks/linux_network_interface_naming.html
-  echo -ne (\
-  ip addr show up scope global | \
-  grep -E ': <|inet' | \
-  sed \
-  -e 's/^[[:digit:]]\+: //' \
-  -e 's/: <.*//' \
-  -e 's/.*inet[[:digit:]]* //' \
-  -e 's/\/.*//'| \
-  awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
-  sort | \
-  #column -t -R1 | \
-  # public addresses are underlined for visibility \
-  sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
-  # private addresses are not \
-  sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
-  # unknown interfaces are cyan \
-  sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
-  # ethernet interfaces are normal \
-  sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
-  # wireless interfaces are purple \
-  sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
-  # wwan interfaces are yellow \
-  sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
-  sed 's/$/\\\e[0m/' | \
-  sed 's/^/\t/' \
-  )
-  echo
+	echo -e " \\e[1mNetwork:\\e[0m"
+	echo
+	# http://tdt.rocks/linux_network_interface_naming.html
+	echo -ne (\
+	ip addr show up scope global | \
+	grep -E ': <|inet' | \
+	sed \
+	-e 's/^[[:digit:]]\+: //' \
+	-e 's/: <.*//' \
+	-e 's/.*inet[[:digit:]]* //' \
+	-e 's/\/.*//'| \
+	awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
+	sort | \
+	#column -t -R1 | \
+	# public addresses are underlined for visibility \
+	sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
+	# private addresses are not \
+	sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
+	# unknown interfaces are cyan \
+	sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
+	# ethernet interfaces are normal \
+	sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
+	# wireless interfaces are purple \
+	sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
+	# wwan interfaces are yellow \
+	sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
+	sed 's/$/\\\e[0m/' | \
+	sed 's/^/\t/' \
+	)
+	echo
 
-  set r (random 0 100)
-  if test -s ~/.todo
-    if [ $r -lt 10 ] # only occasionally show backlog (10%)
-      echo -e " \e[1mBacklog\e[0;32m"
-      set_color blue
-      echo
-      #echo "  [project] <description>"
-      cat ~/.backlog| sed 's/^/  /'
-      echo
-    end
-  end
+	set r (random 0 100)
+	if test -s ~/.todo
+		if [ $r -lt 10 ] # only occasionally show backlog (10%)
+			echo -e " \e[1mBacklog\e[0;32m"
+			set_color blue
+			echo
+			#echo "  [project] <description>"
+			cat ~/.backlog| sed 's/^/  /'
+			echo
+end
+end
 
 # Add this to your ~/.config/fish/config.fish
 # Syntax:
@@ -349,34 +362,34 @@ function fish_greeting
 # Running !! with anything other than sudo will append the argument to your most recent command
 # To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
 function !!;
-  set prevcmd (history | head -n 1)
-  if test "$argv"
-    if test "$argv" = "sudo"        #; or "any other command you want to prepend"
-      eval "$argv $prevcmd"
-    else
-      eval "$var $argv"
-    end
+	set prevcmd (history | head -n 1)
+	if test "$argv"
+		if test "$argv" = "sudo"        #; or "any other command you want to prepend"
+			eval "$argv $prevcmd"
 else
-  eval "$var"
+	eval "$var $argv"
+end
+else
+	eval "$var"
 end
 end
 
 set_color normal
 echo -e " \e[1mTODOs\e[0;32m"
 if [ $r -lt 10 ]
-  # unimportant, so show rarely
-  set_color cyan
-  # echo "  [project] <description>"
+	# unimportant, so show rarely
+	set_color cyan
+	# echo "  [project] <description>"
 end
 if [ $r -lt 25 ]
-  # back-of-my-mind, so show occasionally
-  set_color green
-  # echo "  [project] <description>"
+	# back-of-my-mind, so show occasionally
+	set_color green
+	# echo "  [project] <description>"
 end
 if [ $r -lt 50 ]
-  # upcoming, so prompt regularly
-  set_color yellow
-  # echo "  [project] <description>"
+	# upcoming, so prompt regularly
+	set_color yellow
+	# echo "  [project] <description>"
 end
 
 # urgent, so prompt always
@@ -387,15 +400,15 @@ echo
 
 # Huh, show me some todo
 if test -s ~/.todo
-  #set_color normal
-  #echo -e " \e[1mImmediate\e[0;32m"
-  set_color magenta
-  #echo
-  cat ~/.todo | sed 's/^/  /'
-  echo
+	#set_color normal
+	#echo -e " \e[1mImmediate\e[0;32m"
+	set_color magenta
+	#echo
+	cat ~/.todo | sed 's/^/  /'
+	echo
 end
 
 set_color normal
 end
 
-
+# end of [fish/config.fish]

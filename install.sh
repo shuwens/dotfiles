@@ -1,9 +1,13 @@
 #!/bin/bash
 set -e
 
-#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+# ------------------------------------------------------------------------
+# A list of operations get done here:
+#
+# TODO
 
-sudo apt remove thunderbird nano
+
+sudo apt remove thunderbird nano rhythmbox
 #sudo apt-add-repository -y ppa:rael-gc/scudcloud
 
 # install font 
@@ -63,7 +67,7 @@ sudo add-apt-repository ppa:plt/racket -y
 sudo apt install -y racket
 
 # dev env emacs cpp etc
-sudo apt -y install cppman w3m w3m-el
+sudo apt -y install cppman
 
 ## Install LS_COLORS
 wget https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O $HOME/.dircolors
@@ -77,7 +81,6 @@ sudo apt -y pass sshpass
 
 ## firefox dev
 sudo apt -y remove firefox
-umake web firefox-dev
 
 
 # ----------------------
@@ -92,11 +95,11 @@ sudo apt update
 #sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
 
 # IntelliJ Idea
-sudo apt-add-repository ppa:mmk2410/intellij-idea
-
-
+#sudo apt-add-repository ppa:mmk2410/intellij-idea
 
 sudo apt-get install -y sublime-text ubuntu-make
+
+umake web firefox-dev
 
 # instlal magic wormhole
 pip install --user magic-wormhole
@@ -107,9 +110,9 @@ sudo apt-get install -y minicom
 #sudo apt-get install -y ukuu
 
 # IntelliJ Idea
-sudo apt-get install -y intellij-idea-ultimate
+#sudo apt-get install -y intellij-idea-ultimate
 # Umake pycharm
-umake ide pycharm-professional
+#umake ide pycharm-professional
 
 # dir colors
 wget https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O $HOME/.dircolors

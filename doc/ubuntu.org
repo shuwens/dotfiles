@@ -106,3 +106,7 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-5.0 10
 * Tar
    
 tar -cvzf tarballname.tar.gz itemtocompress
+
+* jupyter notebook
+
+  sudo apt-get install libsqlite3-dev

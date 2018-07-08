@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/zsh
 #set -x
 
 SESSION_NAME="universe"
@@ -14,7 +14,7 @@ if [ $? != 0 ]; then
   tmux new-session -s ${SESSION_NAME} -n foo -d
 
   # First window (0) -- vim and console
-  #tmux send-keys -t ${SESSION_NAME} 'fish' C-m
+  #tmux send-keys -t ${SESSION_NAME} 'fish ; clear' C-m
 
   # shell (1)
   tmux new-window -n bar -t ${SESSION_NAME}
@@ -27,7 +27,7 @@ if [ $? != 0 ]; then
   # server/debug log (3)
   tmux new-window -n athena -t ${SESSION_NAME}
   #tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
-  tmux send-keys -t ${SESSION_NAME}:3 'clear ; neofetch' C-m
+  tmux send-keys -t ${SESSION_NAME}:3 'clear; neofetch' C-m
   tmux split-window -v -t ${SESSION_NAME}:3
   tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 42 ; athena' C-m
 

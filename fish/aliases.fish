@@ -1,10 +1,10 @@
 # Quick edits
-alias Ea 'vim ~/.config/fish/aliases.fish'
-alias Ef 'vim ~/.config/fish/config.fish'
-alias Eg 'vim ~/.gitconfig'
-alias Ev 'vim ~/git/dotfiles/config/.config/nvim/personal.vim'
-alias Es 'vim ~/.spacemacs'
-#alias Es 'vim ~/bin/autosort'
+alias Ea 'nvim ~/.config/fish/aliases.fish'
+alias Ef 'nvim ~/.config/fish/config.fish'
+alias Eg 'nvim ~/.gitconfig'
+alias Ev 'nvim ~/.config/nvim/init.vim'
+alias Es 'nvim ~/.spacemacs'
+alias Ex 'nvim ~/.xmonad/xmonad.hs'
 #alias Et 'vim ~/.tmux.conf'
 
 alias vim-norc 'vim -u NORC'
@@ -343,7 +343,10 @@ alias :q "sudo reboot"
 function bar
   eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"
 end
+
 alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
+alias PhpWgetScrape "wget -A php -m -p -E -k -K -np"
+alias TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 ## tips function
 # tips tar
@@ -357,8 +360,8 @@ alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
 #alias workon "vf activate"
 #alias walkaway "vf deactivate"
 
-alias up '"sudo apt update"; and "sudo apt --list-upgrades"'
-alias upgrade 'sudo apt upgrade'
+#alias up '"sudo apt update"; and "sudo apt --list-upgrades"'
+#alias upgrade 'sudo apt upgrade'
 
 function ,,,
   make clean; and make
@@ -409,7 +412,7 @@ alias stop 'sudo systemctl stop'
 
 ## my ssh utils
 function UpdateFile -a filename
-  env SSHPASS=(pass www/bucs) sshpass -e scp $filename bucs:~/public_html/tmp
+  env SSHPASS=(pass www/ccis) sshpass -e scp $filename nu-ccis:~/.www/tmp/
 end
 
 alias emacs 'emacs '
