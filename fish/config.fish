@@ -273,11 +273,18 @@ setenv J2D_D3D false
 set FISH_CLIPBOARD_CMD "cat"
 
 # Base16 Shell
-if status --is-interactive
+#if status --is-interactive
 	#set BASE16_SHELL "$HOME/dev/others/base16/shell/"
 	#source "$BASE16_SHELL/profile_helper.fish"
-	eval zsh $HOME/dev/others/base16/shell/scripts/base16-atelier-dune.sh
+	#eval zsh $HOME/dev/others/base16/shell/scripts/base16-atelier-dune.sh
+	#end
+
+# Base16 Shell
+if status --is-interactive
+    set BASE16_SHELL "$HOME/dev/others/base16/shell"
+    source "$BASE16_SHELL/profile_helper.fish"
 end
+
 
 ## pyenv
 set -x PATH "/home/jethros/.pyenv/bin" $PATH
