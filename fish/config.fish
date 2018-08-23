@@ -1,3 +1,11 @@
+#
+#       My Fish Shell Config
+# -----------------------------------
+#
+#
+#
+#
+
 ## let me get my aliases
 . ~/.config/fish/aliases.fish
 
@@ -6,7 +14,7 @@ set -U fish_user_abbreviations
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
-#set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
+set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
 set -U fish_user_abbreviations $fish_user_abbreviations 'cargot=cargo t'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vim=nvim'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vi=nvim'
@@ -22,31 +30,28 @@ set --universal FONTCONFIG_PATH /etc/fonts/
 #  tmux ^ /dev/null; and exec true
 #end
 
+# systems update
 if [ -e /usr/bin/apt ]
+	# ubuntu systems
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 else if [ -e /usr/bin/yaourt ]
+	# arch systems w/ yaourt
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
-else
+else if [ -e /usr/bin/pacman]
+	# native arch systems
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
 	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
-end
-
-if [ -e /usr/bin/pacaur ]
+else if [ -e /usr/bin/pacaur ]
+	# arch systems w/ pacaur
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
-else if [ -e /usr/bin/yaourt ]
-	set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
 else
-	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
-	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
-	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+	echo "you are not running a recognizable system!"
 end
 
 if [ -e ~/.cargo/bin/exa ]
-	#set -U fish_user_abbreviations $fish_user_abbreviations 'l=exa'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'ls=exa'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'll=exa -l'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'lll=exa -la'
@@ -80,7 +85,6 @@ end
 function upgrade
 	echo (pass x1c/jethros) | sudo -S apt -y upgrade
 end
-
 
 function remote_alacritty
 	# https://gist.github.com/costis/5135502
@@ -132,7 +136,6 @@ end
 function px
 	ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
 end
-
 
 
 ## why do I have so many web servers?
@@ -193,7 +196,7 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 
-## PATH variable
+## PATH variables
 set PATH /usr/local/bin/ $PATH
 set PATH $PATH ~/bin
 set PATH $PATH ~/.local/bin
@@ -203,6 +206,24 @@ set PATH $PATH /home/linuxbrew/.linuxbrew/bin
 set PATH $PATH $NPM_PACKAGES/bin
 set PATH $PATH ~/.local/share/umake/bin
 set PATH $PATH ~/dev/r/bin
+
+## Other PATH variables
+#setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
+
+## Variables setting
+setenv EDITOR nvim
+setenv BROWSER firefox-developer-edition
+setenv EMAIL sun.shuw@husky.neu.edu
+setenv NAME "Jethro S. Sun"
+setenv GOPATH "$HOME/dev/r"
+setenv RUST_BACKTRACE 1
+setenv CARGO_INCREMENTAL 1
+setenv RUSTFLAGS "-C target-cpu=native"
+setenv WINEDEBUG fixme-all
+setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
+setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
+setenv FZF_DEFAULT_OPTS '--height 20%'
+
 
 # For RLS
 # https://github.com/fish-shell/fish-shell/issues/2456
@@ -217,30 +238,20 @@ setenv NPM_PACKAGES "$HOME/.npm-packages"
 #unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-setenv EDITOR nvim
-setenv BROWSER firefox-developer-edition
-setenv EMAIL sun.shuw@husky.neu.edu
-setenv NAME "Jethro S. Sun"
-setenv GOPATH "$HOME/dev/r"
-#setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
-setenv RUST_BACKTRACE 1
-setenv CARGO_INCREMENTAL 1
-setenv RUSTFLAGS "-C target-cpu=native"
-setenv WINEDEBUG fixme-all
-setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
-setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
-setenv FZF_DEFAULT_OPTS '--height 20%'
 
 # https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
 setenv TZ ":/etc/localtime"
 
-set -U fish_user_abbreviations $fish_user_abbreviations 'nova=env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
-set -U fish_user_abbreviations $fish_user_abbreviations 'glance=env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
-setenv OS_USERNAME jfrg@csail.mit.edu
-setenv OS_TENANT_NAME usersandbox_jfrg
-setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
-setenv OS_IMAGE_API_VERSION 1
-setenv OS_VOLUME_API_VERSION 2
+## Commented stuff
+# --------------------
+#set -U fish_user_abbreviations $fish_user_abbreviations 'nova=env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
+#set -U fish_user_abbreviations $fish_user_abbreviations 'glance=env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
+#setenv OS_USERNAME jfrg@csail.mit.edu
+#setenv OS_TENANT_NAME usersandbox_jfrg
+#setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
+#setenv OS_IMAGE_API_VERSION 1
+#setenv OS_VOLUME_API_VERSION 2
+
 function aws -d "Set up environment for AWS"
 	env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1) $argv
 end
@@ -263,27 +274,22 @@ end
 #setenv QT_DEVICE_PIXEL_RATIO 2
 #setenv GDK_SCALE 2
 #setenv GDK_DPI_SCALE 0.5
-setenv _JAVA_OPTIONS '-Dawt.useSystemAAFontSettings=lcd -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-setenv JAVA_FONTS /usr/share/fonts/TTF
-setenv MATLAB_JAVA /usr/lib/jvm/default-runtime
-setenv J2D_D3D false
+#setenv _JAVA_OPTIONS '-Dawt.useSystemAAFontSettings=lcd -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+#setenv JAVA_FONTS /usr/share/fonts/TTF
+#setenv MATLAB_JAVA /usr/lib/jvm/default-runtime
+#setenv J2D_D3D false
 
 # Fish should not add things to clipboard when killing
 # See https://github.com/fish-shell/fish-shell/issues/772
 set FISH_CLIPBOARD_CMD "cat"
 
 # Base16 Shell
-#if status --is-interactive
-	#set BASE16_SHELL "$HOME/dev/others/base16/shell/"
-	#source "$BASE16_SHELL/profile_helper.fish"
-	#eval zsh $HOME/dev/others/base16/shell/scripts/base16-atelier-dune.sh
-	#end
-
-# Base16 Shell
-if status --is-interactive
-    set BASE16_SHELL "$HOME/dev/others/base16/shell"
-    source "$BASE16_SHELL/profile_helper.fish"
-end
+# ------------------------------------------------------
+# I am spawning fish shell from non-interactive mode ...
+#if status --is-interactive  
+set BASE16_SHELL "$HOME/dev/others/base16/shell"
+source "$BASE16_SHELL/profile_helper.fish"
+#end
 
 
 ## pyenv
