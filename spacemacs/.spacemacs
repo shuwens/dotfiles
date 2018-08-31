@@ -722,8 +722,12 @@ in the dump."
     (evil-define-key 'evilified neotree-mode-map (kbd "k") 'neotree-next-line))
 
 
-
   ;; -------------------------  LSP Starts --------------------------------
+  ;;
+  ;;   LSP currently works for C++ (cquery).
+  ;; todo:
+  ;;   Rust?, Python, an
+  ;;
 
   ;; missing: describe and bunch of stuff
   (with-eval-after-load 'go-mode

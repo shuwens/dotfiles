@@ -14,7 +14,7 @@ set -U fish_user_abbreviations
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
-set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo +nightly clippy'
+set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo-clippy'
 set -U fish_user_abbreviations $fish_user_abbreviations 'cargot=cargo t'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vim=nvim'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vi=nvim'

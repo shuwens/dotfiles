@@ -409,6 +409,8 @@ alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
 alias run 'sudo systemctl start'
 alias restart 'sudo systemctl restart'
 alias stop 'sudo systemctl stop'
+# ---------------------------------
+alias holdmybeer 'sudo'
 
 ## my ssh utils
 function UpdateFile -a filename
