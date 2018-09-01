@@ -389,38 +389,32 @@ end
 
 set_color normal
 echo -e " \e[1mTODOs\e[0;32m"
+echo
 if [ $r -lt 10 ]
 	# unimportant, so show rarely
 	set_color cyan
-	# echo "  [project] <description>"
+	# echo "    [project] <description>"
+	# echo "    [project] <description>"
 end
 if [ $r -lt 25 ]
 	# back-of-my-mind, so show occasionally
 	set_color green
-	# echo "  [project] <description>"
+	# echo "    [project] <description>"
+	echo "    [cs6740] problem set 1: Internetworking"
 end
 if [ $r -lt 50 ]
 	# upcoming, so prompt regularly
 	set_color yellow
-	# echo "  [project] <description>"
+	# echo "    [project] <description>"
+	echo "    [pvn] my thoughts on it"
 end
 
 # urgent, so prompt always
 set_color red
 # echo "  [project] <description>"
+# echo "  [project] <description>"
 
 echo
-
-# Huh, show me some todo
-if test -s ~/.todo
-	#set_color normal
-	#echo -e " \e[1mImmediate\e[0;32m"
-	set_color magenta
-	#echo
-	cat ~/.todo | sed 's/^/  /'
-	echo
-end
-
 set_color normal
 end
 

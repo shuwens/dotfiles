@@ -33,7 +33,7 @@ end
 #set LS_COLORS dxfxcxdxbxegedabagacad
 
 alias df 'command df -m'
-alias j jobs
+#alias j jobs
 alias l ls
 alias ll 'ls -la'
 alias ls 'command ls -FG'
@@ -418,6 +418,7 @@ function UpdateFile -a filename
 end
 
 alias emacs 'emacs '
+alias neo-update 'env SHELL=(which sh) nvim +PlugInstall +PlugClean +PlugUpdate UpdateRemotePlugins'
 
 ## DEPRECATED
 #alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
