@@ -390,29 +390,30 @@ end
 set_color normal
 echo -e " \e[1mTODOs\e[0;32m"
 echo
-if [ $r -lt 10 ]
+if [ $r -lt 15 ]
 	# unimportant, so show rarely
 	set_color cyan
 	# echo "    [project] <description>"
-	# echo "    [project] <description>"
+	 echo "    [personal] driver license test"
 end
-if [ $r -lt 25 ]
+if [ $r -lt 35 ]
 	# back-of-my-mind, so show occasionally
 	set_color green
 	# echo "    [project] <description>"
-	echo "    [cs6740] problem set 1: Internetworking"
+	echo "    [cs6740] problem set 1: Internetworking -- DUE 09/17" 
+	echo "    [cs6740] lab 1: Introduction -- DUE 09/24" 
+	echo "    [cs7800] Reviewing lecture 1" 
 end
 if [ $r -lt 50 ]
 	# upcoming, so prompt regularly
 	set_color yellow
 	# echo "    [project] <description>"
-	echo "    [pvn] my thoughts on it"
+	echo "    [cs6740] pset1: client side has two argparser?" 
 end
 
 # urgent, so prompt always
 set_color red
-# echo "  [project] <description>"
-# echo "  [project] <description>"
+echo "    [pvn] my thoughts on it"
 
 echo
 set_color normal
