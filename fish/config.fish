@@ -3,8 +3,7 @@
 # -----------------------------------
 #
 #
-#
-#
+
 
 ## let me get my aliases
 . ~/.config/fish/aliases.fish
@@ -25,10 +24,12 @@ complete --command pacaur --wraps pacman
 ## let's setup path variable
 set --universal FONTCONFIG_PATH /etc/fonts/
 
+set -U fish_prompt_pwd_dir_length 3
+
 # ??? to blame
-#if status --is-interactive
-#  tmux ^ /dev/null; and exec true
-#end
+if status --is-interactive
+  tmux ^ /dev/null; and exec true
+end
 
 # systems update
 if [ -e /usr/bin/apt ]
@@ -213,7 +214,7 @@ set PATH $PATH ~/dev/r/bin
 ## Variables setting
 setenv EDITOR nvim
 setenv BROWSER firefox-developer-edition
-setenv EMAIL sun.shuw@husky.neu.edu
+setenv EMAIL sun.shuw@northeastern.edu
 setenv NAME "Jethro S. Sun"
 setenv GOPATH "$HOME/dev/r"
 setenv RUST_BACKTRACE 1
@@ -394,7 +395,7 @@ if [ $r -lt 15 ]
 	# unimportant, so show rarely
 	set_color cyan
 	# echo "    [project] <description>"
-	 echo "    [personal] driver license test"
+	echo "    [personal] driver license test"
 end
 if [ $r -lt 35 ]
 	# back-of-my-mind, so show occasionally
@@ -418,5 +419,7 @@ echo "    [pvn] my thoughts on it"
 echo
 set_color normal
 end
+
+
 
 # end of [fish/config.fish]
