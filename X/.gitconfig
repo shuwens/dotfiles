@@ -47,6 +47,11 @@
   insteadOf = h:
 [url "git@github.com:"]
   insteadOf = g:
+[url "https://achtung-gitlab.ccs.neu.edu/working-papers"]
+  insteadOf = working:
+[url "git@achtung-gitlab.ccs.neu.edu/:"]
+  insteadOf = lab:
+
 [diff]
   algorithm = patience
   compactionHeuristic = true

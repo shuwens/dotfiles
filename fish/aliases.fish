@@ -4,6 +4,7 @@ alias Ef 'nvim ~/.config/fish/config.fish'
 alias Eg 'nvim ~/.gitconfig'
 alias Ev 'nvim ~/.config/nvim/init.vim'
 alias Es 'nvim ~/.spacemacs'
+alias Et 'nvim ~/.tmux.conf'
 alias Ex 'nvim ~/.xmonad/xmonad.hs'
 #alias Et 'vim ~/.tmux.conf'
 

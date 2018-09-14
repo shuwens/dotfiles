@@ -409,17 +409,16 @@ if [ $r -lt 50 ]
 	# upcoming, so prompt regularly
 	set_color yellow
 	# echo "    [project] <description>"
-	echo "    [cs6740] pset1: client side has two argparser?" 
+	echo "    [cs6740] pset1: visit northeastern.edu?" 
 end
 
 # urgent, so prompt always
 set_color red
-echo "    [pvn] my thoughts on it"
+echo "    [pvn] Architecture"
 
 echo
 set_color normal
 end
-
 
 
 # end of [fish/config.fish]
