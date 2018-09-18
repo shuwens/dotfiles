@@ -12,7 +12,7 @@
 
 #█▓▒░ load configs
 
-source ~/.zshenv
+#source ~/.zshenv
 
 $HOME/bin/br.sh
 exec fish

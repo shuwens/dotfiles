@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #set -x
 
 SESSION_NAME="universe"
@@ -28,9 +28,9 @@ if [ $? != 0 ]; then
 	# server/debug log (3)
 	tmux new-window -n athena -t ${SESSION_NAME}
 	#tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
-	tmux send-keys -t ${SESSION_NAME}:3 'clear; neofetch' C-m
+	tmux send-keys -t ${SESSION_NAME}:3 'clear; ' C-m
 	tmux split-window -v -t ${SESSION_NAME}:3
-	tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 42 ; athena' C-m
+	#tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 42 ; athena' C-m
 
 	# rails console (4)
 	#tmux new-window -n console -t ${SESSION_NAME}

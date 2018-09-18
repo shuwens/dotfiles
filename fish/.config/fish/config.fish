@@ -197,6 +197,13 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 
+if test (uname) = Darwin
+## PATH variables
+set PATH /usr/local/bin/ $PATH
+set PATH $PATH ~/bin
+#set PATH $PATH ~/.cargo/bin
+
+else 
 ## PATH variables
 set PATH /usr/local/bin/ $PATH
 set PATH $PATH ~/bin
@@ -207,6 +214,9 @@ set PATH $PATH /home/linuxbrew/.linuxbrew/bin
 set PATH $PATH $NPM_PACKAGES/bin
 set PATH $PATH ~/.local/share/umake/bin
 set PATH $PATH ~/dev/r/bin
+
+
+end
 
 ## Other PATH variables
 #setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
@@ -226,11 +236,15 @@ setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
 
+if test (uname) = Darwin
+echo
+else
 # For RLS
 # https://github.com/fish-shell/fish-shell/issues/2456
 setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
 setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
 setenv RLS_ROOT ~/dev/others/rls
+end
 
 # Npm
 setenv NPM_PACKAGES "$HOME/.npm-packages"
@@ -294,9 +308,9 @@ source "$BASE16_SHELL/profile_helper.fish"
 
 
 ## pyenv
-set -x PATH "/home/jethros/.pyenv/bin" $PATH
+#set -x PATH "/home/jethros/.pyenv/bin" $PATH
 status --is-interactive; and . (pyenv init -|psub)
-status --is-interactive; and . (pyenv virtualenv-init -|psub)
+#status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 
 # Pretty ls colors
@@ -313,10 +327,21 @@ end
 
 function fish_greeting
 	echo
+if test (uname) = Darwin
+
+	echo -e (uname -r | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
+	echo -e (uptime  | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
+else
+
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
+	end
 	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e " \\e[1mDisk usage:\\e[0m"
+
+if test (uname) = Darwin
+echo
+else
 	echo
 	echo -ne (\
 	df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
@@ -324,10 +349,15 @@ function fish_greeting
 	sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
 	paste -sd ''\
 	)
+	end
 	echo
 
 	echo -e " \\e[1mNetwork:\\e[0m"
-	echo
+
+if test (uname) = Darwin
+echo 
+else
+echo
 	# http://tdt.rocks/linux_network_interface_naming.html
 	echo -ne (\
 	ip addr show up scope global | \
@@ -355,7 +385,7 @@ function fish_greeting
 	sed 's/$/\\\e[0m/' | \
 	sed 's/^/\t/' \
 	)
-	echo
+	end
 
 	set r (random 0 100)
 	if test -s ~/.todo
