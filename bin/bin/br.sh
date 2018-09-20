@@ -29,7 +29,7 @@ if [ $? != 0 ]; then
 	tmux new-window -n athena -t ${SESSION_NAME}
 	#tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
 	tmux send-keys -t ${SESSION_NAME}:3 'clear; ' C-m
-	tmux split-window -v -t ${SESSION_NAME}:3
+	#tmux split-window -v -t ${SESSION_NAME}:3
 	#tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 42 ; athena' C-m
 
 	# rails console (4)

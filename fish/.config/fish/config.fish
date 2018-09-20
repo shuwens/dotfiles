@@ -5,11 +5,11 @@
 #
 
 
-## let me get my aliases
+## let me get my stuff
 . ~/.config/fish/aliases.fish
+#. ~/.config/fish/security.fish
 
 set -U fish_user_abbreviations
-#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
@@ -28,14 +28,25 @@ set -U fish_prompt_pwd_dir_length 3
 
 # ??? to blame
 if status --is-interactive
-  tmux ^ /dev/null; and exec true
+	tmux ^ /dev/null; and exec true
 end
 
 # systems update
+if test (uname) = Darwin
+	set -U fish_user_abbreviations $fish_user_abbreviations 'p=echo "what r you tring to do?"'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'up=brew update'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'upgrade=brew upgrade'
+	set -U fish_user_abbreviations $fish_user_abbreviations 'o=open'
+else
 if [ -e /usr/bin/apt ]
 	# ubuntu systems
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+
+#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
+function upgrade
+	echo (pass x1c/jethros) | sudo -S apt -y upgrade
+end 
 else if [ -e /usr/bin/yaourt ]
 	# arch systems w/ yaourt
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
@@ -51,6 +62,7 @@ else if [ -e /usr/bin/pacaur ]
 else
 	echo "you are not running a recognizable system!"
 end
+end 
 
 if [ -e ~/.cargo/bin/exa ]
 	set -U fish_user_abbreviations $fish_user_abbreviations 'ls=exa'
@@ -81,10 +93,6 @@ case "ec2-user@"
 case "*"
 	/usr/bin/ssh $argv
 end
-end
-
-function upgrade
-	echo (pass x1c/jethros) | sudo -S apt -y upgrade
 end
 
 function remote_alacritty
@@ -146,7 +154,7 @@ function bucs
 end
 # northeastern
 function athena
-	env SSHPASS=(pass www/ccis) sshpass -e ssh nu-ccis $argv
+	env SSHPASS=(security find-generic-password -a jethrosun -s athena -w) sshpass -e ssh nu-ccis $argv
 end
 
 
@@ -198,22 +206,22 @@ set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 
 if test (uname) = Darwin
-## PATH variables
-set PATH /usr/local/bin/ $PATH
-set PATH $PATH ~/bin
-#set PATH $PATH ~/.cargo/bin
+	## PATH variables
+	set PATH /usr/local/bin/ $PATH
+	set PATH $PATH ~/bin
+	set PATH $PATH ~/.cargo/bin
 
 else 
-## PATH variables
-set PATH /usr/local/bin/ $PATH
-set PATH $PATH ~/bin
-set PATH $PATH ~/.local/bin
-#set PATH $PATH ~/.local/share/umake/rust/rust-lang/rustc/bin
-set PATH $PATH ~/.cargo/bin
-set PATH $PATH /home/linuxbrew/.linuxbrew/bin
-set PATH $PATH $NPM_PACKAGES/bin
-set PATH $PATH ~/.local/share/umake/bin
-set PATH $PATH ~/dev/r/bin
+	## PATH variables
+	set PATH /usr/local/bin/ $PATH
+	set PATH $PATH ~/bin
+	set PATH $PATH ~/.local/bin
+	#set PATH $PATH ~/.local/share/umake/rust/rust-lang/rustc/bin
+	set PATH $PATH ~/.cargo/bin
+	set PATH $PATH /home/linuxbrew/.linuxbrew/bin
+	set PATH $PATH $NPM_PACKAGES/bin
+	set PATH $PATH ~/.local/share/umake/bin
+	set PATH $PATH ~/dev/r/bin
 
 
 end
@@ -237,13 +245,13 @@ setenv FZF_DEFAULT_OPTS '--height 20%'
 
 
 if test (uname) = Darwin
-echo
+	echo
 else
-# For RLS
-# https://github.com/fish-shell/fish-shell/issues/2456
-setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
-setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
-setenv RLS_ROOT ~/dev/others/rls
+	# For RLS
+	# https://github.com/fish-shell/fish-shell/issues/2456
+	setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
+	setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
+	setenv RLS_ROOT ~/dev/others/rls
 end
 
 # Npm
@@ -327,37 +335,52 @@ end
 
 function fish_greeting
 	echo
-if test (uname) = Darwin
+	if test (uname) = Darwin
 
-	echo -e (uname -r | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
-	echo -e (uptime  | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
+		echo -e (uname -r | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
+		echo -e (uptime  | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 else
 
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
-	end
-	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
-	echo -e " \\e[1mDisk usage:\\e[0m"
+end
+echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
 
-if test (uname) = Darwin
-echo
-else
+# Disk usage
+echo -e " \\e[1mDisk usage:\\e[0m"
 	echo
+if test (uname) = Darwin
+echo -ne (\
+	df -l -h | grep -E 'dev' | \
+	awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
+	sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
+	paste -sd\\ - \
+	)
+else
 	echo -ne (\
 	df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
 	awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
 	sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
 	paste -sd ''\
 	)
-	end
-	echo
-
-	echo -e " \\e[1mNetwork:\\e[0m"
-
-if test (uname) = Darwin
-echo 
-else
+end
 echo
+
+# Network
+echo -e " \\e[1mNetwork:\\e[0m"
+echo
+if test (uname) = Darwin
+	echo -ne "       " 
+	echo -ne (\
+	networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}' \
+	)
+	echo -ne ": " 
+	echo -ne (\
+	ipconfig  getifaddr (networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') \
+	)
+	echo
+else
+	echo
 	# http://tdt.rocks/linux_network_interface_naming.html
 	echo -ne (\
 	ip addr show up scope global | \
@@ -385,17 +408,18 @@ echo
 	sed 's/$/\\\e[0m/' | \
 	sed 's/^/\t/' \
 	)
-	end
+end
+echo 
 
-	set r (random 0 100)
-	if test -s ~/.todo
-		if [ $r -lt 10 ] # only occasionally show backlog (10%)
-			echo -e " \e[1mBacklog\e[0;32m"
-			set_color blue
-			echo
-			#echo "  [project] <description>"
-			cat ~/.backlog| sed 's/^/  /'
-			echo
+set r (random 0 100)
+if test -s ~/.todo
+	if [ $r -lt 10 ] # only occasionally show backlog (10%)
+		echo -e " \e[1mBacklog\e[0;32m"
+		set_color blue
+		echo
+		#echo "  [project] <description>"
+		cat ~/.backlog| sed 's/^/  /'
+		echo
 end
 end
 
@@ -431,15 +455,13 @@ if [ $r -lt 35 ]
 	# back-of-my-mind, so show occasionally
 	set_color green
 	# echo "    [project] <description>"
-	echo "    [cs6740] problem set 1: Internetworking -- DUE 09/17" 
-	echo "    [cs6740] lab 1: Introduction -- DUE 09/24" 
-	echo "    [cs7800] Reviewing lecture 1" 
+	echo "    [cs7800] Problem Set 1" 
 end
 if [ $r -lt 50 ]
 	# upcoming, so prompt regularly
 	set_color yellow
 	# echo "    [project] <description>"
-	echo "    [cs6740] pset1: visit northeastern.edu?" 
+	#echo "    [cs6740] pset1: visit northeastern.edu?" 
 end
 
 # urgent, so prompt always

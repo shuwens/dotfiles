@@ -367,6 +367,9 @@ alias TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 function ,,,
   make clean; and make
 end
+
+	if test (uname) = Darwin
+else
 function o -a filename
   xdg-open $filename &
 end
@@ -374,7 +377,7 @@ end
 function open -a filename
   xdg-open $filename &
 end
-
+end
 function lazy
   if test "$argv"
     git add -A

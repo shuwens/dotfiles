@@ -1,2 +1,5 @@
 fishd.x1c
 .fishd.x1c
+security.fish
+fishd.*
+.DS_Store
