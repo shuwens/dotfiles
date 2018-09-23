@@ -126,7 +126,8 @@ export FIGNORE="$FIGNORE:.aux:.out:.toc"
 export LESS="-F -X -R"
 
 # Color aliases
-alias ls='ls --color=auto'
+#alias ls='ls --color=auto'
+alias ls='exa'
 alias grep='grep --color=auto'
 alias mplayer='mplayer -msgcolor'
 # Common aliases

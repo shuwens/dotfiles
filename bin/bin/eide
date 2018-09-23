@@ -73,7 +73,7 @@ echo "         Start running Emacs "
 echo " ---------------------------------------"
 
 #emacs-snapshot &
-emacs &
+emacs --insecure &
 #sleep 245; cd ~/.emacs.d/elpa/develop/alect-themes* && wget https://raw.githubusercontent.com/cbowdon/geeko-theme/master/geeko-theme.el
 #cd ~/.emacs.d/elpa/develop/melancholy-theme* && sed -i.bak s/:height\ 160//g melancholy-theme.el
 

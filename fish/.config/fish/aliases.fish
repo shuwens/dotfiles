@@ -1,6 +1,7 @@
 # Quick edits
 alias Ea 'nvim ~/.config/fish/aliases.fish'
 alias Ef 'nvim ~/.config/fish/config.fish'
+alias Ep 'nvim ~/.config/powerline-shell/config.json'
 alias Eg 'nvim ~/.gitconfig'
 alias Ev 'nvim ~/.config/nvim/init.vim'
 alias Es 'nvim ~/.spacemacs'
