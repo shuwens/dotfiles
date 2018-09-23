@@ -182,7 +182,7 @@
    dotspacemacs-additional-packages '(
                                       lispy meghanada groovy-mode gradle-mode
                                       stickyfunc-enhance dumb-jump
-                                      function-args company-childframe
+                                      function-args company-posframe
                                       aggressive-indent academic-phrases
                                       pcap-mode fix-word darkroom lsp-rust
                                       ;;TEST
@@ -223,12 +223,12 @@
    ;; to compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
    ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper nil
+   dotspacemacs-enable-emacs-pdumper t
 
    ;; File path pointing to emacs 27.1 executable compiled with support
    ;; for the portable dumper (this is currently the branch pdumper).
    ;; (default "emacs")
-   dotspacemacs-emacs-pdumper-executable-file "~/repos/TOOLS/pdumper-emacs/src/emacs"
+   dotspacemacs-emacs-pdumper-executable-file "emacs"
 
    ;; Name of the Spacemacs dump file. This is the file will be created by the
    ;; portable dumper in the cache directory under dumps sub-directory.
@@ -1121,9 +1121,9 @@
   ;;(global-set-key (kbd "H-y") #'aya-expand)
   ;;(global-set-key (kbd "C-o") #'aya-open-line)
 
-  ;; use company childframe
-  (require 'company-childframe)
-  (company-childframe-mode 1)
+  ;; use company posframe
+  (require 'company-posframe)
+  (company-posframe-mode 0)
 
   ;; Deft/Org mode setting
   ;; -----------------------------
@@ -1361,10 +1361,7 @@
 
   ;; tailing interesting links:
   ;; https://github.com/minorugh/emacs.d/blob/273ecd2bf6b1f8ac83338aee6e7eca566aabdfaf/inits/80_darkroom-mode.el
-
-
   )
-
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -1377,3 +1374,24 @@
 ;;(provide '.spacemacs)
   ;;; .spacemacs ends here
 
+
+
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(yapfify yaml-mode xterm-color ws-butler winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill ujelly-theme treemacs-projectile treemacs-evil treemacs pfuture toml-mode toc-org tern tagedit symon string-inflection stickyfunc-enhance srcery-theme spaceline-all-the-icons spaceline powerline smex slim-mode shell-pop scss-mode sass-mode restart-emacs request rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode protobuf-mode prettier-js popwin pippel pipenv pip-requirements persp-mode pcap-mode password-generator paradox overseer org-ref pdf-tools key-chord helm-bibtex parsebib tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file nord-theme nameless mwim mvn multi-term move-text mmm-mode minimap melancholy-theme meghanada maven-test-mode material-theme markdown-toc macrostep lsp-ui dash-functional lsp-rust lsp-python lsp-javascript-typescript typescript-mode lsp-java lsp-go lsp-mode lorem-ipsum livid-mode skewer-mode live-py-mode lispy zoutline link-hint langtool kaolin-themes json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc ivy-xref ivy-purpose window-purpose ivy-prescient prescient ivy-hydra intero insert-shebang indent-guide importmagic epc ctable concurrent deferred impatient-mode simple-httpd imenu-list ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make haskell-snippets haml-mode gruvbox-theme groovy-mode groovy-imports pcache gradle-mode google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc go-mode gnuplot gh-md function-args flyspell-popup flyspell-correct-ivy flyspell-correct flycheck-rust flycheck-pos-tip pos-tip flycheck-haskell flycheck-bashate flx-ido flx fix-word fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eshell-z eshell-prompt-extras esh-help erlang ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig eclim dumb-jump doom-themes doom-modeline eldoc-eval shrink-path all-the-icons memoize doneburn-theme deft define-word darktooth-theme autothemer darkroom dante lcr flycheck cython-mode counsel-projectile projectile counsel-css counsel swiper ivy company-ghci company-ghc ghc haskell-mode company-childframe company-posframe posframe company column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode cmm-mode clojure-cheatsheet helm helm-core popup clj-refactor inflections edn multiple-cursors paredit yasnippet peg clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider sesman spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo markdown-mode rust-mode biblio biblio-core auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex anaconda-mode pythonic f alect-themes aggressive-indent ace-window ace-link avy academic-phrases ht s dash which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
