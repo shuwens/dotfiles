@@ -321,6 +321,7 @@ source "$BASE16_SHELL/profile_helper.fish"
 ## pyenv
 #set -x PATH "/home/jethros/.pyenv/bin" $PATH
 status --is-interactive; and . (pyenv init -|psub)
+set PYENV_VERSION system
 #status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 
