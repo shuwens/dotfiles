@@ -419,7 +419,7 @@ alias holdmybeer 'sudo'
 
 ## my ssh utils
 function UpdateFile -a filename
-  env SSHPASS=(pass www/ccis) sshpass -e scp $filename nu-ccis:~/.www/tmp/
+  scp $filename nu-ccis:~/.www/tmp/
 end
 
 alias emacs 'emacs '

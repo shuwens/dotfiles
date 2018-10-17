@@ -1,0 +1,2 @@
+* Remove dock auto hide delay
+[[https://www.idownloadblog.com/2015/02/14/auto-hide-dock-no-delay-mac/]]

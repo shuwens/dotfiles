@@ -322,7 +322,7 @@ source "$BASE16_SHELL/profile_helper.fish"
 #set -x PATH "/home/jethros/.pyenv/bin" $PATH
 status --is-interactive; and . (pyenv init -|psub)
 set PYENV_VERSION system
-#status --is-interactive; and . (pyenv virtualenv-init -|psub)
+status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 
 # Pretty ls colors
