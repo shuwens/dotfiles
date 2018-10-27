@@ -15,7 +15,7 @@ echo "cp ~/.vim/plugin/Templates ~/.vim/plugged/c-support/c-support/templates"
 echo ""
 
 echo "Install my neovim ..."
-git clone git@github.com:shwsun/yavc.git -b neovim ~/.config/nvim
+git clone git@github.com:jethrosun/yavc.git -b neovim ~/.config/nvim
 
 # phonix
 #git clone https://github.com/phoenixlzx/dotvim.git ~/.vim && ln -s ~/.vim/vimrc ~/.vimrc

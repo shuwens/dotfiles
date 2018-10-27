@@ -20,7 +20,7 @@ set -U fish_user_abbreviations $fish_user_abbreviations 'vim=nvim'
 set -U fish_user_abbreviations $fish_user_abbreviations 'sduo=sudo'
 set -U fish_user_abbreviations $fish_user_abbreviations 'vi=nvim'
 set -U fish_user_abbreviations $fish_user_abbreviations 'jn=jupyter notebook'
-set -U fish_user_abbreviations $fish_user_abbreviations 'emacs=emacs set --dump-file ~/.emacs.d/.cache/dumps/spacemacs.pdmp'
+#set -U fish_user_abbreviations $fish_user_abbreviations 'emacs=emacs set --dump-file ~/.emacs.d/.cache/dumps/spacemacs.pdmp'
 complete --command yaourt --wraps pacman
 complete --command pacaur --wraps pacman
 
