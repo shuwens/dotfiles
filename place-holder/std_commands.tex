@@ -1,0 +1,244 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-- DISCLAIMER:
+%-- This is open sourced LaTeX utils that I adapted and changed over time, you
+%-- are free to change or use it.     
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-- place any standard commands/environments here to get included in
+%-- documents.  When you include this file, you should do it before
+%-- the \begin{document} tag.
+
+
+%-- NECESSARY ENVIRONMENTS OR PACKAGES (paste in to main.tex if necessay):
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-- CHANGES:
+%-- 07/31/01 -jstrunk- Added command to set the paper margins.
+%-- 09/25/17 -jethros- Added some changes around todo.
+%-- 11/23/18 -jethros- Organized things so that it will be easier to use.
+
+
+%-- Provides fixed width font for commands and code snips.
+% ???
+%-- The bit that need to paper.tex right away:
+% =========================================================
+
+%-- Necessary packages... To enable std_commands
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{array}
+\usepackage{ifthen}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage[colorlinks=true,citecolor=Bittersweet,linkcolor=black]{hyperref}% violetred
+
+%-- To use booktabs...
+\usepackage{booktabs}
+\usepackage{rotating} % Rotate tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{chngpage}
+\usepackage{adjustbox}
+\usepackage[english]{babel}
+\usepackage{rotating} % Rotate tables
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{graphicx}
+\usepackage[font={small,it}]{caption}
+\usepackage{subcaption}
+\usepackage{lscape}
+\usepackage{pifont}
+
+%-- 0 means no comments, and 1 o/w
+\newcommand{\showcomments}{0}
+
+%-- enable todo
+%\providecommand{\todo}[1]{\textcolor{red}{TODO: #1}\PackageWarning{TODO:}{#1!}}
+%\renewcommand{\todo}[1]{}   % enable it to supress TODO
+
+% ---------------------------------------------------
+
+%-- Save space... savetrees is breaking
+%\usepackage[subtle]{savetrees}
+%\usepackage[moderate]{savetrees}
+%\usepackage[extreme]{savetrees}
+
+%-- Links... change ref link color
+\definecolor{blue1}{rgb}{0.01, 0.28, 1.0}
+\DeclareCaptionFont{blue}{\color{blue1}}
+\captionsetup[figure]{labelfont=blue}
+
+%-- Booktabs...
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\head}[1]{\textbf{#1}}
+\setlength{\extrarowheight}{4pt}
+\newcommand{\normal}[1]{\multicolumn{1}{l}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-- Macros... examples...
+\newcommand{\netex}{FlexNet\xspace}
+\hyphenation{FlexNet}
+
+%-- ????
+\renewcommand{\sectionautorefname}{\S}
+\renewcommand{\subsectionautorefname}{\S}
+
+%-- Code... Not sure this is useful...
+\newcommand{\code}[1]{\texttt{\textbf{#1}}}
+
+%-- Terms...  Use this to introduce a term in the paper.
+\newcommand{\term}[1]{\emph{#1}}
+
+%-- Provides stylization for e-mail addresses
+%\newcommand{\email}[1]{\emph{(#1)}}
+
+%-- Starts a minor section (puts the title inline w/ the text.
+\newcommand{\minorsection}[1]{\textbf{#1}:}
+
+%-- Jiri caption
+\newcommand{\minicaption}[2]{\caption[#1]{\textbf{#1.} \textnormal{#2}}}
+
+%-- Units on numbers: 4KB -> \units{4}{KB}
+\newcommand{\units}[2]{#1~#2}
+
+%-- Commands...  i.e. WRITE commands.
+\newcommand{\command}[1]{{\sc \MakeLowercase{#1}}}
+
+%-- For notes about things that need to be fixed.
+\newcommand{\fix}[1]{\marginpar{\LARGE\ensuremath{\bullet}}
+\MakeUppercase{\textbf{[#1]}}}
+%-- For adding inline notes to a draft preceded by your initials
+%-- E.g., \fixnote{JJW}{What the heck is a foobar?}
+\newcommand{\fixnote}[2]{\marginpar{\LARGE\ensuremath{\bullet}}
+{\textbf{[#1:} \textit{#2\,}\textbf{]}}}
+
+%-- Setting margins: \setmargins{left}{right}{top}{bottom}
+\newcommand{\setmargins}[4]{
+  % Calculations of top & bottom margins
+  \setlength\topmargin{#3}
+  \addtolength\topmargin{-.5in}  %-- seems like this should be 1, but .5
+  %-- balances the text top to bottom
+  \addtolength\topmargin{-\headheight}
+  \addtolength\topmargin{-\headsep}
+  \setlength\textheight{\paperheight}
+  \addtolength\textheight{-#3}
+  \addtolength\textheight{-#4}
+
+  % Calculations of left & right margins
+  \setlength\oddsidemargin{#1}
+  \addtolength\oddsidemargin{-1in}
+  \setlength\evensidemargin{\oddsidemargin}
+  \setlength\textwidth{\paperwidth}
+  \addtolength\textwidth{-#1}
+  \addtolength\textwidth{-#2}
+}
+
+%-- For the tabularx environment... Using L, C, R as the column type
+%-- will left, center, or right justify the text.
+\newcolumntype{L}{X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+%-- To comment out a swatch of text, use \omitit{blah blah blah} or \eat{ xxx }
+\long\def\omitit#1{}
+\newcommand\eat[1]{}
+\newcommand\bs{\bigskip}
+
+%-- Inline title; useful for sub-sub-sections in which you don't want a separate
+%-- line for the title.
+\newcommand{\inlinesection}[1]{\smallskip\noindent{\textbf{#1.}}}
+
+%-- todo notes
+
+\newenvironment{outlineenv}{\par\color{black}}{\par}
+\newenvironment{pagelenenv}{\par\color{red}}{\par}
+
+%\newcommand{\outline}[1]{\begin{outlineenv}#1\end{outlineenv}}
+\newcommand{\paralenblah}[1]{\begin{pagelenenv}Estimated length: #1
+paragraphs\end{pagelenenv}}
+\newcommand{\pagelenblah}[1]{\begin{pagelenenv}Estimated length: #1
+pages\end{pagelenenv}}
+\newcommand{\outline}[1]{\textsf{\textbf{\leavevmode\color{Red}[Outline: #1]}}}
+\newcommand{\todoA}[1]{\textsf{\textbf{\color{VioletRed}{[#1]}}}}
+\newcommand{\todoB}[1]{\textsf{\textbf{\color{Blue}{[#1]}}}}
+\newcommand{\todoC}[1]{\textsf{\textbf{\color{Green}{[#1]}}}}
+\newcommand{\todoD}[1]{\textsf{\textbf{\color{Red}{[#1]}}}}
+\newcommand{\todoE}[1]{\textsf{\textbf{\color{Orange}{[#1]}}}}
+%\newcommand{\todoF}[1]{\textsf{\textbf{\color{VioletRed}{[#1]}}}}
+\newcommand{\rough}[1]{\textit{\color{Orange}{#1}}}
+
+\newcommand{\paralen}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\paralenblah{#1}}{}}
+
+\newcommand{\pagelen}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\pagelenblah{#1}}{}}
+
+\newcommand{\outlinetext}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\outline{#1}}{}}
+
+\newcommand{\evan}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\todoA{Evan: #1}}{}}
+\newcommand{\raja}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\todoB{Raja: #1}}{}}
+\newcommand{\ok}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\todoC{Orran: #1}}{}}
+\newcommand{\peter}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\todoD{Peter: #1}}{}}
+
+\newcommand{\jethro}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\todoE{Jethro: #1}}{}}
+
+
+\newcommand{\todo}[1]{
+  \ifthenelse{\equal{\showcomments}{1}}{
+\todoA{TODO: #1}}{}}
+
+% eg, ie, etc, et al ....
+\newcommand{\eg}{\emph{e.g.}\xspace}
+\def\etc{etc.\@\xspace}
+\newcommand{\cf}{{cf.}\xspace}
+\newcommand{\ie}{\emph{i.e.}\xspace}
+\newcommand{\etal}{\emph{et al.}\xspace}
+
+%-- Little numbers in circles...  Maybe possible to define smarter macro, but
+%-- simple attempts didn't work.  There are also UTF-8 characters that can be used.
+%-- Might need this to get it working:
+%\usepackage{pifont}
+\newcommand{\circone}{\protect\raisebox{-0.5pt}{\ding{192}}\xspace}
+\newcommand{\circtwo}{\protect\raisebox{-0.5pt}{\ding{193}}\xspace}
+\newcommand{\circthree}{\protect\raisebox{-0.5pt}{\ding{194}}\xspace}
+\newcommand{\circfour}{\protect\raisebox{-0.5pt}{\ding{195}}\xspace}
+\newcommand{\circfive}{\protect\raisebox{-0.5pt}{\ding{196}}\xspace}
+\newcommand{\circsix}{\protect\raisebox{-0.5pt}{\ding{197}}\xspace}
+\newcommand{\circseven}{\protect\raisebox{-0.5pt}{\ding{198}}\xspace}
+\newcommand{\circeight}{\protect\raisebox{-0.5pt}{\ding{199}}\xspace}
+\newcommand{\circnine}{\protect\raisebox{-0.5pt}{\ding{200}}\xspace}
+\newcommand{\circten}{\protect\raisebox{-0.5pt}{\ding{201}}\xspace}
+
+% Little numbers in circles plus background colors
+\newcommand{\colorcirc}[2]{\protect\raisebox{-0.5pt}{\protect\tikz{\protect\path
+[fill=#1] (0,0.004) circle [radius=0.105];\protect\node [inner sep=0,outer
+sep=0] at (0,0) {\small{#2}};}}}
+
+
+
+
+\newcommand{\squeezeup}{\vspace{-6.0mm}}
+%%% Local Variables:
+%%% mode: plain-tex
+%%% TeX-master: "hotnets15_submit_evolvability"
+%%% End:

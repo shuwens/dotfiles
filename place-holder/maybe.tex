@@ -1,0 +1,37 @@
+
+%% Define fancy page foot note
+%% ---------------------------
+\usepackage{fancyhdr,lastpage}
+\usepackage{siunitx}
+\pagestyle{fancy}
+\setlength{\oddsidemargin}{5pt}
+\setlength{\evensidemargin}{10pt}
+\setlength{\marginparwidth}{0in}
+\setlength{\topmargin}{-2.0cm}
+\setlength{\textwidth}{470pt}
+\setlength{\textheight}{9.5in}
+\setlength{\footskip}{25pt}
+
+\fancyhead{}
+\fancyfoot{}
+\fancyheadoffset[R]{1pt}
+\fancyfootoffset[R]{1pt}
+% \fancyhead[R]{\small Research Statement. Shuwen (Jethro) Sun}
+\fancyhead{}
+\fancyfoot[C]{\footnotesize Shuwen (Jethro) Sun -- Page \thepage \ of 
+  \pageref{LastPage} -- Ph.D. Research Statement }
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\footnotesize Shuwen (Jethro) Sun -- Page \thepage \ of
+    \pageref{LastPage} -- Ph.D. Research Statement}   
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfootoffset[R]{1pt}
+}
+
+%% attempts to shrink the vspace in bibtex
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+  \setlength{\itemsep}{-3.5pt}} %Reducing spacing in the bibliography.
+

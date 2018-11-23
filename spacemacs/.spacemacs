@@ -37,15 +37,15 @@
 		 ;; <M-m f e R> (Emacs style) to install them.
 		 ;; ----------------------------------------------------------------
 		 ivy
-		 ;;auto-completion
+		 auto-completion
 		 better-defaults
 		 emacs-lisp
-		 ;;git
+		 git
 		 latex
 		 go
 		 rust
 		 markdown
-		 org
+		 ;;org
 		 (shell :variables
 			shell-default-height 30
 			shell-default-position 'bottom)

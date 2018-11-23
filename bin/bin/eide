@@ -8,11 +8,13 @@ echo YCMD_DIR=/home/jethros/git/ycmd/
 #git clone -b bleeding --single-branch git@github.com:shwsun/emacs.d.git ~/.emacs.d
 
 # Spacemacs
-git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-#git clone https://github.com/shwsun/spacemacs -b develop  ~/.emacs.d
-#git clone https://github.com/shwsun/spacemacs -b new-dev  ~/.emacs.d
+#git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+#ln -s ~/git/dotfiles/emacs/.emacs.d/private/layers ~/.emacs.d/private/layers
 
-ln -s ~/git/dotfiles/emacs/.emacs.d/private/layers ~/.emacs.d/private/layers
+
+#git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
+
 
 #mkdir -p ~/.emacs.d/private && cd ~/.emacs.d/private  && cp -r ~/repos/SPACE/dotspace/layers .
 #cd ~/.emacs.d/private/layers && cp -r ~/repos/SPACE/langtool/layers/+tools/languagetool .
@@ -51,29 +53,12 @@ if [ -d $YCMD_DIR ]; then echo 'Ycmd Exists'; else
   #cd ~/git && git clone https://github.com/Valloric/ycmd.git
 fi
 
-
-# an example
-# --------------------
-
-#rm -r ~/.emacs.d/private
-#git clone git@github.com:tigersoldier/dotspacemacs.git ~/.emacs.d/private
-#rm ~/.spacemacs && ln -s ~/.emacs.d/private/init.el ~/.spacemacs
-
-# 2 
-
-#rm -r ~/.emacs.d/private && rm ~/.spacemacs
-#ln -s ~/repos/Config/home/.spacemacs ~/.spacemacs
-#ln -s ~/repos/Config/home/.emacs.d/private ~/.emacs.d/private
-
-# Evil 
-
 echo ""
 echo " ---------------------------------------"
 echo "         Start running Emacs "
 echo " ---------------------------------------"
 
 #emacs-snapshot &
-emacs --insecure &
-#sleep 245; cd ~/.emacs.d/elpa/develop/alect-themes* && wget https://raw.githubusercontent.com/cbowdon/geeko-theme/master/geeko-theme.el
-#cd ~/.emacs.d/elpa/develop/melancholy-theme* && sed -i.bak s/:height\ 160//g melancholy-theme.el
+#emacs --insecure &
+emacs &
 

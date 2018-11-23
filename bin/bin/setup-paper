@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "setting up current dir as a paper directory..."
+
+wget -O Makefile https://raw.githubusercontent.com/jethrosun/dotfiles/master/place-holder/Makefile
+wget -O .gitignore https://raw.githubusercontent.com/jethrosun/dotfiles/master/place-holder/gitignore
+wget -O latexrun https://raw.githubusercontent.com/jethrosun/dotfiles/master/place-holder/latexrun
+wget -O std_commands.tex https://raw.githubusercontent.com/jethrosun/dotfiles/master/place-holder/std_commands.tex
+
+chmod +x latexrun
+
+echo "Done ...."
+
+# end of vide.sh

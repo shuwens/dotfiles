@@ -146,11 +146,13 @@ chunkc tiling::rule --owner Emacs --except "^$" --state tile &
 # personal rules
 chunkc tiling::rule --owner NeteaseMusic  --state float &
 chunkc tiling::rule --owner Preview  --state float &
+chunkc tiling::rule --owner Keynote --state float &
 chunkc tiling::rule --owner \"Sublime Text\" --state float &
 chunkc tiling::rule --owner \"isec 655 printer\" --state float &
 chunkc tiling::rule --owner Firefox  --state float &
 chunkc tiling::rule --owner Notes --state float &
 chunkc tiling::rule --owner Chrome --state float &
+chunkc tiling::rule --owner Emacs --state float &
 chunkc tiling::rule --owner Slack --state float &
 chunkc tiling::rule --owner Code --state float &
 chunkc tiling::rule --owner Tweetbot --state float &
