@@ -153,6 +153,7 @@ chunkc tiling::rule --owner Firefox  --state float &
 chunkc tiling::rule --owner Notes --state float &
 chunkc tiling::rule --owner Chrome --state float &
 chunkc tiling::rule --owner Emacs --state float &
+chunkc tiling::rule --owner Gitify --state float &
 chunkc tiling::rule --owner Slack --state float &
 chunkc tiling::rule --owner Code --state float &
 chunkc tiling::rule --owner Tweetbot --state float &

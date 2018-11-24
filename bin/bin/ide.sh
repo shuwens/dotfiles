@@ -1,6 +1,6 @@
 #!/bin/bash
+set -euxo pipefail
 
-set -e
 rm -rf ~/.vim*
 rm -rf ~/.config/nvim*
 rm -rf ~/.gvim*
@@ -43,6 +43,6 @@ git clone git@github.com:jethrosun/yavc.git -b neovim ~/.config/nvim
 #git clone --recursive https://github.com/jessfraz/.vim.git ~/.vim && ln -sf $HOME/.vim/vimrc $HOME/.vimrc && cd $HOME/.vim && git submodule update --init
 
 
-
+nvim +PlugInstall +UpdateRemotePlugins +qa
 
 # end of vide.sh

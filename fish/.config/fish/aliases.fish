@@ -36,6 +36,7 @@ end
 
 alias df 'command df -m'
 #alias j jobs
+alias r ranger
 alias l ls
 alias ll 'ls -la'
 alias ls 'command ls -FG'
