@@ -41,14 +41,14 @@ if test (uname) = Darwin
 	set -U fish_user_abbreviations $fish_user_abbreviations 'upgrade=brew upgrade'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'o=open'
 else
-if [ -e /usr/bin/apt ]
-	# ubuntu systems
-	set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+	if [ -e /usr/bin/apt ]
+		# ubuntu systems
+		set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
+		set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
 
-#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
-function upgrade
-	echo (pass x1c/jethros) | sudo -S apt -y upgrade
+		#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
+		function upgrade
+			echo (pass x1c/jethros) | sudo -S apt -y upgrade
 end 
 else if [ -e /usr/bin/yaourt ]
 	# arch systems w/ yaourt
@@ -83,7 +83,8 @@ if [ -e $HOME/.fishmarks/marks.fish ]; and status --is-interactive
 end
 
 ## fzf
-if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
+#if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
+if [ -e $HOME/.fzf/shell/key-bindings.fish ]
 	. $HOME/.fzf/shell/key-bindings.fish
 end
 
@@ -242,19 +243,21 @@ setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native"
 setenv WINEDEBUG fixme-all
-setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
-setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
-
 if test (uname) = Darwin
-	echo
+	# FZF macOS
+	setenv FZF_DEFAULT_COMMAND 'ag -g ""'
+	setenv FZF_CTRL_T_COMMAND 'ag -g ""'
 else
 	# For RLS
 	# https://github.com/fish-shell/fish-shell/issues/2456
 	setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
 	setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
 	setenv RLS_ROOT ~/dev/others/rls
+	# FZF linux
+	setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
+	setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 end
 
 # Npm
@@ -352,9 +355,9 @@ echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
 
 # Disk usage
 echo -e " \\e[1mDisk usage:\\e[0m"
-	echo
+echo
 if test (uname) = Darwin
-echo -ne (\
+	echo -ne (\
 	df -l -h | grep -E 'dev' | \
 	awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
 	sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \

@@ -12,6 +12,7 @@ if [ $? != 0 ]; then
 
 	# Create the session
 	tmux new-session -s ${SESSION_NAME} -n foo -d
+	#tmux new-window -n ${SESSION_NAME} -n foo -d
 
 	# First window (0) -- vim and console
 	#tmux send-keys -t ${SESSION_NAME} 'clear ; fish' C-m
