@@ -213,9 +213,8 @@ if test (uname) = Darwin
 	## PATH variables
 	set PATH /usr/local/bin/ $PATH
 	set PATH $PATH ~/bin
-	set PATH $PATH ~/.cargo/bin
-
-else 
+	set PATH $PATH $HOME/.cargo/bin
+else
 	## PATH variables
 	set PATH /usr/local/bin/ $PATH
 	set PATH $PATH ~/bin
