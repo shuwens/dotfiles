@@ -1,9 +1,6 @@
 #
 #       My Fish Shell Config
 # -----------------------------------
-#
-#
-
 
 ## let me get my stuff
 [ -f ~/.config/fish/aliases.fish ]; and source ~/.config/fish/aliases.fish
@@ -342,11 +339,9 @@ end
 function fish_greeting
 	echo
 	if test (uname) = Darwin
-
-		echo -e (uname -r | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
+		echo -e (uname -sr | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 		echo -e (uptime  | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 else
-
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 end
@@ -358,7 +353,7 @@ echo
 if test (uname) = Darwin
 	echo -ne (\
 	df -l -h | grep -E 'dev' | \
-	awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
+	awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $1, $3, $2, $5}' | \
 	sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
 	paste -sd\\ - \
 	)
