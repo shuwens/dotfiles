@@ -339,13 +339,13 @@ end
 function fish_greeting
 	echo
 	if test (uname) = Darwin
-		echo -e (uname -sr | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
-		echo -e (uptime  | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
+		echo -e (uname -sr | awk '{print " \\\\e[1mOS:  \\\\e[0;32m"$0"\\\\e[0m"}')
+		echo -e (uptime  | sed 's/^up //' | awk '{print " \\\\e[1mUptime:  \\\\e[0;32m"$0"\\\\e[0m"}')
 else
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 end
-echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
+echo -e (uname -n | awk '{print " \\\\e[1mHostname:  \\\\e[0;32m"$0"\\\\e[0m"}')
 
 # Disk usage
 echo -e " \\e[1mDisk usage:\\e[0m"
@@ -450,24 +450,28 @@ if [ $r -lt 15 ]
 	# unimportant, so show rarely
 	set_color cyan
 	# echo "    [project] <description>"
-	echo "    [personal] driver license test"
+	echo "    [PVN] NetBricks: Replicate experiments"
+	echo "    [PVN] NetBricks: Modify and improve NetBricks"
 end
 if [ $r -lt 35 ]
 	# back-of-my-mind, so show occasionally
 	set_color green
 	# echo "    [project] <description>"
-	echo "    [cs7800] Problem Set 1" 
+	echo "    [PVN] SGX: read primer (ring0)"
+	echo "    [PVN] NetBricks: DPDK"
 end
 if [ $r -lt 50 ]
 	# upcoming, so prompt regularly
 	set_color yellow
-	# echo "    [project] <description>"
-	#echo "    [cs6740] pset1: visit northeastern.edu?" 
+	echo "    [SysNet] send the emal out"
+	echo "    [PVN] NetBricks: get familiar with the codebase"
+	#echo "    [cs6740] pset1: visit northeastern.edu?"
 end
 
 # urgent, so prompt always
 set_color red
-echo "    [pvn] Architecture"
+echo "    [Research] Short paper idea"
+echo "    [PVN] Design, Architecture and Prototype"
 
 echo
 set_color normal

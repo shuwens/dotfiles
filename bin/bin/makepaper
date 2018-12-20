@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -ex
+
+papertype=$1
+
+if [[ $papertype == "usenix" ]]; then
+	echo "Creating USENIX paper template!"
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/.gitignore
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/Makefile
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/body.tex
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/latexrun
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/paper.bib
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/std_commands.tex
+	wget https://raw.githubusercontent.com/jethrosun/potential-goggles/template/usenix-template/paper.tex
+	wget	https://raw.githubusercontent.com/jethrosun/potential-goggles/template/usenix-template/usenix2019.sty
+	chmod +x latexrun
+else
+	echo "please provide an option!"
+fi
