@@ -371,11 +371,11 @@ echo
 echo -e " \\e[1mNetwork:\\e[0m"
 echo
 if test (uname) = Darwin
-	echo -ne "       " 
+	echo -ne "       "
 	echo -ne (\
 	networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}' \
 	)
-	echo -ne ": " 
+	echo -ne ": "
 	echo -ne (\
 	ipconfig  getifaddr (networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') \
 	)
@@ -410,36 +410,17 @@ else
 	sed 's/^/\t/' \
 	)
 end
-echo 
+echo
 
 set r (random 0 100)
 if test -s ~/.todo
 	if [ $r -lt 10 ] # only occasionally show backlog (10%)
-		echo -e " \e[1mBacklog\e[0;32m"
+		echo -e " \e[1mFinished things, yay!\e[0;32m"
 		set_color blue
 		echo
 		#echo "  [project] <description>"
-		cat ~/.backlog| sed 's/^/  /'
+		cat $HOME/.config/fish/backlog| sed 's/^/  /'
 		echo
-end
-end
-
-# Add this to your ~/.config/fish/config.fish
-# Syntax:
-# To just rerun your last command, simply type '!!'
-# '!! sudo' will prepend sudo to your most recent command
-# Running !! with anything other than sudo will append the argument to your most recent command
-# To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
-function !!;
-	set prevcmd (history | head -n 1)
-	if test "$argv"
-		if test "$argv" = "sudo"        #; or "any other command you want to prepend"
-			eval "$argv $prevcmd"
-else
-	eval "$var $argv"
-end
-else
-	eval "$var"
 end
 end
 
@@ -447,31 +428,38 @@ set_color normal
 echo -e " \e[1mTODOs\e[0;32m"
 echo
 if [ $r -lt 15 ]
-	# unimportant, so show rarely
+	# least important and urgent, remind me occasionally
 	set_color cyan
 	# echo "    [project] <description>"
 	echo "    [PVN] NetBricks: Replicate experiments"
 	echo "    [PVN] NetBricks: Modify and improve NetBricks"
+	echo "    [Rust] Rust Book: check the list of unclear concepts"
+	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
+	echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
 end
 if [ $r -lt 35 ]
-	# back-of-my-mind, so show occasionally
+	# less important and urgent
 	set_color green
 	# echo "    [project] <description>"
-	echo "    [PVN] SGX: read primer (ring0)"
-	echo "    [PVN] NetBricks: DPDK"
+	echo "    [CFP] HotCloud 2019 DDL: Mar 6, 2019"
+	echo "    [CFP] NSDI 2020 Spring DDL: Mar 19, 2019"
 end
 if [ $r -lt 50 ]
-	# upcoming, so prompt regularly
+	# important but not urgent things, note that these are the things I work
+	# on every morning
 	set_color yellow
-	echo "    [SysNet] send the emal out"
-	echo "    [PVN] NetBricks: get familiar with the codebase"
-	#echo "    [cs6740] pset1: visit northeastern.edu?"
+	echo "    [PVN] SGX: read primer (ring0)"
+	echo "    [PVN] DPDK: Fastpass, primer "
+	echo "    [Research] Short paper idea"
+	echo "    [PVN] Design, Architecture and Prototype"
 end
 
-# urgent, so prompt always
+# important and urgent things, so I should get to it quick
 set_color red
-echo "    [Research] Short paper idea"
-echo "    [PVN] Design, Architecture and Prototype"
+echo "    [NSDI 2019] Student grant application, Jan 23"
+echo "    [Personal] Write-up for 7800"
+echo "    [Rust] Rust by Examples: Dec 29"
+echo "    [PVN] NetBricks: get familiar with the codebase"
 
 echo
 set_color normal

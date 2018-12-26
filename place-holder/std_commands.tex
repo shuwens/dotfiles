@@ -2,7 +2,7 @@
 
 %-- DISCLAIMER:
 %-- This is open sourced LaTeX utils that I adapted and changed over time, you
-%-- are free to change or use it.     
+%-- are free to change or use it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -35,7 +35,7 @@
 \usepackage{xspace}
 \usepackage{enumitem}
 \usepackage{cite}
-\usepackage[colorlinks=true,citecolor=Bittersweet,linkcolor=black]{hyperref}% violetred
+\usepackage[colorlinks=true,urlcolor=black,citecolor=Bittersweet,linkcolor=black]{hyperref}% violetred
 
 %-- To use booktabs...
 \usepackage{booktabs}
@@ -48,12 +48,20 @@
 \usepackage{rotating} % Rotate tables
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \usepackage{graphicx}
-\usepackage[font={small,it}]{caption}
-\usepackage{subcaption}
 \usepackage{lscape}
 \usepackage{pifont}
 
-%-- 0 means no comments, and 1 o/w
+\usepackage[%
+  font=small,
+% font=footnotesize,
+   hypcap=true,
+  labelfont=bf
+  ]{caption}
+\usepackage[%
+  hypcap=true
+]{subcaption}
+
+%-- if you want to see the comments, press 1
 \newcommand{\showcomments}{0}
 
 %-- enable todo
@@ -86,8 +94,8 @@
 \hyphenation{FlexNet}
 
 %-- ????
-\renewcommand{\sectionautorefname}{\S}
-\renewcommand{\subsectionautorefname}{\S}
+%\renewcommand{\sectionautorefname}{\S}
+%\renewcommand{\subsectionautorefname}{\S}
 
 %-- Code... Not sure this is useful...
 \newcommand{\code}[1]{\texttt{\textbf{#1}}}

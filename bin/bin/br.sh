@@ -24,12 +24,12 @@ if [ $? != 0 ]; then
 	# mysql (2)
 	tmux new-window -n workspace -t ${SESSION_NAME}
 	# it is a hack cause base16 color is not functional by default for neovim
-	tmux send-keys -t ${SESSION_NAME}:2 'clear ; fish' C-m
+	#tmux send-keys -t ${SESSION_NAME}:2 'clear ; fish' C-m
 
 	# server/debug log (3)
 	tmux new-window -n athena -t ${SESSION_NAME}
 	#tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
-	tmux send-keys -t ${SESSION_NAME}:3 'clear; ' C-m
+	#tmux send-keys -t ${SESSION_NAME}:3 'clear; ' C-m
 	#tmux split-window -v -t ${SESSION_NAME}:3
 	#tmux send-keys -t ${SESSION_NAME}:3.1 'sleep 42 ; athena' C-m
 
