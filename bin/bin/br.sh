@@ -15,8 +15,8 @@ if [ $? != 0 ]; then
 	#tmux new-window -n ${SESSION_NAME} -n foo -d
 
 	# First window (0) -- vim and console
-	#tmux send-keys -t ${SESSION_NAME} 'clear ; fish' C-m
-
+	#tmux send-keys -t ${SESSION_NAME} 'clear ; fish -i' C-m
+	#
 	# shell (1)
 	tmux new-window -n bar -t ${SESSION_NAME}
 	#tmux send-keys -t ${SESSION_NAME}:1 'git status' C-m
@@ -24,7 +24,7 @@ if [ $? != 0 ]; then
 	# mysql (2)
 	tmux new-window -n workspace -t ${SESSION_NAME}
 	# it is a hack cause base16 color is not functional by default for neovim
-	#tmux send-keys -t ${SESSION_NAME}:2 'clear ; fish' C-m
+	#tmux send-keys -t ${SESSION_NAME}:2 'clear ; fish -i' C-m
 
 	# server/debug log (3)
 	tmux new-window -n athena -t ${SESSION_NAME}

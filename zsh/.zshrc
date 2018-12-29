@@ -17,6 +17,6 @@
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smartcase --follow --glob "!.git/*"'
 
 $HOME/bin/br.sh
-exec fish
+exec fish -i
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

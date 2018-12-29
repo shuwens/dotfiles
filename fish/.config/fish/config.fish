@@ -7,19 +7,14 @@
 #. ~/.config/fish/security.fish
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
-set -U fish_user_abbreviations
-set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
-set -U fish_user_abbreviations $fish_user_abbreviations 'gc=git clone'
-set -U fish_user_abbreviations $fish_user_abbreviations 'vimdiff=nvim -d'
-set -U fish_user_abbreviations $fish_user_abbreviations 'clippy=cargo-clippy'
-set -U fish_user_abbreviations $fish_user_abbreviations 'cargot=cargo t'
-set -U fish_user_abbreviations $fish_user_abbreviations 'vim=nvim'
-set -U fish_user_abbreviations $fish_user_abbreviations 'sduo=sudo'
-set -U fish_user_abbreviations $fish_user_abbreviations 'vi=nvim'
-set -U fish_user_abbreviations $fish_user_abbreviations 'jn=jupyter notebook'
-#set -U fish_user_abbreviations $fish_user_abbreviations 'emacs=emacs set --dump-file ~/.emacs.d/.cache/dumps/spacemacs.pdmp'
-complete --command yaourt --wraps pacman
-complete --command pacaur --wraps pacman
+abbr -a -U vimdiff nvim -d
+abbr -a -U clippy cargo-clippy
+abbr -a -U cargot cargo t
+abbr -a -U sduo sudo
+abbr -a -U gc git clone
+abbr -a -U vim nvim
+abbr -a -U vi vim
+abbr -a -U jn jupyter notebook
 
 ## let's setup path variable
 set --universal FONTCONFIG_PATH /etc/fonts/
@@ -33,10 +28,10 @@ end
 
 # systems update
 if test (uname) = Darwin
-	set -U fish_user_abbreviations $fish_user_abbreviations 'p=echo "what r you tring to do?"'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'up=brew update'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'upgrade=brew upgrade'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'o=open'
+	abbr -a -U p echo "what r you tring to do?"
+	abbr -a -U up brew update
+	abbr -a -U upgrade brew upgrade
+	abbr -a -U o open
 else
 	if [ -e /usr/bin/apt ]
 		# ubuntu systems
@@ -46,10 +41,12 @@ else
 		#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
 		function upgrade
 			echo (pass x1c/jethros) | sudo -S apt -y upgrade
-end 
+end
 else if [ -e /usr/bin/yaourt ]
 	# arch systems w/ yaourt
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+	#complete --command yaourt --wraps pacman
+
 	set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
 else if [ -e /usr/bin/pacman]
 	# native arch systems
@@ -57,17 +54,18 @@ else if [ -e /usr/bin/pacman]
 	#set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
 else if [ -e /usr/bin/pacaur ]
 	# arch systems w/ pacaur
+	#complete --command pacaur --wraps pacman
 	set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
 else
 	echo "you are not running a recognizable system!"
 end
-end 
+end
 
 if [ -e ~/.cargo/bin/exa ]
-	set -U fish_user_abbreviations $fish_user_abbreviations 'ls=exa'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'll=exa -l'
-	set -U fish_user_abbreviations $fish_user_abbreviations 'lll=exa -la'
+	abbr -a -U ls exa
+	abbr -a -U ll exa -l
+	abbr -a -U lll exa -la
 else
 	set -U fish_user_abbreviations $fish_user_abbreviations 'l=ls'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'll=ls -l'
@@ -157,6 +155,17 @@ end
 function athena
 	env SSHPASS=(security find-generic-password -a jethrosun -s athena -w) sshpass -e ssh nu-ccis $argv
 end
+
+# zathura
+function z
+	if test (count $argv) -ne 1
+		echo "No file given"
+		return
+else
+	zathura $argv &
+end
+end
+
 
 
 ## what is this for again?
@@ -309,20 +318,16 @@ end
 set FISH_CLIPBOARD_CMD "cat"
 
 # Base16 Shell
-# ------------------------------------------------------
-# I am spawning fish shell from non-interactive mode ...
-#if status --is-interactive  
-set BASE16_SHELL "$HOME/dev/others/base16/shell"
-source "$BASE16_SHELL/profile_helper.fish"
-#end
-
+if status --is-interactive
+	set BASE16_SHELL "$HOME/dev/others/base16/shell"
+	source "$BASE16_SHELL/profile_helper.fish"
+end
 
 ## pyenv
 #set -x PATH "/home/jethros/.pyenv/bin" $PATH
 status --is-interactive; and . (pyenv init -|psub)
 set PYENV_VERSION system
 status --is-interactive; and . (pyenv virtualenv-init -|psub)
-
 
 # Pretty ls colors
 if test -e $HOME/.dircolors
@@ -443,6 +448,7 @@ if [ $r -lt 35 ]
 	# echo "    [project] <description>"
 	echo "    [CFP] HotCloud 2019 DDL: Mar 6, 2019"
 	echo "    [CFP] NSDI 2020 Spring DDL: Mar 19, 2019"
+	echo "    [NSDI 2019] Student grant application DDL: Jan 23"
 end
 if [ $r -lt 50 ]
 	# important but not urgent things, note that these are the things I work
@@ -456,9 +462,9 @@ end
 
 # important and urgent things, so I should get to it quick
 set_color red
-echo "    [NSDI 2019] Student grant application, Jan 23"
+echo "    [NSDI 2019] Student grant statement Jan 04"
 echo "    [Personal] Write-up for 7800"
-echo "    [Rust] Rust by Examples: Dec 29"
+echo "    [Rust] Rust by Examples: Jan 05"
 echo "    [PVN] NetBricks: get familiar with the codebase"
 
 echo

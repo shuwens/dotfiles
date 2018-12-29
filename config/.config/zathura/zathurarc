@@ -1,7 +1,8 @@
 # zathurarc-light
 
 #set font                        "xos4 Noto Mono Regular 12"
-set font                        "monospace normal 12"
+#set font                        "monospace normal 12"
+set font                        "monospace normal 16"
 
 # Base16 colours
 set default-bg                  "#dfe1e8"
