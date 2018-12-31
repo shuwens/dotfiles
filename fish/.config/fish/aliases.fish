@@ -1,3 +1,26 @@
+#
+# My fish shell aliases and abbrs
+# -------------------------------
+#
+# Note that I need to revamp this sometime
+
+#
+# Useful abbrs
+#
+abbr -a -U vimdiff nvim -d
+abbr -a -U clippy cargo-clippy
+abbr -a -U cargot cargo t
+abbr -a -U sduo sudo
+abbr -a -U vim nvim
+abbr -a -U vi vim
+abbr -a -U jn jupyter notebook
+
+# git
+abbr -a -U gm git m
+abbr -a -U gc git clone
+abbr -a -U go git checkout
+abbr -a -U gb git branch
+
 # Quick edits
 alias Ea 'nvim ~/.config/fish/aliases.fish'
 alias Ef 'nvim ~/.config/fish/config.fish'
@@ -7,7 +30,48 @@ alias Ev 'nvim ~/.config/nvim/init.vim'
 alias Es 'nvim ~/.spacemacs'
 alias Et 'nvim ~/.tmux.conf'
 alias Ex 'nvim ~/.xmonad/xmonad.hs'
-#alias Et 'vim ~/.tmux.conf'
+
+alias df 'command df -m'
+#alias j jobs
+alias r ranger
+alias l ls
+alias ll 'ls -la'
+alias ls 'command ls -FG'
+alias su 'command su -m'
+
+alias git hub
+alias gti git
+alias a 'git amend --allow-empty --no-verify'
+alias gb 'git recent-branches 2.days.ago'
+alias ggco 'git switch'
+alias fl 'clear; and flow-limit'
+alias gl 'git lg1'
+alias gg 'git lg2'
+alias push 'git push'
+alias pull 'git pull'
+
+alias holdmybeer 'sudo'
+
+## my ssh utils
+function UpdateFile -a filename
+  scp $filename nu-ccis:~/.www/tmp/
+end
+
+alias neo-update 'env SHELL=(which sh) nvim +PlugInstall +PlugClean +PlugUpdate UpdateRemotePlugins'
+
+# =======================================================
+#
+#               DEPRECATED
+#
+# =======================================================
+
+
+#alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+#alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+
+#alias jn "jupyter notebook --browser=google-chromium-browser"
+alias jn "jupyter notebook --browser=chromium-browser"
+
 
 alias vim-norc 'vim -u NORC'
 alias vim-none 'vim -u NONE'
@@ -33,15 +97,6 @@ function timestamp
 end
 
 #set LS_COLORS dxfxcxdxbxegedabagacad
-
-alias df 'command df -m'
-#alias j jobs
-alias r ranger
-alias l ls
-alias ll 'ls -la'
-alias ls 'command ls -FG'
-alias su 'command su -m'
-
 function lsd -d 'List only directories (in the current dir)'
   command ls -d */ | sed -Ee 's,/+$,,'
 end
@@ -162,17 +217,6 @@ function vconflicts
   va '^([<]{7}|[>]{7}|[=]{7})([ ].*)?$'
 end
 
-alias git hub
-alias gti git
-alias a 'git amend --allow-empty --no-verify'
-alias gb 'git recent-branches 2.days.ago'
-alias ggco 'git switch'
-alias fl 'clear; and flow-limit'
-alias gl 'git lg1'
-alias gg 'git lg2'
-alias push 'git push'
-alias pull 'git pull'
-
 function git-search
   git log -S"$argv" --pretty=format:%H | map git show 
 end
@@ -206,9 +250,9 @@ else
   if pip freeze ^/dev/null | grep -iq 'flask-script'
     # do nothing, use manage.py, fall through
     set -e cmd
-    else
-      set cmd (which python) manage.py shell
-    end
+  else
+    set cmd (which python) manage.py shell
+  end
 end
 end
 
@@ -233,7 +277,7 @@ for interp in $interpreters
   if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
     set cmd $interp
     break
-    end
+  end
 end
 
 # If they all fall outside the virtualenv, pick the first match
@@ -370,10 +414,10 @@ function ,,,
   make clean; and make
 end
 
-	if test (uname) = Darwin
+if test (uname) = Darwin
 else
-function o -a filename
-  xdg-open $filename &
+  function o -a filename
+    xdg-open $filename &
 end
 
 function open -a filename
@@ -411,17 +455,168 @@ end
 # Running !! with anything other than sudo will append the argument to your most recent command
 # To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
 function !!;
-	set prevcmd (history | head -n 1)
-	if test "$argv"
-		if test "$argv" = "sudo"        #; or "any other command you want to prepend"
-			eval "$argv $prevcmd"
+  set prevcmd (history | head -n 1)
+  if test "$argv"
+    if test "$argv" = "sudo"        #; or "any other command you want to prepend"
+      eval "$argv $prevcmd"
 else
-	eval "$var $argv"
+  eval "$var $argv"
 end
 else
-	eval "$var"
+  eval "$var"
 end
 end
+
+## Commented stuff
+# --------------------
+#set -U fish_user_abbreviations $fish_user_abbreviations 'nova=env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
+#set -U fish_user_abbreviations $fish_user_abbreviations 'glance=env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
+#setenv OS_USERNAME jfrg@csail.mit.edu
+#setenv OS_TENANT_NAME usersandbox_jfrg
+#setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
+#setenv OS_IMAGE_API_VERSION 1
+#setenv OS_VOLUME_API_VERSION 2
+
+function aws -d "Set up environment for AWS"
+  env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1) $argv
+end
+function penv -d "Set up environment for the PDOS openstack service"
+  env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
+end
+function pvm -d "Run nova/glance commands against the PDOS openstack service"
+  switch $argv[1]
+case 'image-*'
+  penv glance $argv
+case 'c'
+  penv cinder $argv[2..-1]
+case 'g'
+  penv glance $argv[2..-1]
+case '*'
+  penv nova $argv
+end
+end
+
+
+
+function ssh
+  switch $argv[1]
+case "*.amazonaws.com"
+  env TERM=xterm /usr/bin/ssh $argv
+case "ec2-user@"
+  env TERM=xterm /usr/bin/ssh $argv
+case "*"
+  /usr/bin/ssh $argv
+end
+end
+
+function remote_alacritty
+  # https://gist.github.com/costis/5135502
+  set fn (mktemp)
+  infocmp alacritty-256color > $fn
+  scp $fn $argv[1]":alacritty-256color.ti"
+  ssh $argv[1] tic "alacritty-256color.ti"
+  ssh $argv[1] rm "alacritty-256color.ti"
+end
+
+function remarkable
+  if test (count $argv) -ne 1
+    echo "No file given"
+    return
+end
+
+ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
+if test $status -ne 0
+  # not yet connected
+  echo "Connecting to reMarkable internal network"
+  sudo dhcpcd enp0s20u2
+end
+curl --form "file=@"$argv[1] http://10.11.99.1/upload
+end
+
+function md2pdf
+  set t (mktemp -t md2pdf.XXXXXXX.pdf)
+  pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
+  set --erase argv[1]
+  if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
+    mv $t $argv[1]
+else
+  cat $t
+  rm $t
+end
+end
+
+function lpmd
+  set infile $argv[1]
+  set --erase argv[1]
+  md2pdf $infile - | lp $argv -
+end
+
+function pdfo
+  echo $argv | xargs pdflatex
+  echo $argv | sed 's/\.tex$/.pdf/' | xargs xdg-open
+end
+
+function px
+  ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
+end
+
+
+## why do I have so many web servers?
+# bu
+function bucs
+  env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
+end
+# northeastern
+function athena
+  env SSHPASS=(security find-generic-password -a jethrosun -s athena -w) sshpass -e ssh nu-ccis $argv
+end
+
+# zathura
+function z
+  if test (count $argv) -ne 1
+    echo "No file given"
+    return
+else
+  zathura $argv &
+end
+end
+
+
+
+## what is this for again?
+set nooverride PATH PWD
+function onchdir -v PWD
+  set dr $PWD
+  while [ "$dr" != "/" ]
+    for e in $dr/.setenv-*
+      set envn (basename -- $e | sed 's/^\.setenv-//')
+      if contains $envn $nooverride
+	continue
+end
+
+if not test -s $e
+  # setenv is empty
+  # var value is file's dir
+  set envv (readlink -e $dr)
+else if test -L $e; and test -d $e
+  # setenv is symlink to directory
+  # var value is target directory
+  set envv (readlink -e $e)
+else
+  # setenv is non-empty file
+  # var value is file content
+  set envv (cat $e)
+end
+
+if not contains $envn $wasset
+  set wasset $wasset $envn
+  setenv $envn $envv
+end
+end
+set dr (dirname $dr)
+end
+end
+
 
 
 # ----------------------------------
@@ -436,19 +631,10 @@ alias run 'sudo systemctl start'
 alias restart 'sudo systemctl restart'
 alias stop 'sudo systemctl stop'
 # ---------------------------------
-alias holdmybeer 'sudo'
-
-## my ssh utils
-function UpdateFile -a filename
-  scp $filename nu-ccis:~/.www/tmp/
-end
-
 alias emacs 'emacs '
-alias neo-update 'env SHELL=(which sh) nvim +PlugInstall +PlugClean +PlugUpdate UpdateRemotePlugins'
 
 ## DEPRECATED
 #alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 #alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 
 #alias jn "jupyter notebook --browser=google-chromium-browser"
-alias jn "jupyter notebook --browser=chromium-browser"

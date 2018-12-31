@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+
+echo "$ git push --delete <remote_name> <branch_name>"
+echo "$ git branch -d <branch_name>"

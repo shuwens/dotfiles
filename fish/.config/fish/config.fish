@@ -7,15 +7,6 @@
 #. ~/.config/fish/security.fish
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
-abbr -a -U vimdiff nvim -d
-abbr -a -U clippy cargo-clippy
-abbr -a -U cargot cargo t
-abbr -a -U sduo sudo
-abbr -a -U gc git clone
-abbr -a -U vim nvim
-abbr -a -U vi vim
-abbr -a -U jn jupyter notebook
-
 ## let's setup path variable
 set --universal FONTCONFIG_PATH /etc/fonts/
 
@@ -83,125 +74,6 @@ if [ -e $HOME/.fzf/shell/key-bindings.fish ]
 	. $HOME/.fzf/shell/key-bindings.fish
 end
 
-function ssh
-	switch $argv[1]
-case "*.amazonaws.com"
-	env TERM=xterm /usr/bin/ssh $argv
-case "ec2-user@"
-	env TERM=xterm /usr/bin/ssh $argv
-case "*"
-	/usr/bin/ssh $argv
-end
-end
-
-function remote_alacritty
-	# https://gist.github.com/costis/5135502
-	set fn (mktemp)
-	infocmp alacritty-256color > $fn
-	scp $fn $argv[1]":alacritty-256color.ti"
-	ssh $argv[1] tic "alacritty-256color.ti"
-	ssh $argv[1] rm "alacritty-256color.ti"
-end
-
-function remarkable
-	if test (count $argv) -ne 1
-		echo "No file given"
-		return
-end
-
-ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
-if test $status -ne 0
-	# not yet connected
-	echo "Connecting to reMarkable internal network"
-	sudo dhcpcd enp0s20u2
-end
-curl --form "file=@"$argv[1] http://10.11.99.1/upload
-end
-
-function md2pdf
-	set t (mktemp -t md2pdf.XXXXXXX.pdf)
-	pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
-	set --erase argv[1]
-	if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
-		mv $t $argv[1]
-else
-	cat $t
-	rm $t
-end
-end
-
-function lpmd
-	set infile $argv[1]
-	set --erase argv[1]
-	md2pdf $infile - | lp $argv -
-end
-
-function pdfo
-	echo $argv | xargs pdflatex
-	echo $argv | sed 's/\.tex$/.pdf/' | xargs xdg-open
-end
-
-function px
-	ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
-end
-
-
-## why do I have so many web servers?
-# bu
-function bucs
-	env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
-end
-# northeastern
-function athena
-	env SSHPASS=(security find-generic-password -a jethrosun -s athena -w) sshpass -e ssh nu-ccis $argv
-end
-
-# zathura
-function z
-	if test (count $argv) -ne 1
-		echo "No file given"
-		return
-else
-	zathura $argv &
-end
-end
-
-
-
-## what is this for again?
-set nooverride PATH PWD
-function onchdir -v PWD
-	set dr $PWD
-	while [ "$dr" != "/" ]
-		for e in $dr/.setenv-*
-			set envn (basename -- $e | sed 's/^\.setenv-//')
-			if contains $envn $nooverride
-				continue
-end
-
-if not test -s $e
-	# setenv is empty
-	# var value is file's dir
-	set envv (readlink -e $dr)
-else if test -L $e; and test -d $e
-	# setenv is symlink to directory
-	# var value is target directory
-	set envv (readlink -e $e)
-else
-	# setenv is non-empty file
-	# var value is file content
-	set envv (cat $e)
-end
-
-if not contains $envn $wasset
-	set wasset $wasset $envn
-	setenv $envn $envv
-end
-end
-set dr (dirname $dr)
-end
-end
-
 set FORTUNES computers debian linux magic
 set FORTUNES futurama hitchhiker $FORTUNES
 set FORTUNES firefly calvin perl $FORTUNES
@@ -255,15 +127,17 @@ if test (uname) = Darwin
 	setenv FZF_DEFAULT_COMMAND 'ag -g ""'
 	setenv FZF_CTRL_T_COMMAND 'ag -g ""'
 else
-	# For RLS
-	# https://github.com/fish-shell/fish-shell/issues/2456
-	setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
-	setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
-	setenv RLS_ROOT ~/dev/others/rls
+	#setenv RLS_ROOT ~/dev/others/rls
 	# FZF linux
 	setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 	setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 end
+
+# For RLS
+# https://github.com/fish-shell/fish-shell/issues/2456
+setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
+setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
+
 
 # Npm
 setenv NPM_PACKAGES "$HOME/.npm-packages"
@@ -275,36 +149,6 @@ setenv NPM_PACKAGES "$HOME/.npm-packages"
 
 # https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
 setenv TZ ":/etc/localtime"
-
-## Commented stuff
-# --------------------
-#set -U fish_user_abbreviations $fish_user_abbreviations 'nova=env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
-#set -U fish_user_abbreviations $fish_user_abbreviations 'glance=env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
-#setenv OS_USERNAME jfrg@csail.mit.edu
-#setenv OS_TENANT_NAME usersandbox_jfrg
-#setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
-#setenv OS_IMAGE_API_VERSION 1
-#setenv OS_VOLUME_API_VERSION 2
-
-function aws -d "Set up environment for AWS"
-	env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1) $argv
-end
-function penv -d "Set up environment for the PDOS openstack service"
-	env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
-end
-function pvm -d "Run nova/glance commands against the PDOS openstack service"
-	switch $argv[1]
-case 'image-*'
-	penv glance $argv
-case 'c'
-	penv cinder $argv[2..-1]
-case 'g'
-	penv glance $argv[2..-1]
-case '*'
-	penv nova $argv
-end
-end
-
 #setenv QT_DEVICE_PIXEL_RATIO 2
 #setenv GDK_SCALE 2
 #setenv GDK_DPI_SCALE 0.5
@@ -465,7 +309,7 @@ set_color red
 echo "    [NSDI 2019] Student grant statement Jan 04"
 echo "    [Personal] Write-up for 7800"
 echo "    [Rust] Rust by Examples: Jan 05"
-echo "    [PVN] NetBricks: get familiar with the codebase"
+echo "    [PVN] NetBricks: go through everything on dev branch"
 
 echo
 set_color normal
