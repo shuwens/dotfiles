@@ -1,5 +1,25 @@
-minion pro font
+* minion pro font
 
-futura
+** One bug I onced fixed
+paper.tex: warning: [microtype] Font `OML/MinionPro-TOsF/m/it/12' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `OML/MinionPro-TOsF/m/it/9' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `OML/MinionPro-TOsF/m/it/7' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `OMX/MnSymbolE/m/n/12' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `OMX/MnSymbolE/m/n/9' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `OMX/MnSymbolE/m/n/7' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolA/m/n/12' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolA/m/n/9' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolA/m/n/7' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolB/m/n/12' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolB/m/n/9' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolB/m/n/7' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolC/m/n/12' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolC/m/n/9' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolC/m/n/7' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolD/m/n/12' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolD/m/n/9' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
+paper.tex: warning: [microtype] Font `U/MnSymbolD/m/n/7' does not specify its \fontdimen 6 (width of an `em')! Therefore, tracking will not work with this font
 
-quicksand
+
+* futura
+

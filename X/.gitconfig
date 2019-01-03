@@ -9,8 +9,8 @@
   email = jethro.s.sun@gmail.com
   signingkey = A12A9012444F0E74
 [color]
-	# config for diff-so-fancy
-	ui = true
+  # config for diff-so-fancy
+  ui = true
 
 [merge]
   conflictstyle = diff3
@@ -33,9 +33,9 @@
   ov = -c core.pager='less -S' log --graph --pretty=format:'%C(auto)%d %s' --abbrev-commit --simplify-by-decoration --all
   ovk = !gitk --all --simplify-by-decoration
   random = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
-	dad = !"curl https://icanhazdadjoke.com/ ; git add"
+  dad = !"curl https://icanhazdadjoke.com/ ; git add"
   m = !"git add -A; git commit -m"
-  open = !vim `git-open.sh`
+  open = !nvim `git-open.sh`
 
 # Type-specific diff settings
 [core]
@@ -67,19 +67,19 @@
 # Global ignores
 [core]
   excludesfile = ~/.gitignore_global
-  editor = /usr/bin/vim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  editor = /usr/local/bin//nvim
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [http]
   cookiefile = /home/jethros/.gitcookies
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+  meta = yellow
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse

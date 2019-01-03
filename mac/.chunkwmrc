@@ -136,27 +136,38 @@ chunkc core::load ffm.so
 # NOTE: sample rules for the tiling plugin
 #
 
-#chunkc tiling::rule --owner iTerm2 --name \"Default\" --grid-layout 4:4:1:1:2:2 &
-
+# Finder
 chunkc tiling::rule --owner Finder --name Copy --state float &
 chunkc tiling::rule --owner Finder --name Moving --state float &
-chunkc tiling::rule --owner \"App Store\" --state float &
 chunkc tiling::rule --owner Emacs --except "^$" --state tile &
+
+# Office stuff
+chunkc tiling::rule --owner Keynote --grid-layout 1:1:0:0:1:1  --state float &
+chunkc tiling::rule --owner Pages --grid-layout 1:1:0:0:1:1  --state float &
+chunkc tiling::rule --owner \"Microsoft Excel\" --grid-layout 1:1:0:0:1:1  --state float &
+chunkc tiling::rule --owner \"Microsoft Word\" --grid-layout 1:1:0:0:1:1  --state float &
+chunkc tiling::rule --owner \"Microsoft PowerPoint\" --grid-layout 1:1:0:0:1:1  --state float &
 
 # personal rules
 chunkc tiling::rule --owner NeteaseMusic  --state float &
-chunkc tiling::rule --owner Preview  --state float &
-chunkc tiling::rule --owner Skim --state float &
-chunkc tiling::rule --owner Keynote --state float &
-chunkc tiling::rule --owner \"Sublime Text\" --state float &
+chunkc tiling::rule --owner Preview --grid-layout 1:1:0:0:1:1 --state float &
+chunkc tiling::rule --owner Skim --grid-layout 1:1:0:0:1:1 --state float &
+chunkc tiling::rule --owner \"Sublime Text\" --grid-layout 1:1:0:0:1:1 --state float &
 chunkc tiling::rule --owner \"isec 655 printer\" --state float &
-chunkc tiling::rule --owner Firefox  --state float &
-chunkc tiling::rule --owner Notes --state float &
-chunkc tiling::rule --owner Chrome --state float &
-chunkc tiling::rule --owner Emacs --state float &
-chunkc tiling::rule --owner Gitify --state float &
-chunkc tiling::rule --owner Slack --state float &
-chunkc tiling::rule --owner Code --state float &
-chunkc tiling::rule --owner iTerm2 --name \"Default\" --state float &
+chunkc tiling::rule --owner Firefox --state float &
+#chunkc tiling::rule --owner Firefox --state float &
+chunkc tiling::rule --owner Notes --grid-layout 1:2:1:0:1:1 --state float &
+chunkc tiling::rule --owner Chrome --grid-layout 1:1:0:0:1:1 --state float &
+chunkc tiling::rule --owner \"App Store\" --grid-layout 1:3:1:0:2:1 --state float &
+chunkc tiling::rule --owner Slack --grid-layout 1:2:1:0:1:1 --state float &
+chunkc tiling::rule --owner Code --state tile &
 chunkc tiling::rule --owner Tweetbot --state float &
-chunkc tiling::rule --owner Dictionary --state float &
+chunkc tiling::rule --owner Dictionary --grid-layout 1:2:1:0:1:1 --state float &
+chunkc tiling::rule --owner Emacs --except "^$" --state tile &
+chunkc tiling::rule --owner \"Activity Monitor\" --grid-layout 8:8:1:1:6:6 --state float &
+#chunkc tiling::rule --owner \"1Password 7\" --state float --grid-layout 8:8:1:1:6:6 &
+chunkc tiling::rule --owner \"1Password 7\" --state float --grid-layout 1:3:1:0:2:1 &
+
+#<option>: rows:cols:left:top:width:height
+#desc: split region to rows:cols grid, windows on left:top grid, have <width> times grid width and <height> times grid height
+chunkc tiling::rule --owner iTerm2 --grid-layout 16:16:1:0:14:15 --state float &

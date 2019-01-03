@@ -8,14 +8,19 @@
 # Useful abbrs
 #
 abbr -a -U vimdiff nvim -d
-abbr -a -U clippy cargo-clippy
-abbr -a -U cargot cargo t
 abbr -a -U sduo sudo
 abbr -a -U vim nvim
+abbr -a -U w wget 
 abbr -a -U vi vim
 abbr -a -U jn jupyter notebook
 
+# Rust
+abbr -a -U c cargo
+abbr -a -U cargot cargo t
+abbr -a -U clippy cargo-clippy
+
 # git
+abbr -a -U g git
 abbr -a -U gm git m
 abbr -a -U gc git clone
 abbr -a -U go git checkout
@@ -32,12 +37,10 @@ alias Et 'nvim ~/.tmux.conf'
 alias Ex 'nvim ~/.xmonad/xmonad.hs'
 
 alias df 'command df -m'
-#alias j jobs
+alias vim nvim
 alias r ranger
-alias l ls
-alias ll 'ls -la'
-alias ls 'command ls -FG'
-alias su 'command su -m'
+#alias ls 'command ls -FG'
+#alias su 'command su -m'
 
 alias git hub
 alias gti git
@@ -218,7 +221,7 @@ function vconflicts
 end
 
 function git-search
-  git log -S"$argv" --pretty=format:%H | map git show 
+  git log -S"$argv" --pretty=format:%H | map git show
 end
 
 
@@ -250,9 +253,9 @@ else
   if pip freeze ^/dev/null | grep -iq 'flask-script'
     # do nothing, use manage.py, fall through
     set -e cmd
-  else
-    set cmd (which python) manage.py shell
-  end
+else
+  set cmd (which python) manage.py shell
+end
 end
 end
 
@@ -277,7 +280,7 @@ for interp in $interpreters
   if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
     set cmd $interp
     break
-  end
+end
 end
 
 # If they all fall outside the virtualenv, pick the first match
@@ -401,7 +404,7 @@ alias TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 # https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/
 
 
-## python stuff 
+## python stuff
 #install virtualfish
 #alias virtualenv3 "virtualenv -p /usr/bin/python3"
 #alias workon "vf activate"
