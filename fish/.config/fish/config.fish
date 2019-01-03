@@ -284,8 +284,8 @@ if [ $r -lt 15 ]
 	echo "    [PVN] NetBricks: Modify and improve NetBricks"
 	echo "    [Rust] Rust Book: check the list of unclear concepts"
 	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
-	echo "    [Impr] SICP"
-	echo "    [Impr] C++ 2012, 2014"
+	echo "    [Fun] SICP"
+	echo "    [Fun] C++ 2012, 2014"
 end
 if [ $r -lt 35 ]
 	# less important and urgent
@@ -307,7 +307,6 @@ end
 
 # important and urgent things, so I should get to it quick
 set_color red
-echo "    [NSDI 2019] Student grant statement Jan 04"
 echo "    [Personal] Write-up for 7800"
 echo "    [Rust] Rust by Examples: Jan 05"
 echo "    [PVN] NetBricks: go through everything on dev branch"

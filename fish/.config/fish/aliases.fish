@@ -451,6 +451,19 @@ else
 end
 end
 
+function change
+  if test "$argv"
+    git add -A
+    git commit -m "ChangeList: $argv"
+    git push
+else
+  git add -A
+  git commit -m "Small changes"
+  git push
+end
+end
+
+
 # Add this to your ~/.config/fish/config.fish
 # Syntax:
 # To just rerun your last command, simply type '!!'
