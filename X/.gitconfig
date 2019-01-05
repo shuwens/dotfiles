@@ -10,6 +10,9 @@
   signingkey = A12A9012444F0E74
 
 [alias]
+  # tesgin
+  # git whatchanged -n 1
+
   # original
   lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
   lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
@@ -19,11 +22,12 @@
   ovk = !gitk --all --simplify-by-decoration
   random = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
   dad = !"curl https://icanhazdadjoke.com/ ; git add"
+  c = checkout -- .
   #m = !"git add -A; git commit -m"
   open = !nvim `git-open.sh`
   # jonhoo
-  c = commit
-  s = status
+  #c = commit
+  s =  !"git diff --name-status HEAD ; echo ''"
   st = status
   #lg = log --oneline
   last = log --abbrev-commit -1 HEAD

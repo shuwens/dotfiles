@@ -10,7 +10,7 @@
 abbr -a -U vimdiff nvim -d
 abbr -a -U sduo sudo
 abbr -a -U vim nvim
-abbr -a -U w wget 
+abbr -a -U w wget
 abbr -a -U vi vim
 abbr -a -U jn jupyter notebook
 
@@ -454,7 +454,8 @@ end
 function change
   if test "$argv"
     git add -A
-    git commit -m "ChangeList: $argv"
+    git diff --name-status HEAD
+    git commit -m "[ChangeList] $argv"
     git push
 else
   git add -A
