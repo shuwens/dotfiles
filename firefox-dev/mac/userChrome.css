@@ -5,17 +5,21 @@
 #TabsToolbar { -moz-box-ordinal-group: 10; }
 
 #PopupAutoCompleteRichResult {
-  margin-top: -25vh !important;
+  margin-top: -35vh !important;
   /*
   margin-top: -75vh;
   position: fixed;
   bottom: 100px;
   margin-left: 0 !important;
-  */
+   */
 }
 
 #PopupAutoCompleteRichResult > hbox { display: none; }
 
+/* global font */
+* {
+  font-size: 12pt !important;
+}
 
 .tab-background { border-top: none !important; }
 #navigator-toolbox::after { border: none; }
@@ -23,4 +27,4 @@
 #tabbrowser-tabs, .tab-stack { min-height: 35px !important; }
 .tabbrowser-tab { font-size: 120%; }
 .tab-content { padding: 0 5px; }
-.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 14px !important; }
+.tab-close-button .toolbarbutton-icon { width: 16px !important; height: 16px !important; }

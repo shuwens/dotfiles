@@ -124,11 +124,9 @@ setenv FZF_DEFAULT_OPTS '--height 20%'
 
 if test (uname) = Darwin
 	# FZF macOS
-	setenv FZF_DEFAULT_COMMAND 'ag -g ""'
-	setenv FZF_CTRL_T_COMMAND 'ag -g ""'
-else
-	#setenv RLS_ROOT ~/dev/others/rls
-	# FZF linux
+	#setenv FZF_DEFAULT_COMMAND 'ag -g ""'
+	#setenv FZF_CTRL_T_COMMAND 'ag -g ""'
+	#else
 	setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 	setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 end

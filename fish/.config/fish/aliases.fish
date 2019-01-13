@@ -13,11 +13,14 @@ abbr -a -U vim nvim
 abbr -a -U w wget
 abbr -a -U vi vim
 abbr -a -U jn jupyter notebook
+abbr -a -U R ranger
 
 # Rust
 abbr -a -U c cargo
 abbr -a -U cargot cargo t
 abbr -a -U clippy cargo-clippy
+#abbr -a -U r rustup
+abbr -a -U ra rustup add component
 
 # git
 abbr -a -U g git
@@ -38,11 +41,10 @@ alias Ex 'nvim ~/.xmonad/xmonad.hs'
 
 alias df 'command df -m'
 alias vim nvim
-alias r ranger
-#alias ls 'command ls -FG'
 #alias su 'command su -m'
+#alias ls 'command ls -FG'
 
-alias git hub
+#alias git hub
 alias gti git
 alias a 'git amend --allow-empty --no-verify'
 alias gb 'git recent-branches 2.days.ago'
@@ -52,6 +54,7 @@ alias gl 'git lg1'
 alias gg 'git lg2'
 alias push 'git push'
 alias pull 'git pull'
+alias lab "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/jethrosun_rsa\" git $argv"
 
 alias holdmybeer 'sudo'
 

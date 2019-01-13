@@ -1,4 +1,4 @@
 #!/bin/bash
 
-nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins 
+nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins
 

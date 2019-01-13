@@ -22,7 +22,7 @@
   ovk = !gitk --all --simplify-by-decoration
   random = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
   dad = !"curl https://icanhazdadjoke.com/ ; git add"
-  c = checkout -- .
+  cc = checkout -- .
   #m = !"git add -A; git commit -m"
   open = !nvim `git-open.sh`
   # jonhoo
@@ -94,6 +94,9 @@
 [diff "elisp"]
   xfuncname="^(\\(def.*)$"
 
+[includeIf "gitdir:~/dev/achtung"]
+    path = ~/dev/achtung/.gitconfig
+
 [help]
   autocorrect = 1
 [url "https://github.com/"]
@@ -102,7 +105,7 @@
   insteadOf = g:
 [url "https://achtung-gitlab.ccs.neu.edu/working-papers"]
   insteadOf = working:
-[url "git@achtung-gitlab.ccs.neu.edu/:"]
+[url "git@achtung-gitlab.ccs.neu.edu"]
   insteadOf = lab:
 
 [diff]
@@ -149,3 +152,9 @@
   old = red bold
   new = green bold
   whitespace = red reverse
+[magithub]
+	online = false
+[magithub "status"]
+	includeStatusHeader = false
+	includePullRequestsSection = false
+	includeIssuesSection = false
