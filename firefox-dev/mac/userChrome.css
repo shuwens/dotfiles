@@ -14,18 +14,51 @@
    */
 }
 
+/*Toolbar & menu font size*/
+menubar, menubutton, menulist, menu, menuitem, textbox{font-size: 12pt !important;}
+
 #PopupAutoCompleteRichResult > hbox { display: none; }
 
-/* global font */
-* {
-  font-size: 12pt !important;
+#PersonalToolbar toolbarbutton .toolbarbutton-icon {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  width: 16px !important;
 }
 
-#PersonalToolbar { height: 35px !important; }
-.tab-background { border-top: none !important; }
 #navigator-toolbox::after { border: none; }
 #TabsToolbar .tabbrowser-arrowscrollbox,
+
 #tabbrowser-tabs, .tab-stack { min-height: 35px !important; }
-.tabbrowser-tab { font-size: 120%; }
+.tabbrowser-tab {
+  font-family: 'Noto Mono' !important;
+  font: "Noto Mono" !important;
+  font-size: 10pt !important;
+}
 .tab-content { padding: 0 5px; }
-.tab-close-button .toolbarbutton-icon { width: 16px !important; height: 16px !important; }
+.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
+
+/* For the bookmarks*/
+#PersonalToolbar {
+  font-size: 12pt !important;
+  height: 35px !important;
+}
+.tab-background { border-top: none !important; }
+
+:root {
+  --tab_min_width: 80px;
+  --tab_max_width: 300px;
+}
+
+/* use 'about:config > browser.tabs.tabMinWidth' for tab min-width */
+
+.tabbrowser-tab:not([pinned]) {
+  min-width: var(--tab_min_width) !important;
+  clip-width: var(--tab_min_width) !important;
+}
+
+
+/* tab max-width */
+#tabbrowser-tabs:not([overflow="true"]) .tabbrowser-tab[fadein]:not([pinned]) {
+  max-width: var(--tab_max_width) !important;
+  overflow: hidden !important;
+}
