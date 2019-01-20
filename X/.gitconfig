@@ -10,21 +10,43 @@
   signingkey = A12A9012444F0E74
 
 [alias]
-  # tesgin
-  # git whatchanged -n 1
-
   # original
   lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
   lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   l = !"git lg1"
   lg = !"git lg2"
-  ov = -c core.pager='less -S' log --graph --pretty=format:'%C(auto)%d %s' --abbrev-commit --simplify-by-decoration --all
-  ovk = !gitk --all --simplify-by-decoration
+  #ov = -c core.pager='less -S' log --graph --pretty=format:'%C(auto)%d %s' --abbrev-commit --simplify-by-decoration --all
+  #ovk = !gitk --all --simplify-by-decoration
   random = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
   dad = !"curl https://icanhazdadjoke.com/ ; git add"
   cc = checkout -- .
+  co = checkout
   #m = !"git add -A; git commit -m"
-  open = !nvim `git-open.sh`
+  #open = !nvim `git-open.sh`
+
+  # not boring
+  squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+  mpr = "!f() { \
+    declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
+    declare branch=\"${2:-$currentBranch}\"; \
+    if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+    git fetch origin refs/pull/$1/head:pr/$1 && \
+    git checkout -B $branch && \
+    git rebase $branch pr/$1 && \
+    git checkout -B $branch && \
+    git merge --ff-only pr/$1 && \
+    git branch -D pr/$1; \
+    fi \
+    }; f"
+  copr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && \
+    git checkout pr/$1; }; f"
+  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+  ignore = update-index --assume-unchanged
+  unignore = update-index --no-assume-unchanged
+  ignored = !git ls-files -v | grep "^[[:lower:]]"
+  aliases = config --get-regexp alias
+  git = !exec git
+
   # jonhoo
   #c = commit
   s =  !"git diff --name-status HEAD ; echo ''"
@@ -37,20 +59,19 @@
   sa = "!f() { git stash apply stash^{/$*}; }; f"
   sl = stash list
   # Ivan
-  aliases = "!f() { git config --get-regexp ^alias | cut -c 7-; }; f"
+  #aliases = "!f() { git config --get-regexp ^alias | cut -c 7-; }; f"
   amend = commit -a --amend -C HEAD
-  b2h = checkout HEAD -B
-  branch-or-sha = "!bs() { git which-branch 2> /dev/null || git sha 2> /dev/null ; }; bs" # In newer versions of git, this simpler definition of which-branch would work. symbolic-ref HEAD --short
+  #b2h = checkout HEAD -B
+  #branch-or-sha = "!bs() { git which-branch 2> /dev/null || git sha 2> /dev/null ; }; bs" # In newer versions of git, this simpler definition of which-branch would work. symbolic-ref HEAD --short
   branches = branch -a
   #c = clone --recursive
   ca = !git add -A && git commit -av
-  cherry-pick-range = "!c() { git cherry-pick $1^..$2; }; c"
-  cpr = cherry-pick-range
-  cam = commit -am
-  clean-branches = "!r() { git branch --merged ${1-origin/master} | grep -v '*' | xargs -n1 git branch -d; }; r"
+  #cherry-pick-range = "!c() { git cherry-pick $1^..$2; }; c"
+  #cpr = cherry-pick-range
+  #cam = commit -am
+  #clean-branches = "!r() { git branch --merged ${1-origin/master} | grep -v '*' | xargs -n1 git branch -d; }; r"
   clone = clone --recursive
   credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f" # Credit an author on the latest commit
-  co = checkout
   d = "!d() { git icdl $@; }; d"
   db = "!db() { git diff HEAD~"$1"; }; db"
   diff-excluding = "!f() { exclude=$1; shift; git diff $1 $2 --name-only | grep -v $exclude | xargs git diff "$@" --; }; f"
@@ -79,7 +100,7 @@
   reset-origin = "!r() { git reset --hard origin/\"$(git which-branch)\" && git suir; }; r"
   rh = reset --hard
   root = rev-parse --show-toplevel
-  s = status -s
+  #s = status -s
   set-working-tree = "!s() { local head=\"$(git rev-parse HEAD)\"; git reset --hard $1 && git reset --soft $head; }; s"
   sha = rev-parse HEAD
   shas = log --pretty=format:%H
@@ -88,6 +109,7 @@
   untracked = "!u() { git status -s | grep "??" | awk '{print $2}'; }; u"
   which-branch = "!wb() { b="$(git symbolic-ref HEAD)" && echo ${b#refs/heads/}; }; wb"
 
+
 # Type-specific diff settings
 [core]
   attributesfile = ~/.gitattributes
@@ -95,7 +117,7 @@
   xfuncname="^(\\(def.*)$"
 
 [includeIf "gitdir:~/dev/achtung"]
-    path = ~/dev/achtung/.gitconfig
+  path = ~/dev/achtung/.gitconfig
 
 [help]
   autocorrect = 1
@@ -136,7 +158,8 @@
 # Global ignores
 [core]
   excludesfile = ~/.gitignore_global
-  editor = /usr/local/bin//nvim
+  #editor = /usr/local/bin//nvim
+  editor = nvim
   pager = diff-so-fancy | less --tabs=4 -RFX
 [http]
   cookiefile = /home/jethros/.gitcookies
@@ -153,8 +176,8 @@
   new = green bold
   whitespace = red reverse
 [magithub]
-	online = false
+  online = false
 [magithub "status"]
-	includeStatusHeader = false
-	includePullRequestsSection = false
-	includeIssuesSection = false
+  includeStatusHeader = false
+  includePullRequestsSection = false
+  includeIssuesSection = false

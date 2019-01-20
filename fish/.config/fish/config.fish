@@ -21,6 +21,7 @@ end
 if test (uname) = Darwin
 	abbr -a -U p echo "what r you tring to do?"
 	abbr -a -U up brew update
+	abbr -a -U update brew update
 	abbr -a -U upgrade brew upgrade
 	abbr -a -U o open
 else
@@ -172,8 +173,13 @@ set PYENV_VERSION system
 status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 # Pretty ls colors
+
 if test -e $HOME/.dircolors
-	setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+	if test (uname) = Darwin
+		setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+	else
+		setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+	end
 end
 
 function fish_user_key_bindings
