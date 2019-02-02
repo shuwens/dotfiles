@@ -15,6 +15,7 @@ abbr -a -U ls exa
 abbr -a -U vi vim
 abbr -a -U jn jupyter notebook
 abbr -a -U R ranger
+abbr -a -U lab "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/jethrosun_rsa\" git $argv"
 
 # Rust
 abbr -a -U c cargo
@@ -29,6 +30,13 @@ abbr -a -U gm git m
 abbr -a -U gc git clone
 abbr -a -U go git checkout
 abbr -a -U gb git branch
+abbr -a -U gti git
+abbr -a -U a 'git amend --allow-empty --no-verify'
+abbr -a -U gb 'git recent-branches 2.days.ago'
+abbr -a -U gl 'git lg1'
+abbr -a -U gg 'git lg2'
+abbr -a -U push 'git push'
+abbr -a -U pull 'git pull'
 
 # Quick edits
 alias Ea 'nvim ~/.config/fish/aliases.fish'
@@ -41,21 +49,8 @@ alias Et 'nvim ~/.tmux.conf'
 alias Ex 'nvim ~/.xmonad/xmonad.hs'
 
 alias df 'command df -m'
-alias vim nvim
 #alias su 'command su -m'
 #alias ls 'command ls -FG'
-
-#alias git hub
-alias gti git
-alias a 'git amend --allow-empty --no-verify'
-alias gb 'git recent-branches 2.days.ago'
-alias ggco 'git switch'
-alias fl 'clear; and flow-limit'
-alias gl 'git lg1'
-alias gg 'git lg2'
-alias push 'git push'
-alias pull 'git pull'
-alias lab "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/jethrosun_rsa\" git $argv"
 
 alias holdmybeer 'sudo'
 
@@ -65,6 +60,8 @@ function UpdateFile -a filename
 end
 
 alias neo-update 'env SHELL=(which sh) nvim +PlugInstall +PlugClean +PlugUpdate UpdateRemotePlugins'
+alias ggco 'git switch'
+alias fl 'clear; and flow-limit'
 
 # =======================================================
 #
