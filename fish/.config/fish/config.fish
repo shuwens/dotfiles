@@ -91,6 +91,7 @@ set __fish_git_prompt_showupstream 'none'
 if test (uname) = Darwin
 	## PATH variables
 	set PATH /usr/local/bin/ $PATH
+	set PATH $PATH /Applications/MATLAB_R2018b.app/bin
 	set PATH $PATH ~/bin
 	set PATH $PATH $HOME/.cargo/bin
 else

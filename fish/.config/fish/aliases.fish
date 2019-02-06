@@ -28,7 +28,7 @@ abbr -a -U ra rustup add component
 abbr -a -U g git
 abbr -a -U gm git m
 abbr -a -U gc git clone
-abbr -a -U go git checkout
+abbr -a -U ggo git checkout
 abbr -a -U gb git branch
 abbr -a -U gti git
 abbr -a -U a 'git amend --allow-empty --no-verify'
