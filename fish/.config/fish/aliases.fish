@@ -404,6 +404,16 @@ alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
 alias PhpWgetScrape "wget -A php -m -p -E -k -K -np"
 alias TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
+# Type - to move up to top parent dir which is a repository
+function d
+	while test $PWD != "/"
+		if test -d .git
+			break
+	end
+	cd ..
+end
+end
+
 ## tips function
 # tips tar
 # https://wiki.archlinux.org/index.php/Core_utilities#tar

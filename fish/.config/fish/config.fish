@@ -123,16 +123,14 @@ setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native"
 setenv WINEDEBUG fixme-all
 setenv FZF_DEFAULT_OPTS '--height 20%'
-if test -e ~/.cargo-target
-	setenv CARGO_TARGET_DIR ~/.cargo-target
+if test -e ~/data/cargo-target
+	setenv CARGO_TARGET_DIR ~/data/cargo-target
 end
 set PATH $PATH ~/.cargo/bin
 
 if test (uname) = Darwin
-	# FZF macOS
 	#setenv FZF_DEFAULT_COMMAND 'ag -g ""'
 	#setenv FZF_CTRL_T_COMMAND 'ag -g ""'
-	#else
 	setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 	setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 end
@@ -179,9 +177,9 @@ status --is-interactive; and . (pyenv virtualenv-init -|psub)
 if test -e $HOME/.dircolors
 	if test (uname) = Darwin
 		setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
-	else
-		setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
-	end
+else
+	setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+end
 end
 function fish_user_key_bindings
 	bind \cz 'fg>/dev/null ^/dev/null'
