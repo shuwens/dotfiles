@@ -123,6 +123,10 @@ setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native"
 setenv WINEDEBUG fixme-all
 setenv FZF_DEFAULT_OPTS '--height 20%'
+if test -e ~/.cargo-target
+	setenv CARGO_TARGET_DIR ~/.cargo-target
+end
+set PATH $PATH ~/.cargo/bin
 
 if test (uname) = Darwin
 	# FZF macOS
@@ -138,14 +142,12 @@ end
 setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
 setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
 
-
 # Npm
 setenv NPM_PACKAGES "$HOME/.npm-packages"
 #PATH="$NPM_PACKAGES/bin:$PATH"
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 #unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
 
 # https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
 setenv TZ ":/etc/localtime"
@@ -174,7 +176,6 @@ set PYENV_VERSION system
 status --is-interactive; and . (pyenv virtualenv-init -|psub)
 
 # Pretty ls colors
-
 if test -e $HOME/.dircolors
 	if test (uname) = Darwin
 		setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
@@ -182,14 +183,12 @@ if test -e $HOME/.dircolors
 		setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
 	end
 end
-
 function fish_user_key_bindings
 	bind \cz 'fg>/dev/null ^/dev/null'
 	if functions -q fzf_key_bindings
 		fzf_key_bindings
 end
 end
-
 function fish_greeting
 	echo
 	if test (uname) = Darwin
@@ -312,14 +311,10 @@ end
 
 # important and urgent things, so I should get to it quick
 set_color red
-echo "    [Personal] Write-up for 7800"
-echo "    [Rust] Rust by Examples: Jan 05"
-echo "    [PVN] NetBricks: go through everything on dev branch"
-echo "    [PVN] NetBricks: fix dpdk myself?"
+#echo "    [PVN] NetBricks: fix dpdk myself?"
 
 echo
 set_color normal
 end
-
 
 # end of [fish/config.fish]

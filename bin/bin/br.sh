@@ -11,23 +11,23 @@ if [ $? != 0 ]; then
 	echo "Creating the session"
 
 	# Create the session
-	tmux new-session -s ${SESSION_NAME} -n foo -d
+	tmux new-session -s ${SESSION_NAME} -d
 	#tmux new-window -n ${SESSION_NAME} -n foo -d
 
 	# First window (0) -- vim and console
 	#tmux send-keys -t ${SESSION_NAME} 'clear ; fish -i' C-m
 	#
 	# shell (1)
-	tmux new-window -n bar -t ${SESSION_NAME}
+	tmux new-window -t ${SESSION_NAME}
 	#tmux send-keys -t ${SESSION_NAME}:1 'git status' C-m
 
 	# mysql (2)
-	tmux new-window -n workspace -t ${SESSION_NAME}
+	tmux new-window -t ${SESSION_NAME}
 	# it is a hack cause base16 color is not functional by default for neovim
 	#tmux send-keys -t ${SESSION_NAME}:2 'clear ; fish -i' C-m
 
 	# server/debug log (3)
-	tmux new-window -n athena -t ${SESSION_NAME}
+	tmux new-window -t ${SESSION_NAME}
 	#tmux send-keys -t ${SESSION_NAME}:3 'tail -f log/development.log | grep "DEBUG"' C-m
 	#tmux send-keys -t ${SESSION_NAME}:3 'clear; ' C-m
 	#tmux split-window -v -t ${SESSION_NAME}:3

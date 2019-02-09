@@ -2,7 +2,8 @@
 
 /* tabs on bottom of window */
 #navigator-toolbox { -moz-box-ordinal-group: 10; }
-#TabsToolbar { -moz-box-ordinal-group: 10; }
+#titlebar { -moz-box-ordinal-group: 10; }
+/*#TabsToolbar { -moz-box-ordinal-group: 10; }*/
 
 #PopupAutoCompleteRichResult {
   margin-top: -35vh !important;
@@ -12,6 +13,9 @@
   bottom: 100px;
   margin-left: 0 !important;
    */
+}
+#PopupAutoCompleteRichResult .autocomplete-richlistbox[style] {
+	/*height: 30vh !important;*/
 }
 
 /*Toolbar & menu font size*/
