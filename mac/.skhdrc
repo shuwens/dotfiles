@@ -86,7 +86,7 @@
 # open terminal, blazingly fast compared to iTerm/Hyper
 cmd - return : open -n /Applications/Alacritty.app
 cmd + ctrl - return : open -a /Applications/Alacritty.app ;\
-					chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+					  chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
 #cmd + ctrl - return : chunkc tiling::rule --owner Alacritty  --state tile
 
 # open qutebrowser
@@ -242,8 +242,8 @@ alt - e : chunkc tiling::window --toggle split
 alt - q : chunkc tiling::window --toggle fade
 
 # float / unfloat window and center on screen
-alt- t : chunkc tiling::window --toggle float;\
-		  chunkc tiling::window --grid-layout 12:12:1:0:10:11
+alt - t : chunkc tiling::window --toggle tile;\
+		  chunkc tiling::window --toggle float --grid-layout 12:12:1:0:10:11
 
 # toggle sticky
 cmd - s : chunkc tiling::window --toggle sticky

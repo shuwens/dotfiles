@@ -178,5 +178,5 @@ chunkc tiling::rule --owner Discord --grid-layout 1:2:1:0:1:1 --state float &
 
 #<option>: rows:cols:left:top:width:height
 #desc: split region to rows:cols grid, windows on left:top grid, have <width> times grid width and <height> times grid height
-#chunkc tiling::rule --owner iTerm2 --grid-layout 16:16:1:0:14:15 --state float &
 chunkc tiling::rule --owner iTerm2 --grid-layout 12:12:1:0:10:11 --state float &
+#chunkc tiling::rule --owner Alacritty --grid-layout 12:12:1:0:10:11 --state float &
