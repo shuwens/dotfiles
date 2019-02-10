@@ -84,7 +84,10 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd - return : open -n /Applications/Alacritty.app
+cmd + ctrl - return : open -a /Applications/Alacritty.app ;\
+					chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+#cmd + ctrl - return : chunkc tiling::rule --owner Alacritty  --state tile
 
 # open qutebrowser
 cmd + shift - return : ~/Scripts/qtb.sh
@@ -145,7 +148,8 @@ cmd + alt - w : chunkc tiling::desktop --annihilate
 cmd + alt - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
 cmd + alt - z : chunkc tiling::desktop --focus prev
 cmd + alt - c : chunkc tiling::desktop --focus next
-cmd + alt - 1 : chunkc tiling::desktop --focus 1
+#cmd + alt - 1 : chunkc tiling::desktop --focus 1
+cmd + shift - 1 : chunkc tiling::desktop --focus 1
 cmd + alt - 2 : chunkc tiling::desktop --focus 2
 cmd + alt - 3 : chunkc tiling::desktop --focus 3
 cmd + alt - 4 : chunkc tiling::desktop --focus 4
@@ -238,11 +242,11 @@ alt - e : chunkc tiling::window --toggle split
 alt - q : chunkc tiling::window --toggle fade
 
 # float / unfloat window and center on screen
-alt - t : chunkc tiling::window --toggle float;\
-          chunkc tiling::window --grid-layout 4:4:1:1:2:2
+alt- t : chunkc tiling::window --toggle float;\
+		  chunkc tiling::window --grid-layout 12:12:1:0:10:11
 
 # toggle sticky
-alt - s : chunkc tiling::window --toggle sticky
+cmd - s : chunkc tiling::window --toggle sticky
 
 # toggle sticky, float and resize to picture-in-picture size
 alt - p : chunkc tiling::window --toggle sticky;\
