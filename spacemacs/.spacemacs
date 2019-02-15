@@ -199,8 +199,8 @@
 
     ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
     ;; quickly tweak the mode-line size to make separators look not too crappy.
-    dotspacemacs-default-font '("Noto Mono"
-                                :size 14
+    dotspacemacs-default-font '("Noto Sans Mono"
+                                :size 16
                                 :weight light
                                 :width normal)
 
@@ -397,7 +397,7 @@
 
     ;; If non-nil, advise quit functions to keep server open when quitting.
     ;; (default nil)
-    dotspacemacs-persistent-server t
+    dotspacemacs-persistent-server nil
 
     ;; List of search tool executable names. Spacemacs uses the first installed
     ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -470,7 +470,7 @@
 
   ;; enable Fira Code ligatures
   (when (window-system)
-    (set-frame-font "Noto Mono"))
+    (set-frame-font "Noto Sans Mono"))
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                  (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
                  (36 . ".\\(?:>\\)")

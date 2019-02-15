@@ -34,6 +34,7 @@ abbr -a -U gm git m
 abbr -a -U gc git clone
 abbr -a -U ggo git checkout
 abbr -a -U gb git branch
+abbr -a -U gr git rebase -i HEAD~3
 abbr -a -U gti git
 abbr -a -U a 'git amend --allow-empty --no-verify'
 abbr -a -U gb 'git recent-branches 2.days.ago'
@@ -115,6 +116,7 @@ alias ccat 'pygmentize -g'
 
 alias c clear
 alias v vim
+alias vim nvim
 alias x 'tig HEAD'
 alias xx 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --branches'
 alias xxa 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --all'
