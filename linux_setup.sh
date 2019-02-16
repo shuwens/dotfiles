@@ -17,8 +17,6 @@ stow -t ~   spacemacs
 cd config
 stow -t ~/.config  .config
 
-
-
 ## Gnome setting changes!
 # screenshots..
 mkdir -p ~/Templates/Pictures/screenshots/

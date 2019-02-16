@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# DANGEROUS:
+#   This script is very outdated and you should not run it unless you are
+#   absolutely sure.
+
 ## I really need to rework this!
 rm ~/.xinitrc
 

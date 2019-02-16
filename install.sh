@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# This script setup the X1C by installing bunch of packages that I feel
+# necessary.
+#
+#                                               Last updated: June 2018
+
 # ------------------------------------------------------------------------
 # A list of operations get done here:
 #
@@ -10,7 +15,7 @@ set -e
 sudo apt remove thunderbird nano rhythmbox
 #sudo apt-add-repository -y ppa:rael-gc/scudcloud
 
-# install font 
+# install font
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 
 # Thinkpad tlp
@@ -21,10 +26,10 @@ wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-# linux kernel 
+# linux kernel
 sudo apt-add-repository -y ppa:teejee2008/ppa
 
-# install my personal utils 
+# install my personal utils
 sudo apt-get install -y xfonts-terminus console-terminus silversearcher-ag \
   mercurial zathura exuberant-ctags stow meld vlc python-pip zsh vagrant \
   chromium-browser gnome-tweak-tool golang-glide docker.io fonts-roboto curl \
@@ -50,7 +55,7 @@ stack install ghc-mod
 
 # python pip
 sudo apt install -y python-pip python3-pip
-sudo pip install pylint pyflakes virtualenv 
+sudo pip install pylint pyflakes virtualenv
 
 # npm yarn
 sudo apt install -y yarn npm
