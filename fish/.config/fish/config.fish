@@ -54,8 +54,9 @@ else
 end
 end
 
-if [ -e ~/.cargo/bin/exa ]
+if [ -e /usr/local/bin/exa ]
 	abbr -a -U ls exa
+	abbr -a -U la exa -a
 	abbr -a -U ll exa -l
 	abbr -a -U lll exa -la
 else
@@ -176,9 +177,9 @@ status --is-interactive; and . (pyenv virtualenv-init -|psub)
 # Pretty ls colors
 if test -e $HOME/.dircolors
 	if test (uname) = Darwin
-		setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+		#setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
 else
-	setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+	#setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
 end
 end
 function fish_user_key_bindings

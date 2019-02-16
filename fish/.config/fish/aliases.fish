@@ -130,6 +130,8 @@ alias reset-mailbox 'rm -v ~/Library/Caches/com.dropbox.mbd.external-beta/mailbo
 
 alias wifi 'nmcli d wifi list'
 
+
+
 function da -d "Allow or disallow .envrc after printing it."
 	echo "------------------------------------------------"
 	cat .envrc
