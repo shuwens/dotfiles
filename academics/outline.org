@@ -4,59 +4,59 @@ Sat Feb 16 09:53:17 2019
 * Title: My Great Research Project
 
 
-* Author
+** Author
 Jethro Shuwen Sun
 
-* Abstract
+** Abstract
 
 
-* Introduction
+** Introduction
 Why did I do the work? What were the central motivations and hypotheses?
 
-** The objectives of the work.
+*** The objectives of the work.
 
 
-** The justification for these objectives:
+*** The justification for these objectives:
 Why is the work important?
 
 
-** Background
+*** Background
 Who else has done what? How? What have we done previously?
 
 
-** Guidance to the reader
+*** Guidance to the reader
 What should the reader watch for in the paper? What are the interesting high
 points? What strategy did we use?
 
 
-** Summary/conclusion
+*** Summary/conclusion
 What should the reader expect as conclusion? In advanced versions of the
 outline, you should also include all the sections that will go in the
 Experimental section (at the level of paragraph subheadings) and indicate what
 information will go in the Microfilm section.
 
 
-* Results and Discussion
+** Results and Discussion
 What were the results? How were compounds made and characterized? What was
 measured?
 
-** Synthesis of starting materials
+*** Synthesis of starting materials
 
 
-** Characterization of products
+*** Characterization of products
 
 
-** Methods of characterization
+*** Methods of characterization
 
 
-** Methods of measurement
+*** Methods of measurement
 
 
-** Results (rate constants, contact angles, whatever)
+*** Results (rate constants, contact angles, whatever)
 
 
 
-* Conclusions
+** Conclusions
 What does it all mean? What hypotheses were proved or disproved? What did I
 learn? Why does it make a difference
 
