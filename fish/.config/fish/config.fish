@@ -17,6 +17,10 @@ if status --is-interactive
 	tmux ^ /dev/null; and exec true
 end
 
+# Add ssh identity, silently
+# macOs is now very annoying...
+ssh-add -K 2>/dev/null
+
 # systems update
 if test (uname) = Darwin
 	abbr -a -U p echo "what r you tring to do?"

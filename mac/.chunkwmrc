@@ -164,7 +164,7 @@ chunkc tiling::rule --owner Code --grid-layout 1:1:0:0:1:1 --state float &
 chunkc tiling::rule --owner Tweetbot --state float &
 chunkc tiling::rule --owner Dictionary --grid-layout 1:2:1:0:1:1 --state float &
 chunkc tiling::rule --owner Emacs --except "^$" --state tile &
-chunkc tiling::rule --owner \"Activity Monitor\" --grid-layout 8:8:1:1:6:6 --state float &
+chunkc tiling::rule --owner \"Activity Monitor\" --grid-layout 8:8:1:0:6:6 --state float &
 #chunkc tiling::rule --owner \"1Password 7\" --state float --grid-layout 8:8:1:1:6:6 &
 chunkc tiling::rule --owner \"1Password 7\" --state float --grid-layout 1:3:1:0:2:1 &
 chunkc tiling::rule --owner VirtualBox  --state float &

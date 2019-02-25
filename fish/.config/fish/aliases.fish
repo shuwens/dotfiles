@@ -24,7 +24,8 @@ abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {
 # Rust
 abbr -a -U c cargo
 abbr -a -U cargot cargo t
-abbr -a -U clippy cargo-clippy
+abbr -a -U clippy cargo clippy
+abbr -a -U cl cargo clippy
 #abbr -a -U r rustup
 abbr -a -U ra rustup add component
 
