@@ -50,7 +50,7 @@ menubar, menubutton, menulist, menu, menuitem, textbox{font-size: 12pt !importan
 
 :root {
   --tab_min_width: 80px;
-  --tab_max_width: 300px;
+  --tab_max_width: 220px;
 }
 
 /* use 'about:config > browser.tabs.tabMinWidth' for tab min-width */

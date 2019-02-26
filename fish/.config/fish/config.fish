@@ -289,7 +289,6 @@ if [ $r -lt 15 ]
 	# echo "    [project] <description>"
 	echo "    [PVN] NetBricks: Replicate experiments"
 	echo "    [PVN] NetBricks: Modify and improve NetBricks"
-	echo "    [Rust] Rust Book: check the list of unclear concepts"
 	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
 	echo "    [Fun] SICP"
 	echo "    [Fun] C++ 2012, 2014"
@@ -299,8 +298,6 @@ if [ $r -lt 35 ]
 	set_color green
 	# echo "    [project] <description>"
 	echo "    [CFP] HotCloud 2019 DDL: Mar 6, 2019"
-	echo "    [CFP] NSDI 2020 Spring DDL: Mar 19, 2019"
-	echo "    [NSDI 2019] Student grant application DDL: Jan 23"
 end
 if [ $r -lt 50 ]
 	# important but not urgent things, note that these are the things I work

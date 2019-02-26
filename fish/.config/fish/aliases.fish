@@ -20,6 +20,8 @@ abbr -a -U lab "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/jethrosun_rsa\" git $argv"
 abbr -a amz 'env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1)'
 abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {iid: .InstanceId, type: .InstanceType, key:.KeyName, state:.State.Name, host:.PublicDnsName}'"
 
+abbr -a idea nvim ~/git/home/academic/outline.org
+abbr -a nsdi nvim ~/notes/nsdi19.org
 
 # Rust
 abbr -a -U c cargo
