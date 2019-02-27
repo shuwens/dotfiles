@@ -9,6 +9,7 @@
 #
 abbr -a -U vimdiff nvim -d
 abbr -a -U sduo sudo
+abbr -a -U b brew
 abbr -a -U vim nvim
 abbr -a -U e nvim
 abbr -a -U w wget
