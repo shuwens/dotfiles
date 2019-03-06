@@ -11,11 +11,12 @@
 set --universal FONTCONFIG_PATH /etc/fonts/
 
 set -U fish_prompt_pwd_dir_length 3
+set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 
 # ??? to blame
 if status --is-interactive
 	tmux ^ /dev/null; and exec true
-end
+	end
 
 # Add ssh identity, silently
 # macOs is now very annoying...
@@ -93,6 +94,18 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 
+## Variables setting
+setenv EDITOR nvim
+setenv BROWSER firefox-developer-edition
+setenv EMAIL sun.shuw@northeastern.edu
+setenv NAME "Jethro S. Sun"
+setenv GOPATH "$HOME/dev/r"
+setenv RUST_BACKTRACE 1
+setenv CARGO_INCREMENTAL 1
+setenv RUSTFLAGS "-C target-cpu=native"
+setenv WINEDEBUG fixme-all
+setenv FZF_DEFAULT_OPTS '--height 20%'
+
 if test (uname) = Darwin
 	## PATH variables
 	set PATH /usr/local/bin/ $PATH
@@ -110,26 +123,11 @@ else
 	set PATH $PATH $NPM_PACKAGES/bin
 	set PATH $PATH ~/.local/share/umake/bin
 	set PATH $PATH ~/dev/r/bin
-
-
 end
 
-## Other PATH variables
-#setenv GOPATH "$HOME/dev/r:$HOME/dev/projects/cuckood:$HOME/dev/projects/hasmail"
 
-## Variables setting
-setenv EDITOR nvim
-setenv BROWSER firefox-developer-edition
-setenv EMAIL sun.shuw@northeastern.edu
-setenv NAME "Jethro S. Sun"
-setenv GOPATH "$HOME/dev/r"
-setenv RUST_BACKTRACE 1
-setenv CARGO_INCREMENTAL 1
-setenv RUSTFLAGS "-C target-cpu=native"
-setenv WINEDEBUG fixme-all
-setenv FZF_DEFAULT_OPTS '--height 20%'
-if test -e ~/data/cargo-target
-	setenv CARGO_TARGET_DIR ~/data/cargo-target
+if test -e $HOME/data/cargo-target
+	setenv CARGO_TARGET_DIR $HOME/data/cargo-target
 end
 set PATH $PATH ~/.cargo/bin
 
@@ -173,10 +171,8 @@ if status --is-interactive
 end
 
 ## pyenv
-#set -x PATH "/home/jethros/.pyenv/bin" $PATH
-status --is-interactive; and . (pyenv init -|psub)
-set PYENV_VERSION system
-status --is-interactive; and . (pyenv virtualenv-init -|psub)
+status --is-interactive; and pyenv init - | source
+status --is-interactive; and pyenv virtualenv-init - | source
 
 # Pretty ls colors
 if test -e $HOME/.dircolors
@@ -304,14 +300,14 @@ if [ $r -lt 50 ]
 	# on every morning
 	set_color yellow
 	echo "    [PVN] SGX: read primer (ring0)"
-	echo "    [PVN] DPDK: Fastpass, primer "
 	echo "    [Research] Short paper idea"
 	echo "    [PVN] Design, Architecture and Prototype"
+	echo "    [NetBricks] DPDK done?"
 end
 
 # important and urgent things, so I should get to it quick
 set_color red
-#echo "    [PVN] NetBricks: fix dpdk myself?"
+echo "    [NetBricks] read config?"
 
 echo
 set_color normal

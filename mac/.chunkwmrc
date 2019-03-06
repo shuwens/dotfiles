@@ -139,6 +139,7 @@ chunkc core::load ffm.so
 # Finder
 chunkc tiling::rule --owner Finder --name Copy --state float &
 chunkc tiling::rule --owner Finder --name Moving --state float &
+chunkc tiling::rule --owner Finder --grid-layout 12:12:1:0:10:11 --state float &
 
 # Office stuff
 chunkc tiling::rule --owner Keynote --grid-layout 1:1:0:0:1:1  --state float &

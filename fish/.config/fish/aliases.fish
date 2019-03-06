@@ -9,8 +9,10 @@
 #
 abbr -a -U vimdiff nvim -d
 abbr -a -U sduo sudo
+abbr -a -U upssh "vagrant up; and vagrant ssh"
 abbr -a -U b brew
 abbr -a -U vim nvim
+abbr -a -U v vagrant
 abbr -a -U e nvim
 abbr -a -U w wget
 abbr -a -U ls exa
