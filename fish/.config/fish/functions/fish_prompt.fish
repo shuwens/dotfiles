@@ -9,13 +9,15 @@ function fish_prompt
   if [ $PWD != $HOME ]
     set_color brblack
     echo -n ':'
-    set_color green
-		#echo -n (basename $PWD)
-		echo -n (prompt_pwd | sed "s_$HOME""_~_")""
-  end
-  set_color green
-  printf '%s ' (__fish_git_prompt)
-  set_color red
-  echo -n '$ '
-  set_color normal
+	# set_color green
+    #echo -n (basename $PWD)
+    set_color yellow
+    echo -n (prompt_pwd | sed "s_$HOME""_~_")""
+end
+set_color green
+printf '%s ' (__fish_git_prompt)
+set_color red
+#echo -n '$ '
+echo -n '| '
+set_color normal
 end
