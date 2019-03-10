@@ -1,1 +1,0 @@
-/home/jethros/.config/fisherman/autojump/conf.d/autojump.fish
