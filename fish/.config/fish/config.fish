@@ -283,31 +283,32 @@ if [ $r -lt 15 ]
 	# least important and urgent, remind me occasionally
 	set_color cyan
 	# echo "    [project] <description>"
-	echo "    [PVN] NetBricks: Replicate experiments"
-	echo "    [PVN] NetBricks: Modify and improve NetBricks"
+	echo "    [Research] Placement short paper idea"
+	echo "    [Research] NF practice short paper idea"
 	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
-	echo "    [Fun] SICP"
-	echo "    [Fun] C++ 2012, 2014"
+	echo "    [CFP] HotCloud 2019 DDL: Mar 6, 2019"
 end
 if [ $r -lt 35 ]
 	# less important and urgent
 	set_color green
 	# echo "    [project] <description>"
-	echo "    [CFP] HotCloud 2019 DDL: Mar 6, 2019"
+	echo "    [ML] Reviewing content so far"
+	echo "    [PVN] Design, Architecture and Prototype"
+	echo "    [PVN] NetBricks: Modify and improve NetBricks"
 end
 if [ $r -lt 50 ]
 	# important but not urgent things, note that these are the things I work
 	# on every morning
 	set_color yellow
-	echo "    [PVN] SGX: read primer (ring0)"
-	echo "    [Research] Short paper idea"
-	echo "    [PVN] Design, Architecture and Prototype"
-	echo "    [NetBricks] DPDK done?"
+	echo "    [ML] Project"
+	echo "    [Research] Organize long paper idea"
+	echo "    [PVN] NetBricks: Replicate experiments"
+	echo "    [Service] Naming ceremony letter"
 end
 
 # important and urgent things, so I should get to it quick
 set_color red
-echo "    [NetBricks] read config?"
+echo "    [ML] HW4"
 
 echo
 set_color normal
