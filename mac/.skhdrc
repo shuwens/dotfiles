@@ -84,7 +84,8 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : open -n /Applications/Alacritty.app -e tmux new-session -A
+#cmd - return : open -n /Applications/Alacritty.app -e tmux new-session -A
+cmd - return : open -n /Applications/Alacritty.app
 cmd + ctrl - return : open -a /Applications/Alacritty.app ;\
               chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
 #cmd + ctrl - return : chunkc tiling::rule --owner Alacritty  --state tile
