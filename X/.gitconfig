@@ -21,7 +21,7 @@
   dad = !"curl https://icanhazdadjoke.com/ ; git add"
   cc = checkout -- .
   co = checkout
-  #m = !"git add -A; git commit -m"
+  m = !"git add -A; git commit -m"
   #open = !nvim `git-open.sh`
 
   # not boring
@@ -108,8 +108,6 @@
   tb = rev-parse --abbrev-ref --symbolic-full-name @{u}
   untracked = "!u() { git status -s | grep "??" | awk '{print $2}'; }; u"
   which-branch = "!wb() { b="$(git symbolic-ref HEAD)" && echo ${b#refs/heads/}; }; wb"
-
-
 # Type-specific diff settings
 [core]
   attributesfile = ~/.gitattributes

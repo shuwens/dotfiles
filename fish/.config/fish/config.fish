@@ -12,9 +12,10 @@ set --universal FONTCONFIG_PATH /etc/fonts/
 
 set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 
-# ??? to blame
+# Finally... fish will get me to the tmux session still active or create a new
+# one
 if status --is-interactive
-	tmux ^ /dev/null; and exec true
+	tmux attach || tmux new ^ /dev/null; and exec true
 end
 
 # Add ssh identity, silently
@@ -140,7 +141,7 @@ end
 
 # For RLS
 # https://github.com/fish-shell/fish-shell/issues/2456
-setenv LD_LIBRARY_PATH (rustc +nightly --print sysroot)"/lib:$LD_LIBRARY_PATH"
+setenv LD_LIBRARY_PATH (rustc  --print sysroot)"/lib:$LD_LIBRARY_PATH"
 setenv RUST_SRC_PATH (rustc --print sysroot)"/lib/rustlib/src/rust/src"
 
 # Npm
@@ -230,6 +231,7 @@ if test (uname) = Darwin
 	echo -ne ": "
 	echo -ne (\
 	ipconfig  getifaddr (networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') \
+	#ipconfig  getifaddr (networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') \
 	)
 	echo
 else
@@ -293,22 +295,22 @@ if [ $r -lt 35 ]
 	set_color green
 	# echo "    [project] <description>"
 	echo "    [ML] Reviewing content so far"
+	echo "    [Research] Organize long paper idea"
 	echo "    [PVN] Design, Architecture and Prototype"
 	echo "    [PVN] NetBricks: Modify and improve NetBricks"
 end
-if [ $r -lt 50 ]
+if [ $r -lt 65 ]
 	# important but not urgent things, note that these are the things I work
 	# on every morning
 	set_color yellow
-	echo "    [ML] Project"
-	echo "    [Research] Organize long paper idea"
-	echo "    [PVN] NetBricks: Replicate experiments"
-	echo "    [Service] Naming ceremony letter"
+	echo "    [ML | 5hr] Project"
+	echo "    [Service | 6hr] Naming ceremony letter (Due Mar 26)"
+	echo "    [Service | 2hr] Grade change request letter (Due unknown)"
 end
 
-# important and urgent things, so I should get to it quick
+# important and urgent things, so I should get to it right away
 set_color red
-echo "    [ML] HW4"
+echo "    [ML | 2d] HW4 (Due in 9 days)"
 
 echo
 set_color normal
