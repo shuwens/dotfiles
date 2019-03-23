@@ -15,7 +15,8 @@ set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 # Finally... fish will get me to the tmux session still active or create a new
 # one
 if status --is-interactive
-	tmux attach || tmux new ^ /dev/null; and exec true
+	tmux ^ /dev/null; and exec true
+	#tmux attach || tmux new ^ /dev/null; and exec true
 end
 
 # Add ssh identity, silently
