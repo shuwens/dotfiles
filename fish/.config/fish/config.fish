@@ -9,14 +9,12 @@
 
 ## let's setup path variable
 set --universal FONTCONFIG_PATH /etc/fonts/
-
+set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 
-# Finally... fish will get me to the tmux session still active or create a new
-# one
+# the right tmux setup in fish
 if status --is-interactive
 	tmux ^ /dev/null; and exec true
-	#tmux attach || tmux new ^ /dev/null; and exec true
 end
 
 # Add ssh identity, silently
@@ -172,9 +170,12 @@ if status --is-interactive
 	source "$BASE16_SHELL/profile_helper.fish"
 end
 
-## pyenv
-status --is-interactive; and pyenv init - | source
-status --is-interactive; and pyenv virtualenv-init - | source
+# pyenv
+# FIXME(jethros): venv not showing up in fish prompt
+if status --is-interactive
+	pyenv init - | source
+	pyenv virtualenv-init - | source
+end
 
 # Pretty ls colors
 if test -e $HOME/.dircolors
