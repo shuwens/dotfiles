@@ -306,7 +306,6 @@ if [ $r -lt 65 ]
 	# on every morning
 	set_color yellow
 	echo "    [ML | 5hr] Project"
-	echo "    [Service | 6hr] Naming ceremony letter (Due Mar 26)"
 	echo "    [Service | 2hr] Grade change request letter (Due unknown)"
 end
 

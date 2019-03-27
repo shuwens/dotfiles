@@ -7,7 +7,6 @@
   # .git/config (Git >= 2.8)
   useConfigOnly = true
   email = jethro.s.sun@gmail.com
-  signingkey = A12A9012444F0E74
 
 [alias]
   # original
@@ -113,10 +112,6 @@
   attributesfile = ~/.gitattributes
 [diff "elisp"]
   xfuncname="^(\\(def.*)$"
-
-[includeIf "gitdir:~/dev/achtung"]
-  path = ~/dev/achtung/.gitconfig
-
 [help]
   autocorrect = 1
 [url "https://github.com/"]
@@ -132,7 +127,7 @@
   algorithm = patience
   compactionHeuristic = true
 [commit]
-  gpgsign = true
+  gpgsign = false
 [include]
   path = ~/.gitconfig-local
 [color]
@@ -157,9 +152,9 @@
 [core]
   excludesfile = ~/.gitignore_global
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  #pager = diff-so-fancy | less --tabs=4 -RFX
 [http]
-  cookiefile = /home/jethros/.gitcookies
+  #cookiefile = /home/jethros/.gitcookies
 [color "diff-highlight"]
   oldNormal = red bold
   oldHighlight = red bold 52
