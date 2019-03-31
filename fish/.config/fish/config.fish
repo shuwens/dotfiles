@@ -306,12 +306,13 @@ if [ $r -lt 65 ]
 	# on every morning
 	set_color yellow
 	echo "    [ML | 5hr] Project"
-	echo "    [Service | 2hr] Grade change request letter (Due unknown)"
+	echo "    [Service | 2hr] Grade change request letter (Due Sunday)"
+	echo "    [Housing | 1hr] (Due Sunday)"
 end
 
 # important and urgent things, so I should get to it right away
 set_color red
-echo "    [ML | 2d] HW4 (Due in 9 days)"
+echo "    [ML | 2d] HW4 (Due in 24 hrs)"
 
 echo
 set_color normal
