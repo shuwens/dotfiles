@@ -42,6 +42,7 @@ abbr -a -U gm git m
 abbr -a -U gc git clone
 abbr -a -U ggo git checkout
 abbr -a -U gb git branch
+abbr -a -U gd git diff
 abbr -a -U gr git rebase -i HEAD~5
 abbr -a -U gti git
 abbr -a -U a 'git amend --allow-empty --no-verify'

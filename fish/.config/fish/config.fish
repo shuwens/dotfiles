@@ -289,30 +289,30 @@ if [ $r -lt 15 ]
 	# echo "    [project] <description>"
 	echo "    [Research] Placement short paper idea"
 	echo "    [Research] NF practice short paper idea"
-	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
-	echo "    [CFP] HotCloud 2019 DDL: Mar 6, 2019"
 end
 if [ $r -lt 35 ]
 	# less important and urgent
 	set_color green
 	# echo "    [project] <description>"
+	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
 	echo "    [ML] Reviewing content so far"
-	echo "    [Research] Organize long paper idea"
-	echo "    [PVN] Design, Architecture and Prototype"
-	echo "    [PVN] NetBricks: Modify and improve NetBricks"
+	#echo "    [Research] Organize long paper idea"
+	#echo "    [PVN] Design, Architecture and Prototype"
+	#echo "    [PVN] NetBricks: Modify and improve NetBricks"
 end
 if [ $r -lt 65 ]
 	# important but not urgent things, note that these are the things I work
 	# on every morning
 	set_color yellow
-	echo "    [ML | 5hr] Project"
-	echo "    [Service | 2hr] Grade change request letter (Due Sunday)"
-	echo "    [Housing | 1hr] (Due Sunday)"
+	echo "    [Tax report | 1hr] "
+	echo "    [Course waiver | .5hr] for Cloud computing"
+	echo "    [Research | .5hr] academic perf review"
 end
 
 # important and urgent things, so I should get to it right away
 set_color red
-echo "    [ML | 2d] HW4 (Due in 24 hrs)"
+	echo "    [ML | 5hr] Project"
+#echo "    [ML | 2d] HW4 (Due in 24 hrs)"
 
 echo
 set_color normal
