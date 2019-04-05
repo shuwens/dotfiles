@@ -168,6 +168,7 @@ chunkc tiling::rule --owner Vienna --state tile &
 chunkc tiling::rule --owner Matlab --state tile &
 chunkc tiling::rule --owner Preview --grid-layout 1:1:0:0:1:1 --state float &
 chunkc tiling::rule --owner Firefox --state float &
+chunkc tiling::rule --owner Vienna --state float &
 chunkc tiling::rule --owner \"Firefox Developer Edition\" --state float &
 chunkc tiling::rule --owner Chrome --state float &
 chunkc tiling::rule --owner Emacs --except "^$" --state tile &

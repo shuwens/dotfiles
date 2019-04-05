@@ -296,8 +296,8 @@ if [ $r -lt 35 ]
 	# echo "    [project] <description>"
 	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
 	echo "    [ML] Reviewing content so far"
-	#echo "    [Research] Organize long paper idea"
-	#echo "    [PVN] Design, Architecture and Prototype"
+	echo "    [Research] Organize long paper idea"
+	echo "    [PVN] Design, Architecture and Prototype"
 	#echo "    [PVN] NetBricks: Modify and improve NetBricks"
 end
 if [ $r -lt 65 ]
@@ -311,8 +311,8 @@ end
 
 # important and urgent things, so I should get to it right away
 set_color red
-	echo "    [ML | 5hr] Project"
-#echo "    [ML | 2d] HW4 (Due in 24 hrs)"
+echo "    [ML | 5hr] Project"
+echo "    [Rust] borrown checking"
 
 echo
 set_color normal
