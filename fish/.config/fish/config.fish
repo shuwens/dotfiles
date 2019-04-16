@@ -102,7 +102,7 @@ setenv NAME "Jethro S. Sun"
 setenv GOPATH "$HOME/dev/r"
 setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
-setenv RUSTFLAGS "-C target-cpu=native"
+setenv RUSTFLAGS "-C target-cpu=native -C codegen-units=4"
 setenv WINEDEBUG fixme-all
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
@@ -159,6 +159,9 @@ setenv TZ ":/etc/localtime"
 #setenv JAVA_FONTS /usr/share/fonts/TTF
 #setenv MATLAB_JAVA /usr/lib/jvm/default-runtime
 #setenv J2D_D3D false
+
+# cuda
+#setenv DYLD_LIBRARY_PATH /Developer/NVIDIA/CUDA-9.0/lib${DYLD_LIBRARY_PATH:+:${DYLD_LIBRARY_PATH}
 
 # Fish should not add things to clipboard when killing
 # See https://github.com/fish-shell/fish-shell/issues/772
@@ -287,31 +290,28 @@ if [ $r -lt 15 ]
 	# least important and urgent, remind me occasionally
 	set_color cyan
 	# echo "    [project] <description>"
-	echo "    [Research] Placement short paper idea"
-	echo "    [Research] NF practice short paper idea"
+	echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
 end
 if [ $r -lt 35 ]
 	# less important and urgent
 	set_color green
 	# echo "    [project] <description>"
 	echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
-	echo "    [ML] Reviewing content so far"
 	echo "    [Research] Organize long paper idea"
 	echo "    [PVN] Design, Architecture and Prototype"
-	#echo "    [PVN] NetBricks: Modify and improve NetBricks"
 end
 if [ $r -lt 65 ]
 	# important but not urgent things, note that these are the things I work
 	# on every morning
 	set_color yellow
-	echo "    [Tax report | 1hr] "
-	echo "    [Course waiver | .5hr] for Cloud computing"
-	echo "    [Research | .5hr] academic perf review"
+	echo "    [Research] Placement short paper idea"
+	echo "    [Research] NF practice short paper idea"
+	#echo "    [ML] Reviewing content so far"
 end
 
 # important and urgent things, so I should get to it right away
 set_color red
-echo "    [ML | 5hr] Project"
+echo "    [ML] Final"
 echo "    [Rust] borrown checking"
 
 echo

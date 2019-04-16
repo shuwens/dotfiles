@@ -1,4 +1,4 @@
 #!/bin/bash
 
-nvim +PlugInstall +PlugClean +PlugUpdate +UpdateRemotePlugins +qall +qall!
+nvim +PlugInstall +PlugClean +PlugUpdate  +PythonSupportInitPython2 +PythonSupportInitPython3 +BlackUpgrade +UpdateRemotePlugins +qall!
 
