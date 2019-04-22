@@ -11,6 +11,7 @@
 set --universal FONTCONFIG_PATH /etc/fonts/
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
+set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
 
 # the right tmux setup in fish
 if status --is-interactive
@@ -112,6 +113,7 @@ if test (uname) = Darwin
 	set PATH $PATH /Applications/MATLAB_R2018b.app/bin
 	set PATH $PATH ~/bin
 	set PATH $PATH $HOME/.cargo/bin
+	set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
 else
 	## PATH variables
 	set PATH /usr/local/bin/ $PATH
@@ -311,7 +313,6 @@ end
 
 # important and urgent things, so I should get to it right away
 set_color red
-echo "    [ML] Final"
 echo "    [Rust] borrown checking"
 
 echo
