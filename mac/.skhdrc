@@ -85,12 +85,14 @@
 
 # open terminal, blazingly fast compared to iTerm/Hyper
 cmd + ctrl - return : open -a /Applications/Alacritty.app ;\
-                  chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+                  chunkc tiling::desktop --focus 1
+                  #chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+
 #cmd - return : open -n /Applications/Alacritty.app
 cmd + shift -t: open -n /Applications/Alacritty.app
 
 # open qutebrowser
-cmd + shift - return : ~/Scripts/qtb.sh
+#cmd + shift - return : ~/Scripts/qtb.sh
 
 # open mpv
 cmd - m : open -na /Applications/mpv.app $(pbpaste)
@@ -149,13 +151,16 @@ cmd + alt - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop
 cmd + alt - z : chunkc tiling::desktop --focus prev
 cmd + alt - c : chunkc tiling::desktop --focus next
 #cmd + alt - 1 : chunkc tiling::desktop --focus 1
-cmd + shift - 1 : chunkc tiling::desktop --focus 1
-cmd + alt - 2 : chunkc tiling::desktop --focus 2
-cmd + alt - 3 : chunkc tiling::desktop --focus 3
-cmd + alt - 4 : chunkc tiling::desktop --focus 4
-cmd + alt - 5 : chunkc tiling::desktop --focus 5
-cmd + alt - 6 : chunkc tiling::desktop --focus 6
-# cmd + alt - 7 : chunkc tiling::desktop --focus 7
+cmd - 1 : chunkc tiling::desktop --focus 1
+cmd - 2 : chunkc tiling::desktop --focus 2
+cmd - 3 : chunkc tiling::desktop --focus 3
+cmd - 4 : chunkc tiling::desktop --focus 4
+cmd - 5 : chunkc tiling::desktop --focus 5
+cmd - 6 : chunkc tiling::desktop --focus 6
+cmd - 7 : chunkc tiling::desktop --focus 7
+cmd - 8 : chunkc tiling::desktop --focus 8
+cmd - 9 : chunkc tiling::desktop --focus 9
+cmd - 0 : chunkc tiling::desktop --focus 10
 
 # send window to desktop
 shift + alt - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
