@@ -21,6 +21,14 @@ window:
     columns: 0
     lines: 0
 
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  #position:
+  #  x: 0
+  #  y: 0
+
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is scaled
@@ -43,8 +51,16 @@ window:
   #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: buttonless
 
-  # When true, alacritty starts maximized.
-  start_maximized: false
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: false
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
