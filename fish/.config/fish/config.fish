@@ -308,6 +308,7 @@ if [ $r -lt 65 ]
 	set_color yellow
 	echo "    [Research] Placement short paper idea"
 	echo "    [Research] NF practice short paper idea"
+	echo "    [Skim] NFV/NF from NSDI 2019-2017, SIGCOMM 2019-2017"
 	#echo "    [ML] Reviewing content so far"
 end
 

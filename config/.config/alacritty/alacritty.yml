@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: xterm-256color
+  TERM: tmux-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -90,7 +90,7 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 4
+tabspaces: 8
 
 # Font configuration (changes require restart)
 font:
@@ -99,10 +99,13 @@ font:
     # Font family
     #
     # Default:
-    #   - (macOS) Menlo
+    #   - (macOS) Menlo, Noto Sans Mono,
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: "Noto Sans Mono"
+    #family: "NotoSansMono Nerd Font"
+    #family: "FuraMono Nerd Font"
+    family: "Droid Sans Mono for Powerline"
+    #family: "Noto Sans Mono"
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -113,7 +116,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
+    family: "Droid Sans Mono for Powerline"
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -124,13 +127,13 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
+    family: "Droid Sans Mono for Powerline"
 
     # The `style` can be specified to pick a specific face.
     style: Italic
 
   # Point size
-  size: 16.0
+  size: 18.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
