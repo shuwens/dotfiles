@@ -34,7 +34,6 @@ else
 		# ubuntu systems
 		set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
 		set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
-
 		#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
 		function upgrade
 			echo (pass x1c/jethros) | sudo -S apt -y upgrade
