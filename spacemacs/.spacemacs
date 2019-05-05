@@ -42,7 +42,7 @@
       auto-completion
       better-defaults
       emacs-lisp
-      magit
+      git
       ;helm
       ivy
       markdown
@@ -198,7 +198,7 @@
     ;; Press `SPC T n' to cycle to the next theme in the list (works great
     ;; with 2 themes variants, one dark and one light)
     dotspacemacs-themes '(spacemacs-dark
-                          spacemacs-light)
+                           spacemacs-light)
 
     ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
     ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -455,6 +455,7 @@
   configuration.
   It is mostly for variables that should be set before packages are loaded.
   If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq-default git-magit-status-fullscreen t)
   (setq lsp-ui-doc-max-width 72
         lsp-ui-doc-max-height 40)
   )
@@ -472,5 +473,7 @@
   configuration.
   Put your configuration code here, except for variables that should be set
   before packages are loaded."
+  (setq magit-repository-directories '(("~/dev" . 1)
+                                       ("~/git" . 1))
+        )
   )
-
