@@ -262,6 +262,7 @@ function fish_greeting
 		echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
 		echo "    [Research] Organize long paper idea"
 		echo "    [PVN] Design, Architecture and Prototype"
+		echo "    [Rust] Rust book"
 	end
 	if [ $r -lt 65 ]
 		# important but not urgent things, note that these are the things I work
@@ -269,16 +270,17 @@ function fish_greeting
 		set_color yellow
 		echo "    [Research] Placement short paper idea"
 		echo "    [Research] NF practice short paper idea"
+		echo "    [reimbursement] touchpad and keboar"
+		echo "    [reimbursement] nsdi 2019"
+		echo "    [reimbursement] reading group"
 		echo "    [Skim] NFV/NF from NSDI 2019-2017, SIGCOMM 2019-2017"
 		#echo "    [ML] Reviewing content so far"
 	end
 
 	# important and urgent things, so I should get to it right away
 	set_color red
-	echo "    [Rust] borrown checking"
-	echo "    [reimbursement] touchpad and keboar"
-	echo "    [reimbursement] nsdi 2019"
-
+	echo "    [Rust] borrow checking"
+	echo "    [PVN] perf experiment"
 	echo
 	set_color normal
 end
