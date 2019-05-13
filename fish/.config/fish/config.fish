@@ -34,8 +34,8 @@ if test (uname) = Darwin
 else
 	if [ -e /usr/bin/apt ]
 		# ubuntu systems
-		set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo apt'
-		set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo apt update; and sudo apt list --upgradable'
+		abbr -a p 'sudo apt'
+		abbr -a up 'sudo apt update; and sudo apt list --upgradable'
 		#set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
 		function upgrade
 			echo (pass x1c/jethros) | sudo -S apt -y upgrade
@@ -64,6 +64,11 @@ if [ -e /usr/local/bin/exa ]
 	abbr -a -U la exa -a
 	abbr -a -U ll exa -l
 	abbr -a -U lll exa -la
+else if [ -e $HOME/.cargo/bin/exa ]
+	abbr -a -U ls exa
+	abbr -a -U la 'exa -a'
+	abbr -a -U ll 'exa -l'
+	abbr -a -U lll 'exa -la'
 else
 	set -U fish_user_abbreviations $fish_user_abbreviations 'l=ls'
 	set -U fish_user_abbreviations $fish_user_abbreviations 'll=ls -l'
@@ -118,6 +123,8 @@ else
 	set PATH $PATH $NPM_PACKAGES/bin
 	set PATH $PATH ~/.local/share/umake/bin
 	set PATH $PATH ~/dev/r/bin
+	set PATH $PATH $HOME/.pyenv/bin
+	set PATH $PATH $HOME/.fzf/bin
 end
 
 if test -e $HOME/data/cargo-target
@@ -125,10 +132,12 @@ if test -e $HOME/data/cargo-target
 end
 
 if test (uname) = Darwin
-	#setenv FZF_DEFAULT_COMMAND 'ag -g ""'
-	#setenv FZF_CTRL_T_COMMAND 'ag -g ""'
 	setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 	setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
+else
+setenv FZF_DEFAULT_COMMAND 'ag -g ""'
+	setenv FZF_CTRL_T_COMMAND 'ag -g ""'
+	
 end
 
 # For RLS

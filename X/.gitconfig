@@ -132,7 +132,7 @@
   algorithm = patience
   compactionHeuristic = true
 [commit]
-  gpgsign = true
+  gpgsign = false
 [include]
   path = ~/.gitconfig-local
 [color]
