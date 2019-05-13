@@ -1,8 +1,12 @@
+# dir length in prompt
+set -g fish_prompt_pwd_dir_length 1
+
 function fish_prompt
   set_color purple
   if set -q VIRTUAL_ENV; and set -q PYENV_VERSION
     printf '[%s]' $PYENV_VERSION
 end
+
 set_color brblack
 echo -n "["(date "+%H:%M")"] "
 #set_color yellow

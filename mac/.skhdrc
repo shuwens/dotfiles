@@ -84,7 +84,7 @@
 # ]
 
 # open my terminal, faster than before but I think it still can be improved...
-cmd + ctrl - return : open -a /Applications/Alacritty.app ;\
+cmd + shift - return : open -a /Applications/Alacritty.app ;\
                   chunkc tiling::desktop --focus 1
                   #chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
 
