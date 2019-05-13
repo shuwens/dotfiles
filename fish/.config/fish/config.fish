@@ -13,6 +13,7 @@ set --universal FONTCONFIG_PATH /etc/fonts/
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
+set -U fish_user_paths /Users/jethros/.npm-packages/bin $fish_user_paths
 
 # the right tmux setup in fish
 if status --is-interactive
