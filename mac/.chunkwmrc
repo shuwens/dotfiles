@@ -158,9 +158,12 @@ chunkc tiling::rule --owner \"VirtualBox VM\"  --state tile &
 chunkc tiling::rule --owner iTunes --state tile &
 
 # I have too many chatrooms
-chunkc tiling::rule --owner Slack --grid-layout 1:3:1:0:2:1 --state float &
-chunkc tiling::rule --owner Textual --grid-layout 1:2:1:0:1:1 --state float &
-chunkc tiling::rule --owner Discord --grid-layout 1:2:1:0:1:1 --state float &
+# chunkc tiling::rule --owner Slack --grid-layout 1:3:1:0:2:1 --state float &
+# chunkc tiling::rule --owner Textual --grid-layout 1:2:1:0:1:1 --state float &
+# chunkc tiling::rule --owner Discord --grid-layout 1:2:1:0:1:1 --state float &
+chunkc tiling::rule --owner Slack  --state tile &
+chunkc tiling::rule --owner Textual --state tile &
+chunkc tiling::rule --owner Discord --state tile &
 
 # Software with different setup
 #chunkc tiling::rule --owner MATLAB --state tile &

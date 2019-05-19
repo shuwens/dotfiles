@@ -33,7 +33,7 @@
 
     ;; List of configuration layers to load.
     dotspacemacs-configuration-layers
-    '(
+    '(shell-scripts
       ;; ----------------------------------------------------------------
       ;; Example of useful layers you may want to use right away.
       ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -74,7 +74,7 @@
     ;; To use a local version of a package, use the `:location' property:
     ;; '(your-package :location "~/path/to/your-package/")
     ;; Also include the dependencies as they will not be resolved automatically.
-    dotspacemacs-additional-packages '()
+    dotspacemacs-additional-packages '(color-theme-solarized )
 
     ;; A list of packages that cannot be updated.
     dotspacemacs-frozen-packages '()
@@ -476,4 +476,6 @@
   (setq magit-repository-directories '(("~/dev" . 1)
                                        ("~/git" . 1))
         )
-  )
+  ;; Colortheme fix in terminal
+ (custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+    )
