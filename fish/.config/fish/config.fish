@@ -64,8 +64,8 @@ end
 if [ -e /usr/local/bin/exa ]
     abbr -a -U ls exa
     abbr -a -U la exa -a
-    abbr -a -U ll exa -l
-    abbr -a -U lll exa -la
+    abbr -a -U ll exa -l --git
+    abbr -a -U lll exa -la --git
 else if [ -e $HOME/.cargo/bin/exa ]
     abbr -a -U ls exa
     abbr -a -U la 'exa -a'

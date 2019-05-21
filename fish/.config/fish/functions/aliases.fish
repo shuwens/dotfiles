@@ -15,8 +15,6 @@ abbr -a -U vim nvim
 abbr -a -U v vagrant
 abbr -a -U e nvim
 abbr -a -U w wget
-abbr -a -U l exa
-abbr -a -U ls exa
 abbr -a -U vi vim
 abbr -a -U jn jupyter notebook
 abbr -a -U R ranger
@@ -403,7 +401,6 @@ end
 alias gs "git status"
 alias gc "git clone"
 alias cls "clear"
-#alias ls "exa"
 alias , "make"
 alias ,, "make clean"
 #alias ,,, '"make clean"; and "make"'
