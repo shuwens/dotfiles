@@ -196,7 +196,7 @@ done
 
 # Replace part of current path and cd to it
 function cdd {
-cd `pwd | sed "s/$1/$2/"`
+  cd `pwd | sed "s/$1/$2/"`
 }
 
 # source the devstack xxx file if I am in a devstack
@@ -207,25 +207,23 @@ fi
 
 # ssh keys
 if [ -e ~/.ssh/config ]; then
-	echo -e "\e[37mbtw: enabling __ssh__ key agent...\e[0m";
-	ssh-add &>/dev/null || eval `ssh-agent` &>/dev/null  # start ssh-agent if not present
-	[ $? -eq 0 ] && {                                     # ssh-agent has started
-	echo ""
-	ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
-	}
+  echo -e "\e[37mbtw: enabling __ssh__ key agent...\e[0m";
+  ssh-add &>/dev/null || eval `ssh-agent` &>/dev/null  # start ssh-agent if not present
+  [ $? -eq 0 ] && {                                     # ssh-agent has started
+    echo ""
+      #ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
+    }
 fi
 
-function ssh
-	switch $argv[1]
-		case "*.amazonaws.com"
-				env TERM=xterm /usr/bin/ssh $argv
-					case "ubuntu@"
-							env TERM=xterm /usr/bin/ssh $argv
-								case "*"
-										/usr/bin/ssh $argv
-											end
-											end
-
+function ssh {
+  case $argv[1] in
+    "tuco"|"saul")
+      ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
+      env TERM=xterm /usr/bin/ssh $argv
+    "*")
+      env TERM=xterm /usr/bin/ssh $argv
+  esac
+}
 
 export TERM=xterm
 
