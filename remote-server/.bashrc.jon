@@ -215,15 +215,21 @@ if [ -e ~/.ssh/config ]; then
     }
 fi
 
-function ssh {
-  case $argv[1] in
-    "tuco"|"saul")
-      ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
-      env TERM=xterm /usr/bin/ssh $argv
-    *)
-      env TERM=xterm /usr/bin/ssh $argv
+
+function ssh() {
+  case $* in
+    "tuco"|"saul") env TERM=xterm ssh "$@"  ;;
+    * ) env TERM=xterm ssh "$@" ;;
   esac
 }
+
+# function ssh {
+#   case $argv[1] in
+#     "tuco"|"saul")
+#       ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
+#       env TERM=xterm /usr/bin/ssh $argv
+#   esac
+# }
 
 export TERM=xterm
 
