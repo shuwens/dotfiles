@@ -220,7 +220,7 @@ function ssh {
     "tuco"|"saul")
       ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
       env TERM=xterm /usr/bin/ssh $argv
-    "*")
+    *)
       env TERM=xterm /usr/bin/ssh $argv
   esac
 }
