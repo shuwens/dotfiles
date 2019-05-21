@@ -1,3 +1,4 @@
+
 # If not running interactively, don't do anything
 if [[ $- != *i* ]]; then
   # non-interactive
@@ -204,8 +205,28 @@ if [ -e /opt/stack/devstack/openrc ]; then
   source /opt/stack/devstack/openrc
 fi
 
+# ssh keys
+if [ -e ~/.ssh/config ]; then
+	echo -e "\e[37mbtw: enabling __ssh__ key agent...\e[0m";
+	ssh-add &>/dev/null || eval `ssh-agent` &>/dev/null  # start ssh-agent if not present
+	[ $? -eq 0 ] && {                                     # ssh-agent has started
+	echo ""
+	ssh-add ~/.ssh/jethrosun_rsa  &>/dev/null        # Load key 1
+	}
+fi
+
+function ssh
+	switch $argv[1]
+		case "*.amazonaws.com"
+				env TERM=xterm /usr/bin/ssh $argv
+					case "ubuntu@"
+							env TERM=xterm /usr/bin/ssh $argv
+								case "*"
+										/usr/bin/ssh $argv
+											end
+											end
 
 
 export TERM=xterm
-# end of [.bashrc]
 
+# end of [.bashrc]
