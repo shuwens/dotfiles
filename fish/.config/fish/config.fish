@@ -305,6 +305,7 @@ function fish_greeting
     set_color red
     echo "    [CT] finish the notes"
     echo "    [PVN] Refactor the NF code"
+    echo "    [NetBricks] Travis CI is breaking.."
     echo
     set_color normal
 end
