@@ -119,7 +119,7 @@ setenv EDITOR nvim
 setenv BROWSER firefox-developer-edition
 setenv EMAIL sun.shuw@northeastern.edu
 setenv NAME "Jethro Shuwen Sun"
-setenv GOPATH "$HOME/dev/r"
+setenv GOPATH "$HOME/data/r"
 setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native -C codegen-units=4"
@@ -149,6 +149,7 @@ if test -e $HOME/data/cargo-target
     setenv CARGO_TARGET_DIR $HOME/data/cargo-target
 end
 
+setenv INFOPATH "mkdir -p ~/.local/share/eless/info"
 
 # For RLS
 # https://github.com/fish-shell/fish-shell/issues/2456
@@ -277,6 +278,7 @@ function fish_greeting
         set_color cyan
         # echo "    [project] <description>"
         echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
+        echo "    [PVN] Design, Architecture and Prototype"
     end
     if [ $r -lt 35 ]
         # less important and urgent
@@ -284,23 +286,25 @@ function fish_greeting
         # echo "    [project] <description>"
         echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
         echo "    [Research] Organize long paper idea"
-        echo "    [PVN] Design, Architecture and Prototype"
         echo "    [Rust] Rust book"
     end
     if [ $r -lt 65 ]
         # important but not urgent things, note that these are the things I work
         # on every morning
         set_color yellow
-        echo "    [Research] Placement short paper idea"
+        echo "    [Research] Placement/steering short paper idea"
         echo "    [Research] NF practice short paper idea"
         echo "    [Skim] NFV/NF from NSDI 2019-2017, SIGCOMM 2019-2017"
-        echo "    [NetBricks] Instrumenting the codebase (mainly framework)"
+        echo "    [Rust] borrow checking"
+        echo "    [Rust] write about my learning rust experience"
+        echo "    [NetBricks] Instrumenting the codebase (mainly framework and the part I am stuck at)"
+        echo "    [Blog] my dev setup"
     end
 
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [Rust] borrow checking"
-    echo "    [PVN] perf experiment"
+    echo "    [CT] finish the notes"
+    echo "    [PVN] Refactor the NF code"
     echo
     set_color normal
 end

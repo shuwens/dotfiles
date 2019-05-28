@@ -24,7 +24,7 @@ abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {
 
 abbr -a pvn nvim ~/writings/northeastern/projects/pvn/pvn.org
 abbr -a idea nvim ~/git/home/academic/outline.org
-abbr -a nsdi nvim ~/notes/nsdi19.org
+abbr -a bs bibtex-search
 
 # Rust
 abbr -a -U c cargo
@@ -454,43 +454,19 @@ function open -a filename
     xdg-open $filename &
 end
 end
+
+# for git journal, I should only use ["Added", "Changed", "Fixed", "Improved", "Removed"]
 function lazy
     if test "$argv"
         git add -A
-        git commit -m "Update: $argv"
+        git commit -m "$argv"
         git push
 else
     git add -A
-    git commit -m "Just some simple update"
+    git commit -m "Changed files w/ little update"
     git push
 end
 end
-
-function check
-    if test "$argv"
-        git add -A
-        git commit -m "Checkpoint: $argv"
-        git push
-else
-    git add -A
-    git commit -m "Checkpoint: random"
-    git push
-end
-end
-
-function change
-    if test "$argv"
-        git add -A
-        git diff --name-status HEAD
-        git commit -m "[ChangeList] $argv"
-        git push
-else
-    git add -A
-    git commit -m "Small changes"
-    git push
-end
-end
-
 
 # Add this to your ~/.config/fish/config.fish
 # Syntax:
