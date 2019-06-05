@@ -26,6 +26,8 @@ abbr -a pvn nvim ~/writings/northeastern/projects/pvn/pvn.org
 abbr -a idea nvim ~/git/home/academic/outline.org
 abbr -a bs bibtex-search
 
+abbr -a note 'nvim ~/notes/talks.org'
+
 # Rust
 abbr -a -U c cargo
 abbr -a -U cargot cargo t

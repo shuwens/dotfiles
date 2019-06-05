@@ -59,6 +59,17 @@ else
     else
         echo "you are not running a recognizable system!"
     end
+
+    function ssh
+        switch $argv[1]
+        case "*.amazonaws.com"
+            env TERM=xterm /usr/bin/ssh $argv
+        case "ubuntu@"
+            env TERM=xterm /usr/bin/ssh $argv
+        case "*"
+            /usr/bin/ssh -X $argv
+        end
+    end
 end
 
 if [ -e /usr/local/bin/exa ]
@@ -295,16 +306,15 @@ function fish_greeting
         echo "    [Research] Placement/steering short paper idea"
         echo "    [Research] NF practice short paper idea"
         echo "    [Skim] NFV/NF from NSDI 2019-2017, SIGCOMM 2019-2017"
-        echo "    [Rust] borrow checking"
-        echo "    [Rust] write about my learning rust experience"
-        echo "    [NetBricks] Instrumenting the codebase (mainly framework and the part I am stuck at)"
-        echo "    [Blog] my dev setup"
+        echo "    [Blog #1] dev: mostly vim and Rust programming setup"
+        echo "    [Blog #2] My Rust learning experience"
+        echo "    [Blog #3] Year one experience as a PhD"
+        echo "    [Errand] Reading registration"
     end
 
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [CT] finish the notes"
-    echo "    [PVN] Refactor the NF code"
+    #echo "    [PVN] Refactor the NF code"
     echo "    [NetBricks] Travis CI is breaking.."
     echo
     set_color normal
