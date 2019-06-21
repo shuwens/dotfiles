@@ -309,6 +309,7 @@ function fish_greeting
         echo "    [Blog #1] dev: mostly vim and Rust programming setup"
         echo "    [Blog #2] My Rust learning experience"
         echo "    [Blog #3] Year one experience as a PhD"
+        echo "    [Blog #4] Tracing in Rust"
         echo "    [Errand] Reading registration"
     end
 
