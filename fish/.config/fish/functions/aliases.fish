@@ -39,6 +39,7 @@ abbr -a -U ra rustup add component
 # git
 abbr -a -U g git
 abbr -a -U gm git m
+abbr -a -U m 'git commit; and git push'
 abbr -a -U gc git clone
 abbr -a -U ggo git checkout
 abbr -a -U gb git branch
