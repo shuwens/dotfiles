@@ -316,7 +316,8 @@ function fish_greeting
     # important and urgent things, so I should get to it right away
     set_color red
     #echo "    [PVN] Refactor the NF code"
-    echo "    [NetBricks] Travis CI is breaking.."
+    echo "    [Reading] "
+    echo "    [Travel signation] OGS.."
     echo
     set_color normal
 end
