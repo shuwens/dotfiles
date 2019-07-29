@@ -137,6 +137,7 @@ setenv RUSTFLAGS "-C target-cpu=native -C codegen-units=4"
 setenv WINEDEBUG fixme-all
 
 ## PATH variables
+# ---------------
 if test (uname) = Darwin
     set PATH /usr/local/bin/ $PATH
     set PATH $PATH /Applications/MATLAB_R2018b.app/bin
@@ -289,32 +290,35 @@ function fish_greeting
         set_color cyan
         # echo "    [project] <description>"
         echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
-        echo "    [PVN] Design, Architecture and Prototype"
-    end
-    if [ $r -lt 35 ]
-        # less important and urgent
-        set_color green
-        # echo "    [project] <description>"
-        echo "    [CFP] NSDI 2020 Fall DDL: Sept 19, 2019"
-        echo "    [Research] Organize long paper idea"
-        echo "    [Rust] Rust book"
-    end
-    if [ $r -lt 65 ]
-        # important but not urgent things, note that these are the things I work
-        # on every morning
-        set_color yellow
-        echo "    [Research] Placement/steering short paper idea"
-        echo "    [Skim] NFV/NF from NSDI 2019-2017, SIGCOMM 2019-2017"
+        #echo "    [PVN] Design, Architecture and Prototype"
         echo "    [Blog #1] dev: mostly vim and Rust programming setup"
         echo "    [Blog #2] My Rust learning experience"
         echo "    [Blog #3] Year one experience as a PhD"
         echo "    [Blog #4] Tracing in Rust"
     end
-
+    if [ $r -lt 35 ]
+        # less important and urgent
+        set_color green
+        # echo "    [project] <description>"
+        echo "    [Research] Organize long paper idea"
+        echo "    [Rust] Rust book"
+    end
+    if [ $r -lt 65 ]
+        # important but not urgent things, note that these are the things I
+        # work on every morning
+        set_color yellow
+        echo "    [Back from SIGCOMM] email Sujata from VMware"
+        echo "    [Back from SIGCOMM] email Lihua Yuan"
+        echo "    [SOSR submission] survey in motivation"
+        echo "    [SOSR submission] experiment context and traces"
+        echo "    [SOSR submission] outline for rest of the paper, figures etc"
+        echo "    [Reflection on SIGCOMM] email cristina on verification"
+        echo "    [Back from SIGCOMM] email Tim wood"
+    end
     # important and urgent things, so I should get to it right away
     set_color red
-    #echo "    [PVN] Refactor the NF code"
-    echo "    [Research] NF practice short paper idea"
+    echo "    [CFP] SOSR 2020 DDL: Nov 15"
+
     echo
     set_color normal
 end
