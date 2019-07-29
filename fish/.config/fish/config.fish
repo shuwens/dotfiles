@@ -304,20 +304,17 @@ function fish_greeting
         # on every morning
         set_color yellow
         echo "    [Research] Placement/steering short paper idea"
-        echo "    [Research] NF practice short paper idea"
         echo "    [Skim] NFV/NF from NSDI 2019-2017, SIGCOMM 2019-2017"
         echo "    [Blog #1] dev: mostly vim and Rust programming setup"
         echo "    [Blog #2] My Rust learning experience"
         echo "    [Blog #3] Year one experience as a PhD"
         echo "    [Blog #4] Tracing in Rust"
-        echo "    [Errand] Reading registration"
     end
 
     # important and urgent things, so I should get to it right away
     set_color red
     #echo "    [PVN] Refactor the NF code"
-    echo "    [Reading] "
-    echo "    [Travel signation] OGS.."
+    echo "    [Research] NF practice short paper idea"
     echo
     set_color normal
 end
