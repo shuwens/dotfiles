@@ -1,8 +1,9 @@
-@-moz-document url(chrome://browser/content/browser.xul) {
+@-moz-document url(chrome://browser/content/browser.xhtml) {
   /* tabs on bottom of window */
   #navigator-toolbox { -moz-box-ordinal-group: 10; }
   #titlebar { -moz-box-ordinal-group: 10; }
-  #urlbar-results { margin-top: -35vh !important; }
+  #urlbar-results { margin-top: -35vh !important; 
+  background-color: #373b44 !important;}
   .urlbarView-body-inner { }
   #urlbarView-results { }
   .search-one-offs { display: none; }
@@ -14,18 +15,8 @@
   .tab-content { padding: 0 5px; }
   .tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
 
-
-  #PopupAutoCompleteRichResult {
-    margin-top: -35vh !important;
-  }
-  #PopupAutoCompleteRichResult .autocomplete-richlistbox[style] {
-    /*height: 30vh !important;*/
-  }
-
   /*Toolbar & menu font size*/
   menubar, menubutton, menulist, menu, menuitem, textbox{font-size: 12pt !important;}
-
-  #PopupAutoCompleteRichResult > hbox { display: none; }
 
   #PersonalToolbar toolbarbutton .toolbarbutton-icon {
     padding-left: 0px !important;
@@ -58,18 +49,14 @@
   }
 
   /* use 'about:config > browser.tabs.tabMinWidth' for tab min-width */
-
   .tabbrowser-tab:not([pinned]) {
     min-width: var(--tab_min_width) !important;
     clip-width: var(--tab_min_width) !important;
   }
-
 
   /* tab max-width */
   #tabbrowser-tabs:not([overflow="true"]) .tabbrowser-tab[fadein]:not([pinned]) {
     max-width: var(--tab_max_width) !important;
     overflow: hidden !important;
   }
-
-
 }
