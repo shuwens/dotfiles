@@ -290,6 +290,7 @@ function fish_greeting
         set_color cyan
         # echo "    [project] <description>"
         echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
+        echo "    [CFP] NSDI 2021 DDL: March 15, 2021"
         #echo "    [PVN] Design, Architecture and Prototype"
         echo "    [Blog #1] dev: mostly vim and Rust programming setup"
         echo "    [Blog #2] My Rust learning experience"
