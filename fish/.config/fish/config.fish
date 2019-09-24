@@ -310,11 +310,8 @@ function fish_greeting
         set_color yellow
         echo "    [Back from SIGCOMM] email Sujata from VMware"
         echo "    [Back from SIGCOMM] email Lihua Yuan"
-        echo "    [SOSR submission] survey in motivation"
         echo "    [SOSR submission] experiment context and traces"
         echo "    [SOSR submission] outline for rest of the paper, figures etc"
-        echo "    [Reflection on SIGCOMM] email cristina on verification"
-        echo "    [Back from SIGCOMM] email Tim wood"
     end
     # important and urgent things, so I should get to it right away
     set_color red
