@@ -23,7 +23,7 @@ end
 
 # Add ssh identity, silently
 # macOS is now very annoying...
-ssh-add -K 2>/dev/null
+# ssh-add -K 2>/dev/null
 
 # systems update
 if test (uname) = Darwin
@@ -87,6 +87,20 @@ else
     abbr -a -U ll 'ls -l'
     abbr -a -U lll 'ls -la'
 end
+
+# gnupg.fish
+#
+# Start or re-use a gpg-agent.
+#
+gpgconf --launch gpg-agent
+
+# Ensure that GPG Agent is used as the SSH agent
+# set -e SSH_AUTH_SOCK
+# set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+#
+# another way
+set GPG_TTY (tty)
+set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
 # fzf
 set PATH $PATH $HOME/.fzf/bin

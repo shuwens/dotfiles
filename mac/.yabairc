@@ -51,6 +51,7 @@ yabai -m rule --add app=Pages space=3
 yabai -m rule --add app=Finder space=3
 yabai -m rule --add app=Wireshark space=3
 yabai -m rule --add app=Papers space=3
+yabai -m rule --add app="EndNote X9" space=3
 yabai -m rule --add app=Vienna space=3
 yabai -m rule --add app=WeChat space=4
 yabai -m rule --add app=Emacs manage=on space=4
