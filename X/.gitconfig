@@ -7,7 +7,8 @@
   # .git/config (Git >= 2.8)
   useConfigOnly = true
   email = jethro.s.sun@gmail.com
-  signingkey = A12A9012444F0E74
+  # email = jethro.rules@real.com
+  # signingkey = 0x248A26757B9F68D6
 
 [alias]
   # original
@@ -132,6 +133,7 @@
   algorithm = patience
   compactionHeuristic = true
 [commit]
+  # gpgsign = true
   gpgsign = false
 [include]
   path = ~/.gitconfig-local
