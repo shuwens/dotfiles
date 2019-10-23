@@ -95,12 +95,15 @@ end
 gpgconf --launch gpg-agent
 
 # Ensure that GPG Agent is used as the SSH agent
-# set -e SSH_AUTH_SOCK
-# set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+set -e SSH_AUTH_SOCK
+set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
 #
 # another way
-set GPG_TTY (tty)
-set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+# set GPG_TTY (tty)
+# set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
+# add alias for ssh to update the tty
+# alias ssh "gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
 
 # fzf
 set PATH $PATH $HOME/.fzf/bin
@@ -322,14 +325,15 @@ function fish_greeting
         # important but not urgent things, note that these are the things I
         # work on every morning
         set_color yellow
-        echo "    [Back from SIGCOMM] email Sujata from VMware"
         echo "    [Back from SIGCOMM] email Lihua Yuan"
         echo "    [SOSR submission] experiment context and traces"
         echo "    [SOSR submission] outline for rest of the paper, figures etc"
+        echo "    [CFP] SOSR 2020 DDL: Nov 15"
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [CFP] SOSR 2020 DDL: Nov 15"
+    echo "    [Showtime] In Week 4"
+    echo "    [P2P] Keyword: bittorrent, P2P, transmision"
 
     echo
     set_color normal
