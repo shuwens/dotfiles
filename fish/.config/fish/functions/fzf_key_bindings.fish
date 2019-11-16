@@ -1,1 +1,1 @@
-/Users/jethros/.fzf/shell/key-bindings.fish
+/home/jethros/.fzf/shell/key-bindings.fish

@@ -32,6 +32,7 @@ if test (uname) = Darwin
     abbr -a -U update brew update
     abbr -a -U upgrade brew upgrade
     abbr -a -U o open
+    abbr -a -U w wget
     abbr -a -U emacs emacs -nw
 else
     if [ -e /usr/bin/apt ]
@@ -62,12 +63,12 @@ else
 
     function ssh
         switch $argv[1]
-        case "*.amazonaws.com"
-            env TERM=xterm /usr/bin/ssh $argv
-        case "ubuntu@"
-            env TERM=xterm /usr/bin/ssh $argv
-        case "*"
-            /usr/bin/ssh -X $argv
+            case "*.amazonaws.com"
+                env TERM=xterm /usr/bin/ssh $argv
+            case "ubuntu@"
+                env TERM=xterm /usr/bin/ssh $argv
+            case "*"
+                /usr/bin/ssh -X $argv
         end
     end
 end
@@ -88,22 +89,28 @@ else
     abbr -a -U lll 'ls -la'
 end
 
-# gnupg.fish
-#
-# Start or re-use a gpg-agent.
-#
-gpgconf --launch gpg-agent
 
-# Ensure that GPG Agent is used as the SSH agent
-set -e SSH_AUTH_SOCK
-set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
-#
-# another way
-# set GPG_TTY (tty)
-# set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+if test (uname) = Darwin
+    # gnupg.fish
+    #
+    # Start or re-use a gpg-agent.
+    #
+    gpgconf --launch gpg-agent
 
-# add alias for ssh to update the tty
-# alias ssh "gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
+    # Ensure that GPG Agent is used as the SSH agent
+    set -e SSH_AUTH_SOCK
+    set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+    #
+    # another way
+    # set GPG_TTY (tty)
+    # set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
+    # add alias for ssh to update the tty
+    # alias ssh "gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
+else
+    ssh-add -K 2>/dev/null
+end
+
 
 # fzf
 set PATH $PATH $HOME/.fzf/bin
@@ -199,8 +206,9 @@ end
 
 # pyenv
 if status --is-interactive
+    setenv PYENV_ROOT $HOME/.pyenv
+    set PATH $PATH $PYENV_ROOT/bin
     pyenv init - | source
-    pyenv virtualenv-init - | source
 end
 
 # # Pretty ls colors
@@ -319,21 +327,20 @@ function fish_greeting
         set_color green
         # echo "    [project] <description>"
         echo "    [Research] Organize long paper idea"
-        echo "    [Rust] Rust book"
+        echo "    [NetBricks] Clean the wiki pages"
     end
     if [ $r -lt 65 ]
         # important but not urgent things, note that these are the things I
         # work on every morning
         set_color yellow
-        echo "    [Back from SIGCOMM] email Lihua Yuan"
-        echo "    [SOSR submission] experiment context and traces"
-        echo "    [SOSR submission] outline for rest of the paper, figures etc"
-        echo "    [CFP] SOSR 2020 DDL: Nov 15"
+        # echo "    [SOSR submission] experiment context and traces"
+        # echo "    [SOSR submission] outline for rest of the paper, figures etc"
+        echo "    [Submission] Read some SIGCOMM paper and collect ideas"
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [Showtime] In Week 4"
-    echo "    [P2P] Keyword: bittorrent, P2P, transmision"
+    echo "    [Submission] SIGCOMM 2020 DDL: Feb 7"
+    # echo "    [Showtime] In Week 4"
 
     echo
     set_color normal

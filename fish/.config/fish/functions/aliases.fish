@@ -14,7 +14,8 @@ abbr -a -U b brew
 abbr -a -U vim nvim
 abbr -a -U v vagrant
 abbr -a -U e nvim
-abbr -a -U w wget
+abbr -a -U ws "wormhole send"
+abbr -a -U wr "wormhole receive"
 abbr -a -U vi vim
 abbr -a -U jn jupyter notebook
 abbr -a -U R ranger

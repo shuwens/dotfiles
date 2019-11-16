@@ -1,15 +1,15 @@
 # -*- mode: conf; indent-tabs-mode: t -*-
 
 [user]
-  #name = jethrosun
-  name = Jethro Shuwen Sun
+  name = jethrosun
+  # name = Jethro Shuwen Sun
   # Require email to be configured in either .gitconfig-local or
   # .git/config (Git >= 2.8)
   useConfigOnly = true
-  email = jethrosun@css.neu.edu
+  ; email = jethrosun@css.neu.edu
   # email = jethro.s.sun@gmail.com
-  # email = jethro.rules@real.com
-  # signingkey = 0x248A26757B9F68D6
+  email = jethro.rules@real.com
+  signingkey = 0x248A26757B9F68D6
 
 [alias]
   # original
@@ -134,7 +134,7 @@
   algorithm = patience
   compactionHeuristic = true
 [commit]
-  #gpgsign = true
+  ; gpgsign = true
   gpgsign = false
 [include]
   path = ~/.gitconfig-local
@@ -181,3 +181,5 @@
   includeStatusHeader = false
   includePullRequestsSection = false
   includeIssuesSection = false
+[credential]
+  helper = cache
