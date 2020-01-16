@@ -161,6 +161,7 @@ fi
 alias e='$EDITOR'
 # Safety first
 alias mv='mv -i'
+alias jn='jupyter notebook'
 
 # Type - to move up to top parent dir which is a repository
 function - {

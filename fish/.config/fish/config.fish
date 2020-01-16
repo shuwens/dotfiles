@@ -347,3 +347,4 @@ function fish_greeting
 end
 
 # end of [fish/config.fish]
+set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
