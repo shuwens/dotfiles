@@ -18,7 +18,7 @@ set -U fish_user_paths /Users/jethros/.npm-packages/bin $fish_user_paths
 
 # the right tmux setup in fish
 if status --is-interactive
-    tmux ^ /dev/null; and exec true
+	tmux ^ /dev/null; and exec true
 end
 
 # Add ssh identity, silently
