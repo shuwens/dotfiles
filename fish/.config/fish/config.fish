@@ -314,7 +314,7 @@ function fish_greeting
         # least important and urgent, remind me occasionally
         set_color cyan
         # echo "    [project] <description>"
-        echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
+        # echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
         echo "    [CFP] NSDI 2021 DDL: March 15, 2021"
         #echo "    [PVN] Design, Architecture and Prototype"
         echo "    [Blog #1] dev: mostly vim and Rust programming setup"
@@ -335,11 +335,11 @@ function fish_greeting
         set_color yellow
         # echo "    [SOSR submission] experiment context and traces"
         # echo "    [SOSR submission] outline for rest of the paper, figures etc"
-        echo "    [Submission] Read some SIGCOMM paper and collect ideas"
+        # echo "    [Submission] Read some SIGCOMM paper and collect ideas"
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [Submission] SIGCOMM 2020 DDL: Feb 7"
+    echo "    [Submission] NSDI 2021 DDL: March 15"
     # echo "    [Showtime] In Week 4"
 
     echo
