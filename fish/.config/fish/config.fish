@@ -15,6 +15,7 @@ set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
 set -U fish_user_paths /Users/jethros/.npm-packages/bin $fish_user_paths
+set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
 
 # the right tmux setup in fish
 if status --is-interactive
@@ -177,7 +178,6 @@ else
     set PATH $PATH $NPM_PACKAGES/bin
     set PATH $PATH ~/.local/share/umake/bin
     set PATH $PATH ~/dev/r/bin
-    set PATH $PATH $HOME/.pyenv/bin
     set PATH $PATH $HOME/.fzf/bin
 end
 
@@ -204,11 +204,21 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
-# pyenv
-if status --is-interactive
-    setenv PYENV_ROOT $HOME/.pyenv
-    set PATH $PATH $PYENV_ROOT/bin
-    pyenv init - | source
+# # Add pyenv, if available
+if test -d "$HOME/.pyenv"
+	# set where pyenv is installed
+	set -x PYENV_ROOT $HOME/.pyenv
+	# Disable prompt as it's been removed
+	set -x PYENV_VIRTUALENV_DISABLE_PROMPT 1
+	set -x PYTHON_CONFIGURE_OPTS "--enable-framework"
+	# Set virtualenvs to be located in one place
+	set -x WORKON_HOME $HOME/.ve
+	# Set virtualenv projects in one place
+	set -x PROJECT_HOME $HOME/p
+	# Add pyenv root to PATH to access its shims
+	set -xg PATH $PYENV_ROOT/bin $PATH
+	# load pyenv and virtualenv-init, etc
+	status --is-interactive; and pyenv init - | source
 end
 
 # # Pretty ls colors
@@ -347,4 +357,3 @@ function fish_greeting
 end
 
 # end of [fish/config.fish]
-set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
