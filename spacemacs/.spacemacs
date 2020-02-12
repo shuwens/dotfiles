@@ -55,6 +55,7 @@
       spell-checking
       syntax-checking
       (lsp :variables
+	   lsp-rust-server 'rust-analyzer
            lsp-navigation 'simple
            lsp-ui-sideline-enable nil)
       (rust :variables
