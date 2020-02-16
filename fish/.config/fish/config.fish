@@ -331,6 +331,8 @@ function fish_greeting
         echo "    [Blog #2] My Rust learning experience"
         echo "    [Blog #3] Year one experience as a PhD"
         echo "    [Blog #4] Tracing in Rust"
+        echo "    [After NSDI ddl] Leetcode in Rust"
+        echo "    [After NSDI ddl] Rust 101 by Ralf Jung"
     end
     if [ $r -lt 35 ]
         # less important and urgent
