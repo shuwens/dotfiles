@@ -60,7 +60,7 @@
     .tabbrowser-tab {
         font-family: 'Noto Mono' !important;
         font: "Noto Mono" !important;
-        font-size: 14pt !important;
+        font-size: 120% !important;
     }
 
     .tab-content {
@@ -74,7 +74,7 @@
 
     /* For the bookmarks*/
     #PersonalToolbar {
-        font-size: 14pt !important;
+        font-size: 120% !important;
         height: 35px !important;
     }
 
