@@ -48,6 +48,7 @@
       markdown
       multiple-cursors
       org
+      latex
       dap
       ;; (shell :variables
       ;;        shell-default-height 30

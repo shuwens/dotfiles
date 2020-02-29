@@ -2,12 +2,10 @@
 "" Screen setting
 """"""""""""""""""""""""""""""""""
 
-" OK I made up the number 
+" OK I made up the number
 defscrollback 100000
 hardstatus on
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'
 
 attrcolor u "-u b"
-
-""""escape ^Pp
