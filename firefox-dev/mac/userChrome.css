@@ -11,7 +11,7 @@
 	#titlebar { -moz-box-ordinal-group: 10; }
 	.urlbarView {
 		top: unset !important;
-		bottom: 115px !important;
+		bottom: 120px !important;
 		box-shadow: none !important;
 	}
 	.search-one-offs { display: none !important; }

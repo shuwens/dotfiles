@@ -351,7 +351,7 @@ function fish_greeting
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [Submission] NSDI 2021 DDL: March 15"
+    echo "    [Submission] NSDI 2021 DDL: April 15"
     # echo "    [Showtime] In Week 4"
 
     echo
