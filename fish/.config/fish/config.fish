@@ -340,6 +340,7 @@ function fish_greeting
         # echo "    [project] <description>"
         echo "    [Research] Organize long paper idea"
         echo "    [NetBricks] Clean the wiki pages"
+        echo "    [SIGCOMM 15] Get the papers and public reviews"
     end
     if [ $r -lt 65 ]
         # important but not urgent things, note that these are the things I
