@@ -65,7 +65,6 @@
       (python :variables
               python-backend 'lsp)
 
-      treemacs
       ;; version-control
       )
 

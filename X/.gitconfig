@@ -182,4 +182,4 @@
   includePullRequestsSection = false
   includeIssuesSection = false
 [credential]
-  helper = cache
+	helper = store

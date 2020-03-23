@@ -345,14 +345,17 @@ function fish_greeting
         # important but not urgent things, note that these are the things I
         # work on every morning
         set_color yellow
+	echo "    [Submission] NSDI 2021 DDL: April 15"
         # echo "    [SOSR submission] experiment context and traces"
         # echo "    [SOSR submission] outline for rest of the paper, figures etc"
         # echo "    [Submission] Read some SIGCOMM paper and collect ideas"
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [Submission] NSDI 2021 DDL: April 15"
-    # echo "    [Showtime] In Week 4"
+    echo "    [NSDI 21] Writing: background and motivation"
+    echo "    [NSDI 21] Impl and running expr"
+    # echo "    [NSDI 21] Survey: CoNEXT, SIGCOMM, NSDI"
+
 
     echo
     set_color normal
