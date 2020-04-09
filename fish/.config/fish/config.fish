@@ -231,11 +231,11 @@ end
 # end
 
 if type -q hub
-    alias g hub
+    # alias g hub
     complete --command hub --wraps git
     complete --command g --wraps hub
 else
-    alias g git
+    # alias g git
     complete --command g --wraps git
 end
 
@@ -347,14 +347,12 @@ function fish_greeting
         # work on every morning
         set_color yellow
 	echo "    [Submission] NSDI 2021 DDL: April 15"
-        # echo "    [SOSR submission] experiment context and traces"
-        # echo "    [SOSR submission] outline for rest of the paper, figures etc"
-        # echo "    [Submission] Read some SIGCOMM paper and collect ideas"
+	echo "    [Submission] CoNEXT 2020 DDL: June 24"
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    echo "    [NSDI 21] Writing: background and motivation"
-    echo "    [NSDI 21] Impl and running expr"
+    echo "    [CoNEXT 20] Writing: background and motivation"
+    echo "    [CoNEXT 20] Impl and running expr"
     # echo "    [NSDI 21] Survey: CoNEXT, SIGCOMM, NSDI"
 
 
