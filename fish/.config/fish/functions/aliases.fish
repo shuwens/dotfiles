@@ -1,5 +1,5 @@
 #
-# My fish shell aliases and abbrs
+# My fish shell abbr -a -Ues and abbrs
 # -------------------------------
 #
 # Note that I need to revamp this sometime
@@ -56,30 +56,30 @@ abbr -a -U push 'git push'
 abbr -a -U pull 'git pull'
 
 # Quick edits
-alias Ea 'nvim ~/.config/fish/functions/aliases.fish'  # nvim doesn't work well for cooking fish
-alias Ef 'nvim ~/.config/fish/config.fish'
-#alias Ep 'nvim ~/.config/powerline-shell/config.json'
-alias Eg 'nvim ~/.gitconfig'
-alias Ev 'nvim ~/.config/nvim/init.vim'
-alias Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
-alias Ee 'nvim ~/.spacemacs'
-alias Et 'nvim ~/.tmux.conf'
-alias Ex 'nvim ~/.xmonad/xmonad.hs'
+abbr -a -U Ea 'nvim ~/.config/fish/functions/abbr -a -Ues.fish'  # nvim doesn't work well for cooking fish
+abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
+#abbr -a -U Ep 'nvim ~/.config/powerline-shell/config.json'
+abbr -a -U Eg 'nvim ~/.gitconfig'
+abbr -a -U Ev 'nvim ~/.config/nvim/init.vim'
+abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
+abbr -a -U Ee 'nvim ~/.spacemacs'
+abbr -a -U Et 'nvim ~/.tmux.conf'
+abbr -a -U Ex 'nvim ~/.xmonad/xmonad.hs'
 
-alias df 'command df -m'
-#alias su 'command su -m'
-#alias ls 'command ls -FG'
+abbr -a -U df 'command df -m'
+#abbr -a -U su 'command su -m'
+#abbr -a -U ls 'command ls -FG'
 
-alias holdmybeer 'sudo'
+abbr -a -U holdmybeer 'sudo'
 
 ## my ssh utils
 function UpdateFile -a filename
     scp $filename nu-ccis:~/.www/tmp/
 end
 
-alias neo-update 'env SHELL=(which sh) nvim +PlugInstall +PlugClean +PlugUpdate UpdateRemotePlugins'
-alias ggco 'git switch'
-alias fl 'clear; and flow-limit'
+abbr -a -U neo-update 'env SHELL=(which sh) nvim +PlugInstall +PlugClean +PlugUpdate UpdateRemotePlugins'
+abbr -a -U ggco 'git switch'
+abbr -a -U fl 'clear; and flow-limit'
 
 # =======================================================
 #
@@ -88,15 +88,15 @@ alias fl 'clear; and flow-limit'
 # =======================================================
 
 
-#alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
-#alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+#abbr -a -U UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+#abbr -a -U UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 
-#alias jn "jupyter notebook --browser=google-chromium-browser"
-alias jn "jupyter notebook --browser=chromium-browser"
+#abbr -a -U jn "jupyter notebook --browser=google-chromium-browser"
+abbr -a -U jn "jupyter notebook --browser=chromium-browser"
 
 
-alias vim-norc 'vim -u NORC'
-alias vim-none 'vim -u NONE'
+abbr -a -U vim-norc 'vim -u NORC'
+abbr -a -U vim-none 'vim -u NONE'
 
 function pdftext
     pdftotext -layout $argv[1] -
@@ -124,23 +124,23 @@ function lsd -d 'List only directories (in the current dir)'
 end
 
 # Colorized cat (will guess file type based on contents)
-alias ccat 'pygmentize -g'
+abbr -a -U ccat 'pygmentize -g'
 
-alias c clear
-alias v vim
-alias vim nvim
-alias x 'tig HEAD'
-alias xx 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --branches'
-alias xxa 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --all'
-alias xxaa 'tig --all'
-alias notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
+abbr -a -U c clear
+abbr -a -U v vim
+abbr -a -U vim nvim
+abbr -a -U x 'tig HEAD'
+abbr -a -U xx 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --branches'
+abbr -a -U xxa 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --all'
+abbr -a -U xxaa 'tig --all'
+abbr -a -U notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
 
-alias m make
-alias mm 'make run'
+abbr -a -U m make
+abbr -a -U mm 'make run'
 
-alias reset-mailbox 'rm -v ~/Library/Caches/com.dropbox.mbd.external-beta/mailbox.db'
+abbr -a -U reset-mailbox 'rm -v ~/Library/Caches/com.dropbox.mbd.external-beta/mailbox.db'
 
-alias wifi 'nmcli d wifi list'
+abbr -a -U wifi 'nmcli d wifi list'
 
 
 
@@ -195,7 +195,7 @@ set vim_pattern (echo $argv | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
 ag -l --smart-case --null -a $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
 end
 
-## Git aliases
+## Git abbr -a -Ues
 
 function vc
     if git modified -q $argv
@@ -221,9 +221,9 @@ else
 end
 end
 
-alias vch 'vc head'
-alias vch1 'vc head~1'
-alias vch2 'vc head~2'
+abbr -a -U vch 'vc head'
+abbr -a -U vch1 'vc head~1'
+abbr -a -U vch2 'vc head~2'
 
 function vu
     if git modified -u $argv
@@ -260,10 +260,10 @@ function cleandsstores
     find . -name '.DS_Store' -exec rm -f '{}' ';'
 end
 
-alias json 'prettify-json'
-alias map 'xargs -n1'
-alias collapse "sed -e 's/  */ /g'"
-alias cuts 'cut -d\ '
+abbr -a -U json 'prettify-json'
+abbr -a -U map 'xargs -n1'
+abbr -a -U collapse "sed -e 's/  */ /g'"
+abbr -a -U cuts 'cut -d\ '
 
 function p -d "Start the best Python shell that is available"
     set -l cmd
@@ -317,11 +317,11 @@ printf "Using "; set_color green; echo $cmd; set_color normal
 eval $cmd $argv
 end
 
-alias pm 'python manage.py'
-alias pmm 'python manage.py migrate'
-alias pmmm 'python manage.py makemigrations'
-alias pms 'python manage.py shell_plus'
-alias pmr 'python manage.py runserver_plus 0.0.0.0:8000'
+abbr -a -U pm 'python manage.py'
+abbr -a -U pmm 'python manage.py migrate'
+abbr -a -U pmmm 'python manage.py makemigrations'
+abbr -a -U pms 'python manage.py shell_plus'
+abbr -a -U pmr 'python manage.py runserver_plus 0.0.0.0:8000'
 
 function pipr -d "Find & install all requirements for this project"
     pushd (git root)
@@ -349,27 +349,27 @@ function ff
     echo '
     tell application "Finder"
     if (1 <= (count Finder windows)) then
-        get POSIX path of (target of window 1 as alias)
+        get POSIX path of (target of window 1 as abbr -a -U)
 else
-    get POSIX path of (desktop as alias)
+    get POSIX path of (desktop as abbr -a -U)
 end if
 end tell
 ' | osascript -
 end
 
-alias cd.. 'cd ..'
-alias .. 'cd ..'
-alias ... 'cd ../..'
-alias .... 'cd ../../..'
-alias ..... 'cd ../../../..'
+abbr -a -U cd.. 'cd ..'
+abbr -a -U .. 'cd ..'
+abbr -a -U ... 'cd ../..'
+abbr -a -U .... 'cd ../../..'
+abbr -a -U ..... 'cd ../../../..'
 
-alias md 'mkdir -p'
+abbr -a -U md 'mkdir -p'
 function take
     set -l dir $argv[1]
     mkdir -p $dir; and cd $dir
 end
-alias cx 'chmod +x'
-alias 'c-x' 'chmod -x'
+abbr -a -U cx 'chmod +x'
+abbr -a -U 'c-x' 'chmod -x'
 
 # }}}
 
@@ -391,8 +391,8 @@ end
 pygmentize -f rtf -l $lang
 end
 
-alias h=heroku
-alias gp='cd ~/Projects/SimpleContacts/simplecontacts'
+abbr -a -U h heroku
+abbr -a -U gp 'cd ~/Projects/SimpleContacts/simplecontacts'
 
 function wtf -d "Print which and --version output for the given command"
     for arg in $argv
@@ -402,22 +402,22 @@ end
 end
 
 ## My own stuff!
-alias gs "git status"
-alias gc "git clone"
-alias cls "clear"
-alias , "make"
-alias ,, "make clean"
-#alias ,,, '"make clean"; and "make"'
-alias vi "nvim"
-alias :q "sudo reboot"
+abbr -a -U gs "git status"
+abbr -a -U gc "git clone"
+abbr -a -U cls "clear"
+abbr -a -U , "make"
+abbr -a -U ,, "make clean"
+#abbr -a -U ,,, '"make clean"; and "make"'
+abbr -a -U vi "nvim"
+abbr -a -U :q "sudo reboot"
 
 function bar
     eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"
 end
 
-alias WgetScrape "wget -A pdf -m -p -E -k -K -np"
-alias PhpWgetScrape "wget -A php -m -p -E -k -K -np"
-alias TexWgetScrape "wget -A tex -m -p -E -k -K -np"
+abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
+abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
+abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 # Type - to move up to top parent dir which is a repository
 function d
@@ -437,12 +437,12 @@ end
 
 ## python stuff
 #install virtualfish
-#alias virtualenv3 "virtualenv -p /usr/bin/python3"
-#alias workon "vf activate"
-#alias walkaway "vf deactivate"
+#abbr -a -U virtualenv3 "virtualenv -p /usr/bin/python3"
+#abbr -a -U workon "vf activate"
+#abbr -a -U walkaway "vf deactivate"
 
-#alias up '"sudo apt update"; and "sudo apt --list-upgrades"'
-#alias upgrade 'sudo apt upgrade'
+#abbr -a -U up '"sudo apt update"; and "sudo apt --list-upgrades"'
+#abbr -a -U upgrade 'sudo apt upgrade'
 
 function ,,,
     make clean; and make
@@ -644,19 +644,19 @@ end
 # ----------------------------------
 # Compiling stuff
 # ----------------------------------
-alias ghcd "ghc -dynamic"
-alias g11 'g++ -std=c++11 -O2'
-alias g+ "g++ -std=gnu++11 -Wall -Wextra -g"
+abbr -a -U ghcd "ghc -dynamic"
+abbr -a -U g11 'g++ -std=c++11 -O2'
+abbr -a -U g+ "g++ -std=gnu++11 -Wall -Wextra -g"
 
-# Convenience aliases
-alias run 'sudo systemctl start'
-alias restart 'sudo systemctl restart'
-alias stop 'sudo systemctl stop'
+# Convenience abbr -a -Ues
+abbr -a -U run 'sudo systemctl start'
+abbr -a -U restart 'sudo systemctl restart'
+abbr -a -U stop 'sudo systemctl stop'
 # ---------------------------------
-alias emacs 'emacs -nw'
+abbr -a -U emacs 'emacs -nw'
 
 ## DEPRECATED
-#alias UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
-#alias UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+#abbr -a -U UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
+#abbr -a -U UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
 
-#alias jn "jupyter notebook --browser=google-chromium-browser"
+#abbr -a -U jn "jupyter notebook --browser=google-chromium-browser"
