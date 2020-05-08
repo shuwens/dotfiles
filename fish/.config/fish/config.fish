@@ -346,7 +346,7 @@ function fish_greeting
 	# important but not urgent things, note that these are the things I
 	# work on every morning
 	set_color yellow
-	echo "    [Submission] NSDI 2021 DDL: April 15"
+	echo "    [Submission] NSDI 2021 DDL: Sept 17"
 	echo "    [Submission] CoNEXT 2020 DDL: June 24"
     end
     # important and urgent things, so I should get to it right away
