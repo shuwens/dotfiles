@@ -204,22 +204,22 @@ end
 #     source "$BASE16_SHELL/profile_helper.fish"
 # end
 
-# # Add pyenv, if available
-# if test -d "$HOME/.pyenv"
-#     # set where pyenv is installed
-#     set -x PYENV_ROOT $HOME/.pyenv
-#     # Disable prompt as it's been removed
-#     set -x PYENV_VIRTUALENV_DISABLE_PROMPT 1
-#     set -x PYTHON_CONFIGURE_OPTS "--enable-framework"
-#     # Set virtualenvs to be located in one place
-#     set -x WORKON_HOME $HOME/.ve
-#     # Set virtualenv projects in one place
-#     set -x PROJECT_HOME $HOME/p
-#     # Add pyenv root to PATH to access its shims
-#     set -xg PATH $PYENV_ROOT/bin $PATH
-#     # load pyenv and virtualenv-init, etc
-#     status --is-interactive; and pyenv init - | source
-# end
+# Add pyenv, if available
+if test -d "$HOME/.pyenv"
+    # set where pyenv is installed
+    set -x PYENV_ROOT $HOME/.pyenv
+    # Disable prompt as it's been removed
+    set -x PYENV_VIRTUALENV_DISABLE_PROMPT 1
+    set -x PYTHON_CONFIGURE_OPTS "--enable-framework"
+    # Set virtualenvs to be located in one place
+    set -x WORKON_HOME $HOME/.ve
+    # Set virtualenv projects in one place
+    set -x PROJECT_HOME $HOME/p
+    # Add pyenv root to PATH to access its shims
+    set -xg PATH $PYENV_ROOT/bin $PATH
+    # load pyenv and virtualenv-init, etc
+    status --is-interactive; and pyenv init - | source
+end
 
 # # Pretty ls colors
 # if test -e $HOME/.dircolors
