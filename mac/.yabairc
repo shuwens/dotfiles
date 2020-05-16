@@ -1,30 +1,16 @@
 #!/bin/bash
 
-# bar settings
-yabai -m config status_bar                   on
-yabai -m config status_bar_text_font         "Fantasque Sans Mono:Regular:16.0"
-yabai -m config status_bar_icon_font         "Font Awesome 5 Free:Solid:12.0"
-yabai -m config status_bar_background_color  0xe0202020
-yabai -m config status_bar_foreground_color  0xffa8a8a8
-yabai -m config status_bar_space_icon_strip         
-yabai -m config status_bar_power_icon_strip   
-yabai -m config status_bar_space_icon        
-yabai -m config status_bar_clock_icon        
-
 # global settings
-yabai -m config mouse_follows_focus          on
-yabai -m config focus_follows_mouse          autoraise
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          off
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
 yabai -m config window_opacity               off
-yabai -m config window_shadow                off
-yabai -m config window_border                on
-yabai -m config window_border_width          2
-yabai -m config active_window_border_color   0xff775759
-yabai -m config normal_window_border_color   0xff505050
-yabai -m config insert_window_border_color   0xffd75f5f
+yabai -m config window_opacity_duration      0.0
+yabai -m config window_shadow                on
+yabai -m config insert_feedback_color        0xaad75f5f
 yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.95
+yabai -m config normal_window_opacity        0.90
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
 yabai -m config mouse_modifier               fn
@@ -33,11 +19,14 @@ yabai -m config mouse_action2                resize
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  15
-yabai -m config bottom_padding               15
-yabai -m config left_padding                 15
-yabai -m config right_padding                15
-yabai -m config window_gap                   10
+yabai -m config top_padding                  26
+yabai -m config bottom_padding               12
+yabai -m config left_padding                 12
+yabai -m config right_padding                12
+yabai -m config window_gap                   06
+
+# float system preferences
+yabai -m rule --add app='^System Preferences$' manage=off
 
 # specific space settings
 yabai -m config --space 7 layout             float
@@ -50,6 +39,7 @@ yabai -m rule --add app=Skim space=3
 yabai -m rule --add app=Pages space=3
 yabai -m rule --add app=Finder space=3
 yabai -m rule --add app=Wireshark space=3
+yabai -m rule --add app="zoom.us" space=3
 yabai -m rule --add app=Blue space=5
 yabai -m rule --add app="Microsoft Teams" space=4
 yabai -m rule --add app=Papers space=4
@@ -71,11 +61,10 @@ yabai -m rule --add app=Spotify space=8
 yabai -m rule --add app=Steam space=10
 yabai -m rule --add app=Chrome space=4
 
-# Make System Preferences float
-yabai -m rule --add app="^System Preferences$" manage=off sticky=on
-
 # signals
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
 
 echo "yabai configuration loaded.."
