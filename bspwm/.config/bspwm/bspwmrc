@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# =============================
+#  Setup
+# =============================
+
+## BEHAVIOR
+
+# keyboard setup
+/usr/bin/setxkbmap -option 'ctrl:swapcaps'
+/usr/bin/setxkbmap -option 'altwin:swap_alt_win'
+
+# sxhkd uses the shell so it can't be fish
+SXHKD_SHELL=/bin/bash sxhkd &
+# network manager
+if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
+# ssh keys
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<~/.ssh-agent-thing)"
+fi
+ssh-add ~/.ssh/jethrosun_rsa &
+sudo -E -u jethros $HOME/bin/hotplug-dp.sh mirror &
+[ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
+
+# =============================
+# bspwm things
+# =============================
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc config border_width         2
+bspc config window_gap           10
+bspc config focused_border_color \#3c3836
+bspc config normal_border_color  \#1d2021
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
+
+# desktop specific settings
+bspc desktop "^2" --layout monocle
+bspc config -d "^2" border_width 0
+bspc config -d "^2" window_gap 0
+bspc config -d "^2" top_padding 0
+
+bspc rule -a firefoxdeveloperedition desktop='^2'
+bspc rule -a Firefox desktop='^2'
+
+bspc rule -a Slack desktop='^3' follow=on
+bspc rule -a Zotero desktop='^3' follow=on
+bspc rule -a Evolution desktop='^3' follow=on
+
+bspc rule -a Zathura desktop='^4' follow=on state=tiled
+
+bspc rule -a Google-chrome desktop='^10' follow=on
+
+bspc rule -a polybar border=off manage=off
+
+# Any popup type terminal windows
+bspc rule -a "*:popup_window" state=floating rectangle=825x500 center
+
+# Any popup type terminal windows large
+bspc rule -a "*:popup_window_large" state=floating rectangle=1500x750 center

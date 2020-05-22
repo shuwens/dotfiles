@@ -8,8 +8,9 @@ stow todo        -t ~
 stow backlog     -t ~
 stow X           -t ~
 stow screen      -t ~
-stow urxvt       -t ~
+# stow urxvt       -t ~
 stow bin         -t ~
+stow bspwm	-t ~
 
 stow -t ~   spacemacs
 
