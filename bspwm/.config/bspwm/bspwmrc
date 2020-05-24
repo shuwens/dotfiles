@@ -22,14 +22,17 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     eval "$(<~/.ssh-agent-thing)"
 fi
 ssh-add ~/.ssh/jethrosun_rsa &
-sudo -E -u jethros $HOME/bin/hotplug-dp.sh mirror &
+
+sudo -E -u jethros $HOME/bin/hotplug-dp.sh dual &
+
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
 
 # =============================
 # bspwm things
 # =============================
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor HDMI-1 -d I II III IV V VI VII VIII IX
+bspc monitor eDP-1 -d X
 
 bspc config border_width         2
 bspc config window_gap           10
