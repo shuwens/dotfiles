@@ -23,16 +23,19 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 ssh-add ~/.ssh/jethrosun_rsa &
 
+# monitor setup
 sudo -E -u jethros $HOME/bin/hotplug-dp.sh dual &
 
+# polybar
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
 
 # =============================
 # bspwm things
 # =============================
 
-bspc monitor HDMI-1 -d I II III IV V VI VII VIII IX
-bspc monitor eDP-1 -d X
+bspc monitor eDP-1 -d I
+bspc monitor HDMI-1 -d II III IV V VI VII VIII IX X
+bspc desktop --focus II
 
 bspc config border_width         2
 bspc config window_gap           10
@@ -44,21 +47,21 @@ bspc config borderless_monocle   false
 bspc config gapless_monocle      false
 
 # desktop specific settings
-bspc desktop "^2" --layout monocle
-bspc config -d "^2" border_width 0
-bspc config -d "^2" window_gap 0
-bspc config -d "^2" top_padding 0
+bspc desktop "^3" --layout monocle
+bspc config -d "^3" border_width 0
+bspc config -d "^3" window_gap 0
+bspc config -d "^3" top_padding 0
 
-bspc rule -a firefoxdeveloperedition desktop='^2'
-bspc rule -a Firefox desktop='^2'
+bspc rule -a firefoxdeveloperedition desktop='^3'
+bspc rule -a Firefox desktop='^3'
 
-bspc rule -a Slack desktop='^3' follow=on
-bspc rule -a Zotero desktop='^3' follow=on
-bspc rule -a Evolution desktop='^3' follow=on
+bspc rule -a Slack desktop='^10' follow=on
+bspc rule -a Zotero desktop='^10' follow=on
+bspc rule -a Evolution desktop='^10' follow=on
 
 bspc rule -a Zathura desktop='^4' follow=on state=tiled
 
-bspc rule -a Google-chrome desktop='^10' follow=on
+bspc rule -a Google-chrome desktop='^1' follow=on
 
 bspc rule -a polybar border=off manage=off
 
