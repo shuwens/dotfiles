@@ -31,6 +31,7 @@ sudo -E -u jethros $HOME/bin/hotplug-dp.sh dual &
 
 dunst -conf ~/.config/dunst/dunstrc &
 
+xsetroot -cursor_name left_ptr &
 
 # =============================
 # bspwm things

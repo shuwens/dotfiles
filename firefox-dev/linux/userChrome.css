@@ -30,8 +30,8 @@
 	#navigator-toolbox::after { border: none; }
 	#TabsToolbar .tabbrowser-arrowscrollbox,
 	#tabbrowser-tabs, .tab-stack { min-height: 34px !important; }
-	.tabbrowser-tab { font-size: 120%; }
+	.tabbrowser-tab { font-size: 110%; }
 	.tab-content { padding: 0 5px; }
 	.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 24px !important; }
-	#PersonalToolbar { font-size: 120% !important; height: 34px !important;}
+	#PersonalToolbar { font-size: 110% !important; height: 34px !important;}
 }
