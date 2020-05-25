@@ -29,6 +29,9 @@ sudo -E -u jethros $HOME/bin/hotplug-dp.sh dual &
 # polybar
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
 
+dunst -conf ~/.config/dunst/dunstrc &
+
+
 # =============================
 # bspwm things
 # =============================
@@ -52,16 +55,20 @@ bspc config -d "^3" border_width 0
 bspc config -d "^3" window_gap 0
 bspc config -d "^3" top_padding 0
 
+bspc rule -a Google-chrome desktop='^1' follow=on
+
 bspc rule -a firefoxdeveloperedition desktop='^3'
 bspc rule -a Firefox desktop='^3'
+
+bspc rule -a Zathura desktop='^4' follow=on state=tiled
+
+bspc rule -a Code desktop='^9' follow=on state=tiled
+bspc rule -a Emacs desktop='^9' follow=on state=tiled
 
 bspc rule -a Slack desktop='^10' follow=on
 bspc rule -a Zotero desktop='^10' follow=on
 bspc rule -a Evolution desktop='^10' follow=on
 
-bspc rule -a Zathura desktop='^4' follow=on state=tiled
-
-bspc rule -a Google-chrome desktop='^1' follow=on
 
 bspc rule -a polybar border=off manage=off
 

@@ -11,8 +11,10 @@ super + ctrl + Enter
 
 # program launcher
 # super + @space
-super + p
 	rofi -show run
+
+super + p
+	rofi -combi-modi window#drun -show combi -modi combi -show-icons
 
 Print
 	scrot
