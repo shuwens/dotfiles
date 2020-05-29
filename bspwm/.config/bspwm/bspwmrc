@@ -26,6 +26,11 @@ ssh-add ~/.ssh/jethrosun_rsa &
 # monitor setup
 sudo -E -u jethros $HOME/bin/hotplug-dp.sh dual &
 
+# Network manager, so we don't have to configure wifi at the command line.
+if [ -z "$(pgrep nm-applet)" ] ; then
+  nm-applet --sm-disable &
+fi
+
 # polybar
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
 
@@ -65,9 +70,9 @@ bspc rule -a Zathura desktop='^4' follow=on state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' follow=on state=tiled
+bspc rule -a Zotero desktop='^9' follow=on state=tiled
 
 bspc rule -a Slack desktop='^10' follow=on
-bspc rule -a Zotero desktop='^10' follow=on
 bspc rule -a Evolution desktop='^10' follow=on
 
 
