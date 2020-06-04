@@ -1,6 +1,8 @@
 # Various ways to open terminal
 cmd + shift - return : open -a /Applications/Alacritty.app ;\
                     yabai -m space --focus 1
+cmd + a : open -a /Applications/Alacritty.app ;\
+                    yabai -m space --focus 1
 cmd + shift -t: open -n /Applications/Alacritty.app
 
 # focus window
