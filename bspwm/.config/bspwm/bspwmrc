@@ -71,6 +71,7 @@ bspc rule -a Zathura desktop='^4' follow=on state=tiled
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' follow=on state=tiled
 bspc rule -a Zotero desktop='^9' follow=on state=tiled
+bspc rule -a Nautilus desktop='^9' follow=on state=tiled
 
 bspc rule -a Slack desktop='^10' follow=on
 bspc rule -a Evolution desktop='^10' follow=on
