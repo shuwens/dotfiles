@@ -232,5 +232,6 @@ function ssh() {
 # }
 
 export TERM=xterm
+export EDITOR=vim
 
 # end of [.bashrc]

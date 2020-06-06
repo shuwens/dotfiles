@@ -10,7 +10,7 @@ super + ctrl + Enter
 	alacritty
 
 # program launcher
-# super + @space
+super + @space
 	rofi -show run
 
 super + p
