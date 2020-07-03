@@ -413,6 +413,7 @@ function bar
 	eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"
 end
 
+# wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla https://pg.ucsd.edu
 abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
 abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
 abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
@@ -637,6 +638,58 @@ function onchdir -v PWD
 	end
 	set dr (dirname $dr)
 end
+end
+
+
+function em --description "Emacs from the terminal."
+  emacsclient -t $argv
+end
+
+function mktable --description "produces a LaTeX table for oxide testing results"
+    set -q argv[1]; or set argv[1] (pwd)
+
+    echo "\begin{tabular}{*{21}{c|}c}"
+    echo "\multicolumn{2}{c|}{in-scope} & \multicolumn{20}{c}{disqualified} \\\\ \hline"
+    echo "borrowck & nll & advanced control flow & casting &
+    first-class constructors & debug dump & enums & function mutability & heap &
+    inline asm & out-of-scope library & macros & multithreading &
+    slice patterns & statics \& constants & traits &
+    two-phase borrows & uninitialized variables & universal function call &
+    unsafe & variable mutability \\\\ \hline"
+
+    echo -n (cat "$argv/tests/borrowck/results.json" | jq ".matches | length") " & "
+    echo -n (math (cat "$argv/tests/nll/results.json" | jq ".matches | length") + \
+                  (cat "$argv/tests/nll/closure-requirements/results.json" | jq ".matches | length") + \
+                  (cat "$argv/tests/nll/relate_tys/results.json" | jq ".matches | length") + \
+                  (cat "$argv/tests/nll/user-annotations/results.json" | jq ".matches | length"))
+
+    for folder in (ls $argv/tests/disqualified)
+        echo -n " &" (ls -1 $argv/tests/disqualified/$folder | wc -l | xargs)
+    end
+    echo " \\\\"
+
+    echo "\end{tabular}"
+end
+
+
+function cat --description "mdcat for markdown files, cat for everything else"
+  set cat_flags
+  for arg in $argv
+    if string match -rq -- '^-' $arg
+      set cat_flags $cat_flags $arg
+    end
+    if string match -rq -- '.md$' $arg
+      set cat_mdcat_args $cat_mdcat_args $arg
+    else
+      set cat_cat_args $cat_cat_args $arg
+    end
+  end
+  if set -q cat_mdcat_args
+    command mdcat $cat_flags $cat_mdcat_args
+  end
+  if set -q cat_cat_args
+    command cat $cat_flags $cat_cat_args
+  end
 end
 
 # ----------------------------------

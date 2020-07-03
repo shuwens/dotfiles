@@ -42,6 +42,9 @@ dunst -conf ~/.config/dunst/dunstrc &
 # display cursor pointer
 xsetroot -cursor_name left_ptr &
 
+guake &
+
+
 # =============================
 # bspwm things
 # =============================
@@ -73,6 +76,7 @@ bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
 bspc rule -a Firefox desktop='^3' follow=on state=tiled
 
 bspc rule -a Zathura desktop='^4' follow=on state=tiled
+bspc rule -a Evince desktop='^4' follow=on state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' follow=on state=tiled
