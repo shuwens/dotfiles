@@ -1,0 +1,252 @@
+
+[colors]
+background = #222
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #888
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/main]
+monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 2.5%
+radius = 6.0
+fixed-center = false
+bottom = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-size = 0
+line-size = 2
+padding = 1
+module-margin = 1
+
+font-0 = "Noto Sans Mono:size=10;0"
+font-1 = Unifont:size=12;0
+font-2 = FontAwesome:size=10;0
+font-3 = NotoSans-Regular:size=10;0
+font-4 = MaterialIcons:size=10;0
+font-5 = Termsynu:size=10;0
+font-6 = Siji:pixelsize=12;0
+font-7 = "Noto Sans Symbols:size=11;1"
+font-8 = "Noto Sans Symbols2:size=11;1"
+
+modules-left = date bspwm xwindow
+modules-center =
+modules-right = wlan pulseaudio cpu filesystem battery
+
+tray-position = right
+tray-padding = 2
+tray-maxsize = 24
+
+[global/wm]
+margin-top = 0
+
+[module/xwindow]
+type = internal/xwindow
+; label = %title:0:80:...%
+label = >_ %title:0:85:...%
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = false
+enable-click = false
+enable-scroll = false
+
+label-focused = " %name% "
+label-focused-underline = #fba922
+
+label-occupied = " %name% "
+label-occupied-foreground = #ffaa00
+
+label-urgent = " %name% "
+label-urgent-underline = #9b0a20
+
+label-empty = " %name% "
+label-empty-foreground = #555555
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = false
+enable-click = false
+enable-scroll = false
+
+label-active = " %name% "
+label-active-underline = #fba922
+
+label-occupied = " %name% "
+label-occupied-foreground = #ffaa00
+
+label-urgent = " %name% "
+label-urgent-underline = #9b0a20
+
+label-empty = " %name% "
+label-empty-foreground = #555555
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+
+label = %percentage%%
+format = <label> <ramp-coreload>
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #f90000
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "🗍 "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+label = %percentage_used:2%%
+
+[module/wlan]
+type = internal/network
+interface = wlp4s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = #9f78e1
+format-connected-prefix = " "
+format-connected-prefix-foreground = #666
+format-connected-prefix-offset = -6
+label-connected = %downspeed:8%
+; label-connected = %essid% %downspeed:7%
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " "
+format-disconnected-prefix-foreground = #666
+label-disconnected = not connected
+label-disconnected-foreground = #999
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = #666
+
+[module/eth2]
+type = internal/network
+interface = enp12s0u1
+interval = 3.0
+
+format-connected-underline = #115511
+format-connected-prefix = "🖧 "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/eth1]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = "🖧 "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%a %d"
+date-alt = %a %b %d
+
+time = %I:%M
+time-alt = %I:%M%p
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = %date% %time%
+
+[settings]
+screenchange-reload = true
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 96
+
+format-charging = <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full = <label-full>
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = ⚋
+ramp-capacity-1 = ⚊
+ramp-capacity-2 = ⚍
+ramp-capacity-3 = ⚌
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+label-charging = ⚡ %percentage%%
+label-discharging = %percentage%%
+label-full = " ☀ "
+
+[module/github]
+type = internal/github
+token = ${file:/home/jethros/.config/github/notifications.token}
+empty-notifications = false
+#label = %{u#ff9900 +u} %notifications% %{u-}
+label = %{u#0099ff +u} 📫 %{u-}
+interval = 10
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+use-ui-max = true
+interval = 5
+
+format-volume = %{u#ff69b4 +u}<ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+click-right = pavucontrol &
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+interval = 10
+fixed-values = true
+spacing = 4
+
+format-mounted = <label-mounted>
+format-unmounted = <label-unmounted>
+
+label-mounted = %{u#008000 +u}%mountpoint%: %percentage_free%% of %total%
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = #55
+
+; vim:ft=dosini
