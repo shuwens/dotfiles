@@ -150,7 +150,7 @@
   envelopesender = auto
 [pull]
   # Only do fast-forward merges automatically on pull
-  #ff = only
+  ff = only
 [push]
   # Git 2.0 changes the default to simple
   default = simple
