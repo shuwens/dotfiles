@@ -3,21 +3,6 @@
 #       My Fish Shell Config
 # -----------------------------------
 
-# # let me get my stuff
-[ -f ~/.config/fish/functions/aliases.fish ]; and source ~/.config/fish/functions/aliases.fish
-# #. ~/.config/fish/security.fish
-[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
-[ -f $HOME/.autojump/share/autojump/autojump.fish ]; and source $HOME/.autojump/share/autojump/autojump.fish
-#
-# ## let's setup path variable
-# # set -e fish_user_paths
-# set --universal FONTCONFIG_PATH /etc/fonts/
-set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
-set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
-set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
-set -U fish_user_paths /Users/jethros/.npm-packages/bin $fish_user_paths
-set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
-
 # the right tmux setup in fish
 if status --is-interactive
 	# Base16 Shell
@@ -90,6 +75,25 @@ else
 	abbr -a -U l 'ls'
 	abbr -a -U ll 'ls -l'
 	abbr -a -U lll 'ls -la'
+end
+
+# get auto jump
+if test -f /usr/local/share/autojump/autojump.fish;
+	source /usr/local/share/autojump/autojump.fish;
+else if test -f $HOME/.autojump/share/autojump/autojump.fish;
+	source $HOME/.autojump/share/autojump/autojump.fish;
+end
+[ -f ~/.config/fish/functions/aliases.fish ]; and source ~/.config/fish/functions/aliases.fish
+# #. ~/.config/fish/security.fish
+
+# Type - to move up to top parent dir which is a repository
+function d
+	while test $PWD != "/"
+		if test -d .git
+			break
+		end
+		cd ..
+	end
 end
 
 # Add ssh identity, silently

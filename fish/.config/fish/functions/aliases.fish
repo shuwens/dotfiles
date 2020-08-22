@@ -465,11 +465,12 @@ function lazy
 		git add -A
 		git commit -m "$argv"
 		git push
-else
-	git add -A
-	git commit -m "Changed files w/ little update"
-	git push
-end
+	else
+		git add -A
+		git commit -am \"(echo (curl -s http://whatthecommit.com/index.txt)\"
+		git pull --rebase
+		git push
+	end
 end
 
 # Add this to your ~/.config/fish/config.fish
