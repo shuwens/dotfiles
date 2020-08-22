@@ -56,7 +56,7 @@ abbr -a -U push 'git push'
 abbr -a -U pull 'git pull'
 
 # Quick edits
-abbr -a -U Ea 'nvim ~/.config/fish/functions/abbr -a -Ues.fish'  # nvim doesn't work well for cooking fish
+abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish'  # nvim doesn't work well for cooking fish
 abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
 #abbr -a -U Ep 'nvim ~/.config/powerline-shell/config.json'
 abbr -a -U Eg 'nvim ~/.gitconfig'
@@ -124,7 +124,8 @@ end
 # Colorized cat (will guess file type based on contents)
 abbr -a -U ccat 'pygmentize -g'
 
-abbr -a -U c clear
+abbr -a -U c "cargo"
+abbr -a -U r "cargo r"
 abbr -a -U v vim
 abbr -a -U vim nvim
 abbr -a -U x 'tig HEAD'

@@ -70,7 +70,9 @@ bspc config -d "^3" top_padding 0
 
 bspc rule -a Alacritty state=tiled
 
-bspc rule -a Google-chrome desktop='^1' follow=on
+# bspc rule -a Google-chrome desktop='^1'
+bspc rule -a Zoom desktop='^1'
+bspc rule -a zoom desktop='^1'
 
 bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
 bspc rule -a Firefox desktop='^3' follow=on state=tiled

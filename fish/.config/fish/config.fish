@@ -327,8 +327,6 @@ function fish_greeting
 	set_color cyan
 	# echo "    [project] <description>"
 	# echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
-	echo "    [CFP] NSDI 2021 DDL: March 15, 2021"
-	#echo "    [PVN] Design, Architecture and Prototype"
 	echo "    [Blog #1] dev: mostly vim and Rust programming setup"
 	echo "    [Blog #2] My Rust learning experience"
 	echo "    [Blog #3] Year one experience as a PhD"
@@ -349,14 +347,13 @@ function fish_greeting
 	# work on every morning
 	set_color yellow
 	echo "    [Submission] NSDI 2021 DDL: Sept 17"
-	echo "    [Submission] CoNEXT 2020 DDL: June 24"
+	echo "    [Submission] SIGCOMM 2021 DDL: Feb 7"
     end
     # important and urgent things, so I should get to it right away
     set_color red
     echo "    [CoNEXT 20] Writing: background and motivation"
     echo "    [CoNEXT 20] Impl and running expr"
     # echo "    [NSDI 21] Survey: CoNEXT, SIGCOMM, NSDI"
-
 
     echo
     set_color normal
