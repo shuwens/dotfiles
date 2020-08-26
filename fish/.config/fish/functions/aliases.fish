@@ -56,7 +56,7 @@ abbr -a -U push 'git push'
 abbr -a -U pull 'git pull'
 
 # Quick edits
-abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish'  # nvim doesn't work well for cooking fish
+abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
 abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
 #abbr -a -U Ep 'nvim ~/.config/powerline-shell/config.json'
 abbr -a -U Eg 'nvim ~/.gitconfig'
@@ -74,7 +74,7 @@ abbr -a -U holdmybeer 'sudo'
 
 ## my ssh utils
 function UpdateFile -a filename
-	scp $filename nu-ccis:~/.www/tmp/
+    scp $filename nu-ccis:~/.www/tmp/
 end
 
 abbr -a -U ggco 'git switch'
@@ -88,7 +88,7 @@ abbr -a -U vim-none 'vim -u NONE'
 
 #set LS_COLORS dxfxcxdxbxegedabagacad
 function lsd -d 'List only directories (in the current dir)'
-	command ls -d */ | sed -Ee 's,/+$,,'
+    command ls -d */ | sed -Ee 's,/+$,,'
 end
 
 # Colorized cat (will guess file type based on contents)
@@ -116,8 +116,8 @@ abbr -a -U ..... 'cd ../../../..'
 
 abbr -a -U md 'mkdir -p'
 function take
-	set -l dir $argv[1]
-	mkdir -p $dir; and cd $dir
+    set -l dir $argv[1]
+    mkdir -p $dir; and cd $dir
 end
 abbr -a -U cx 'chmod +x'
 abbr -a -U 'c-x' 'chmod -x'
@@ -133,7 +133,7 @@ abbr -a -U vi "nvim"
 abbr -a -U :q "sudo reboot"
 
 function bar
-	eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"
+    eval "sudo -E -u jethros $HOME/.config/polybar/launch.sh &"
 end
 
 # wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla https://pg.ucsd.edu
@@ -142,29 +142,29 @@ abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
 abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 function ,,,
-	make clean; and make
+    make clean; and make
 end
 
 if test (uname) = Darwin
 else
-	function o -a filename
-		xdg-open $filename &
-end
+    function o -a filename
+        xdg-open $filename &
+    end
 
-function open -a filename
-	xdg-open $filename &
-end
+    function open -a filename
+        xdg-open $filename &
+    end
 end
 
 # for git journal, I should only use ["Added", "Changed", "Fixed", "Improved", "Removed"]
 function lazy
-	if test "$argv"
-		git add -A
-		git commit -am "$argv"
-		git push
-	else
-		git r
-	end
+    if test "$argv"
+        git add -A
+        git commit -am "$argv"
+        git push
+    else
+        git r
+    end
 end
 
 # Add this to your ~/.config/fish/config.fish
@@ -173,78 +173,78 @@ end
 # '!! sudo' will prepend sudo to your most recent command
 # Running !! with anything other than sudo will append the argument to your most recent command
 # To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
-function !!;
-	set prevcmd (history | head -n 1)
-	if test "$argv"
-		if test "$argv" = "sudo"        #; or "any other command you want to prepend"
-			eval "$argv $prevcmd"
-		else
-			eval "$var $argv"
-		end
-	else
-		eval "$var"
-	end
+function !!
+    set prevcmd (history | head -n 1)
+    if test "$argv"
+        if test "$argv" = "sudo" #; or "any other command you want to prepend"
+            eval "$argv $prevcmd"
+        else
+            eval "$var $argv"
+        end
+    else
+        eval "$var"
+    end
 end
 
 function ssh
-	switch $argv[1]
-		case "*.amazonaws.com"
-			env TERM=xterm /usr/bin/ssh $argv
-		case "ec2-user@"
-			env TERM=xterm /usr/bin/ssh $argv
-		case "*"
-			/usr/bin/ssh $argv
-	end
+    switch $argv[1]
+        case "*.amazonaws.com"
+            env TERM=xterm /usr/bin/ssh $argv
+        case "ec2-user@"
+            env TERM=xterm /usr/bin/ssh $argv
+        case "*"
+            /usr/bin/ssh $argv
+    end
 end
 
 function remote_alacritty
-	# https://gist.github.com/costis/5135502
-	set fn (mktemp)
-	infocmp alacritty-256color > $fn
-	scp $fn $argv[1]":alacritty-256color.ti"
-	ssh $argv[1] tic "alacritty-256color.ti"
-	ssh $argv[1] rm "alacritty-256color.ti"
+    # https://gist.github.com/costis/5135502
+    set fn (mktemp)
+    infocmp alacritty-256color >$fn
+    scp $fn $argv[1]":alacritty-256color.ti"
+    ssh $argv[1] tic "alacritty-256color.ti"
+    ssh $argv[1] rm "alacritty-256color.ti"
 end
 
 function remarkable
-	if test (count $argv) -ne 1
-		echo "No file given"
-		return
-	end
-	ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
-	if test $status -ne 0
-		# not yet connected
-		echo "Connecting to reMarkable internal network"
-		sudo dhcpcd enp0s20u2
-	end
-	curl --form "file=@"$argv[1] http://10.11.99.1/upload
+    if test (count $argv) -ne 1
+        echo "No file given"
+        return
+    end
+    ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
+    if test $status -ne 0
+        # not yet connected
+        echo "Connecting to reMarkable internal network"
+        sudo dhcpcd enp0s20u2
+    end
+    curl --form "file=@"$argv[1] http://10.11.99.1/upload
 end
 
 function md2pdf
-	set t (mktemp -t md2pdf.XXXXXXX.pdf)
-	pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
-	set --erase argv[1]
-	if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
-		mv $t $argv[1]
-	else
-		cat $t
-		rm $t
-	end
+    set t (mktemp -t md2pdf.XXXXXXX.pdf)
+    pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
+    set --erase argv[1]
+    if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
+        mv $t $argv[1]
+    else
+        cat $t
+        rm $t
+    end
 end
 
 function lpmd
-	set infile $argv[1]
-	set --erase argv[1]
-	md2pdf $infile - | lp $argv -
+    set infile $argv[1]
+    set --erase argv[1]
+    md2pdf $infile - | lp $argv -
 end
 
 function pdfo
-	echo $argv | xargs pdflatex
-	echo $argv | sed 's/\.tex$/.pdf/' | xargs xdg-open
+    echo $argv | xargs pdflatex
+    echo $argv | sed 's/\.tex$/.pdf/' | xargs xdg-open
 end
 
 function px
-	ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
+    ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
 end
 
 function mktable --description "produces a LaTeX table for oxide testing results"
@@ -275,23 +275,23 @@ end
 
 
 function cat --description "mdcat for markdown files, cat for everything else"
-  set cat_flags
-  for arg in $argv
-    if string match -rq -- '^-' $arg
-      set cat_flags $cat_flags $arg
+    set cat_flags
+    for arg in $argv
+        if string match -rq -- '^-' $arg
+            set cat_flags $cat_flags $arg
+        end
+        if string match -rq -- '.md$' $arg
+            set cat_mdcat_args $cat_mdcat_args $arg
+        else
+            set cat_cat_args $cat_cat_args $arg
+        end
     end
-    if string match -rq -- '.md$' $arg
-      set cat_mdcat_args $cat_mdcat_args $arg
-    else
-      set cat_cat_args $cat_cat_args $arg
+    if set -q cat_mdcat_args
+        command mdcat $cat_flags $cat_mdcat_args
     end
-  end
-  if set -q cat_mdcat_args
-    command mdcat $cat_flags $cat_mdcat_args
-  end
-  if set -q cat_cat_args
-    command cat $cat_flags $cat_cat_args
-  end
+    if set -q cat_cat_args
+        command cat $cat_flags $cat_cat_args
+    end
 end
 
 # ----------------------------------
