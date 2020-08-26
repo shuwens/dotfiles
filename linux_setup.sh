@@ -10,7 +10,8 @@ stow X           -t ~
 stow screen      -t ~
 # stow urxvt       -t ~
 stow bin         -t ~
-stow bspwm	-t ~
+stow bspwm		 -t ~
+stow git		 -t ~
 
 stow -t ~   spacemacs
 
