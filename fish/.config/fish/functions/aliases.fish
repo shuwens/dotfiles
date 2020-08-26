@@ -23,9 +23,10 @@ abbr -a -U lab "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/jethrosun_rsa\" git $argv"
 abbr -a amz 'env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1)'
 abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {iid: .InstanceId, type: .InstanceType, key:.KeyName, state:.State.Name, host:.PublicDnsName}'"
 
-abbr -a pvn nvim ~/writings/northeastern/projects/pvn/pvn.org
-abbr -a idea nvim ~/git/home/academic/outline.org
 abbr -a bs bibtex-search
+
+abbr -a py3 "pyenv activate neovim3"
+abbr -a pyn "pyenv activate newest"
 
 abbr -a note 'nvim ~/notes/talks.org'
 
@@ -59,7 +60,7 @@ abbr -a -U pull 'git pull'
 abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
 abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
 #abbr -a -U Ep 'nvim ~/.config/powerline-shell/config.json'
-abbr -a -U Eg 'nvim ~/.gitconfig'
+abbr -a -U Eg 'nvim ~/.config/git/config'
 abbr -a -U Ev 'nvim ~/.config/nvim/init.vim'
 abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
 abbr -a -U Ee 'nvim ~/.spacemacs'
