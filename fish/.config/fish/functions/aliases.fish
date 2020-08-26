@@ -80,41 +80,11 @@ end
 abbr -a -U ggco 'git switch'
 abbr -a -U fl 'clear; and flow-limit'
 
-# =======================================================
-#
-#               DEPRECATED
-#
-# =======================================================
-
-
-#abbr -a -U UpdateResume "scp ~/writing/phd-application/nice_cv/sun_cv.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
-#abbr -a -U UpdateStatement "scp ~/writing/phd-application/sop/statement.pdf shwsun@csa2.bu.edu:~/public_html/tmp"
-
 #abbr -a -U jn "jupyter notebook --browser=google-chromium-browser"
 abbr -a -U jn "jupyter notebook --browser=firefox"
 
 abbr -a -U vim-norc 'vim -u NORC'
 abbr -a -U vim-none 'vim -u NONE'
-
-function pdftext
-	pdftotext -layout $argv[1] -
-end
-
-function serve
-	if test (count $argv) -ge 1
-		if python -c 'import sys; sys.exit(sys.version_info[0] != 3)'
-			/bin/sh -c "(cd $argv[1] && python -m http.server)"
-else
-	/bin/sh -c "(cd $argv[1] && python -m SimpleHTTPServer)"
-end
-else
-	python -m SimpleHTTPServer
-end
-end
-
-function timestamp
-	python -c 'import time; print(int(time.time()))'
-end
 
 #set LS_COLORS dxfxcxdxbxegedabagacad
 function lsd -d 'List only directories (in the current dir)'
@@ -128,233 +98,15 @@ abbr -a -U c "cargo"
 abbr -a -U r "cargo r"
 abbr -a -U v vim
 abbr -a -U vim nvim
-abbr -a -U x 'tig HEAD'
-abbr -a -U xx 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --branches'
-abbr -a -U xxa 'tig --exclude=production --exclude="*/production" --exclude=canary --exclude="*/canary" --all'
-abbr -a -U xxaa 'tig --all'
 abbr -a -U notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
-
 abbr -a -U m make
 abbr -a -U mm 'make run'
-
-abbr -a -U reset-mailbox 'rm -v ~/Library/Caches/com.dropbox.mbd.external-beta/mailbox.db'
-
 abbr -a -U wifi 'nmcli d wifi list'
-
-
-
-function da -d "Allow or disallow .envrc after printing it."
-	echo "------------------------------------------------"
-	cat .envrc
-	echo "------------------------------------------------"
-	echo "To allow, hit Return."
-	read answer
-	direnv allow
-end
-
-function def -d "Quickly jump to place where a function, method, or variable is defined"
-	va "^\s*(def\s+$argv|$argv\s*[=])"
-end
-
-function vimff
-	vim (ffind -tf $argv)
-end
-
-function f
-	git ls-tree -r --name-only HEAD
-end
-
-function vf
-	f | fzf | xargs -o vim
-end
-
-function va
-	set pattern $argv[1]
-	if test (count $argv) -gt 1
-		set argv $argv[2..-1]
-else
-	set argv
-end
-
-set ag_pattern (echo $pattern | sed -Ee 's/[<>]/\\\\b/g')
-set vim_pattern (echo $pattern | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
-ag -l --smart-case --null $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
-end
-
-function vaa
-	set pattern $argv[1]
-	if test (count $argv) -gt 1
-		set argv $argv[2..-1]
-else
-	set argv
-end
-
-set ag_pattern (echo $argv | sed -Ee 's/[<>]/\\\\b/g')
-set vim_pattern (echo $argv | sed -E -e 's,([/=]),\\\\\1,g' -e 's,.*,/\\\\v&,')
-ag -l --smart-case --null -a $ag_pattern -- $argv ^/dev/null | xargs -0 -o vim -c $vim_pattern
-end
-
-## Git abbr -a -Ues
-
-function vc
-	if git modified -q $argv
-		vim (git modified $argv | sed -Ee 's/^"(.*)"$/\1/')
-else
-	echo '(nothing changed)'
-end
-end
-
-function vca
-	if git modified -qi
-		vim (git modified -i | sed -Ee 's/^"(.*)"$/\1/')
-else
-	echo '(nothing changed)'
-end
-end
-
-function vci
-	if git modified -qi
-		vim (begin; git modified -i; git modified; end | sort | uniq -u | sed -Ee 's/^"(.*)"$/\1/')
-else
-	echo '(nothing changed)'
-end
-end
-
-abbr -a -U vch 'vc head'
-abbr -a -U vch1 'vc head~1'
-abbr -a -U vch2 'vc head~2'
-
-function vu
-	if git modified -u $argv
-		vim (git modified -u $argv | sed -Ee 's/^"(.*)"$/\1/')
-else
-	echo 'no files with conflicts'
-end
-end
-
-function vw
-	vim (which "$argv")
-end
-
-function vconflicts
-	# Opens all files with merge conflict markers
-	va '^([<]{7}|[>]{7}|[=]{7})([ ].*)?$'
-end
-
-function git-search
-	git log -S"$argv" --pretty=format:%H | map git show
-end
-
-
-function cleanpycs
-	find . -name '.git' -prune -o -name '__pycache__' -delete
-	find . -name '.git' -prune -o -name '*.py[co]' -delete
-end
-
-function cleanorigs
-	find . '(' -name '*.orig' -o -name '*.BACKUP.*' -o -name '*.BASE.*' -o -name '*.LOCAL.*' -o -name '*.REMOTE.*' ')' -print0 | xargs -0 rm -f
-end
-
-function cleandsstores
-	find . -name '.DS_Store' -exec rm -f '{}' ';'
-end
 
 abbr -a -U json 'prettify-json'
 abbr -a -U map 'xargs -n1'
 abbr -a -U collapse "sed -e 's/  */ /g'"
 abbr -a -U cuts 'cut -d\ '
-
-function p -d "Start the best Python shell that is available"
-	set -l cmd
-
-	if test -f manage.py
-		if pip freeze ^/dev/null | grep -iq 'django-extensions'
-			set cmd (which python) manage.py shell_plus
-else
-	if pip freeze ^/dev/null | grep -iq 'flask-script'
-		# do nothing, use manage.py, fall through
-		set -e cmd
-	else
-		set cmd (which python) manage.py shell
-	end
-end
-end
-
-if test -z $cmd
-	set -l interpreters (which bpython ^/dev/null; which ipython ^/dev/null; which python ^/dev/null)
-
-	if test -z "$interpreters"
-		set_color red
-		echo "No python interpreters found on the PATH."
-		set_color normal
-		return 127
-end
-
-# Try to find the first interpreter within the current virtualenv
-# Rationale: it's more important to start a Python interpreter in the
-# current virtualenv than it is to start an _IPython_ interpreter (for
-# example, when the current virtualenv has no ipython installed, but such
-# would be installed system-wide).
-for interp in $interpreters
-	#echo '-' $interp
-	#echo '-' (dirname (dirname $interp))
-	if test (dirname (dirname $interp)) = "$VIRTUAL_ENV"
-		set cmd $interp
-		break
-	end
-end
-
-# If they all fall outside the virtualenv, pick the first match
-# (preferring ipython over python)
-if test -z "$cmd"
-	set cmd $interpreters[1]
-end
-end
-
-# Run the command
-printf "Using "; set_color green; echo $cmd; set_color normal
-eval $cmd $argv
-end
-
-abbr -a -U pm 'python manage.py'
-abbr -a -U pmm 'python manage.py migrate'
-abbr -a -U pmmm 'python manage.py makemigrations'
-abbr -a -U pms 'python manage.py shell_plus'
-abbr -a -U pmr 'python manage.py runserver_plus 0.0.0.0:8000'
-
-function pipr -d "Find & install all requirements for this project"
-	pushd (git root)
-	begin
-		if test -f requirements.txt
-			command pip install -r requirements.txt
-end
-if test -f dev-requirements.txt
-	command pip install -r dev-requirements.txt
-end
-if test -f .pipignore
-	command pip install -r .pipignore
-end
-end
-popd
-end
-
-# Directories {{{
-
-function cdff --description "cd's into the current front-most open Finder window's directory"
-	cd (ff $argv)
-end
-
-function ff
-	echo '
-	tell application "Finder"
-	if (1 <= (count Finder windows)) then
-		get POSIX path of (target of window 1 as abbr -a -U)
-else
-	get POSIX path of (desktop as abbr -a -U)
-end if
-end tell
-' | osascript -
-end
 
 abbr -a -U cd.. 'cd ..'
 abbr -a -U .. 'cd ..'
@@ -369,36 +121,6 @@ function take
 end
 abbr -a -U cx 'chmod +x'
 abbr -a -U 'c-x' 'chmod -x'
-
-# }}}
-
-function colorize-pboard
-	if test (count $argv) -gt 0
-		set lang $argv[1]
-else
-	set lang 'python'
-end
-pbpaste | strip-indents | color-syntax | pbcopy
-end
-
-function color-syntax
-	if test (count $argv) -gt 0
-		set lang $argv[1]
-else
-	set lang 'python'
-end
-pygmentize -f rtf -l $lang
-end
-
-abbr -a -U h heroku
-abbr -a -U gp 'cd ~/Projects/SimpleContacts/simplecontacts'
-
-function wtf -d "Print which and --version output for the given command"
-	for arg in $argv
-		echo $arg: (which $arg)
-		echo $arg: (sh -c "$arg --version")
-end
-end
 
 ## My own stuff!
 abbr -a -U gs "git status"
@@ -419,31 +141,6 @@ abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
 abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
 abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
-# Type - to move up to top parent dir which is a repository
-function d
-	while test $PWD != "/"
-		if test -d .git
-			break
-end
-cd ..
-end
-end
-
-## tips function
-# tips tar
-# https://wiki.archlinux.org/index.php/Core_utilities#tar
-# https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/
-
-
-## python stuff
-#install virtualfish
-#abbr -a -U virtualenv3 "virtualenv -p /usr/bin/python3"
-#abbr -a -U workon "vf activate"
-#abbr -a -U walkaway "vf deactivate"
-
-#abbr -a -U up '"sudo apt update"; and "sudo apt --list-upgrades"'
-#abbr -a -U upgrade 'sudo apt upgrade'
-
 function ,,,
 	make clean; and make
 end
@@ -463,13 +160,10 @@ end
 function lazy
 	if test "$argv"
 		git add -A
-		git commit -m "$argv"
+		git commit -am "$argv"
 		git push
 	else
-		git add -A
-		git commit -am \"(echo (curl -s http://whatthecommit.com/index.txt)\"
-		git pull --rebase
-		git push
+		git r
 	end
 end
 
@@ -484,54 +178,23 @@ function !!;
 	if test "$argv"
 		if test "$argv" = "sudo"        #; or "any other command you want to prepend"
 			eval "$argv $prevcmd"
-else
-	eval "$var $argv"
+		else
+			eval "$var $argv"
+		end
+	else
+		eval "$var"
+	end
 end
-else
-	eval "$var"
-end
-end
-
-## Commented stuff
-# --------------------
-#set -U fish_user_abbreviations $fish_user_abbreviations 'nova=env OS_PASSWORD=(pass www/mit-openstack | head -n1) nova'
-#set -U fish_user_abbreviations $fish_user_abbreviations 'glance=env OS_PASSWORD=(pass www/mit-openstack | head -n1) glance'
-#setenv OS_USERNAME jfrg@csail.mit.edu
-#setenv OS_TENANT_NAME usersandbox_jfrg
-#setenv OS_AUTH_URL https://nimbus.csail.mit.edu:5001/v2.0
-#setenv OS_IMAGE_API_VERSION 1
-#setenv OS_VOLUME_API_VERSION 2
-
-function aws -d "Set up environment for AWS"
-	env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1) $argv
-end
-function penv -d "Set up environment for the PDOS openstack service"
-	env OS_PASSWORD=(pass www/mit-openstack | head -n1) OS_TENANT_NAME=pdos OS_PROJECT_NAME=pdos $argv
-end
-function pvm -d "Run nova/glance commands against the PDOS openstack service"
-	switch $argv[1]
-case 'image-*'
-	penv glance $argv
-case 'c'
-	penv cinder $argv[2..-1]
-case 'g'
-	penv glance $argv[2..-1]
-case '*'
-	penv nova $argv
-end
-end
-
-
 
 function ssh
 	switch $argv[1]
-case "*.amazonaws.com"
-	env TERM=xterm /usr/bin/ssh $argv
-case "ec2-user@"
-	env TERM=xterm /usr/bin/ssh $argv
-case "*"
-	/usr/bin/ssh $argv
-end
+		case "*.amazonaws.com"
+			env TERM=xterm /usr/bin/ssh $argv
+		case "ec2-user@"
+			env TERM=xterm /usr/bin/ssh $argv
+		case "*"
+			/usr/bin/ssh $argv
+	end
 end
 
 function remote_alacritty
@@ -547,15 +210,14 @@ function remarkable
 	if test (count $argv) -ne 1
 		echo "No file given"
 		return
-end
-
-ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
-if test $status -ne 0
-	# not yet connected
-	echo "Connecting to reMarkable internal network"
-	sudo dhcpcd enp0s20u2
-end
-curl --form "file=@"$argv[1] http://10.11.99.1/upload
+	end
+	ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
+	if test $status -ne 0
+		# not yet connected
+		echo "Connecting to reMarkable internal network"
+		sudo dhcpcd enp0s20u2
+	end
+	curl --form "file=@"$argv[1] http://10.11.99.1/upload
 end
 
 function md2pdf
@@ -564,10 +226,10 @@ function md2pdf
 	set --erase argv[1]
 	if test (count $argv) -gt 0 -a $argv[1] '!=' '-'
 		mv $t $argv[1]
-else
-	cat $t
-	rm $t
-end
+	else
+		cat $t
+		rm $t
+	end
 end
 
 function lpmd
@@ -583,68 +245,6 @@ end
 
 function px
 	ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
-end
-
-
-## why do I have so many web servers?
-# bu
-function bucs
-	env SSHPASS=(pass www/bucs) sshpass -e ssh bucs $argv
-end
-# northeastern
-function athena
-	env SSHPASS=(security find-generic-password -a jethrosun -s athena -w) sshpass -e ssh nu-ccis $argv
-end
-
-# zathura
-function z
-	if test (count $argv) -ne 1
-		echo "No file given"
-		return
-else
-	zathura $argv &
-end
-end
-
-
-
-## what is this for again?
-set nooverride PATH PWD
-function onchdir -v PWD
-	set dr $PWD
-	while [ "$dr" != "/" ]
-		for e in $dr/.setenv-*
-			set envn (basename -- $e | sed 's/^\.setenv-//')
-			if contains $envn $nooverride
-				continue
-		end
-
-		if not test -s $e
-			# setenv is empty
-			# var value is file's dir
-			set envv (readlink -e $dr)
-		else if test -L $e; and test -d $e
-			# setenv is symlink to directory
-			# var value is target directory
-			set envv (readlink -e $e)
-		else
-			# setenv is non-empty file
-			# var value is file content
-			set envv (cat $e)
-		end
-
-		if not contains $envn $wasset
-			set wasset $wasset $envn
-			setenv $envn $envv
-		end
-	end
-	set dr (dirname $dr)
-end
-end
-
-
-function em --description "Emacs from the terminal."
-  emacsclient -t $argv
 end
 
 function mktable --description "produces a LaTeX table for oxide testing results"
