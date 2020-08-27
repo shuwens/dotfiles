@@ -52,16 +52,16 @@ else
 		#/usr/bin/xrandr --output $DEV --mode 1024x768
 		#/usr/bin/xrandr --output eDP-1 --mode 1024x768 --same-as $DEV
 		/usr/bin/xrandr --output $DEV --auto
-		/usr/bin/xrandr --output eDP-1 --auto --same-as $DEV
+		/usr/bin/xrandr --output eDP1 --auto --same-as $DEV
 	elif [[ $1 == "desktop" ]]; then
 		/usr/bin/xrandr --output $DEV --auto
-		/usr/bin/xrandr --output eDP-1 --off
+		/usr/bin/xrandr --output eDP1 --off
 	elif [[ $1 == "dual" ]]; then
 		/usr/bin/xrandr --output $DEV --primary --auto
 		/usr/bin/xrandr --output eDP1 --auto --left-of $DEV
 	else
 		edid=$(/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /bin/sed 's/\s*-$//')
-		print $edid
+		printf $edid
 
     ## For some reasons it can only be top down
     pos="above"
@@ -78,8 +78,8 @@ else
 						;;
 				esac
 				#/usr/bin/xrandr --addmode eDP-1 1920x1080
-				/usr/bin/xrandr --output eDP-1 --auto
-				/usr/bin/xrandr --output $DEV --auto --$pos eDP-1
+				/usr/bin/xrandr --output eDP1 --auto
+				/usr/bin/xrandr --output $DEV --auto --$pos eDP1
 	fi
 	#/usr/bin/xset -dpms
 	#/usr/bin/xset s off

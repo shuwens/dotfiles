@@ -76,12 +76,10 @@ else
     abbr -a -U lll 'ls -la'
 end
 
-# get auto jump
-if test -f /usr/local/share/autojump/autojump.fish
-    source /usr/local/share/autojump/autojump.fish
-else if test -f $HOME/.autojump/share/autojump/autojump.fish
-    source $HOME/.autojump/share/autojump/autojump.fish
+function j -d "Autojump alias" -w "autojump"
+  cd (env AUTOJUMP_SOURCED=1 autojump $argv)
 end
+
 [ -f ~/.config/fish/functions/aliases.fish ]; and source ~/.config/fish/functions/aliases.fish
 # #. ~/.config/fish/security.fish
 
@@ -212,7 +210,8 @@ if test -e $HOME/.dircolors
     if test (uname) = Darwin
         setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
     else
-        setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+		eval ( dircolors --c-shell /usr/share/LS_COLORS/LS_COLORS )
+        # setenv LS_COLORS (bash --noprofile -c 'eval "$(dircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
     end
 end
 

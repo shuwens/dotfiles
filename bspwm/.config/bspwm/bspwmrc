@@ -6,44 +6,13 @@
 
 ## BEHAVIOR
 
-# keyboard setup
-/usr/bin/setxkbmap -option 'ctrl:swapcaps'
-/usr/bin/setxkbmap -option 'altwin:swap_alt_win'
-
 # sxhkd uses the shell so it can't be fish
 SXHKD_SHELL=/bin/bash sxhkd &
 
-# Network manager, so we don't have to configure wifi at the command line.
-if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
-
-# ssh keys
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > ~/.ssh-agent-thing
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    eval "$(<~/.ssh-agent-thing)"
-fi
-ssh-add ~/.ssh/jethrosun_rsa &
-
-# monitor setup
-sudo -E -u jethros $HOME/bin/hotplug-dp.sh dual &
-
-# polybar
-# [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
+nitrogen --restore &
 
 # dunst to display messages
 dunst -conf ~/.config/dunst/dunstrc &
-
-# screen lock
-#/usr/bin/xautolock -time 450 -locker /usr/bin/i3lock-fancy -detectsleep &
-
-# eval (op signin my)
-
-# display cursor pointer
-#xsetroot -cursor_name left_ptr &
-
-# guake &
-
 
 # =============================
 # bspwm things
