@@ -29,7 +29,7 @@ if [[ "$STATUS_DP" = "connected" ]]; then
 	DEVC="DP-2"
 elif [[ "$STATUS_HDMI" = "connected" ]]; then
 	STATUS="connected"
-	DEV="HDMI-1"
+	DEV="HDMI1"
 	DEVC="HDMI-A-1"
 elif [[ "$STATUS_HDMI2" = "connected" ]]; then
 	STATUS="connected"
@@ -38,11 +38,11 @@ elif [[ "$STATUS_HDMI2" = "connected" ]]; then
 fi
 
 if [ "$STATUS" = "disconnected" ]; then
-	/usr/bin/xrandr --output DP-2 --off
-	/usr/bin/xrandr --output HDMI-1 --off
-	/usr/bin/xrandr --output HDMI-2 --off
+	/usr/bin/xrandr --output DP2 --off
+	/usr/bin/xrandr --output HDMI1 --off
+	/usr/bin/xrandr --output HDMI2 --off
 	#/usr/bin/xrandr --output eDP-1 --mode 1920x1440
-	/usr/bin/xrandr --output eDP-1 --auto
+	/usr/bin/xrandr --output eDP1 --auto
 	#/usr/bin/xset +dpms
 	#/usr/bin/xset s default
 	#hidpi
@@ -58,7 +58,7 @@ else
 		/usr/bin/xrandr --output eDP-1 --off
 	elif [[ $1 == "dual" ]]; then
 		/usr/bin/xrandr --output $DEV --primary --auto
-		/usr/bin/xrandr --output eDP-1 --auto --left-of $DEV
+		/usr/bin/xrandr --output eDP1 --auto --left-of $DEV
 	else
 		edid=$(/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /bin/sed 's/\s*-$//')
 		print $edid
@@ -94,5 +94,5 @@ fi
 /usr/bin/pkill notify-osd
 /usr/bin/sudo -E -u jethros nitrogen --restore
 /usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
-/usr/bin/sudo -E -u jethros /home/jethros/bin/touchpad-setup.sh
+# /usr/bin/sudo -E -u jethros /home/jethros/bin/touchpad-setup.sh
 # /usr/bin/systemctl restart systemd-logind

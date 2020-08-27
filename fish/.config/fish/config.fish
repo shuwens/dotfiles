@@ -30,12 +30,12 @@ else
         function upgrade
             echo (pass x1c/jethros) | sudo -S apt -y upgrade
         end
-    else if [ -e /usr/bin/yaourt ]
+    else if [ -e /usr/bin/yay ]
         # arch systems w/ yaourt
-        set -U fish_user_abbreviations $fish_user_abbreviations 'p=yaourt'
+        set -U fish_user_abbreviations $fish_user_abbreviations 'p=yay'
         #complete --command yaourt --wraps pacman
-        set -U fish_user_abbreviations $fish_user_abbreviations 'up=yaourt -Syu --aur'
-    else if [ -e /usr/bin/pacman]
+        set -U fish_user_abbreviations $fish_user_abbreviations 'up=yay -Syu'
+    else if [ -e /usr/bin/pacman ]
         # native arch systems
         set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
         #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
