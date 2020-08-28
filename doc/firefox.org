@@ -1,7 +1,0 @@
-* ctrl scroll wheel
-
- mousewheel.with_control.action;0
-
-  [][]https://support.mozilla.org/en-US/questions/955305
-
-  https://github.com/kud/my/blob/9cdb04de71f4600b8d14119f319fc34c2c6b76f0/core/firefox-settings

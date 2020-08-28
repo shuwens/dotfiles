@@ -32,18 +32,13 @@ else
         end
     else if [ -e /usr/bin/yay ]
         # arch systems w/ yaourt
-        set -U fish_user_abbreviations $fish_user_abbreviations 'p=yay'
-        #complete --command yaourt --wraps pacman
-        set -U fish_user_abbreviations $fish_user_abbreviations 'up=yay -Syu'
+        complete --command yay --wraps pacman
+		abbr -a -U p yay
+		abbr -a -U up 'yay -Syu'
     else if [ -e /usr/bin/pacman ]
         # native arch systems
-        set -U fish_user_abbreviations $fish_user_abbreviations 'p=sudo pacman'
-        #set -U fish_user_abbreviations $fish_user_abbreviations 'up=sudo pacman -Syu'
-    else if [ -e /usr/bin/pacaur ]
-        # arch systems w/ pacaur
-        #complete --command pacaur --wraps pacman
-        set -U fish_user_abbreviations $fish_user_abbreviations 'p=pacaur'
-        set -U fish_user_abbreviations $fish_user_abbreviations 'up=pacaur -Syu'
+		abbr -a -U p 'sudo pacman'
+		abbr -a -U up 'sudo pacman -Syu'
     else
         echo "you are not running a recognizable system!"
     end
@@ -114,7 +109,7 @@ if test (uname) = Darwin
     # add alias for ssh to update the tty
     # alias ssh "gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
 else
-    ssh-add -K 2>/dev/null
+    # ssh-add -K 2>/dev/null
 end
 
 

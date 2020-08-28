@@ -1,0 +1,53 @@
+# This file sets environment variables that should be globally set on the system
+# That is, across graphical and non-graphical logins, and across all shell types
+#
+# Note that it is _not_ important to set things like FZF_DEFAULT_COMMAND here since
+# that is only relevant when using an interactive shell, so we may as well just set
+# that directly in the shell config.
+#
+# Also note that pam_env is _really_ picky about formatting.
+# Lines can _either_ be KEY=VALUE (no spaces!)
+#  _or_ they can be KEY DEFAULT="VALUE" where VALUE can then have spaces
+#  KEY="VALUE" does _not_ work!
+
+EDITOR=nvim
+BROWSER=firefox-developer-edition
+NAME DEFAULT="Shuwen Jethro Sun"
+EMAIL=jethro.sun7@gmail.com
+
+PATH DEFAULT=${PATH}:@{HOME}/bin
+PATH DEFAULT=${PATH}:@{HOME}/.cargo/bin
+PATH DEFAULT=${PATH}:@{HOME}/.npm-global/bin
+PATH DEFAULT=${PATH}:@{HOME}/.local/bin
+PATH DEFAULT=${PATH}:@{HOME}/.gem/ruby/2.6.0/bin
+PATH DEFAULT=${PATH}:@{HOME}/.gem/ruby/2.7.0/bin
+
+# Globals
+TZ=America/New_York
+
+# Configs
+R_LIBS_USER DEFAULT=@{HOME}/.Rpackages
+SXHKD_SHELL DEFAULT=/usr/bin/bash
+
+# Environment-local
+CARGO_TARGET_DIR DEFAULT=@{HOME}/.cargo-target
+PATH DEFAULT=${PATH}:@{HOME}/.cargo-target/release/
+
+# Rust stuff
+CARGO_INCREMENTAL=1
+RUSTFLAGS DEFAULT="-C target-cpu=native"
+RUST_BACKTRACE=1
+
+# Handy for debugging
+WINEDEBUG=fixme-all
+
+# make less better
+# X = leave content on-screen
+# F = quit automatically if less than one screenfull
+# R = raw terminal characters (fixes git diff)
+#     see http://jugglingbits.wordpress.com/2010/03/24/a-better-less-playing-nice-with-git/
+LESS DEFAULT="-F -X -R"
+
+# ssh stuff
+SSH_AGENT_PID	DEFAULT=
+SSH_AUTH_SOCK	DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"

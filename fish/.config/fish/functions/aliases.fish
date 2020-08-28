@@ -25,7 +25,7 @@ abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {
 
 abbr -a bs bibtex-search
 
-abbr -a py3 "pyenv activate neovim3"
+abbr -a py3 "pyenv activate py3"
 abbr -a pyn "pyenv activate newest"
 
 abbr -a note 'nvim ~/notes/talks.org'
@@ -82,7 +82,7 @@ abbr -a -U ggco 'git switch'
 abbr -a -U fl 'clear; and flow-limit'
 
 #abbr -a -U jn "jupyter notebook --browser=google-chromium-browser"
-abbr -a -U jn "jupyter notebook --browser=firefox"
+abbr -a -U jn "jupyter notebook --browser=firefox-developer-edition"
 
 abbr -a -U vim-norc 'vim -u NORC'
 abbr -a -U vim-none 'vim -u NONE'

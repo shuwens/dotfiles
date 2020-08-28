@@ -1,7 +1,0 @@
-* comment and uncomment
-[[https://stackoverflow.com/questions/1676632/whats-a-quick-way-to-comment-uncomment-lines-in-vim#1676690]]
-
-* C++ refernece lookup
-[[https://stackoverflow.com/questions/2272759/looking-up-c-documentation-inside-of-vim?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa]]
-
-[[https://news.ycombinator.com/item?id=573127]]

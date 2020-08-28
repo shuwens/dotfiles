@@ -1,7 +1,0 @@
-# Set the base directory
-set my_dir = '~/.mutt'
-
-# and source the real muttrc
-source "$my_dir/main.muttrc"
-
-# vim: ft=muttrc

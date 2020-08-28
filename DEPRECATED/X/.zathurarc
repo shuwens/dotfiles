@@ -1,8 +1,0 @@
-
-set adjust-open best-fit
-set window-height 10000
-
-map [normal] <F11> toggle_fullscreen
-map [fullscreen] <F11> toggle_normal
-
-
