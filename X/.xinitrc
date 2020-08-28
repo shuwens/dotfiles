@@ -41,5 +41,8 @@ fi
 # Start WM
 xsetroot -cursor_name left_ptr
 
+firefox-developer-edition &
+slack &
+
 # bspwm 2> .logs/bspwm.err > .logs/bspwm.log
 exec bspwm
