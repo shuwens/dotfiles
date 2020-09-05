@@ -200,7 +200,6 @@ if test -d "$HOME/.pyenv"
     status --is-interactive; and source (pyenv init -|psub)
 end
 
-
 # # Pretty ls colors
 if test -e $HOME/.dircolors
     if test (uname) = Darwin
