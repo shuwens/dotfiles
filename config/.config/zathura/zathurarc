@@ -40,8 +40,11 @@ set recolor-keephue             "true"
 
 # Rest of your configs go here:
 set selection-clipboard         "clipboard"
-set adjust-open                 "width"
+# set adjust-open                 "width"
 
+set adjust-open "best-fit"
+# set window-height 2000
+# set window-width 2000
 
 # key bindings
 map <PageUp> navigate previous
