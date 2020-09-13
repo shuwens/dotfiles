@@ -49,6 +49,8 @@ bspc rule -a zoom desktop='^1'
 
 bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
 
+bspc rule -a PCManFM desktop='^4' follow=on state=tiled
+bspc rule -a thunar desktop='^4' follow=on state=tiled
 bspc rule -a Zathura desktop='^4' follow=on state=tiled
 bspc rule -a Evince desktop='^4' state=tiled
 
