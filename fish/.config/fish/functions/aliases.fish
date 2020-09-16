@@ -111,6 +111,7 @@ abbr -a -U vi "nvim"
 abbr -a -U :q "sudo reboot"
 
 abbr -a -U vpn "eval /etc/profile.d/PanMSInit.sh; sleep 5; globalprotect connect -portal vpn.northeastern.edu"
+abbr -a -U dvpn "globalprotect disconnect"
 
 # wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla https://pg.ucsd.edu
 abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
