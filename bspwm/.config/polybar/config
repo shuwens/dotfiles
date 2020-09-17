@@ -30,14 +30,13 @@ font-2 = FontAwesome:size=10;0
 font-3 = NotoSans-Regular:size=10;0
 font-4 = MaterialIcons:size=10;0
 font-5 = Termsynu:size=10;0
-; font-6 = "Wuncon Siji:pixelsize=12;0"
 font-6 = "Siji:pixelsize=12;0"
 font-7 = "Noto Sans Symbols:size=11;1"
 font-8 = "Noto Sans Symbols2:size=11;1"
 
 modules-left = date bspwm xwindow
 modules-center =
-modules-right = wlan pulseaudio cpu filesystem battery
+modules-right = github wlan pulseaudio cpu filesystem battery
 
 tray-position = right
 tray-padding = 2
@@ -48,35 +47,16 @@ margin-top = 0
 
 [module/xwindow]
 type = internal/xwindow
-; label = %title:0:80:...%
 label = >_ %title:0:85:...%
 
 [module/bspwm]
 type = internal/bspwm
 pin-workspaces = false
-enable-click = false
+enable-click = true
 enable-scroll = false
 
 label-focused = " %name% "
 label-focused-underline = #fba922
-
-label-occupied = " %name% "
-label-occupied-foreground = #ffaa00
-
-label-urgent = " %name% "
-label-urgent-underline = #9b0a20
-
-label-empty = " %name% "
-label-empty-foreground = #555555
-
-[module/ewmh]
-type = internal/xworkspaces
-pin-workspaces = false
-enable-click = false
-enable-scroll = false
-
-label-active = " %name% "
-label-active-underline = #fba922
 
 label-occupied = " %name% "
 label-occupied-foreground = #ffaa00
@@ -127,7 +107,6 @@ format-connected-prefix = " "
 format-connected-prefix-foreground = #666
 format-connected-prefix-offset = -6
 label-connected = %downspeed:8%
-; label-connected = %essid% %downspeed:7%
 
 format-disconnected = <label-disconnected>
 format-disconnected-prefix = " "
@@ -141,18 +120,6 @@ ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = #666
-
-[module/eth2]
-type = internal/network
-interface = enp12s0u1
-interval = 3.0
-
-format-connected-underline = #115511
-format-connected-prefix = "🖧 "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
 
 [module/eth1]
 type = internal/network
@@ -212,11 +179,14 @@ label-full = " ☀ "
 
 [module/github]
 type = internal/github
-token = ${file:/home/jethros/.config/github/notifications.token}
+token = ${file:/home/jethros/git/home/github/notifications.token}
+user = jethros
 empty-notifications = false
-#label = %{u#ff9900 +u} %notifications% %{u-}
 label = %{u#0099ff +u} 📫 %{u-}
 interval = 10
+; Github API URL (unreleased)
+; Default: https://api.github.com/
+; api-url = https://hub.example.org/api/v3/
 
 [module/pulseaudio]
 type = internal/pulseaudio
