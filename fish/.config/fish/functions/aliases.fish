@@ -25,10 +25,12 @@ abbr -a note 'nvim ~/notes/talks.org'
 
 # Rust
 abbr -a -U c cargo
-abbr -a -U cargot cargo t
-abbr -a -U clippy cargo clippy
-abbr -a -U cl cargo clippy
-abbr -a -U ra rustup add component
+abbr -a -U cargot "cargo t"
+abbr -a -U clippy "cargo clippy"
+abbr -a -U cl "cargo clippy"
+abbr -a -U ra "rustup add component"
+abbr -a -U cr "cargo r --release"
+abbr -a -U cb "cargo b --release"
 
 # git
 abbr -a -U g git

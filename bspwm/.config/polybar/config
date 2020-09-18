@@ -36,7 +36,7 @@ font-8 = "Noto Sans Symbols2:size=11;1"
 
 modules-left = date bspwm xwindow
 modules-center =
-modules-right = github wlan pulseaudio cpu filesystem battery
+modules-right = wlan pulseaudio cpu filesystem battery
 
 tray-position = right
 tray-padding = 2

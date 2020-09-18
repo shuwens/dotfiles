@@ -63,3 +63,5 @@
 	annotate = yes
 [diff "odf"]
 	textconv = odt2txt
+[includeIf "gitdir:~/dev/achtung/"]
+    path = ~/dev/achtung/.gitconfig_include
