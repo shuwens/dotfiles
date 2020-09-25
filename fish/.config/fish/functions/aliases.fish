@@ -19,6 +19,7 @@ abbr -a -U R ranger
 abbr -a bs bibtex-search
 
 abbr -a py "pyenv activate py3"
+abbr -a py2 "pyenv activate neovim2"
 abbr -a pyn "pyenv activate newest"
 
 abbr -a note 'nvim ~/notes/talks.org'
@@ -34,12 +35,12 @@ abbr -a -U cb "cargo b --release"
 
 # git
 abbr -a -U g git
-abbr -a -U gm git m
-abbr -a -U gc git clone
-abbr -a -U gb git branch
-abbr -a -U gd git diff
-abbr -a -U gr git rebase -i HEAD~5
 abbr -a -U gti git
+abbr -a -U gm "git m"
+abbr -a -U gd "git diff"
+abbr -a -U gr "git rebase -i HEAD~5"
+abbr -a -U gs "git status"
+abbr -a -U gc "git clone"
 abbr -a -U a 'git amend --allow-empty --no-verify'
 abbr -a -U gb 'git recent-branches 2.days.ago'
 abbr -a -U gl 'git lg1'
@@ -103,11 +104,9 @@ function take
 end
 
 ## My own stuff!
-abbr -a -U gs "git status"
-abbr -a -U gc "git clone"
 abbr -a -U cls "clear"
 abbr -a -U , "make"
-abbr -a -U ,, "make clean"
+abbr -a -U ,, "make all"
 #abbr -a -U ,,, '"make clean"; and "make"'
 abbr -a -U vi "nvim"
 abbr -a -U :q "sudo reboot"

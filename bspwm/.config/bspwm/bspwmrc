@@ -42,7 +42,14 @@ bspc desktop "^3" --layout monocle
 bspc config -d "^3" border_width 0
 bspc config -d "^3" window_gap 0
 bspc config -d "^3" top_padding 0
+bspc desktop "^4" --layout monocle
+bspc config -d "^4" border_width 0
+bspc config -d "^4" window_gap 0
+bspc config -d "^4" top_padding 0
 
+
+
+# bspwm rule
 bspc rule -a Alacritty state=tiled
 
 bspc rule -a zoom desktop='^1'
