@@ -18,6 +18,7 @@
 	l = !"git lg1"
 	lg = !"git lg2"
 	r = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
+	cp = !"git add -A; git commit -am \"Checkpoint: $(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
 	dad = !"curl https://icanhazdadjoke.com/ ; git add"
 	clone = clone --recursive
 	cc = checkout -- .
