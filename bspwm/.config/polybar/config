@@ -215,7 +215,7 @@ spacing = 4
 format-mounted = <label-mounted>
 format-unmounted = <label-unmounted>
 
-label-mounted = %{u#008000 +u}%mountpoint%: %percentage_free%% of %total%
+label-mounted = %{u#008000 +u}%mountpoint%: %percentage_used%% of %total%
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = #55
 
