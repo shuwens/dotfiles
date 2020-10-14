@@ -97,6 +97,15 @@ abbr -a -U ... 'cd ../..'
 abbr -a -U .... 'cd ../../..'
 abbr -a -U ..... 'cd ../../../..'
 
+
+if test -d ~/dev/pvn/netbricks
+    abbr -a -U n "cd ~/dev/pvn/netbricks"
+    abbr -a -U u "cd ~/dev/pvn/utils"
+else if test -d ~/dev/netbricks
+    abbr -a -U n "cd ~/dev/netbricks"
+else
+end
+
 abbr -a -U md 'mkdir -p'
 function take
     set -l dir $argv[1]
@@ -260,6 +269,8 @@ function cat --description "mdcat for markdown files, cat for everything else"
         end
         if string match -rq -- '.md$' $arg
             set cat_mdcat_args $cat_mdcat_args $arg
+        else if string match -rq -- '.json$' $arg
+            set cat_jsoncat_args $cat_jsoncat_args $arg
         else
             set cat_cat_args $cat_cat_args $arg
         end
@@ -267,9 +278,13 @@ function cat --description "mdcat for markdown files, cat for everything else"
     if set -q cat_mdcat_args
         command mdcat $cat_flags $cat_mdcat_args
     end
+    if set -q cat_jsoncat_args
+        command cat $cat_flags $cat_jsoncat_args | jq .
+    end
     if set -q cat_cat_args
         command cat $cat_flags $cat_cat_args
     end
+
 end
 
 # ----------------------------------
