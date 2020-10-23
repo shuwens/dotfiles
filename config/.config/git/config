@@ -57,8 +57,6 @@
 	compactionHeuristic = true
 [commit]
 	gpgsign = false
-[protocol]
-	version = 2
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 	annotate = yes

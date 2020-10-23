@@ -447,6 +447,8 @@
   default it calls `spacemacs/load-spacemacs-env' which loads the environment
   variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
   See the header of this file for more information."
+  ; (spacemacs/set-leader-keys "C-]" 'academic-phrases-by-section)
+  ; (spacemacs/set-leader-keys-for-major-mode 'tex-mode "C-]" 'academic-phrases-by-section)
   (setq racer-rust-src-path "~/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src")
   (spacemacs/load-spacemacs-env))
 
@@ -478,5 +480,12 @@
                                        ("~/git" . 1))
         )
   ;; Colortheme fix in terminal
- (custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+  (custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+
+  ;; Integrate keymap into Spacemacs Evil
+  ;; https://github.com/atextor/dotfiles/blob/d2f11ac9581f8eb6f473a688e0763fe88404f3e7/.spacemacs
+   (define-key evil-normal-state-map (kbd "C-j") 'academic-phrases-by-section)
+
+  ; SPC b l to list buffers
+  (evil-leader/set-key "j" 'academic-phrases-by-section)
     )
