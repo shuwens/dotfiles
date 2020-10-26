@@ -220,7 +220,7 @@
     ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
     ;; quickly tweak the mode-line size to make separators look not too crappy.
     dotspacemacs-default-font '("Noto Sans Mono"
-                                :size 17
+                                :size 18
                                 :weight normal
                                 :width normal)
 

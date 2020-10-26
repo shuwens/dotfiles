@@ -62,11 +62,11 @@ bspc rule -a Zathura desktop='^4' follow=on state=tiled
 bspc rule -a Evince desktop='^4' state=tiled
 
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
+bspc rule -a Zotero desktop='^8' state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
 bspc rule -a Wireshark desktop='^9' state=tiled
-bspc rule -a Zotero desktop='^9' state=tiled
 bspc rule -a qBittorrent desktop='^9' state=tiled
 
 bspc rule -a Discord desktop='^10'
