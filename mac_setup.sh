@@ -9,4 +9,3 @@ stow -t ~   spacemacs
 cd config
 stow -t ~/.config  .config
 
-
