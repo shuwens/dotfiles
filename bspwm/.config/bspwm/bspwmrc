@@ -61,6 +61,7 @@ bspc rule -a thunar desktop='^4' follow=on state=tiled
 bspc rule -a Zathura desktop='^4' follow=on state=tiled
 bspc rule -a Evince desktop='^4' state=tiled
 
+bspc rule -a Hiri desktop='^8' state=tiled
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
 bspc rule -a Zotero desktop='^8' state=tiled
 
