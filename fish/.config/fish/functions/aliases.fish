@@ -65,6 +65,7 @@ abbr -a -U df 'command df -m'
 
 abbr -a -U holdmybeer 'sudo'
 
+#
 ## my ssh utils
 function UpdateFile -a filename
     scp $filename nu-ccis:~/.www/tmp/
@@ -142,6 +143,11 @@ else
         xdg-open $filename &
     end
 end
+
+function pdf -a filename
+    mupdf -r 180 $filename &
+end
+
 
 # for git journal, I should only use ["Added", "Changed", "Fixed", "Improved", "Removed"]
 function lazy

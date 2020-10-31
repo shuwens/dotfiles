@@ -1,0 +1,27 @@
+[Added Associations]
+image/png=viewnior.desktop;
+image/jpeg=viewnior.desktop;
+text/x-csrc=geany.desktop;
+application/x-shellscript=geany.desktop;
+image/gif=viewnior.desktop;
+image/svg+xml=viewnior.desktop;
+x-scheme-handler/http=exo-web-browser.desktop;
+x-scheme-handler/https=exo-web-browser.desktop;
+text/calendar=firefox-developer-edition.desktop;
+application/x-bibtex=nvim.desktop;
+
+[Default Applications]
+image/gif=viewnior.desktop
+image/svg+xml=viewnior.desktop
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+application/pdf=mupdf.desktop
+application/xps=mupdf.desktop
+application/vnd.ms-xpsdocument=mupdf.desktop
+image/png=sxiv.desktop
+image/jpg=sxiv.desktop
+image/jpeg=sxiv.desktop
+x-scheme-handler/http=firefox-developer-edition.desktop
+x-scheme-handler/https=firefox-developer-edition.desktop
+text/html=firefox-developer-edition.desktop
+text/plain=nvim.desktop
+
