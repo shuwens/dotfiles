@@ -203,7 +203,8 @@ end
 # # Pretty ls colors
 if test -e $HOME/.dircolors
     if test (uname) = Darwin
-        setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+        # setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
+		setenv LS_COLORS (bash --noprofile -c 'test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)')
     else
         eval ( dircolors --c-shell $HOME/.dircolors )
     end

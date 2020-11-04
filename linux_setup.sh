@@ -11,7 +11,7 @@ stow bspwm		-t ~
 stow -t ~   spacemacs
 
 ## dot config
-cd config
+cd config || exit
 stow -t ~/.config  .config
 
 ## Gnome setting changes!
