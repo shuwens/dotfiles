@@ -62,15 +62,11 @@ abbr -a -U Et 'nvim ~/.tmux.conf'
 abbr -a -U df 'command df -m'
 #abbr -a -U su 'command su -m'
 #abbr -a -U ls 'command ls -FG'
-
-abbr -a -U holdmybeer 'sudo'
-
 #
 ## my ssh utils
 function UpdateFile -a filename
     scp $filename nu-ccis:~/.www/tmp/
 end
-
 
 # abbr -a -U jn "jupyter notebook --browser=firefox"
 abbr -a -U jn 'jupyter notebook --browser="firefox-developer-edition %s"'
@@ -107,7 +103,6 @@ else if test -d ~/dev/netbricks
 else
 end
 
-abbr -a -U md 'mkdir -p'
 function take
     set -l dir $argv[1]
     mkdir -p $dir; and cd $dir
@@ -117,7 +112,7 @@ end
 abbr -a -U cls "clear"
 abbr -a -U , "make"
 abbr -a -U ,, "make all"
-#abbr -a -U ,,, '"make clean"; and "make"'
+abbr -a -U ,,, "make clean; and make"
 abbr -a -U vi "nvim"
 abbr -a -U :q "sudo reboot"
 
@@ -129,22 +124,51 @@ abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
 abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
 abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
-function ,,,
-    make clean; and make
-end
 
 if test (uname) = Darwin
 else
-	function pdf -a filename
-		mupdf -r 165 $filename &
+    function pdf -a filename
+        mupdf -r 165 $filename &
     end
 
-    function o -a filename
-        xdg-open $filename &
+    function o #-a filename
+        set o_flags
+        for arg in $argv
+            if string match -rq -- '^-' $arg
+                set o_flags $o_flags $arg
+            end
+            if string match -rq -- '.pdf$' $arg
+                set o_pdf_args $o_pdf_args $arg
+            else
+                set o_open_args $o_open_args $arg
+            end
+        end
+        if set -q o_pdf_args
+            mupdf $o_flags -r 160 $o_pdf_args &
+        end
+        if set -q o_open_args
+            xdg-open $o_flags $o_open_args &
+        end
     end
 
-    function open -a filename
-        xdg-open $filename &
+	function open
+        set o_flags
+        for arg in $argv
+            if string match -rq -- '^-' $arg
+                set o_flags $o_flags $arg
+            end
+            if string match -rq -- '.pdf$' $arg
+                set o_pdf_args $o_pdf_args $arg
+            else
+                set o_open_args $o_open_args $arg
+            end
+        end
+        if set -q o_pdf_args
+            mupdf $o_flags -r 160 $o_pdf_args &
+        end
+        if set -q o_open_args
+            xdg-open $o_flags $o_open_args &
+        end
     end
 end
 
@@ -170,26 +194,6 @@ function check
     end
 end
 
-
-# Add this to your ~/.config/fish/config.fish
-# Syntax:
-# To just rerun your last command, simply type '!!'
-# '!! sudo' will prepend sudo to your most recent command
-# Running !! with anything other than sudo will append the argument to your most recent command
-# To add another command to prepend list remove the # on line 10 and put the command in the quotes. Repeat as needed
-function !!
-    set prevcmd (history | head -n 1)
-    if test "$argv"
-        if test "$argv" = "sudo" #; or "any other command you want to prepend"
-            eval "$argv $prevcmd"
-        else
-            eval "$var $argv"
-        end
-    else
-        eval "$var"
-    end
-end
-
 function ssh
     switch $argv[1]
         case "*.amazonaws.com"
@@ -210,20 +214,6 @@ function remote_alacritty
     ssh $argv[1] rm "alacritty-256color.ti"
 end
 
-function remarkable
-    if test (count $argv) -ne 1
-        echo "No file given"
-        return
-    end
-    ip addr show up to 10.11.99.0/29 | grep enp0s20u2 >/dev/null
-    if test $status -ne 0
-        # not yet connected
-        echo "Connecting to reMarkable internal network"
-        sudo dhcpcd enp0s20u2
-    end
-    curl --form "file=@"$argv[1] http://10.11.99.1/upload
-end
-
 function md2pdf
     set t (mktemp -t md2pdf.XXXXXXX.pdf)
     pandoc --smart --standalone --from markdown_github -V geometry:letterpaper,margin=2cm $argv[1] -o $t
@@ -238,6 +228,32 @@ end
 
 function px
     ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
+end
+
+function cat --description "mdcat for markdown files, cat for everything else"
+    set cat_flags
+    for arg in $argv
+        if string match -rq -- '^-' $arg
+            set cat_flags $cat_flags $arg
+        end
+        if string match -rq -- '.md$' $arg
+            set cat_mdcat_args $cat_mdcat_args $arg
+        else if string match -rq -- '.json$' $arg
+            set cat_jsoncat_args $cat_jsoncat_args $arg
+        else
+            set cat_cat_args $cat_cat_args $arg
+        end
+    end
+    if set -q cat_mdcat_args
+        command mdcat $cat_flags $cat_mdcat_args
+    end
+    if set -q cat_jsoncat_args
+        command cat $cat_flags $cat_jsoncat_args | jq .
+    end
+    if set -q cat_cat_args
+        command cat $cat_flags $cat_cat_args
+    end
+
 end
 
 function mktable --description "produces a LaTeX table for oxide testing results"
@@ -266,39 +282,4 @@ function mktable --description "produces a LaTeX table for oxide testing results
     echo "\end{tabular}"
 end
 
-
-function cat --description "mdcat for markdown files, cat for everything else"
-    set cat_flags
-    for arg in $argv
-        if string match -rq -- '^-' $arg
-            set cat_flags $cat_flags $arg
-        end
-        if string match -rq -- '.md$' $arg
-            set cat_mdcat_args $cat_mdcat_args $arg
-        else if string match -rq -- '.json$' $arg
-            set cat_jsoncat_args $cat_jsoncat_args $arg
-        else
-            set cat_cat_args $cat_cat_args $arg
-        end
-    end
-    if set -q cat_mdcat_args
-        command mdcat $cat_flags $cat_mdcat_args
-    end
-    if set -q cat_jsoncat_args
-        command cat $cat_flags $cat_jsoncat_args | jq .
-    end
-    if set -q cat_cat_args
-        command cat $cat_flags $cat_cat_args
-    end
-
-end
-
-# ----------------------------------
-# Compiling stuff
-# ----------------------------------
-
-# Convenience abbr -a -Ues
-abbr -a -U run 'sudo systemctl start'
-abbr -a -U restart 'sudo systemctl restart'
-abbr -a -U stop 'sudo systemctl stop'
 
