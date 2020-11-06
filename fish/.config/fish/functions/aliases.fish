@@ -135,6 +135,10 @@ end
 
 if test (uname) = Darwin
 else
+	function pdf -a filename
+		mupdf -r 165 $filename &
+    end
+
     function o -a filename
         xdg-open $filename &
     end
@@ -142,10 +146,6 @@ else
     function open -a filename
         xdg-open $filename &
     end
-end
-
-function pdf -a filename
-    mupdf -r 180 $filename &
 end
 
 
