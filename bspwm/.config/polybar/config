@@ -105,7 +105,7 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 format-connected-prefix = " "
 format-connected-prefix-foreground = #666
-format-connected-prefix-offset = -6
+format-connected-prefix-offset = -4
 label-connected = %downspeed:8%
 
 format-disconnected = <label-disconnected>
