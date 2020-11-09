@@ -27,11 +27,9 @@ fi
 # ensure it's started so SSH will work
 # https://www.gnupg.org/faq/whats-new-in-2.1.html#autostart
 dbus-update-activation-environment --systemd DISPLAY
-gpgconf --launch gpg-agent 
+gpgconf --launch gpg-agent
 export "SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
-
-source /etc/profile.d/PanMSInit.sh
 
 # Update screen layout
 if [[ -e ~/bin/hotplug-dp.sh ]]; then
@@ -43,9 +41,6 @@ fi
 
 # Start WM
 xsetroot -cursor_name left_ptr
-
-firefox-developer-edition &
-slack &
 
 # bspwm 2> .logs/bspwm.err > .logs/bspwm.log
 exec bspwm
