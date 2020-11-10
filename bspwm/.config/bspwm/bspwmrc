@@ -48,7 +48,6 @@ bspc config -d "^4" window_gap 0
 bspc config -d "^4" top_padding 0
 
 
-
 # bspwm rule
 bspc rule -a Alacritty state=tiled
 
@@ -65,15 +64,14 @@ bspc rule -a MuPDF desktop='^4' state=tiled
 bspc rule -a Thunar desktop='^5' state=tiled
 
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
-bspc rule -a Zotero desktop='^8' state=tiled
+bspc rule -a Wireshark desktop='^8' state=tiled
+bspc rule -a qBittorrent desktop='^8' state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
-bspc rule -a Wireshark desktop='^9' state=tiled
-bspc rule -a qBittorrent desktop='^9' state=tiled
+bspc rule -a Zotero desktop='^9' state=tiled
 
 bspc rule -a Discord desktop='^10'
-# bspc rule -a Evolution desktop='^10'
 bspc rule -a Slack desktop='^10'
 
 bspc rule -a polybar border=off manage=off
