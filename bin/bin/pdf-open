@@ -1,0 +1,3 @@
+#!/bin/bash
+
+f=$1; mupdf -r 160 $f & while inotifywait -e close_write $f; do pkill -HUP mupdf; done

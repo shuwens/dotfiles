@@ -144,7 +144,7 @@ else
             end
         end
         if set -q o_pdf_args
-            mupdf $o_flags -r 160 $o_pdf_args &
+			pdf-open $o_flags $o_pdf_args &
         end
         if set -q o_open_args
             xdg-open $o_flags $o_open_args &
