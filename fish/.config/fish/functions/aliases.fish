@@ -20,7 +20,7 @@ abbr -a bs bibtex-search
 
 abbr -a py "pyenv activate py3"
 abbr -a py2 "pyenv activate neovim2"
-abbr -a pyn "pyenv activate newest"
+abbr -a pyn "pyenv activate neovim3"
 
 abbr -a note 'nvim ~/notes/talks.org'
 
@@ -144,7 +144,7 @@ else
             end
         end
         if set -q o_pdf_args
-			pdf-open $o_flags $o_pdf_args &
+			mupdf $o_flags -r 178 $o_pdf_args &
         end
         if set -q o_open_args
             xdg-open $o_flags $o_open_args &
