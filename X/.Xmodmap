@@ -1,0 +1,28 @@
+keysym o = o O oslash Oslash
+keysym a = a A aring Aring
+keysym e = e E ae AE
+keysym 4 = 4 dollar sterling
+keysym u = u U UB5 U222A
+keysym 1 = 1 exclam U203D
+
+! Modifier key remapping
+! We want to rewire caps lock and control keys
+clear      lock
+clear   control
+keycode      37 = Control_L
+! Caps -> Control_L
+keycode      66 = Control_L
+! Control_R stays
+keycode     105 = Multi_key
+! We apparently need to say that these are control keys?
+add     control = Control_L Control_R
+! AltGr is Mode_switch
+keycode     108 = Mode_switch
+
+! Greek letters
+keysym p = p P Greek_pi Greek_phi
+keysym t = t T Greek_theta Greek_alpha
+keysym l = l L Greek_lamda
+keysym d = d D Greek_DELTA Greek_DELTA
+keysym period = period greater periodcentered
+keysym s = s S radical section

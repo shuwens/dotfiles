@@ -63,6 +63,8 @@ bspc rule -a MuPDF desktop='^4' state=tiled
 
 bspc rule -a Thunar desktop='^5' state=tiled
 
+bspc rule -a Lollypop desktop='^6' state=pseudo_tiled
+
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
 bspc rule -a Wireshark desktop='^8' state=tiled
 bspc rule -a qBittorrent desktop='^8' state=tiled
