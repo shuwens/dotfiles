@@ -6,7 +6,6 @@
 
 ## BEHAVIOR
 
-nitrogen --restore &
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
 
 # screen lock
@@ -22,6 +21,15 @@ nitrogen --restore &
 
 # dunst to display messages
 dunst -conf ~/.config/dunst/dunstrc &
+
+# Update screen layout
+if [ -e ~/bin/hotplug-dp.sh ]; then
+    (
+      sleep .2;
+      sudo -E -u jethros ~/bin/hotplug-dp.sh dual;
+    ) &
+fi
+
 
 # =============================
 # bspwm things
