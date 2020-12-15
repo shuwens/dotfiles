@@ -40,7 +40,7 @@ if [[ -e ~/bin/hotplug-dp.sh ]]; then
 fi
 
 # Start WM
-xsetroot -cursor_name left_ptr
+# xsetroot -cursor_name left_ptr
 
 # bspwm 2> .logs/bspwm.err > .logs/bspwm.log
-exec bspwm
+# exec bspwm

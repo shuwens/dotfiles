@@ -6,6 +6,9 @@
 
 ## BEHAVIOR
 
+nitrogen --restore &
+[ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
+
 # screen lock
 /usr/bin/xautolock -time 450 -locker /usr/bin/i3lock-fancy-multimonitor -detectsleep &
 
