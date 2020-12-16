@@ -1,8 +1,9 @@
 # -*- mode: conf; indent-tabs-mode: t -*-
 
 [user]
-	name = Shuwen Jethro Sun
-	email = jethro.rules@real.com
+	name = Shuwen Sun
+	email = sun.shuw@northeastern.edu
+	signkey = 2AE1C8AF5D86FE72
 [ui "color"]
 	ui = always
 [color]
@@ -56,7 +57,7 @@
 	algorithm = patience
 	compactionHeuristic = true
 [commit]
-	gpgsign = false
+	gpgsign = true
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 	annotate = yes
