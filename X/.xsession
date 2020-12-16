@@ -18,10 +18,6 @@ dbus-update-activation-environment --systemd DISPLAY
 gpgconf --launch gpg-agent
 export "SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-
 # Update screen layout
 if [ -e ~/bin/hotplug-dp.sh ]; then
     (
