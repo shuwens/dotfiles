@@ -12,8 +12,8 @@
 
 EDITOR=nvim
 BROWSER=firefox-developer-edition
-NAME DEFAULT="Shuwen Jethro Sun"
-EMAIL=jethro.sun7@gmail.com
+# NAME DEFAULT="Shuwen Sun"
+# EMAIL=sun.shuw@northeastern.edu
 
 PATH DEFAULT=${PATH}:@{HOME}/bin
 PATH DEFAULT=${PATH}:@{HOME}/.cargo/bin
@@ -38,6 +38,12 @@ CARGO_INCREMENTAL=1
 RUSTFLAGS DEFAULT="-C target-cpu=native"
 RUST_BACKTRACE=1
 
+# Java stuff
+_JAVA_OPTIONS DEFAULT="-Dawt.useSystemAAFontSettings=lcd -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+JAVA_FONTS=/usr/share/fonts/TTF
+MATLAB_JAVA=/usr/lib/jvm/default-runtime
+J2D_D3D=false
+
 # Handy for debugging
 WINEDEBUG=fixme-all
 
@@ -47,7 +53,3 @@ WINEDEBUG=fixme-all
 # R = raw terminal characters (fixes git diff)
 #     see http://jugglingbits.wordpress.com/2010/03/24/a-better-less-playing-nice-with-git/
 LESS DEFAULT="-F -X -R"
-
-# ssh stuff
-SSH_AGENT_PID	DEFAULT=
-SSH_AUTH_SOCK	DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"

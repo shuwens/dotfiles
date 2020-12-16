@@ -11,15 +11,15 @@ super + ctrl + Enter
 
 # program launcher
 super + @space
-	rofi -show run -font "Noto Sans Mono 14"
+	rofi -show run -font "Noto Sans Mono 12"
 
 super + p
-	rofi -combi-modi window#drun -show combi -modi combi -show-icons -font "Noto Sans Mono 14"
+	rofi -combi-modi window#drun -show combi -modi combi -show-icons -font "Noto Sans Mono 12"
 
 super + d
 	rofi -show run -modi run -location 1 -width 100 \
 		 -lines 2 -line-margin 0 -line-padding 1 \
-		 -separator-style none -font "Noto Sans Mono 14" -columns 9 -bw 0 \
+		 -separator-style none -font "Noto Sans Mono 12" -columns 9 -bw 0 \
 		 -disable-history \
 		 -hide-scrollbar \
 		 -color-window "#222222, #222222, #b1b4b3" \
