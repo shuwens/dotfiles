@@ -2,7 +2,7 @@
 # Keymap
 # setxkbmap no;
 setxkbmap -option compose:rctrl
-#setxkbmap -option altwin:swap_alt_win
+setxkbmap -option altwin:swap_alt_win
 setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 
 # if test -e /usr/bin/xmodmap; then
