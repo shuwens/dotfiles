@@ -1,5 +1,6 @@
 #!/bin/bash
 
+stow alacritty	-t ~
 stow bash		-t ~
 stow fish		-t ~
 stow tmux		-t ~
