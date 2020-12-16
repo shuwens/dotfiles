@@ -91,6 +91,7 @@ bspc rule -a polybar border=off manage=off
 
 # Any popup type terminal windows
 bspc rule -a "*:popup_window" state=floating rectangle=825x500 center
+bspc rule -a Pinentry state=floating
 
 # Any popup type terminal windows large
 bspc rule -a "*:popup_window_large" state=floating rectangle=1500x750 center
