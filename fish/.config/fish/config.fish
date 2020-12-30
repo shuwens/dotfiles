@@ -9,7 +9,7 @@ if status --is-interactive
         set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
         builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
     end
-    tmux ^/dev/null; and exec true
+	tmux ^/dev/null; and exec true
 end
 
 # systems update
@@ -320,7 +320,7 @@ function fish_greeting
     set_color red
     # echo "    [CoNEXT 20] Writing: background and motivation"
     # echo "    [CoNEXT 20] Impl and running expr"
-    # echo "    [NSDI 21] Survey: CoNEXT, SIGCOMM, NSDI"
+	echo "    [Jan 30] Writing session"
 
     echo
     set_color normal

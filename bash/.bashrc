@@ -234,3 +234,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # end of [.bashrc]
+source "$HOME/.cargo/env"
