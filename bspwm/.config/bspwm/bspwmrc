@@ -1,28 +1,14 @@
 #!/bin/sh
 
-# =============================
-#  Setup
-# =============================
-
 ## BEHAVIOR
 
-[ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
-
-# screen lock
-/usr/bin/xautolock -time 450 -locker /usr/bin/i3lock-fancy-multimonitor -detectsleep &
-
-# Network manager, so we don't have to configure wifi at the command line.
 if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
-
-# sxhkd uses the shell so it can't be fish
+[ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
+/usr/bin/xautolock -time 450 -locker /usr/bin/i3lock-fancy-multimonitor -detectsleep &
 SXHKD_SHELL=/bin/bash sxhkd &
-
 nitrogen --restore &
-
-# dunst to display messages
 dunst -conf ~/.config/dunst/dunstrc &
 
-# Update screen layout
 if [ -e ~/bin/hotplug-dp.sh ]; then
     (
       sleep .2;
@@ -30,9 +16,8 @@ if [ -e ~/bin/hotplug-dp.sh ]; then
     ) &
 fi
 
-
 # =============================
-# bspwm things
+#   bspwm things
 # =============================
 
 bspc monitor eDP1 -d I
@@ -40,7 +25,7 @@ bspc monitor HDMI1 -d II III IV V VI VII VIII IX X
 bspc desktop --focus II
 
 bspc config border_width         2
-bspc config window_gap           10
+bspc config window_gap           20
 bspc config focused_border_color \#3c3836
 bspc config normal_border_color  \#1d2021
 
@@ -57,7 +42,6 @@ bspc desktop "^4" --layout monocle
 bspc config -d "^4" border_width 0
 bspc config -d "^4" window_gap 0
 bspc config -d "^4" top_padding 0
-
 
 # bspwm rule
 bspc rule -a Alacritty state=tiled
