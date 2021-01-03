@@ -43,7 +43,7 @@ This function should only modify configuration layer settings."
 
      ;; Languages
      html
-     (javascript :variables javascript-backend 'lsp)
+     ; (javascript :variables javascript-backend 'lsp)
      c-c++
      cmake
      emacs-lisp
@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
      git
 
      ;; Tools
-     sphinx
+     ; sphinx
      ; pandoc
      (ranger :variables
              ranger-show-preview t
@@ -85,17 +85,23 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom
             shell-default-shell 'eshell)
      (spell-checking :variables
-                     spell-checking-enable-by-default nil
+                     spell-checking-enable-by-default t
                      enable-flyspell-auto-completion t)
      (syntax-checking :variables
                       syntax-checking-enable-by-default nil)
      (colors :variables
              colors-colorize-identifiers 'variables)
-     emoji
+     ; emoji
+
+
+	   (latex :variables
+            latex-backend 'lsp
+            latex-build-command "Make"
+            latex-refresh-preview t
+            TeX-view-program-selection '((output-pdf "PDF Tools")))
+     pdf
 
      ;; Completion
-     gtags
-     dash ;; open and search docs with Zeal
      helm
      lsp
      (auto-completion :variables
@@ -104,9 +110,11 @@ This function should only modify configuration layer settings."
                       auto-completion-idle-delay 0.05
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-sort-by-usage t))
+                      auto-completion-enable-sort-by-usage t)
 
-   dotspacemacs-additional-packages '(;; (gdscript-mode :location local)
+     )
+
+   dotspacemacs-additional-packages '(academic-phrases
                                       company-tabnine)
 
    ;; A list of packages that cannot be updated.
@@ -136,7 +144,7 @@ It should only modify the values of Spacemacs settings."
    ;; to compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
    ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper t
+   dotspacemacs-enable-emacs-pdumper nil
 
    ;; Name of executable file pointing to emacs 27+. This executable must be
    ;; in your PATH.
@@ -161,7 +169,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
-   dotspacemacs-elpa-timeout 3
+   dotspacemacs-elpa-timeout 5
 
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
@@ -203,7 +211,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'nil
+   dotspacemacs-startup-banner 'official
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -211,7 +219,8 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((agenda . 5)
+   dotspacemacs-startup-lists '((recents . 5)
+								(agenda . 5)
                                 (todos . 5)
                                 (projects . 5))
 
@@ -224,7 +233,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-new-empty-buffer-major-mode 'org-mode
 
    ;; Default major mode of the scratch buffer (default `text-mode')
-   dotspacemacs-scratch-mode 'markdown-mode
+   dotspacemacs-scratch-mode 'org-mode
 
    ;; Initial message in the scratch buffer, such as "Welcome to Spacemacs!"
    ;; (default nil)
@@ -233,8 +242,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dracula
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
+                         dracula
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -251,7 +260,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Noto Sans Mono"  ; "Source Code Pro"
                                :size 18
                                :weight normal
                                :width normal)
@@ -413,12 +422,12 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -491,6 +500,15 @@ It should only modify the values of Spacemacs settings."
   This is the place where most of your configurations should be done. Unless it is
   explicitly specified that a variable should be set before a package is loaded,
   you should place your code here."
+
+  ;; general stuff
+
+  ;; sane scroll
+  ;;; scroll one line at a time (less "jumpy" than defaults)
+  (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
   ;; Appointments and notifications
   (require 'notifications)
   (require 'appt)
@@ -637,6 +655,25 @@ It should only modify the values of Spacemacs settings."
                     '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold
                                                                      :underline nil)))))
   ;; Enable TabNine on default
-  (add-to-list 'company-backends #'company-tabnine))
+  (add-to-list 'company-backends #'company-tabnine)
 
+  ;; Integrate keymap into Spacemacs Evil
+  ;; https://github.com/atextor/dotfiles/blob/d2f11ac9581f8eb6f473a688e0763fe88404f3e7/.spacemacs
+   (define-key evil-normal-state-map (kbd "C-j") 'academic-phrases-by-section)
 
+  ; SPC b l to list buffers
+  (evil-leader/set-key "j" 'academic-phrases-by-section)
+
+  ;; configure latex
+(eval-after-load "tex" '(add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile nil t)))
+
+;; Use pdf-tools to open PDF files
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-source-correlate-start-server t)
+
+;; Update PDF buffers after successful LaTeX runs
+(add-hook 'TeX-after-compilation-finished-functions
+           #'TeX-revert-document-buffer)
+(add-hook 'doc-view-mode-hook 'doc-view-fit-width-to-window)
+
+)
