@@ -1,12 +1,27 @@
 
 [colors]
-background = #222
+; background = #222
 background-alt = #444
-foreground = #dfdfdf
+; foreground = #dfdfdf
 foreground-alt = #888
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+
+background = #242424
+;background = ${xrdb:color0:#222}
+foreground = #ffffff
+;foreground = ${xrdb:color7:#222}
+
+background_module = #444444
+foreground_module = ${colors.foreground}
+background_module-prefix = #ffee82
+foreground_module-prefix = ${colors.background}
+
+background_bspwm-focused = #ffee82
+foreground_bspwm-focused = ${colors.background}
+foreground_bspwm-occupied = #ffdd00
+
 
 [bar/main]
 monitor = ${env:MONITOR:HDMI1}
@@ -25,7 +40,8 @@ padding = 1
 module-margin = 1
 
 font-0 = "Noto Sans Mono:size=10;0"
-font-1 = Unifont:size=12;0
+font-1 = "NotoSansMono Nerd Font:pixelsize=13;2"
+; font-1 = Unifont:size=12;0
 font-2 = Siji:pixelsize=12;0
 font-3 = FontAwesome:size=10;0
 font-4 = NotoSans-Regular:size=10;0
@@ -36,7 +52,7 @@ font-8 = "Noto Sans Symbols2:size=11;1"
 
 modules-left = date bspwm xwindow
 modules-center =
-modules-right = wlan pulseaudio cpu filesystem battery
+modules-right = wlan timer pulseaudio cpu filesystem battery
 
 tray-position = right
 tray-padding = 2
@@ -218,5 +234,21 @@ format-unmounted = <label-unmounted>
 label-mounted = %{u#008000 +u}%mountpoint%: %percentage_used%% of %total%
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = #55
+
+[module/timer]
+type = custom/script
+
+exec = ~/.scripts/polybar-timer.sh tail "祥 TMR" 5
+tail = true
+
+click-left = ~/.scripts/polybar-timer.sh new 25 '﫜' 'notify-send -i amarok_clock "Session finished"' ; ~/.scripts/polybar-timer.sh update %pid%
+click-middle = ~/.scripts/polybar-timer.sh cancel ; ~/.scripts/polybar-timer.sh update %pid%
+click-right = ~/.scripts/polybar-timer.sh new 5 '盛' 'notify-send -i amarok_clock "Break finished"' ; ~/.scripts/polybar-timer.sh update %pid%
+scroll-up = ~/.scripts/polybar-timer.sh increase 60 || ~/.scripts/polybar-timer.sh new 1 '祥' 'notify-send -u critical -i amarok_clock "Timer expired"' ; ~/.scripts/polybar-timer.sh update %pid%
+scroll-down = ~/.scripts/polybar-timer.sh increase -60 ; ~/.scripts/polybar-timer.sh update %pid%
+
+format-background = ${colors.background_module-prefix}
+format-foreground = ${colors.foreground_module-prefix}
+format-padding = 1
 
 ; vim:ft=dosini

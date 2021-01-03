@@ -9,10 +9,10 @@ SXHKD_SHELL=/bin/bash sxhkd &
 nitrogen --restore &
 dunst -conf ~/.config/dunst/dunstrc &
 
-if [ -e ~/bin/hotplug-dp.sh ]; then
+if [ -e ~/.scripts/hotplug-dp.sh ]; then
     (
       sleep .2;
-      sudo -E -u jethros ~/bin/hotplug-dp.sh dual;
+      sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual;
     ) &
 fi
 
@@ -78,6 +78,7 @@ bspc rule -a polybar border=off manage=off
 # Any popup type terminal windows
 bspc rule -a "*:popup_window" state=floating rectangle=825x500 center
 bspc rule -a Pinentry state=floating
+bspc rule -a Pilorama state=floating
 
 # Any popup type terminal windows large
 bspc rule -a "*:popup_window_large" state=floating rectangle=1500x750 center

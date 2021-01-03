@@ -6,7 +6,8 @@ stow fish		-t ~
 stow tmux		-t ~
 stow X			-t ~
 stow screen		-t ~
-stow bin		-t ~
+# stow bin		-t ~
+stow scripts	-t ~
 stow bspwm		-t ~
 
 stow -t ~   spacemacs

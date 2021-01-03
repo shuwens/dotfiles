@@ -45,7 +45,7 @@ super + {F9,F10}
 	pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ {+,-}3%
 
 super + {F11,F12}
-	sudo $HOME/bin/adjust_brightness.sh {+,-} &
+	sudo $HOME/.scripts/adjust_brightness.sh {+,-} &
 
 super + p
 	playerctl play-pause
