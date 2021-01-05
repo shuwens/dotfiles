@@ -3,6 +3,7 @@
 stow bash        -t ~
 stow fish        -t ~
 stow bin         -t ~
+stow scripts	 -t ~
 stow mac         -t ~
 stow -t ~   spacemacs
 
