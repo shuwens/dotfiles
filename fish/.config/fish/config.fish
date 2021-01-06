@@ -9,7 +9,7 @@ if status --is-interactive
         set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
         builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
     end
-	tmux ^/dev/null; and exec true
+	# tmux ^/dev/null; and exec true
 end
 
 # systems update

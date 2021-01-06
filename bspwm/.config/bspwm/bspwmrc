@@ -64,12 +64,12 @@ bspc rule -a Lollypop desktop='^6' state=pseudo_tiled
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
 bspc rule -a Wireshark desktop='^8' state=tiled
 bspc rule -a qBittorrent desktop='^8' state=tiled
+bspc rule -a Zotero desktop='^8' state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a emacs desktop='^9' state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
 
-bspc rule -a Zotero desktop='^10' state=tiled
 bspc rule -a Discord desktop='^10' state=tiled
 bspc rule -a Slack desktop='^10' state=tiled
 
