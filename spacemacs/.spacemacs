@@ -54,30 +54,30 @@
 	   markdown
 	   restructuredtext
 	   yaml
-     (ranger :variables
-			       ranger-show-preview t
-			       ranger-ignored-extensions '("mkv" "iso" "mp4" "mov" "flv" "avi")
-			       ranger-max-preview-size 10
-			       ranger-enter-with-minus t
-			       ranger-show-hidden nil)
+     ;; (ranger :variables
+		 ;;         ranger-show-preview t
+		 ;;         ranger-ignored-extensions '("mkv" "iso" "mp4" "mov" "flv" "avi")
+		 ;;         ranger-max-preview-size 10
+		 ;;         ranger-enter-with-minus t
+		 ;;         ranger-show-hidden nil)
      (colors :variables
 			       colors-colorize-identifiers 'variables)
 
 	   ;; Languages
-	   rust
+	   ;; rust
      html
 	   emacs-lisp
      ;; (javascript :variables javascript-backend 'lsp)
-	   shell-scripts
-     (shell :variables
-			      shell-default-height 50
-			      shell-default-position 'bottom
-			      shell-default-shell 'eshell)
-	   (python :variables
-			       python-format-on-save t
-			       python-formatter 'black
-			       python-fill-column 88
-			       python-shell-interpreter "python3")
+	   ;; shell-scripts
+     ;; (shell :variables
+		 ;;        shell-default-height 50
+		 ;;        shell-default-position 'bottom
+		 ;;        shell-default-shell 'eshell)
+	   ;; (python :variables
+		 ;;         python-format-on-save t
+		 ;;         python-formatter 'black
+		 ;;         python-fill-column 88
+		 ;;         python-shell-interpreter "python3")
 
 	   spacemacs-org
 	   (org :variables
@@ -105,7 +105,8 @@
 	   )
 
 	 dotspacemacs-additional-packages '(academic-phrases org-gcal
-                                                       company-tabnine)
+                                                       ;;company-tabnine
+                                                       )
 
 	 ;; A list of packages that cannot be updated.
 	 dotspacemacs-frozen-packages '()
@@ -233,7 +234,6 @@
 	 ;; Press `SPC T n' to cycle to the next theme in the list (works great
 	 ;; with 2 themes variants, one dark and one light)
 	 dotspacemacs-themes '(spacemacs-dark
-						             dracula
 						             spacemacs-light)
 
 	 ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -435,8 +435,8 @@
 	 ;; (default nil)
 	 dotspacemacs-server-socket-dir nil
 
-	 ;; If non-nil, advise quit functions to keep server open when quitting.
 	 ;; (default nil)
+	 ;; If non-nil, advise quit functions to keep server open when quitting.
 	 dotspacemacs-persistent-server t
 
 	 ;; List of search tool executable names. Spacemacs uses the first installed
@@ -509,7 +509,7 @@
   (require 'notifications)
   (require 'calendar)
   (require 'appt)
-                                        ; (require 'gdscript-mode)
+                                        ;; (require 'gdscript-mode)
   (defun appt-agenda-notify (minutes-to-appt time-current message)
 	  "Display a notification before scheduled events registered in org-agenda"
 	  (notifications-notify :title "Appointment"
@@ -619,40 +619,41 @@
 							line-end))
 		:modes (text-mode markdown-mode gfm-mode))
   (add-to-list 'flycheck-checkers 'proselint)
-  (require 'company)
-  ;; Integrate company-tabnine with lsp-mode
-  (defun company-sort-by-tabnine (candidates)
-	  (if (or (functionp company-backend)
-			      (not (and (listp company-backend)
-					            (memq 'company-tabnine company-backend))))
-	      candidates
-	    (let ((candidates-table (make-hash-table :test #'equal)) candidates-lsp
-						candidates-tabnine)
-		    (dolist (candidate candidates)
-		      (if (eq (get-text-property 0 'company-backend candidate) 'company-tabnine)
-			        (unless (gethash candidate candidates-table)
-			          (push candidate candidates-tabnine))
-			      (push candidate candidates-lsp)
-			      (puthash candidate t candidates-table)))
-		    (setq candidates-lsp (nreverse candidates-lsp))
-		    (setq candidates-tabnine (nreverse candidates-tabnine))
-		    (nconc (seq-take candidates-tabnine 3)
-			         (seq-take candidates-lsp 6)))))
-  (add-hook 'lsp-after-open-hook
-			      (lambda ()
-			        (setq company-tabnine-max-num-results 3)
-			        (add-to-list 'company-transformers 'company-sort-by-tabnine
-						               t)
-			        (add-to-list 'company-backends
-						               '(company-lsp :with company-tabnine
-										                     :separate))))
-  (setq company-show-numbers t)
-  (custom-set-faces '(company-tooltip-common ((t (:inherit company-tooltip :weight bold
-														                               :underline nil))))
-					          '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold
-																	                                   :underline nil)))))
-  ;; Enable TabNine on default
-  (add-to-list 'company-backends #'company-tabnine)
+
+  ;; (require 'company)
+  ;; ;; Integrate company-tabnine with lsp-mode
+  ;; (defun company-sort-by-tabnine (candidates)
+	;;   (if (or (functionp company-backend)
+	;; 		      (not (and (listp company-backend)
+	;; 				            (memq 'company-tabnine company-backend))))
+	;;       candidates
+	;;     (let ((candidates-table (make-hash-table :test #'equal)) candidates-lsp
+	;; 					candidates-tabnine)
+	;; 	    (dolist (candidate candidates)
+	;; 	      (if (eq (get-text-property 0 'company-backend candidate) 'company-tabnine)
+	;; 		        (unless (gethash candidate candidates-table)
+	;; 		          (push candidate candidates-tabnine))
+	;; 		      (push candidate candidates-lsp)
+	;; 		      (puthash candidate t candidates-table)))
+	;; 	    (setq candidates-lsp (nreverse candidates-lsp))
+	;; 	    (setq candidates-tabnine (nreverse candidates-tabnine))
+	;; 	    (nconc (seq-take candidates-tabnine 3)
+	;; 		         (seq-take candidates-lsp 6)))))
+  ;; (add-hook 'lsp-after-open-hook
+	;; 		      (lambda ()
+	;; 		        (setq company-tabnine-max-num-results 3)
+	;; 		        (add-to-list 'company-transformers 'company-sort-by-tabnine
+	;; 					               t)
+	;; 		        (add-to-list 'company-backends
+	;; 					               '(company-lsp :with company-tabnine
+	;; 									                     :separate))))
+  ;; (setq company-show-numbers t)
+  ;; (custom-set-faces '(company-tooltip-common ((t (:inherit company-tooltip :weight bold
+	;; 													                               :underline nil))))
+	;; 				          '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold
+	;; 																                                   :underline nil)))))
+  ;; ;; Enable TabNine on default
+  ;; (add-to-list 'company-backends #'company-tabnine)
 
   ;; configure latex
   (eval-after-load "tex" '(add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile nil t)))
@@ -737,8 +738,9 @@
 	 '(org-agenda-files
 	   ;; '("/home/jethros/Dropbox/org/routine.org" "/home/jethros/Dropbox/org/projects/paper.org" "/home/jethros/Dropbox/org/calendar.org" "/home/jethros/Dropbox/org/tasks.org" "/home/jethros/Dropbox/org/projects/maintenance.org"))
 	   '("/home/jethros/Dropbox/org/routine.org" "/home/jethros/Dropbox/org/calendar.org" "/home/jethros/Dropbox/org/tasks.org"))
-	 '(package-selected-packages
-	   '(srefactor gdscript-mode dap-mode bui company auto-complete zeal-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide typescript-mode tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pandoc-mode ox-pandoc ht orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-helm flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dumb-jump dracula-theme disaster diminish define-word cython-mode company-web company-statistics company-shell company-quickhelp company-emoji company-c-headers company-anaconda column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-key beacon auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
+	 ;; '(package-selected-packages
+	 ;;   '(srefactor gdscript-mode dap-mode bui company auto-complete zeal-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide typescript-mode tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pandoc-mode ox-pandoc ht orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-helm flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dumb-jump dracula-theme disaster diminish define-word cython-mode company-web company-statistics company-shell company-quickhelp company-emoji company-c-headers company-anaconda column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-key beacon auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
+
 	 '(paradox-github-token t)
 	 '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
 	 '(projectile-globally-ignored-directories
@@ -754,14 +756,15 @@
 	 '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
 	 '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
   )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-	 (quote
-	  (company auto-complete zeal-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide typescript-mode tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pandoc-mode ox-pandoc ht orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-helm flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dumb-jump dracula-theme disaster diminish define-word cython-mode company-web company-statistics company-shell company-quickhelp company-emoji company-c-headers company-anaconda column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-key beacon auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(package-selected-packages
+;; 	 (quote
+;; 	  (company auto-complete zeal-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide typescript-mode tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pandoc-mode ox-pandoc ht orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-helm flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dumb-jump dracula-theme disaster diminish define-word cython-mode company-web company-statistics company-shell company-quickhelp company-emoji company-c-headers company-anaconda column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-key beacon auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
