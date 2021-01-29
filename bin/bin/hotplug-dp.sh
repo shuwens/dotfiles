@@ -91,8 +91,8 @@ else
 fi
 
 # notify-osd doesn't need to be restored
-/usr/bin/pkill notify-osd
-/usr/bin/sudo -E -u jethros nitrogen --restore
-/usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
+# /usr/bin/pkill notify-osd
+# /usr/bin/sudo -E -u jethros nitrogen --restore
+# /usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
 # /usr/bin/sudo -E -u jethros /home/jethros/bin/touchpad-setup.sh
 # /usr/bin/systemctl restart systemd-logind

@@ -173,12 +173,11 @@ if test (uname) = Darwin
 else
     set PATH /usr/local/bin/ $PATH
     set PATH $PATH ~/bin
+    set PATH $PATH ~/.scripts
     set PATH $PATH ~/.local/bin
     set PATH $PATH ~/.cargo/bin
-    set PATH $PATH /home/linuxbrew/.linuxbrew/bin
     set PATH $PATH $NPM_PACKAGES/bin
     set PATH $PATH ~/.local/share/umake/bin
-    set PATH $PATH ~/dev/r/bin
     set PATH $PATH $HOME/.fzf/bin
 end
 

@@ -43,7 +43,8 @@
 	   lsp
      (auto-completion :variables
 						          auto-completion-return-key-behavior 'complete
-						          auto-completion-tab-key-behavior 'complete
+						          auto-completion-tab-key-behavior 'cycle
+								          auto-completion-complete-with-key-sequence "jk"
 						          auto-completion-idle-delay 0.05
 						          auto-completion-enable-help-tooltip t
 						          auto-completion-enable-snippets-in-popup t
@@ -73,11 +74,12 @@
 		 ;;        shell-default-height 50
 		 ;;        shell-default-position 'bottom
 		 ;;        shell-default-shell 'eshell)
-	   ;; (python :variables
-		 ;;         python-format-on-save t
-		 ;;         python-formatter 'black
-		 ;;         python-fill-column 88
-		 ;;         python-shell-interpreter "python3")
+	   (python :variables
+			   python-backend 'lsp
+		          python-format-on-save t
+				  ; python-formatter 'black
+		          python-fill-column 160
+		         python-shell-interpreter "python3")
 
 	   spacemacs-org
 	   (org :variables
@@ -88,6 +90,7 @@
 			    org-journal-file-type 'monthly)
 
      ;; I write a lot
+		bibtex
 	   (languagetool :variables
 					         langtool-default-language "en-US"
 					         languagetool-show-error-on-jump t
@@ -251,7 +254,7 @@
 
 	 ;; Default font or prioritized list of fonts.
 	 dotspacemacs-default-font '("Noto Sans Mono"  ; "Source Code Pro"
-								               :size 19
+								               :size 18
 								               :weight normal
 								               :width normal)
 
@@ -656,8 +659,18 @@
   ;; (add-to-list 'company-backends #'company-tabnine)
 
   ;; configure latex
-  (eval-after-load "tex" '(add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile nil t)))
+  ;; https://github.com/syl20bnr/spacemacs/issues/12655
+  (setq org-ref-default-bibliography '("~/dev/achtung/nfv/main.bib")
+      org-ref-pdf-directory "~/Zotero/storage"
+      org-ref-bibliography-notes "~/Dropbox/org/papers.org")
 
+  (eval-after-load "tex" '(add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile nil t)))
+  (eval-after-load "tex" '(add-to-list 'TeX-command-list '("Writing" "checkwriting ." TeX-run-compile nil t)))
+ (add-hook 'latex-mode-hook (lambda ()
+                               (setq-default flycheck-enabled-checkers '(tex-chktex))
+                               ;; Proselint seems to require lots of CPU power"
+                               (setq-default flycheck-disabled-checkers '(proselint))
+                               ))
   ;; Use pdf-tools to open PDF files
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
 		    TeX-source-correlate-start-server t)
@@ -677,7 +690,8 @@
 		      ("etc" "[{")
 		      ("etal" "[{")
 		      ("re" "[{")
-                                        ; ("" "[{")
+            ;; ("" "[{")
+		      ("todo" "[{")
 		      ("sun" "[{")
 		      ("dave" "[{")
 		      ("drc" "[{")
@@ -691,14 +705,31 @@
 		    org-gcal-file-alist '(("shuwenjsun@gmail.com" .  "~/Dropbox/org/sjsgcal.org")
 							                ("jethro.sun7@gmail.com" .  "~/Dropbox/org/js7gcal.org")))
 
+  ;; python
+ (require 'pyvenv)
+  (pyvenv-activate "/home/jethros/.pyenv/shims/python")
+
   ;; keybinding
 
   ;; Integrate keymap into Spacemacs Evil
   ;; https://github.com/atextor/dotfiles/blob/d2f11ac9581f8eb6f473a688e0763fe88404f3e7/.spacemacs
   (define-key evil-normal-state-map (kbd "C-j") 'academic-phrases-by-section)
 
-                                        ; SPC b l to list buffers
+;; SPC b l to list buffers
   (evil-leader/set-key "j" 'academic-phrases-by-section)
+
+;; comment dwim
+  (define-key evil-normal-state-map (kbd "C-\\") 'comment-dwim)
+
+  (define-key minibuffer-local-map (kbd "C-n") #'next-history-element)
+  (define-key minibuffer-local-map (kbd "C-p") #'previous-history-element)
+
+;; insert link
+  (define-key evil-normal-state-map (kbd "C-i") 'org-ref-insert-link)
+  (evil-leader/set-key "I" 'org-ref-insert-link)
+  (evil-leader/set-key "il" 'org-ref-insert-label-link)
+  (evil-leader/set-key "ic" 'org-ref-insert-cite-link)
+  (evil-leader/set-key "ir" 'org-ref-insert-ref-link)
 
   (define-key evil-normal-state-local-map (kbd "<right>") 'hannesr/evil-normal-move-character-forward)
   (define-key evil-normal-state-local-map (kbd "<left>") 'hannesr/evil-normal-move-character-backward)
@@ -707,6 +738,11 @@
   (define-key evil-normal-state-map [up] 'move-line-up)
   (define-key evil-normal-state-map [down] 'move-line-down)
 
+  ;; https://github.com/devd/Academic-Writing-Check
+  (defun colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
   )
 
 (defun dotspacemacs/emacs-custom-settings ()

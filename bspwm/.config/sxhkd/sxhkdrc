@@ -6,6 +6,9 @@
 super + a
 	alacritty
 
+super + e
+    killall -9 emacs; emacs --daemon
+
 super + ctrl + Enter
 	alacritty
 
