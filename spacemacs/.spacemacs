@@ -38,7 +38,7 @@
 	   ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
 	   ;; `M-m f e R' (Emacs style) to install them.
 	   ;; ----------------------------------------------------------------
-     git
+     ; git
      helm
 	   lsp
      (auto-completion :variables
@@ -52,7 +52,7 @@
 
 	   pdf
      csv
-	   markdown
+	  ; (markdown :variables markdown-live-preview-engine 'vmd)
 	   restructuredtext
 	   yaml
      ;; (ranger :variables
@@ -738,6 +738,10 @@
   (define-key evil-normal-state-map [up] 'move-line-up)
   (define-key evil-normal-state-map [down] 'move-line-down)
 
+  ;; org journal
+  (define-key evil-normal-state-map (kbd "C-c C-j") 'org-journal-new-entry)
+  (evil-leader/set-key "j" 'org-journal-new-entry)
+
   ;; https://github.com/devd/Academic-Writing-Check
   (defun colorize-compilation-buffer ()
     (when (eq major-mode 'compilation-mode)
@@ -774,8 +778,6 @@
 	 '(org-agenda-files
 	   ;; '("/home/jethros/Dropbox/org/routine.org" "/home/jethros/Dropbox/org/projects/paper.org" "/home/jethros/Dropbox/org/calendar.org" "/home/jethros/Dropbox/org/tasks.org" "/home/jethros/Dropbox/org/projects/maintenance.org"))
 	   '("/home/jethros/Dropbox/org/routine.org" "/home/jethros/Dropbox/org/calendar.org" "/home/jethros/Dropbox/org/tasks.org"))
-	 ;; '(package-selected-packages
-	 ;;   '(srefactor gdscript-mode dap-mode bui company auto-complete zeal-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide typescript-mode tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pandoc-mode ox-pandoc ht orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-helm flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dumb-jump dracula-theme disaster diminish define-word cython-mode company-web company-statistics company-shell company-quickhelp company-emoji company-c-headers company-anaconda column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-key beacon auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
 
 	 '(paradox-github-token t)
 	 '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
@@ -792,15 +794,6 @@
 	 '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
 	 '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
   )
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(package-selected-packages
-;; 	 (quote
-;; 	  (company auto-complete zeal-at-point yapfify yaml-mode xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide typescript-mode tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner pandoc-mode ox-pandoc ht orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hydra lv hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-gtags helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flyspell-popup flyspell-correct-helm flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav dumb-jump dracula-theme disaster diminish define-word cython-mode company-web company-statistics company-shell company-quickhelp company-emoji company-c-headers company-anaconda column-enforce-mode color-identifiers-mode cmake-mode clean-aindent-mode clang-format bind-key beacon auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
