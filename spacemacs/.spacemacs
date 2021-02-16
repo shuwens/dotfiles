@@ -74,13 +74,13 @@
 		 ;;        shell-default-height 50
 		 ;;        shell-default-position 'bottom
 		 ;;        shell-default-shell 'eshell)
-	   (python :variables
-			   python-backend 'lsp
-		          python-format-on-save t
-				  ; python-formatter 'black
-		          python-fill-column 160
-		         python-shell-interpreter "python3")
-
+	   ; (python :variables
+	   ;         python-backend 'lsp
+	   ;            python-format-on-save t
+	   ;            ; python-formatter 'black
+	   ;            python-fill-column 160
+	   ;           python-shell-interpreter "python3")
+       ;
 	   spacemacs-org
 	   (org :variables
 			    org-want-todo-bindings t
@@ -706,8 +706,9 @@
 							                ("jethro.sun7@gmail.com" .  "~/Dropbox/org/js7gcal.org")))
 
   ;; python
- (require 'pyvenv)
-  (pyvenv-activate "/home/jethros/.pyenv/shims/python")
+ ;(require 'pyvenv)
+  ;(pyvenv-activate "/home/jethros/.pyenv/shims/python")
+  ;(pyvenv-activate "/Users/jethros/.pyenv/shims/python")
 
   ;; keybinding
 

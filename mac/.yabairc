@@ -48,7 +48,7 @@ yabai -m rule --add app="EndNote X9" space=3
 yabai -m rule --add app=Vienna space=3
 yabai -m rule --add app=Tableau space=3
 yabai -m rule --add app=WeChat space=4
-yabai -m rule --add app=Emacs manage=on space=4
+yabai -m rule --add app=Emacs manage=on space=3
 yabai -m rule --add app="Visual Studio Code" space=4
 yabai -m rule --add app=Code space=3
 yabai -m rule --add app=Slack space=4
