@@ -30,8 +30,8 @@ R_LIBS_USER DEFAULT=@{HOME}/.Rpackages
 SXHKD_SHELL DEFAULT=/usr/bin/bash
 
 # Environment-local
-CARGO_TARGET_DIR DEFAULT=@{HOME}/.cargo-target
-PATH DEFAULT=${PATH}:@{HOME}/.cargo-target/release/
+CARGO_TARGET_DIR DEFAULT=@{HOME}/data/cargo-target
+PATH DEFAULT=${PATH}:@{HOME}/data/cargo-target/release/
 
 # Rust stuff
 CARGO_INCREMENTAL=1

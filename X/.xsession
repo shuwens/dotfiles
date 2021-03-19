@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Keymap
 # setxkbmap no;
 setxkbmap -option compose:rctrl
@@ -18,13 +19,14 @@ dbus-update-activation-environment --systemd DISPLAY
 gpgconf --launch gpg-agent
 export "SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
+sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual &
 # Update screen layout
-if [ -e ~/bin/hotplug-dp.sh ]; then
-    (
-      sleep .2;
-      sudo -E -u jethros ~/bin/hotplug-dp.sh dual;
-    ) &
-fi
+# if [ -e ~/.scripts/hotplug-dp.sh ]; then
+    # (
+    #   sleep .2;
+    #   sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual;
+    # ) &
+# fi
 
 # Start WM
 xsetroot -cursor_name left_ptr

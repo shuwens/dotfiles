@@ -38,7 +38,7 @@
 	   ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
 	   ;; `M-m f e R' (Emacs style) to install them.
 	   ;; ----------------------------------------------------------------
-     ; git
+	 git
      helm
 	   lsp
      (auto-completion :variables
@@ -74,13 +74,13 @@
 		 ;;        shell-default-height 50
 		 ;;        shell-default-position 'bottom
 		 ;;        shell-default-shell 'eshell)
-	   ; (python :variables
-	   ;         python-backend 'lsp
-	   ;            python-format-on-save t
-	   ;            ; python-formatter 'black
-	   ;            python-fill-column 160
-	   ;           python-shell-interpreter "python3")
-       ;
+	   (python :variables
+			   python-backend 'lsp
+				  python-format-on-save t
+				  ; python-formatter 'black
+				  python-fill-column 160
+				 python-shell-interpreter "python3")
+
 	   spacemacs-org
 	   (org :variables
 			    org-want-todo-bindings t
@@ -107,7 +107,7 @@
 			      TeX-view-program-selection '((output-pdf "PDF Tools")))
 	   )
 
-	 dotspacemacs-additional-packages '(academic-phrases org-gcal
+	 dotspacemacs-additional-packages '(academic-phrases org-gcal writegood-mode
                                                        ;;company-tabnine
                                                        )
 
@@ -693,6 +693,9 @@
             ;; ("" "[{")
 		      ("todo" "[{")
 		      ("sun" "[{")
+		      ("arjun" "[{")
+		      ("ma" "[{")
+		      ("cristina" "[{")
 		      ("dave" "[{")
 		      ("drc" "[{")
 		      ("sysname" "[{")

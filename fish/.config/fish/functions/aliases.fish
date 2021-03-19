@@ -65,7 +65,7 @@ abbr -a -U df 'command df -m'
 #
 ## my ssh utils
 function UpdateFile -a filename
-    scp $filename nu-ccis:~/.www/tmp/
+    scp $filename nu-ccis:~/public_html/tmp/
 end
 
 # abbr -a -U jn "jupyter notebook --browser=firefox"
