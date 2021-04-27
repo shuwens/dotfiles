@@ -63,7 +63,7 @@ margin-top = 0
 
 [module/xwindow]
 type = internal/xwindow
-label = >_ %title:0:85:...%
+label = >_ %title:0:75:...%
 
 [module/bspwm]
 type = internal/bspwm

@@ -9,7 +9,7 @@
 [color]
 	ui = true
 [core]
-	autocrlf = input
+	autocrlf = false
 	safecrlf = true
 [merge]
 	tool = nvim -d

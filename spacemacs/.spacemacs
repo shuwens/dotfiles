@@ -495,7 +495,11 @@
   you should place your code here."
 
   ;; general stuff
-
+(setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+(setq evil-want-keybinding nil)
+(require 'evil)
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
   (setq evil-vsplit-window-right t)
   ;; vertical split
   (defadvice org-agenda (around split-vertically activate)
