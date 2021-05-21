@@ -4,7 +4,7 @@
 
 (defun dotspacemacs/layers ()
   "Layer configuration:
-  This function should only modify configuration layer settings."
+  This function should only modify configuration layer settings                . "
   (setq-default
 	 ;; Base distribution to use. This is a layer contained in the directory
 	 ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -41,11 +41,12 @@
 	 git
      helm
 	   lsp
+	   semantic
      (auto-completion :variables
 						          auto-completion-return-key-behavior 'complete
 						          auto-completion-tab-key-behavior 'cycle
 								          auto-completion-complete-with-key-sequence "jk"
-						          auto-completion-idle-delay 0.05
+						          auto-completion-idle-delay 0                             . 05
 						          auto-completion-enable-help-tooltip t
 						          auto-completion-enable-snippets-in-popup t
 						          auto-completion-enable-sort-by-usage t)
@@ -75,12 +76,12 @@
 		 ;;        shell-default-position 'bottom
 		 ;;        shell-default-shell 'eshell)
 	   (python :variables
-			   python-backend 'lsp
-				  python-format-on-save t
-				  ; python-formatter 'black
-				  python-fill-column 160
-				 python-shell-interpreter "python3")
-
+			       python-backend 'lsp
+				     python-lsp-server 'mspyls
+				     python-formatter 'yapf
+				     python-shell-interpreter "python3"
+				     python-format-on-save t
+				     python-sort-imports-on-save t)
 	   spacemacs-org
 	   (org :variables
 			    org-want-todo-bindings t
@@ -104,6 +105,7 @@
 			      latex-backend 'lsp
 			      latex-build-command "Make"
 			      latex-refresh-preview t
+				  latex-enable-magic t
 			      TeX-view-program-selection '((output-pdf "PDF Tools")))
 	   )
 
@@ -129,8 +131,8 @@
 (defun dotspacemacs/init ()
   "Initialization:
   This function is called at the very beginning of Spacemacs startup,
-  before layer configuration.
-  It should only modify the values of Spacemacs settings."
+  before layer configuration                             .
+  It should only modify the values of Spacemacs settings . "
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
@@ -169,7 +171,7 @@
 	 ;; This is an advanced option and should not be changed unless you suspect
 	 ;; performance issues due to garbage collection operations.
 	 ;; (default '(100000000 0.1))
-	 dotspacemacs-gc-cons '(100000000 0.1)
+	 dotspacemacs-gc-cons '(100000000 0                                          . 1)
 
 	 ;; If non-nil then Spacelpa repository is the primary source to install
 	 ;; a locked version of packages. If nil then Spacemacs will install the
@@ -213,10 +215,10 @@
 	 ;; `recents' `bookmarks' `projects' `agenda' `todos'.
 	 ;; List sizes may be nil, in which case
 	 ;; `spacemacs-buffer-startup-lists-length' takes effect.
-	 dotspacemacs-startup-lists '((recents . 9)
-								                (agenda . 5)
-								                (todos . 5)
-								                (projects . 5))
+	 dotspacemacs-startup-lists '((recents                                       . 9)
+								                (agenda                                        . 5)
+								                (todos                                         . 5)
+								                (projects                                      . 5))
 
 	 ;; True if the home buffer should respond to resize events. (default t)
 	 dotspacemacs-startup-buffer-responsive t
@@ -246,7 +248,7 @@
 	 ;; refer to the DOCUMENTATION.org for more info on how to create your own
 	 ;; spaceline theme. Value can be a symbol or list with additional properties.
 	 ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-	 dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.0)
+	 dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1 . 0)
 
 	 ;; If non-nil the cursor color matches the state color in GUI Emacs.
 	 ;; (default t)
@@ -324,7 +326,7 @@
 
 	 ;; Which-key delay in seconds. The which-key buffer is the popup listing
 	 ;; the commands bound to the current keystroke sequence. (default 0.4)
-	 dotspacemacs-which-key-delay 0.1
+	 dotspacemacs-which-key-delay 0                                              . 1
 
 	 ;; Which-key frame position. Possible values are `right', `bottom' and
 	 ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
@@ -487,12 +489,12 @@
 	 dotspacemacs-pretty-docs nil))
 
 (defun dotspacemacs/user-config ()
-  "Configuration function for user code.
+  "Configuration function for user code                                        .
   This function is called at the very end of Spacemacs initialization after
-  layers configuration.
-  This is the place where most of your configurations should be done. Unless it is
+  layers configuration                                                         .
+  This is the place where most of your configurations should be done           . Unless it is
   explicitly specified that a variable should be set before a package is loaded,
-  you should place your code here."
+  you should place your code here                                              . "
 
   ;; general stuff
 (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
@@ -508,7 +510,7 @@
 
   ;; sane scroll
   ;;; scroll one line at a time (less "jumpy" than defaults)
-  (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
+  (setq mouse-wheel-scroll-amount '(2 ((shift)                                 . 1))) ;; two lines at a time
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
@@ -574,7 +576,7 @@
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-emacs-lisp-mode)
   ;; Major mode associations
   (add-to-list 'auto-mode-alist
-			         '("\\.tscn\\'" . toml-mode))
+			         '("\\.tscn\\'"                                                  . toml-mode))
   (setq spacemacs-large-file-modes-list '(archive-mode tar-mode jka-compr git-commit-mode
 													                             image-mode doc-view-mode doc-view-mode-maybe
 													                             ebrowse-tree-mode pdf-view-mode fundamental-mode
@@ -709,8 +711,8 @@
   (require 'org-gcal)
   (setq org-gcal-client-id "508295214115-at4hti0cdq4m191735dqupa8tbk0jpr8.apps.googleusercontent.com"
 		    org-gcal-client-secret "pu-tQVLgKhKm_484KUgw5Q_z"
-		    org-gcal-file-alist '(("shuwenjsun@gmail.com" .  "~/Dropbox/org/sjsgcal.org")
-							                ("jethro.sun7@gmail.com" .  "~/Dropbox/org/js7gcal.org")))
+		    org-gcal-file-alist '(("shuwenjsun@gmail.com"                          . "~/Dropbox/org/sjsgcal.org")
+							                ("jethro.sun7@gmail.com"                         . "~/Dropbox/org/js7gcal.org")))
 
   ;; python
  ;(require 'pyvenv)
@@ -758,10 +760,10 @@
   )
 
 (defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
+  "Emacs custom settings                                                       .
   This is an auto-generated function, do not modify its content directly, use
-  Emacs customize menu instead.
-  This function is called at the very end of Spacemacs initialization."
+  Emacs customize menu instead                                                 .
+  This function is called at the very end of Spacemacs initialization          . "
   (custom-set-variables
 	 ;; custom-set-variables was added by Custom.
 	 ;; If you edit it by hand, you could mess it up, so be careful.
@@ -772,39 +774,39 @@
 	 '(auto-dim-other-buffers-mode nil)
 	 '(evil-want-Y-yank-to-eol nil)
 	 '(hl-todo-keyword-faces
-	   '(("TODO" . "#dc752f")
-		   ("NEXT" . "#dc752f")
-		   ("PROGRESS" . "#4f97d7")
-		   ("OKAY" . "#4f97d7")
-		   ("DONT" . "#f2241f")
-		   ("FAIL" . "#f2241f")
-		   ("DONE" . "#86dc2f")
-		   ("NOTE" . "#b1951d")
-		   ("HACK" . "#b1951d")
-		   ("TEMP" . "#b1951d")
-		   ("FIXME" . "#dc752f")))
+	   '(("TODO"                                                                 . "#dc752f")
+		   ("NEXT"                                                                 . "#dc752f")
+		   ("PROGRESS"                                                             . "#4f97d7")
+		   ("OKAY"                                                                 . "#4f97d7")
+		   ("DONT"                                                                 . "#f2241f")
+		   ("FAIL"                                                                 . "#f2241f")
+		   ("DONE"                                                                 . "#86dc2f")
+		   ("NOTE"                                                                 . "#b1951d")
+		   ("HACK"                                                                 . "#b1951d")
+		   ("TEMP"                                                                 . "#b1951d")
+		   ("FIXME"                                                                . "#dc752f")))
 	 '(org-agenda-files
 	   ;; '("/home/jethros/Dropbox/org/routine.org" "/home/jethros/Dropbox/org/projects/paper.org" "/home/jethros/Dropbox/org/calendar.org" "/home/jethros/Dropbox/org/tasks.org" "/home/jethros/Dropbox/org/projects/maintenance.org"))
 	   '("/home/jethros/Dropbox/org/routine.org" "/home/jethros/Dropbox/org/calendar.org" "/home/jethros/Dropbox/org/tasks.org"))
 
 	 '(paradox-github-token t)
-	 '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
+	 '(pdf-view-midnight-colors '("#b2b2b2"                                      . "#292b2e"))
 	 '(projectile-globally-ignored-directories
 	   '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work"))
 	 '(projectile-tags-backend 'auto))
   (custom-set-faces
-	 ;; custom-set-faces was added by Custom.
-	 ;; If you edit it by hand, you could mess it up, so be careful.
-	 ;; Your init file should contain only one such instance.
-	 ;; If there is more than one, they won't work right.
+	 ;; 
+	 ;; 
+	 ;; 
+	 ;; 
 	 '(default ((((min-colors 16777216)) (:background "#282a36" :foreground "#f8f8f2")) (t (:background "#000000" :foreground "#f8f8f2"))))
 	 '(auto-dim-other-buffers-face ((t (:background "#16171e"))))
 	 '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
 	 '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
   )
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+ ;; cu
+ ;; If
+ ;; Yo
+ ;; If
  '(default ((((min-colors 16777216)) (:background "#282a36" :foreground "#f8f8f2")) (t (:background "#000000" :foreground "#f8f8f2")))))

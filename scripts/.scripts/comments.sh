@@ -186,7 +186,7 @@ case ${FILE_EXT} in
      .c | .cpp | .java | .rs )
          make_comments  "${QUESTION_CONTENT}" clike "${TMP_FILE}"
          ;;
-    .sh | .py )
+	.sh | .py )
          make_comments  "${QUESTION_CONTENT}" script "${TMP_FILE}"
          ;;
       * )

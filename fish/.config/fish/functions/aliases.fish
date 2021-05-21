@@ -4,6 +4,9 @@
 #
 # Note that I need to revamp this sometime
 
+# ccig
+abbr -a -U td "cd ~/dev/major/ccig/py/i-linked-list/"
+
 #
 # Useful abbrs
 #
@@ -13,6 +16,7 @@ abbr -a -U upssh "vagrant up; and vagrant ssh"
 abbr -a -U vi vim
 abbr -a -U vim nvim
 abbr -a -U e nvim
+abbr -a -U w workflow.sh
 abbr -a -U ws "wormhole send"
 abbr -a -U wr "wormhole receive"
 abbr -a -U R ranger
