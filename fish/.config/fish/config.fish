@@ -195,8 +195,8 @@ set FISH_CLIPBOARD_CMD "cat"
 
 # Add pyenv, if available
 if test -d "$HOME/.pyenv"
-    set PATH $PATH $HOME/.pyenv/bin
-    status --is-interactive; and source (pyenv init -|psub)
+	status is-login; and pyenv init --path | source
+	pyenv init - | source
 end
 
 # # Pretty ls colors
