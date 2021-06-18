@@ -4,10 +4,13 @@
 
 if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
-/usr/bin/xautolock -time 450 -locker /usr/bin/i3lock-fancy-multimonitor -detectsleep &
+# /usr/bin/xautolock -time 450 -locker /usr/bin/i3lock-fancy-multimonitor -detectsleep &
 SXHKD_SHELL=/bin/bash sxhkd &
 nitrogen --restore &
 dunst -conf ~/.config/dunst/dunstrc &
+if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
+if [ -z "$(pgrep tilda)" ] ; then tilda & fi
+
 
 if [ -e ~/.scripts/hotplug-dp.sh ]; then
     (
@@ -79,6 +82,8 @@ bspc rule -a polybar border=off manage=off
 bspc rule -a "*:popup_window" state=floating rectangle=825x500 center
 bspc rule -a Pinentry state=floating
 bspc rule -a Pilorama state=floating
+bspc rule -a Tilda state=floating
+bspc rule -a GlobalProtect state=floating
 
 # Any popup type terminal windows large
 bspc rule -a "*:popup_window_large" state=floating rectangle=1500x750 center

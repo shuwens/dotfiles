@@ -317,11 +317,11 @@ function fish_greeting
     end
     # important and urgent things, so I should get to it right away
     set_color red
-	# echo "    [Submission DDL] NSDI 2022: March 10"
+	echo "    [Submission DDL] CoNEXT 2021: June 28"
 	# echo "    [CoNEXT 20] Writing: background and motivation"
 	# echo "    [CoNEXT 20] Impl and running expr"
 	# echo "    [Jan 30] Writing session"
-	echo "    [2/18] Cracking the code interview"
+	# echo "    [2/18] Cracking the code interview"
 
     echo
     set_color normal

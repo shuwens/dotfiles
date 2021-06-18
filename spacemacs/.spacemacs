@@ -40,7 +40,6 @@
 	   ;; ----------------------------------------------------------------
 	   git
      helm
-	   lsp
 	   semantic
      (auto-completion :variables
 						          auto-completion-return-key-behavior 'complete
@@ -66,7 +65,8 @@
 			       colors-colorize-identifiers 'variables)
 
 	   ;; Languages
-	   ;; rust
+	    (lsp :variables lsp-rust-server 'rust-analyzer)
+	   rust
      html
 	   emacs-lisp
      ;; (javascript :variables javascript-backend 'lsp)
