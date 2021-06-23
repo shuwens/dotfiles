@@ -34,26 +34,26 @@ yabai -m config --space 7 layout             float
 # window rules
 yabai -m rule --add app=Alacritty space=1
 yabai -m rule --add app=Firefox space=2
-yabai -m rule --add app=Preview space=3
+yabai -m rule --add app=Preview space=4
 yabai -m rule --add app=Skim space=3
 yabai -m rule --add app=Pages space=3
 yabai -m rule --add app=Finder space=3
 yabai -m rule --add app=Wireshark space=3
 yabai -m rule --add app="zoom.us" space=3
 yabai -m rule --add app=Blue space=5
-yabai -m rule --add app="Microsoft Teams" space=4
-yabai -m rule --add app=Papers space=4
-yabai -m rule --add app=Zotero space=4
+yabai -m rule --add app="Microsoft Teams" space=5
+yabai -m rule --add app=Papers space=3
+yabai -m rule --add app=Zotero space=3
 yabai -m rule --add app="EndNote X9" space=3
 yabai -m rule --add app=Vienna space=3
 yabai -m rule --add app=Tableau space=3
 yabai -m rule --add app=WeChat space=4
-yabai -m rule --add app=Emacs manage=on space=3
+yabai -m rule --add app=Emacs manage=on space=4
 yabai -m rule --add app="Visual Studio Code" space=4
 yabai -m rule --add app=Code space=3
 yabai -m rule --add app=Slack space=4
 yabai -m rule --add app=Discord space=4
-yabai -m rule --add app=Mail space=5
+yabai -m rule --add app=Mail space=4
 yabai -m rule --add app=Notes space=6
 yabai -m rule --add app=Transmission space=7
 yabai -m rule --add app=Spotify space=8
