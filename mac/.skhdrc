@@ -147,8 +147,9 @@ shift + alt - b : yabai -m window --toggle border
 alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-alt - t : yabai -m window --toggle float;\
-          yabai -m window --grid 12:12:1:0:10:11
+ctrl + alt - t : yabai -m window --toggle float;\
+	yabai -m window --grid 12:12:1:0:10:11
+# yabai -m window --grid 12:12:1:1:10:10
 
 # toggle sticky
 alt - s : yabai -m window --toggle sticky

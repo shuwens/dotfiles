@@ -119,7 +119,7 @@ abbr -a -U ,, "make all"
 abbr -a -U ,,, "make clean; and make"
 abbr -a -U vi "nvim"
 abbr -a -U :q "sudo reboot"
-
+abbr -a -U yr "yabai -m window --toggle float; yabai -m window --grid 12:12:1:0:10:11"
 abbr -a -U vpn "eval /etc/profile.d/PanMSInit.sh; sleep 5; globalprotect connect -portal vpn.northeastern.edu"
 abbr -a -U dvpn "globalprotect disconnect"
 

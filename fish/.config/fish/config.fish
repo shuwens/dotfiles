@@ -9,7 +9,11 @@ if status --is-interactive
         set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
         builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
     end
-	tmux ^/dev/null; and exec true
+end
+
+if status is-interactive
+and not set -q TMUX
+    exec tmux
 end
 
 # systems update
@@ -71,6 +75,7 @@ else
     abbr -a -U lll 'ls -la'
 end
 
+[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 function j -d "Autojump alias" -w "autojump"
     cd (env AUTOJUMP_SOURCED=1 autojump $argv)
 end
@@ -122,6 +127,8 @@ if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
 end
 
 if test (uname) = Darwin
+	fish_add_path /usr/local/sbin
+
     setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
     setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 else
