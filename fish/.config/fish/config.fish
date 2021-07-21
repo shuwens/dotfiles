@@ -9,11 +9,7 @@ if status --is-interactive
         set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
         builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
     end
-end
-
-if status is-interactive
-and not set -q TMUX
-    exec tmux
+    tmux 2> /dev/null; and exec true
 end
 
 # systems update
@@ -324,11 +320,8 @@ function fish_greeting
     end
     # important and urgent things, so I should get to it right away
     set_color red
-	echo "    [Submission DDL] CoNEXT 2021: June 28"
-	# echo "    [CoNEXT 20] Writing: background and motivation"
 	# echo "    [CoNEXT 20] Impl and running expr"
-	# echo "    [Jan 30] Writing session"
-	# echo "    [2/18] Cracking the code interview"
+	echo "    [Expr bug] flow classification"
 
     echo
     set_color normal
