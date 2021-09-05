@@ -51,8 +51,8 @@ bspc rule -a Alacritty state=tiled
 
 bspc rule -a zoom desktop='^1'
 
-# bspc rule -a firefox desktop='^3' follow=on state=tiled
-# bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
+bspc rule -a firefox desktop='^3' follow=on state=tiled
+bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
 
 bspc rule -a Zathura desktop='^4' follow=on state=tiled
 bspc rule -a MuPDF desktop='^4' state=tiled

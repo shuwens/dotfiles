@@ -4,32 +4,76 @@
 #
 # Note that I need to revamp this sometime
 
-# ccig
-abbr -a -U td "cd ~/dev/major/ccig/py/i-linked-list/"
+if [ -e /usr/bin/trash-list ]
+    abbr -a -U rm 'echo "This is not the command you are looking for."; false'
+end
+
+if [ -e /usr/bin/nvim ]
+    abbr -a -U vimdiff nvim -d
+    abbr -a -U vim nvim
+    abbr -a -U e nvim
+    abbr -a note 'nvim ~/notes/talks.org'
+
+    # Quick edits
+    abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
+    abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
+    abbr -a -U Eg 'nvim ~/.config/git/config'
+    abbr -a -U Ev 'nvim ~/.config/nvim/init.vim'
+    abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
+    abbr -a -U Ee 'nvim ~/.spacemacs'
+    abbr -a -U Et 'nvim ~/.tmux.conf'
+end
+
+if [ -e /usr/local/bin/exa ]
+    abbr -a -U ls exa
+    abbr -a -U la exa -a
+    abbr -a -U ll exa -l --git
+    abbr -a -U lll exa -la --git
+else if [ -e $HOME/.cargo/bin/exa ]
+    abbr -a -U ls exa
+    abbr -a -U la 'exa -a'
+    abbr -a -U ll 'exa -l'
+    abbr -a -U lll 'exa -la'
+else
+    abbr -a -U l 'ls'
+    abbr -a -U ll 'ls -l'
+    abbr -a -U lll 'ls -la'
+end
 
 #
 # Useful abbrs
 #
-abbr -a -U vimdiff nvim -d
 abbr -a -U sduo sudo
 abbr -a -U upssh "vagrant up; and vagrant ssh"
+abbr -a -U v vim
 abbr -a -U vi vim
-abbr -a -U vim nvim
-abbr -a -U e nvim
+abbr -a -U vim-norc 'vim -u NORC'
+abbr -a -U vim-none 'vim -u NONE'
+
 abbr -a -U w workflow.sh
 abbr -a -U ws "wormhole send"
 abbr -a -U wr "wormhole receive"
 abbr -a -U R ranger
 abbr -a bs bibtex-search
+abbr -a -U notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
+abbr -a -U m make
+abbr -a -U mm 'make run'
+abbr -a -U wifi 'nmcli d wifi list'
 
-abbr -a py "pyenv activate py3"
-abbr -a py2 "pyenv activate neovim2"
-abbr -a pyn "pyenv activate neovim3"
+abbr -a -U json 'prettify-json'
+abbr -a -U map 'xargs -n1'
+abbr -a -U collapse "sed -e 's/  */ /g'"
+abbr -a -U cuts 'cut -d\ '
 
-abbr -a note 'nvim ~/notes/talks.org'
+abbr -a -U cd.. 'cd ..'
+abbr -a -U .. 'cd ..'
+abbr -a -U ... 'cd ../..'
+abbr -a -U .... 'cd ../../..'
+abbr -a -U ..... 'cd ../../../..'
 
 # Rust
-abbr -a -U c cargo
+abbr -a -U c "cargo"
+abbr -a -U r "cargo r"
 abbr -a -U cargot "cargo t"
 abbr -a -U clippy "cargo clippy"
 abbr -a -U cl "cargo clippy"
@@ -53,52 +97,37 @@ abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a -U push 'git push'
 abbr -a -U pull 'git pull'
 
-# Quick edits
-abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
-abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
-#abbr -a -U Ep 'nvim ~/.config/powerline-shell/config.json'
-abbr -a -U Eg 'nvim ~/.config/git/config'
-# abbr -a -U Ev 'nvim ~/.config/nvim/init.lua'
-abbr -a -U Ev 'nvim ~/.config/nvim/init.vim'
-abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
-abbr -a -U Ee 'nvim ~/.spacemacs'
-abbr -a -U Et 'nvim ~/.tmux.conf'
-
 abbr -a -U df 'command df -m'
 #abbr -a -U su 'command su -m'
 #abbr -a -U ls 'command ls -FG'
-#
-## my ssh utils
-function UpdateFile -a filename
-    scp $filename nu-ccis:~/public_html/tmp/
-end
+
+## My own stuff!
+abbr -a -U cls "clear"
+abbr -a -U , "make"
+abbr -a -U ,, "make all"
+abbr -a -U ,,, "make clean; and make"
+abbr -a -U vi "nvim"
+abbr -a -U :q "sudo reboot"
+abbr -a -U yr "yabai -m window --toggle float; yabai -m window --grid 12:12:1:0:10:11"
+abbr -a -U vpn "eval /etc/profile.d/PanMSInit.sh; sleep 5; globalprotect connect -portal vpn.northeastern.edu"
+abbr -a -U dvpn "globalprotect disconnect"
+
+abbr -a py "pyenv activate py3"
+abbr -a py2 "pyenv activate neovim2"
+abbr -a pyn "pyenv activate neovim3"
+
+# wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla https://pg.ucsd.edu
+abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
+abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
+abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 # abbr -a -U jn "jupyter notebook --browser=firefox"
 abbr -a -U jn 'jupyter notebook --browser="firefox-developer-edition %s"'
 
-abbr -a -U vim-norc 'vim -u NORC'
-abbr -a -U vim-none 'vim -u NONE'
-
-abbr -a -U c "cargo"
-abbr -a -U r "cargo r"
-abbr -a -U v vim
-abbr -a -U vim nvim
-abbr -a -U notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
-abbr -a -U m make
-abbr -a -U mm 'make run'
-abbr -a -U wifi 'nmcli d wifi list'
-
-abbr -a -U json 'prettify-json'
-abbr -a -U map 'xargs -n1'
-abbr -a -U collapse "sed -e 's/  */ /g'"
-abbr -a -U cuts 'cut -d\ '
-
-abbr -a -U cd.. 'cd ..'
-abbr -a -U .. 'cd ..'
-abbr -a -U ... 'cd ../..'
-abbr -a -U .... 'cd ../../..'
-abbr -a -U ..... 'cd ../../../..'
-
+# my ssh utils
+function UpdateFile -a filename
+    scp $filename nu-ccis:~/public_html/tmp/
+end
 
 if test -d ~/dev/pvn/netbricks
     abbr -a -U n "cd ~/dev/pvn/netbricks"
@@ -112,22 +141,6 @@ function take
     set -l dir $argv[1]
     mkdir -p $dir; and cd $dir
 end
-
-## My own stuff!
-abbr -a -U cls "clear"
-abbr -a -U , "make"
-abbr -a -U ,, "make all"
-abbr -a -U ,,, "make clean; and make"
-abbr -a -U vi "nvim"
-abbr -a -U :q "sudo reboot"
-abbr -a -U yr "yabai -m window --toggle float; yabai -m window --grid 12:12:1:0:10:11"
-abbr -a -U vpn "eval /etc/profile.d/PanMSInit.sh; sleep 5; globalprotect connect -portal vpn.northeastern.edu"
-abbr -a -U dvpn "globalprotect disconnect"
-
-# wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla https://pg.ucsd.edu
-abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
-abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
-abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 
 if test (uname) = Darwin
@@ -156,7 +169,7 @@ else
         end
     end
 
-	function open
+    function open
         set o_flags
         for arg in $argv
             if string match -rq -- '^-' $arg
@@ -286,5 +299,3 @@ function mktable --description "produces a LaTeX table for oxide testing results
 
     echo "\end{tabular}"
 end
-
-

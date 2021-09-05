@@ -2,6 +2,15 @@
 #       My Fish Shell Config
 #
 
+[ -f ~/.config/fish/functions/aliases.fish ]; and source ~/.config/fish/functions/aliases.fish
+
+if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
+    . $HOME/.fzf/shell/key-bindings.fish
+end
+
+
+#. ~/.config/fish/security.fish
+
 # the right tmux setup in fish
 if status --is-interactive
     # Base16 Shell
@@ -34,7 +43,7 @@ else
         # arch systems w/ yaourt
         complete --command yay --wraps pacman
         abbr -a -U p yay
-        abbr -a -U up 'yay -Syu'
+        abbr -a -U up 'yay -Syyu'
     else if [ -e /usr/bin/pacman ]
         # native arch systems
         abbr -a -U p 'sudo pacman'
@@ -55,29 +64,10 @@ else
     end
 end
 
-if [ -e /usr/local/bin/exa ]
-    abbr -a -U ls exa
-    abbr -a -U la exa -a
-    abbr -a -U ll exa -l --git
-    abbr -a -U lll exa -la --git
-else if [ -e $HOME/.cargo/bin/exa ]
-    abbr -a -U ls exa
-    abbr -a -U la 'exa -a'
-    abbr -a -U ll 'exa -l'
-    abbr -a -U lll 'exa -la'
-else
-    abbr -a -U l 'ls'
-    abbr -a -U ll 'ls -l'
-    abbr -a -U lll 'ls -la'
-end
-
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 function j -d "Autojump alias" -w "autojump"
     cd (env AUTOJUMP_SOURCED=1 autojump $argv)
 end
-
-[ -f ~/.config/fish/functions/aliases.fish ]; and source ~/.config/fish/functions/aliases.fish
-# #. ~/.config/fish/security.fish
 
 # Type - to move up to top parent dir which is a repository
 function d
@@ -118,13 +108,8 @@ end
 set PATH $PATH $HOME/.fzf/bin
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
-if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
-    . $HOME/.fzf/shell/key-bindings.fish
-end
-
 if test (uname) = Darwin
-	fish_add_path /usr/local/sbin
-
+    fish_add_path /usr/local/sbin
     setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
     setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 else
@@ -206,7 +191,7 @@ end
 if test -e $HOME/.dircolors
     if test (uname) = Darwin
         # setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
-		setenv LS_COLORS (bash --noprofile -c 'test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)')
+	setenv LS_COLORS (bash --noprofile -c 'test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)')
     else
         eval ( dircolors --c-shell $HOME/.dircolors )
     end
