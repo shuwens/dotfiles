@@ -5,7 +5,7 @@
 # Note that I need to revamp this sometime
 
 if [ -e /usr/bin/trash-list ]
-    abbr -a -U rm 'echo "This is not the command you are looking for."; false'
+    alias rm 'echo "This is not the command you are looking for."; false'
 end
 
 if [ -e /usr/bin/nvim ]

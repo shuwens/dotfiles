@@ -1,6 +1,11 @@
 #!/bin/sh
 
 ## BEHAVIOR
+# Keymap
+# setxkbmap no;
+setxkbmap -option compose:rctrl
+setxkbmap -option altwin:swap_alt_win
+setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 
 if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
 [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
