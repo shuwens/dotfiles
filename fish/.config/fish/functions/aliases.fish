@@ -8,7 +8,7 @@ if [ -e /usr/bin/trash-list ]
     alias rm 'echo "This is not the command you are looking for."; false'
 end
 
-if [ -e /usr/bin/nvim ]
+if type -q nvim
     abbr -a -U vimdiff nvim -d
     abbr -a -U vim nvim
     abbr -a -U e nvim
@@ -24,16 +24,11 @@ if [ -e /usr/bin/nvim ]
     abbr -a -U Et 'nvim ~/.tmux.conf'
 end
 
-if [ -e /usr/local/bin/exa ]
+if type -q exa
     abbr -a -U ls exa
     abbr -a -U la exa -a
     abbr -a -U ll exa -l --git
     abbr -a -U lll exa -la --git
-else if [ -e $HOME/.cargo/bin/exa ]
-    abbr -a -U ls exa
-    abbr -a -U la 'exa -a'
-    abbr -a -U ll 'exa -l'
-    abbr -a -U lll 'exa -la'
 else
     abbr -a -U l 'ls'
     abbr -a -U ll 'ls -l'
