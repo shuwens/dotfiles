@@ -18,7 +18,7 @@ if type -q nvim
     abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
     abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
     abbr -a -U Eg 'nvim ~/.config/git/config'
-    abbr -a -U Ev 'nvim ~/.config/nvim/init.vim'
+    abbr -a -U Ev 'nvim ~/.config/nvim/init.lua'
     abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
     abbr -a -U Ee 'nvim ~/.spacemacs'
     abbr -a -U Et 'nvim ~/.tmux.conf'
