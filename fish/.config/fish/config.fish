@@ -183,8 +183,9 @@ set FISH_CLIPBOARD_CMD "cat"
 
 # Add pyenv, if available
 if test -d "$HOME/.pyenv"
-	status is-login; and pyenv init --path | source
-	pyenv init - | source
+    setenv PYENV_ROOT $HOME/.pyenv
+    status is-login; and pyenv init --path | source
+    pyenv init - | source
 end
 
 # # Pretty ls colors

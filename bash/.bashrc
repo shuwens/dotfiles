@@ -235,3 +235,4 @@ fi
 
 # end of [.bashrc]
 source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
