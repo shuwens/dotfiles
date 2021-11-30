@@ -45,6 +45,8 @@ yabai -m rule --add app=Blue space=5
 yabai -m rule --add app="Microsoft Teams" space=5
 yabai -m rule --add app=Papers space=3
 yabai -m rule --add app=Zotero space=3
+# yabai -m rule --add app="Roam Research" space=3
+yabai -m rule --add app="Roam Research" manage=off
 yabai -m rule --add app="EndNote X9" space=3
 yabai -m rule --add app=Vienna space=3
 yabai -m rule --add app=Tableau space=3
