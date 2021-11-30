@@ -39,11 +39,22 @@ else
         function upgrade
             echo (pass x1c/jethros) | sudo -S apt -y upgrade
         end
+	else if [ -e /usr/bin/aurman ]
+	complete --command aurman --wraps pacman
+        # native arch systems
+	abbr -a p 'aurman'
+	abbr -a up 'aurman -Syu'
+ 
     else if [ -e /usr/bin/yay ]
         # arch systems w/ yaourt
         complete --command yay --wraps pacman
         abbr -a -U p yay
         abbr -a -U up 'yay -Syyu'
+
+else if [ -e /usr/bin/paru ]
+        # native arch systems
+        abbr -a -U p 'sudo paru'
+        abbr -a -U up 'sudo paru -Syu'
     else if [ -e /usr/bin/pacman ]
         # native arch systems
         abbr -a -U p 'sudo pacman'

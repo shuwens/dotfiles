@@ -80,6 +80,7 @@ bspc rule -a Discord desktop='^10' state=tiled
 bspc rule -a Slack desktop='^10' state=tiled
 bspc rule -a Microsoft Teams desktop='^10' state=tiled
 bspc rule -a Microsoft Teams - Preview desktop='^10'
+bspc rule -a Roam Research desktop='^10'
 
 bspc rule -a polybar border=off manage=off
 

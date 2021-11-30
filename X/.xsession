@@ -6,11 +6,11 @@ setxkbmap -option compose:rctrl
 setxkbmap -option altwin:swap_alt_win
 setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 
-# if test -e /usr/bin/xmodmap; then
-#   if test -e .Xmodmap; then
-#     xmodmap .Xmodmap
-#   fi
-# fi
+if test -e /usr/bin/xmodmap; then
+  if test -e .Xmodmap; then
+    xmodmap .Xmodmap
+  fi
+fi
 
 # gnupg keyring agent
 # ensure it's started so SSH will work
