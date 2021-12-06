@@ -93,6 +93,17 @@ abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a -U push 'git push'
 abbr -a -U pull 'git pull'
 
+# Quick edits
+abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
+abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
+#abbr -a -U Ep 'nvim ~/.config/powerline-shell/config.json'
+abbr -a -U Eg 'nvim ~/.config/git/config'
+# abbr -a -U Ev 'nvim ~/.config/nvim/init.lua'
+abbr -a -U Ev 'nvim ~/.config/nvim/init.vim'
+abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
+abbr -a -U Ee 'nvim ~/.spacemacs'
+abbr -a -U Et 'nvim ~/.tmux.conf'
+
 abbr -a -U df 'command df -m'
 #abbr -a -U su 'command su -m'
 #abbr -a -U ls 'command ls -FG'

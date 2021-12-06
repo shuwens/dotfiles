@@ -18,7 +18,9 @@ if status --is-interactive
         set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
         builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
     end
-    tmux 2> /dev/null; and exec true
+    if ! set -q TMUX
+        exec tmux
+    end
 end
 
 # systems update
@@ -39,38 +41,38 @@ else
         function upgrade
             echo (pass x1c/jethros) | sudo -S apt -y upgrade
         end
-	else if [ -e /usr/bin/aurman ]
-	complete --command aurman --wraps pacman
+    else if [ -e /usr/bin/aurman ]
+        complete --command aurman --wraps pacman
         # native arch systems
-	abbr -a p 'aurman'
-	abbr -a up 'aurman -Syu'
- 
-    else if [ -e /usr/bin/yay ]
-        # arch systems w/ yaourt
-        complete --command yay --wraps pacman
-        abbr -a -U p yay
-        abbr -a -U up 'yay -Syyu'
+        abbr -a p 'aurman'
+        abbr -a up 'aurman -Syu'
+
+else if [ -e /usr/bin/yay ]
+    # arch systems w/ yaourt
+    complete --command yay --wraps pacman
+    abbr -a -U p yay
+    abbr -a -U up 'yay -Syyu'
 
 else if [ -e /usr/bin/paru ]
-        # native arch systems
-        abbr -a -U p 'sudo paru'
-        abbr -a -U up 'sudo paru -Syu'
-    else if [ -e /usr/bin/pacman ]
-        # native arch systems
-        abbr -a -U p 'sudo pacman'
-        abbr -a -U up 'sudo pacman -Syu'
-    else
-        echo "you are not running a recognizable system!"
-    end
+    # native arch systems
+    abbr -a -U p 'sudo paru'
+    abbr -a -U up 'sudo paru -Syu'
+else if [ -e /usr/bin/pacman ]
+    # native arch systems
+    abbr -a -U p 'sudo pacman'
+    abbr -a -U up 'sudo pacman -Syu'
+else
+    echo "you are not running a recognizable system!"
+end
 
-    function ssh
-        switch $argv[1]
-            case "*.amazonaws.com"
-                env TERM=xterm /usr/bin/ssh $argv
-            case "ubuntu@"
-                env TERM=xterm /usr/bin/ssh $argv
-            case "*"
-                /usr/bin/ssh -X $argv
+function ssh
+    switch $argv[1]
+        case "*.amazonaws.com"
+            env TERM=xterm /usr/bin/ssh $argv
+        case "ubuntu@"
+            env TERM=xterm /usr/bin/ssh $argv
+        case "*"
+            /usr/bin/ssh -X $argv
         end
     end
 end
@@ -203,7 +205,7 @@ end
 if test -e $HOME/.dircolors
     if test (uname) = Darwin
         # setenv LS_COLORS (bash --noprofile -c 'eval "$(gdircolors -b $HOME/.dircolors)"; echo $LS_COLORS')
-	setenv LS_COLORS (bash --noprofile -c 'test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)')
+        setenv LS_COLORS (bash --noprofile -c 'test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)')
     else
         eval ( dircolors --c-shell $HOME/.dircolors )
     end
@@ -220,68 +222,68 @@ function fish_greeting
     end
     echo -e (uname -n | awk '{print " \\\\e[1mHostname:  \\\\e[0;32m"$0"\\\\e[0m"}')
 
-    # Disk usage
+# Disk usage
     echo -e " \\e[1mDisk usage:\\e[0m"
     echo
     if test (uname) = Darwin
         echo -ne (\
-		df -l -h | grep -E 'dev' | \
-		awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $1, $3, $2, $5}' | \
-		sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
-		paste -sd\\ - \
-		)
+        df -l -h | grep -E 'dev' | \
+        awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $1, $3, $2, $5}' | \
+        sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
+        paste -sd\\ - \
+        )
     else
         echo -ne (\
-		df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
-		awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
-		sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
-		paste -sd ''\
-		)
+        df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
+        awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
+        sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
+        paste -sd ''\
+        )
     end
     echo
 
-    # Network
+# Network
     echo -e " \\e[1mNetwork:\\e[0m"
     echo
     if test (uname) = Darwin
         echo -ne "       "
         echo -ne (\
-		networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}' \
-		)
+        networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}' \
+        )
         echo -ne ": "
         echo -ne (\
-		ipconfig  getifaddr (networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') \
-		)
+        ipconfig  getifaddr (networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') \
+        )
         echo
     else
         echo
         # http://tdt.rocks/linux_network_interface_naming.html
         echo -ne (\
-		ip addr show up scope global | \
-		grep -E ': <|inet' | \
-		sed \
-		-e 's/^[[:digit:]]\+: //' \
-		-e 's/: <.*//' \
-		-e 's/.*inet[[:digit:]]* //' \
-		-e 's/\/.*//'| \
-		awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
-		sort | \
-		#column -t -R1 | \
-		# public addresses are underlined for visibility \
-		sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
-		# private addresses are not \
-		sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
-		# unknown interfaces are cyan \
-		sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
-		# ethernet interfaces are normal \
-		sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
-		# wireless interfaces are purple \
-		sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
-		# wwan interfaces are yellow \
-		sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
-		sed 's/$/\\\e[0m/' | \
-		sed 's/^/\t/' \
-		)
+        ip addr show up scope global | \
+        grep -E ': <|inet' | \
+        sed \
+        -e 's/^[[:digit:]]\+: //' \
+        -e 's/: <.*//' \
+        -e 's/.*inet[[:digit:]]* //' \
+        -e 's/\/.*//'| \
+        awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
+        sort | \
+        #column -t -R1 | \
+        # public addresses are underlined for visibility \
+        sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
+        # private addresses are not \
+        sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
+        # unknown interfaces are cyan \
+        sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
+        # ethernet interfaces are normal \
+        sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
+        # wireless interfaces are purple \
+        sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
+        # wwan interfaces are yellow \
+        sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
+        sed 's/$/\\\e[0m/' | \
+        sed 's/^/\t/' \
+        )
     end
     echo
 
@@ -304,21 +306,21 @@ function fish_greeting
     if [ $r -lt 35 ]
         # less important and urgent
         set_color green
-		# echo "    [project] <description>"
+        # echo "    [project] <description>"
         echo "    [Research] Organize long paper idea"
-		echo "    [NetBricks] Clean the wiki pages"
+        echo "    [NetBricks] Clean the wiki pages"
     end
     if [ $r -lt 65 ]
         # important but not urgent things, note that these are the things I
         # work on every morning
         set_color yellow
         echo "    [Blog #5] Writing is joggling"
-		# echo "    [Title and abstract DDL] NSDI 2022: March 04"
+        # echo "    [Title and abstract DDL] NSDI 2022: March 04"
     end
-    # important and urgent things, so I should get to it right away
+# important and urgent things, so I should get to it right away
     set_color red
-	# echo "    [CoNEXT 20] Impl and running expr"
-	echo "    [Expr bug] flow classification"
+# echo "    [CoNEXT 20] Impl and running expr"
+    echo "    [Expr bug] flow classification"
 
     echo
     set_color normal

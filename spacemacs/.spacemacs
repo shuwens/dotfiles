@@ -53,23 +53,22 @@ This function should only modify configuration layer settings."
      syntax-checking
      ;; version-control
      treemacs
-(bibtex
- :variables
- bibtex-completion-bibliography (expand-file-name "~/Dropbox/org/zotero.bib")
- bibtex-completion-pdf-field "file"
- ;; org-ref stuff (but used by bibtex layer)
- org-ref-default-bibliography (list bibtex-completion-bibliography)
- org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
+     (bibtex
+      :variables
+      bibtex-completion-bibliography (expand-file-name "~/Dropbox/org/zotero.bib")
+      bibtex-completion-pdf-field "file"
+      ;; org-ref stuff (but used by bibtex layer)
+      org-ref-default-bibliography (list bibtex-completion-bibliography)
+      org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
 
-(org
- :variables
- org-directory (expand-file-name "~/Dropbox/org")
- org-default-notes-file (concat org-directory "/inbox.org")
- ;; org-roam
- org-enable-roam-support t
- org-roam-directory (concat org-directory "/roam")
- org-roam-db-location (concat org-roam-directory "/db/org-roam.db"))
-
+     (org
+      :variables
+      org-directory (expand-file-name "~/Dropbox/org")
+      org-default-notes-file (concat org-directory "/inbox.org")
+      ;; org-roam
+      org-enable-roam-support t
+      org-roam-directory (concat org-directory "/roam")
+      org-roam-db-location (concat org-roam-directory "/db/org-roam.db"))
      )
 
 
@@ -258,7 +257,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13.0
+                               :size 14.0
                                :weight normal
                                :width normal)
 
@@ -543,7 +542,10 @@ See the header of this file for more information."
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first.")
+If you are unsure, try setting them in `dotspacemacs/user-config' first."
+
+  (setq org-roam-v2-ack t)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -558,7 +560,8 @@ dump.")
 This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
-before packages are loaded.")
+before packages are loaded."
+  )
 
 
 ;; Do not write anything past this comment. This is where Emacs will
