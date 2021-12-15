@@ -171,6 +171,7 @@ if test (uname) = Darwin
     set PATH $PATH ~/bin
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
+    set PATH $PATH /Users/jethros/.rvm/scripts/rvm
 else
     set PATH /usr/local/bin/ $PATH
     set PATH $PATH ~/bin
