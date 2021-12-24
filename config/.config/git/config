@@ -3,7 +3,7 @@
 [user]
 	name = Shuwen Sun
 	email = sun.shuw@northeastern.edu
-	signkey = 2AE1C8AF5D86FE72
+	# signkey = 2AE1C8AF5D86FE72
 [ui "color"]
 	ui = always
 [color]
@@ -57,7 +57,8 @@
 	algorithm = patience
 	compactionHeuristic = true
 [commit]
-	gpgsign = true
+	# gpgsign = true
+	gpgsign = false
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 	annotate = yes
