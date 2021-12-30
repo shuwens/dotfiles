@@ -117,9 +117,6 @@ abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
 abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
 abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
-# abbr -a -U jn "jupyter notebook --browser=firefox"
-abbr -a -U jn 'jupyter notebook --browser="firefox-developer-edition %s"'
-
 # my ssh utils
 function UpdateFile -a filename
     scp $filename nu-ccis:~/public_html/tmp/

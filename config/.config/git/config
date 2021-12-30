@@ -57,7 +57,6 @@
 	algorithm = patience
 	compactionHeuristic = true
 [commit]
-	# gpgsign = true
 	gpgsign = false
 [sendemail]
 	smtpserver = /usr/bin/msmtp
