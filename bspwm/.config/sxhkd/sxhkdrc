@@ -17,7 +17,7 @@ super + @space
 	rofi -show run -font "Noto Sans Mono 12"
 
 super + p
-	rofi -combi-modi window#drun -show combi -modi combi -show-icons -font "Noto Sans Mono 12"
+	rofi -combi-modi window#drun -show combi -modi combi -show-icons -font "Noto Sans Mono 14"
 
 super + d
 	rofi -show run -modi run -location 1 -width 100 \
@@ -42,10 +42,10 @@ super + e
 	alacritty -t mutt -e tmux new-session -A -s mail /bin/bash -ic "mutt -e 'source ~/.mutt/account.fm'"
 
 super + {j,k}
-	pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ {+,-}3%
+	pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%
 
 super + {F9,F10}
-	pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ {+,-}3%
+	pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%
 
 super + {F11,F12}
 	sudo $HOME/.scripts/adjust_brightness.sh {+,-} &

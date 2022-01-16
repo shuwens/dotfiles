@@ -65,13 +65,12 @@ bspc rule -a MuPDF desktop='^4' state=tiled
 bspc rule -a PCManFM desktop='^5' follow=on state=tiled
 bspc rule -a Thunar desktop='^5' state=tiled
 
-bspc rule -a Lollypop desktop='^6' state=pseudo_tiled
+bspc rule -a Roam Research desktop='^7'
 
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
 bspc rule -a Wireshark desktop='^8' state=tiled
 bspc rule -a qBittorrent desktop='^8' state=tiled
 bspc rule -a Zotero desktop='^8' state=tiled
-bspc rule -a Zettlr desktop='^8' state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
@@ -80,7 +79,6 @@ bspc rule -a Discord desktop='^10' state=tiled
 bspc rule -a Slack desktop='^10' state=tiled
 bspc rule -a Microsoft Teams desktop='^10' state=tiled
 bspc rule -a Microsoft Teams - Preview desktop='^10'
-bspc rule -a Roam Research desktop='^10'
 
 bspc rule -a polybar border=off manage=off
 
