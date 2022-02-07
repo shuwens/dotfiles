@@ -19,7 +19,7 @@ dbus-update-activation-environment --systemd DISPLAY
 gpgconf --launch gpg-agent
 export "SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
-sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual &
+# sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual &
 # Update screen layout
 # if [ -e ~/.scripts/hotplug-dp.sh ]; then
     # (

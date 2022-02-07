@@ -10,7 +10,7 @@ stow screen		-t ~
 stow scripts	-t ~
 stow bspwm		-t ~
 
-stow -t ~   spacemacs
+# stow -t ~   spacemacs
 
 ## dot config
 cd config || exit

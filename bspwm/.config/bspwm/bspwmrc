@@ -18,18 +18,18 @@ if [ -z "$(pgrep tilda)" ] ; then tilda & fi
 
 
 if [ -e ~/.scripts/hotplug-dp.sh ]; then
-    (
-      sleep .2;
-      sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual;
-    ) &
+  (
+  sleep .2;
+  sudo -E -u jethros ~/.scripts/hotplug-dp.sh dual;
+  ) &
 fi
 
 # =============================
 #   bspwm things
 # =============================
 
-bspc monitor eDP1 -d I
-bspc monitor HDMI1 -d II III IV V VI VII VIII IX X
+bspc monitor eDP-1 -d I
+bspc monitor HDMI-1 -d II III IV V VI VII VIII IX X
 bspc desktop --focus II
 
 bspc config border_width         2

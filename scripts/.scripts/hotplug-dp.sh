@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read STATUS_DP < /sys/class/drm/card0-DP-2/status
+read STATUS_DP < /sys/class/drm/card0-eDP-1/status
 read STATUS_HDMI < /sys/class/drm/card0-HDMI-A-1/status
 #read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
 export DISPLAY=:0
@@ -25,8 +25,8 @@ DEVC=""
 STATUS="disconnected"
 if [[ "$STATUS_DP" = "connected" ]]; then
 	STATUS="conected"
-	DEV="DP-2"
-	DEVC="DP-2"
+	DEV="eDP-1"
+	DEVC="eDP-1"
 elif [[ "$STATUS_HDMI" = "connected" ]]; then
 	STATUS="connected"
 	DEV="HDMI1"
@@ -52,13 +52,13 @@ else
 		#/usr/bin/xrandr --output $DEV --mode 1024x768
 		#/usr/bin/xrandr --output eDP-1 --mode 1024x768 --same-as $DEV
 		/usr/bin/xrandr --output $DEV --auto
-		/usr/bin/xrandr --output eDP1 --auto --same-as $DEV
+		/usr/bin/xrandr --output eDP-1 --auto --same-as $DEV
 	elif [[ $1 == "desktop" ]]; then
 		/usr/bin/xrandr --output $DEV --auto
-		/usr/bin/xrandr --output eDP1 --off
+		/usr/bin/xrandr --output eDP-1 --off
 	elif [[ $1 == "dual" ]]; then
 		/usr/bin/xrandr --output $DEV --primary --auto
-		/usr/bin/xrandr --output eDP1 --auto --left-of $DEV
+		/usr/bin/xrandr --output eDP-1 --auto --left-of $DEV
 	else
 		edid=$(/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /bin/sed 's/\s*-$//')
 		printf $edid
