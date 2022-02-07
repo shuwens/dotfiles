@@ -23,14 +23,14 @@ hidpi() {
 DEV=""
 DEVC=""
 STATUS="disconnected"
-if [[ "$STATUS_DP" = "connected" ]]; then
+if [[ "$STATUS_HDMI" = "connected" ]]; then
+	STATUS="connected"
+	DEV="HDMI-1"
+	DEVC="HDMI-A-1"
+elif [[ "$STATUS_DP" = "connected" ]]; then
 	STATUS="conected"
 	DEV="eDP-1"
 	DEVC="eDP-1"
-elif [[ "$STATUS_HDMI" = "connected" ]]; then
-	STATUS="connected"
-	DEV="HDMI1"
-	DEVC="HDMI-A-1"
 elif [[ "$STATUS_HDMI2" = "connected" ]]; then
 	STATUS="connected"
 	DEV="HDMI-2"
@@ -39,10 +39,10 @@ fi
 
 if [ "$STATUS" = "disconnected" ]; then
 	/usr/bin/xrandr --output DP2 --off
-	/usr/bin/xrandr --output HDMI1 --off
-	/usr/bin/xrandr --output HDMI2 --off
+	/usr/bin/xrandr --output HDMI-1 --off
+	/usr/bin/xrandr --output HDMI-2 --off
 	#/usr/bin/xrandr --output eDP-1 --mode 1920x1440
-	/usr/bin/xrandr --output eDP1 --auto
+	/usr/bin/xrandr --output eDP-1 --auto
 	#/usr/bin/xset +dpms
 	#/usr/bin/xset s default
 	#hidpi
@@ -57,6 +57,7 @@ else
 		/usr/bin/xrandr --output $DEV --auto
 		/usr/bin/xrandr --output eDP-1 --off
 	elif [[ $1 == "dual" ]]; then
+		echo $DEV
 		/usr/bin/xrandr --output $DEV --primary --auto
 		/usr/bin/xrandr --output eDP-1 --auto --left-of $DEV
 	else
