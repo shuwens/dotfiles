@@ -13,6 +13,11 @@ end
 
 # the right tmux setup in fish
 if status --is-interactive
+    # GPG
+    set -x GPG_TTY (tty)
+    set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+
     # Base16 Shell
     if test -d ~/dev/others/base16/fish-shell
         set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
