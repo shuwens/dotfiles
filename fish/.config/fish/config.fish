@@ -192,6 +192,7 @@ if test -e $HOME/data/cargo-target
     setenv CARGO_TARGET_DIR $HOME/data/cargo-target
 end
 
+setenv NVIM_HOME $HOME/.config/nvim
 # setenv INFOPATH "mkdir -p ~/.local/share/eless/info"
 
 # https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
