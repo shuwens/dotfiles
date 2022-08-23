@@ -34,6 +34,7 @@ fi
 #   bspwm things
 # =============================
 
+# bspc monitor eDP-1 -d I II III IV V VI VII VIII IX X
 bspc monitor eDP-1 -d I
 bspc monitor HDMI-1 -d II III IV V VI VII VIII IX X
 bspc desktop --focus II

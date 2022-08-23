@@ -77,6 +77,8 @@
 	annotate = yes
 [diff "odf"]
 	textconv = odt2txt
+[init]
+	defaultBranch = main
 [includeIf "gitdir:~/dev/achtung/"]
     path = ~/dev/achtung/.gitconfig_include
 [credential]

@@ -199,7 +199,7 @@ setenv NVIM_HOME $HOME/.config/nvim
 # setenv TZ ":/etc/localtime"
 
 # See https://github.com/fish-shell/fish-shell/issues/772
-set FISH_CLIPBOARD_CMD "cat"
+# set FISH_CLIPBOARD_CMD "cat"
 
 # Add pyenv, if available
 if test -d "$HOME/.pyenv"
