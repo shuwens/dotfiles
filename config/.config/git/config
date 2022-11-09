@@ -11,7 +11,7 @@
 	ui = auto
 [core]
 	; autocrlf = false
-	autocrlf = input
+	autocrlf = false
 	safecrlf = true
 [merge]
 	tool = nvim -d
@@ -36,8 +36,8 @@
 	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 	l = !"git lg1"
 	lg = !"git lg2"
-	r = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
-	cp = !"git add -A; git commit -am \"Checkpoint: $(echo $(curl -s http://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
+	r = !"git add -A; git commit -am \"$(echo $(curl --silent --fail https://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
+	cp = !"git add -A; git commit -am \"Checkpoint: $(echo $(curl --silent --fail https://whatthecommit.com/index.txt)\" \")\"; git pull --rebase; git push"
 	dad = !"curl https://icanhazdadjoke.com/ ; git add"
 	clone = clone --recursive
 	m = commit -am
