@@ -119,7 +119,7 @@ abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 # my ssh utils
 function UpdateFile -a filename
-    scp $filename nu-ccis:~/public_html/tmp/
+    scp $filename nu:~/public_html/www/
 end
 
 if test -d ~/dev/pvn/netbricks

@@ -128,6 +128,7 @@ setenv FZF_DEFAULT_OPTS '--height 20%'
 
 if test (uname) = Darwin
     fish_add_path /usr/local/sbin
+    fish_add_path /usr/local/opt/node@16/bin
     setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
     setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 else
@@ -177,6 +178,7 @@ if test (uname) = Darwin
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
     set PATH $PATH /Users/jethros/.rvm/scripts/rvm
+    # set PATH $PATH /usr/local/opt/node@16/bin
 else
     set PATH /usr/local/bin/ $PATH
     set PATH $PATH ~/bin

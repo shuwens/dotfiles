@@ -19,7 +19,7 @@ yabai -m config mouse_action2                resize
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  26
+yabai -m config top_padding                  12
 yabai -m config bottom_padding               12
 yabai -m config left_padding                 12
 yabai -m config right_padding                12
@@ -30,9 +30,16 @@ yabai -m rule --add app='^System Preferences$' manage=off
 yabai -m rule --add app='^Toggl Track$' manage=off
 yabai -m rule --add app='^Cisco WebX Meeetings$' manage=off
 yabai -m rule --add app='^Youtube Music$' manage=off
+yabai -m rule --add app='^Signal$' manage=off
+yabai -m rule --add app='^Notion$' manage=off
+yabai -m rule --add app='^Obsidian$' manage=off
+yabai -m rule --add app='^Sublime Text$' manage=off
+yabai -m rule --add app='^reMarkable$' manage=off
+yabai -m rule --add app='^1Password$' manage=off
+yabai -m rule --add app='^Garmin Express$' manage=off
 
 # specific space settings
-yabai -m config --space 7 layout             float
+yabai -m config --space 7 layout float
 
 # window rules
 yabai -m rule --add app=Alacritty space=1
@@ -56,16 +63,17 @@ yabai -m rule --add app=WeChat space=4
 yabai -m rule --add app=Emacs manage=on space=4
 yabai -m rule --add app="Visual Studio Code" space=4
 yabai -m rule --add app=Code space=3
-yabai -m rule --add app=Slack space=4
 yabai -m rule --add app=Discord space=4
-yabai -m rule --add app=reMarkable space=4
 yabai -m rule --add app=Mail space=4
 yabai -m rule --add app=Notes space=6
 yabai -m rule --add app=Transmission space=7
 yabai -m rule --add app=Spotify space=8
-#yabai -m rule --add app=Discord space=9 grid=6:6:1:1:3:3
+
+yabai -m rule --add app='^Calendar$' space=9
+yabai -m rule --add app='^Slack$' space=9
+
 yabai -m rule --add app=Steam space=10
-yabai -m rule --add app=Chrome space=9
+yabai -m rule --add app=Chrome space=10
 
 # signals
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
