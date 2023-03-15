@@ -37,6 +37,8 @@ yabai -m rule --add app='^Sublime Text$' manage=off
 yabai -m rule --add app='^reMarkable$' manage=off
 yabai -m rule --add app='^1Password$' manage=off
 yabai -m rule --add app='^Garmin Express$' manage=off
+yabai -m rule --add app='^Keynote$' manage=off
+yabai -m rule --add app='^System Settings$' manage=off
 
 # specific space settings
 yabai -m config --space 7 layout float
@@ -66,11 +68,14 @@ yabai -m rule --add app=Code space=3
 yabai -m rule --add app=Discord space=4
 yabai -m rule --add app=Mail space=4
 yabai -m rule --add app=Notes space=6
+
+# second monitor
 yabai -m rule --add app=Transmission space=7
 yabai -m rule --add app=Spotify space=8
+yabai -m rule --add app='^Calendar$' space=8
+yabai -m rule --add app='^Slack$' space=8
 
-yabai -m rule --add app='^Calendar$' space=9
-yabai -m rule --add app='^Slack$' space=9
+# 9 is for obsidian
 
 yabai -m rule --add app=Steam space=10
 yabai -m rule --add app=Chrome space=10
