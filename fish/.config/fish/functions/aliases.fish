@@ -1,121 +1,121 @@
 #
-# My fish shell abbr -a -Ues and abbrs
+# My fish shell abbr -a es and abbrs
 # -------------------------------
 #
 # Note that I need to revamp this sometime
 
 if [ -e /usr/bin/trash-list ]
     # alias rm 'echo "This is not the command you are looking for."; false'
-    abbr -a -U rm trash-put
+    abbr -a  rm trash-put
 end
 
 if type -q nvim
-    abbr -a -U vimdiff nvim -d
-    abbr -a -U vim nvim
-    abbr -a -U e nvim
+    abbr -a  vimdiff nvim -d
+    abbr -a  vim nvim
+    abbr -a  e nvim
     abbr -a note 'nvim ~/notes/talks.org'
 
     # Quick edits
-    abbr -a -U Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
-    abbr -a -U Ef 'nvim ~/.config/fish/config.fish'
-    abbr -a -U Eg 'nvim ~/.config/git/config'
-    abbr -a -U Ev 'nvim ~/.config/nvim/init.lua'
-    abbr -a -U Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
-    abbr -a -U Ee 'nvim ~/.spacemacs'
-    abbr -a -U Et 'nvim ~/.tmux.conf'
+    abbr -a  Ea 'nvim ~/.config/fish/functions/aliases.fish' # nvim doesn't work well for cooking fish
+    abbr -a  Ef 'nvim ~/.config/fish/config.fish'
+    abbr -a  Eg 'nvim ~/.config/git/config'
+    abbr -a  Ev 'nvim ~/.config/nvim/init.lua'
+    abbr -a  Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
+    abbr -a  Ee 'nvim ~/.spacemacs'
+    abbr -a  Et 'nvim ~/.tmux.conf'
 end
 
 if type -q exa
-    abbr -a -U ls exa
-    abbr -a -U la exa -a
-    abbr -a -U ll exa -l --git
-    abbr -a -U lll exa -la --git
+    abbr -a  ls exa
+    abbr -a  la exa -a
+    abbr -a  ll exa -l --git
+    abbr -a  lll exa -la --git
 else
-    abbr -a -U l 'ls'
-    abbr -a -U ll 'ls -l'
-    abbr -a -U lll 'ls -la'
+    abbr -a  l 'ls'
+    abbr -a  ll 'ls -l'
+    abbr -a  lll 'ls -la'
 end
 
 #
 # Useful abbrs
 #
-abbr -a -U sduo sudo
-abbr -a -U upssh "vagrant up; and vagrant ssh"
-abbr -a -U v vim
-abbr -a -U vi vim
-abbr -a -U vim-norc 'vim -u NORC'
-abbr -a -U vim-none 'vim -u NONE'
+abbr -a  sduo sudo
+abbr -a  upssh "vagrant up; and vagrant ssh"
+abbr -a  v vim
+abbr -a  vi vim
+abbr -a  vim-norc 'vim -u NORC'
+abbr -a  vim-none 'vim -u NONE'
 
-abbr -a -U w workflow.sh
-abbr -a -U ws "wormhole send"
-abbr -a -U wr "wormhole receive"
-abbr -a -U R ranger
+abbr -a  w workflow.sh
+abbr -a  ws "wormhole send"
+abbr -a  wr "wormhole receive"
+abbr -a  R ranger
 abbr -a bs bibtex-search
-abbr -a -U notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
-abbr -a -U m make
-abbr -a -U mm 'make run'
-abbr -a -U wifi 'nmcli d wifi list'
+abbr -a  notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
+abbr -a  m make
+abbr -a  mm 'make run'
+abbr -a  wifi 'nmcli d wifi list'
 
-abbr -a -U json 'prettify-json'
-abbr -a -U map 'xargs -n1'
-abbr -a -U collapse "sed -e 's/  */ /g'"
-abbr -a -U cuts 'cut -d\ '
+abbr -a  json 'prettify-json'
+abbr -a  map 'xargs -n1'
+abbr -a  collapse "sed -e 's/  */ /g'"
+abbr -a  cuts 'cut -d\ '
 
-abbr -a -U cd.. 'cd ..'
-abbr -a -U .. 'cd ..'
-abbr -a -U ... 'cd ../..'
-abbr -a -U .... 'cd ../../..'
-abbr -a -U ..... 'cd ../../../..'
+abbr -a  cd.. 'cd ..'
+abbr -a  .. 'cd ..'
+abbr -a  ... 'cd ../..'
+abbr -a  .... 'cd ../../..'
+abbr -a  ..... 'cd ../../../..'
 
 # Rust
-abbr -a -U c "cargo"
-abbr -a -U r "cargo r"
-abbr -a -U cargot "cargo t"
-abbr -a -U clippy "cargo clippy"
-abbr -a -U cl "cargo clippy"
-abbr -a -U ra "rustup add component"
-abbr -a -U cr "cargo r --release"
-abbr -a -U cb "cargo b --release"
+abbr -a  c "cargo"
+abbr -a  r "cargo r"
+abbr -a  cargot "cargo t"
+abbr -a  clippy "cargo clippy"
+abbr -a  cl "cargo clippy"
+abbr -a  ra "rustup add component"
+abbr -a  cr "cargo r --release"
+abbr -a  cb "cargo b --release"
 
 # git
-abbr -a -U g git
-abbr -a -U gti git
-abbr -a -U gm "git m"
-abbr -a -U gd "git diff"
-abbr -a -U gr "git rebase -i HEAD~5"
-abbr -a -U gs "git status"
-abbr -a -U gc "git clone"
-abbr -a -U a 'git amend --allow-empty --no-verify'
-abbr -a -U gb 'git recent-branches 2.days.ago'
-abbr -a -U gl 'git lg1'
-abbr -a -U gg 'git lg2'
+abbr -a  g git
+abbr -a  gti git
+abbr -a  gm "git m"
+abbr -a  gd "git diff"
+abbr -a  gr "git rebase -i HEAD~5"
+abbr -a  gs "git status"
+abbr -a  gc "git clone"
+abbr -a  a 'git amend --allow-empty --no-verify'
+abbr -a  gb 'git recent-branches 2.days.ago'
+abbr -a  gl 'git lg1'
+abbr -a  gg 'git lg2'
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
-abbr -a -U push 'git push'
-abbr -a -U pull 'git pull'
+abbr -a  push 'git push'
+abbr -a  pull 'git pull'
 
-abbr -a -U df 'command df -m'
-#abbr -a -U su 'command su -m'
-#abbr -a -U ls 'command ls -FG'
+abbr -a  df 'command df -m'
+#abbr -a  su 'command su -m'
+#abbr -a  ls 'command ls -FG'
 
 ## My own stuff!
-abbr -a -U cls "clear"
-abbr -a -U , "make"
-abbr -a -U ,, "make all"
-abbr -a -U ,,, "make clean; and make"
-abbr -a -U vi "nvim"
-abbr -a -U :q "sudo reboot"
-abbr -a -U yr "yabai -m window --toggle float; yabai -m window --grid 12:12:1:0:10:11"
-abbr -a -U vpn "eval /etc/profile.d/PanMSInit.sh; sleep 5; globalprotect connect -portal vpn.northeastern.edu"
-abbr -a -U dvpn "globalprotect disconnect"
+abbr -a  cls "clear"
+abbr -a  , "make"
+abbr -a  ,, "make all"
+abbr -a  ,,, "make clean; and make"
+abbr -a  vi "nvim"
+abbr -a  :q "sudo reboot"
+abbr -a  yr "yabai -m window --toggle float; yabai -m window --grid 12:12:1:0:10:11"
+abbr -a  vpn "eval /etc/profile.d/PanMSInit.sh; sleep 5; globalprotect connect -portal vpn.northeastern.edu"
+abbr -a  dvpn "globalprotect disconnect"
 
 abbr -a py "pyenv activate py3"
 abbr -a py2 "pyenv activate neovim2"
 abbr -a pyn "pyenv activate neovim3"
 
-# wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla https://pg.ucsd.edu
-abbr -a -U WgetScrape "wget -A pdf -m -p -E -k -K -np"
-abbr -a -U PhpWgetScrape "wget -A php -m -p -E -k -K -np"
-abbr -a -U TexWgetScrape "wget -A tex -m -p -E -k -K -np"
+# wget -A pdf,mp3,ps,djvu,tex,doc,docx,xls,xlsx,gz,ppt,mp4,avi,zip,rar,html,htm,asp,php --no-clobber --convert-links --random-wait -r -p -E -e robots=off  mozilla https://pg.ucsd.edu
+abbr -a  WgetScrape "wget -A pdf -m -p -E -k -K -np"
+abbr -a  PhpWgetScrape "wget -A php -m -p -E -k -K -np"
+abbr -a  TexWgetScrape "wget -A tex -m -p -E -k -K -np"
 
 # my ssh utils
 function UpdateFile -a filename
@@ -123,10 +123,10 @@ function UpdateFile -a filename
 end
 
 if test -d ~/dev/pvn/netbricks
-    abbr -a -U n "cd ~/dev/pvn/netbricks"
-    abbr -a -U u "cd ~/dev/pvn/utils"
+    abbr -a  n "cd ~/dev/pvn/netbricks"
+    abbr -a  u "cd ~/dev/pvn/utils"
 else if test -d ~/dev/netbricks
-    abbr -a -U n "cd ~/dev/netbricks"
+    abbr -a  n "cd ~/dev/netbricks"
 else
 end
 

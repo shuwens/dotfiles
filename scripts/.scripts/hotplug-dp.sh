@@ -1,7 +1,7 @@
 #!/bin/bash
 
-read STATUS_DP < /sys/class/drm/card0-eDP-1/status
-read STATUS_HDMI < /sys/class/drm/card0-HDMI-A-1/status
+read STATUS_DP < /sys/class/drm/card1-eDP-1/status
+read STATUS_HDMI < /sys/class/drm/card1-HDMI-A-1/status
 #read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
 export DISPLAY=:0
 #export XAUTHORITY=/home/jon/.Xauthority
@@ -28,7 +28,7 @@ if [[ "$STATUS_HDMI" = "connected" ]]; then
 	DEV="HDMI-1"
 	DEVC="HDMI-A-1"
 elif [[ "$STATUS_DP" = "connected" ]]; then
-	STATUS="conected"
+	STATUS="connected"
 	DEV="eDP-1"
 	DEVC="eDP-1"
 elif [[ "$STATUS_HDMI2" = "connected" ]]; then

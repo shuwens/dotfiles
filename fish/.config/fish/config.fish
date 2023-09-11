@@ -30,21 +30,21 @@ end
 
 # systems update
 if test (uname) = Darwin
-    abbr -a -U p echo "what r you tring to do?"
-    abbr -a -U up brew update
-    abbr -a -U update brew update
-    abbr -a -U upgrade brew upgrade
-    abbr -a -U o open
-    abbr -a -U w wget
-    abbr -a -U emacs emacs -nw
-    abbr -a -U jn "jupyter notebook --browser=firefox"
+    abbr -a  p echo "what r you tring to do?"
+    abbr -a  up brew update
+    abbr -a  update brew update
+    abbr -a  upgrade brew upgrade
+    abbr -a  o open
+    abbr -a  w wget
+    abbr -a  emacs emacs -nw
+    abbr -a  jn "jupyter notebook --browser=firefox"
 else
-    abbr -a -U jn 'jupyter notebook --browser="firefox-developer-edition %s"'
+    abbr -a  jn 'jupyter notebook --browser="firefox-developer-edition %s"'
     if [ -e /usr/bin/apt ]
         # ubuntu systems
         abbr -a p 'sudo apt'
         abbr -a up 'sudo apt update; and sudo apt list --upgradable'
-        #set -U fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
+        #set  fish_user_abbreviations $fish_user_abbreviations 'o=xdg-open'
         function upgrade
             echo (pass x1c/jethros) | sudo -S apt -y upgrade
         end
@@ -56,16 +56,16 @@ else
     else if [ -e /usr/bin/yay ]
         # arch systems w/ yaourt
         complete --command yay --wraps pacman
-        abbr -a -U p yay
-        abbr -a -U up 'yay -Syyu'
+        abbr -a  p yay
+        abbr -a  up 'yay -Syyu'
     else if [ -e /usr/bin/paru ]
         # native arch systems
-        abbr -a -U p 'sudo paru'
-        abbr -a -U up 'sudo paru -Syu'
+        abbr -a  p 'sudo paru'
+        abbr -a  up 'sudo paru -Syu'
     else if [ -e /usr/bin/pacman ]
         # native arch systems
-        abbr -a -U p 'sudo pacman'
-        abbr -a -U up 'sudo pacman -Syu'
+        abbr -a  p 'sudo pacman'
+        abbr -a  up 'sudo pacman -Syu'
     else
         echo "you are not running a recognizable system!"
 end
@@ -109,7 +109,7 @@ if test (uname) = Darwin
 
     # Ensure that GPG Agent is used as the SSH agent
     set -e SSH_AUTH_SOCK
-    set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+    set  -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
     #
     # another way
     # set GPG_TTY (tty)
