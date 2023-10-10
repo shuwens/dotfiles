@@ -2,27 +2,23 @@
 #       My Fish Shell Config
 #
 
-[ -f ~/.config/fish/functions/aliases.fish ]; and source ~/.config/fish/functions/aliases.fish
-
-if [ -e $HOME/.fzf/shell/key-bindings.fish ]; and status --is-interactive
-    . $HOME/.fzf/shell/key-bindings.fish
-end
-
+source ~/.config/fish/functions/aliases.fish
+. $HOME/.fzf/shell/key-bindings.fish
 
 #. ~/.config/fish/security.fish
 
 # the right tmux setup in fish
 if status --is-interactive
     # GPG
-    set -x GPG_TTY (tty)
-    set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-    gpgconf --launch gpg-agent
+    # set -x GPG_TTY (tty)
+    # set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+    # gpgconf --launch gpg-agent
 
     # Base16 Shell
-    if test -d ~/dev/others/base16/fish-shell
-        set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
-        builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
-    end
+    # if test -d ~/dev/others/base16/fish-shell
+    #     set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
+    #     builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
+    # end
     if ! set -q TMUX
         exec tmux
     end
@@ -105,7 +101,7 @@ if test (uname) = Darwin
     #
     # Start or re-use a gpg-agent.
     #
-    gpgconf --launch gpg-agent
+    #gpgconf --launch gpg-agent
 
     # Ensure that GPG Agent is used as the SSH agent
     set -e SSH_AUTH_SOCK
@@ -172,6 +168,7 @@ setenv WINEDEBUG fixme-all
 ## PATH variables
 # ---------------
 if test (uname) = Darwin
+    set PATH /opt/homebrew/bin/ $PATH
     set PATH /usr/local/bin/ $PATH
     set PATH $PATH /Applications/MATLAB_R2018b.app/bin
     set PATH $PATH ~/bin
@@ -179,7 +176,6 @@ if test (uname) = Darwin
     set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
     set PATH $PATH /Users/jethros/.rvm/scripts/rvm
     set PATH $PATH /Library/TeX/texbin
-    # set PATH $PATH /usr/local/opt/node@16/bin
 else
     set PATH /usr/local/bin/ $PATH
     set PATH $PATH ~/bin
@@ -335,3 +331,11 @@ function fish_greeting
 end
 
 # end of [fish/config.fish]
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /Users/shwsun/tools/miniconda/bin/conda
+    eval /Users/shwsun/tools/miniconda/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+
