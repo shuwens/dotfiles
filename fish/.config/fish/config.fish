@@ -2,10 +2,30 @@
 #       My Fish Shell Config
 #
 
+## PATH variables
+# ---------------
+if test (uname) = Darwin
+    set PATH /opt/homebrew/bin/ $PATH
+    set PATH /usr/local/bin/ $PATH
+    set PATH $PATH /Applications/MATLAB_R2018b.app/bin
+    set PATH $PATH ~/bin
+    set PATH $PATH $HOME/.cargo/bin
+    set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
+    set PATH $PATH /Users/jethros/.rvm/scripts/rvm
+    set PATH $PATH /Library/TeX/texbin
+else
+    set PATH /usr/local/bin/ $PATH
+    set PATH $PATH ~/bin
+    set PATH $PATH ~/.scripts
+    set PATH $PATH ~/.local/bin
+    set PATH $PATH ~/.cargo/bin
+    set PATH $PATH $NPM_PACKAGES/bin
+    set PATH $PATH ~/.local/share/umake/bin
+    set PATH $PATH $HOME/.fzf/bin
+end
+
 source ~/.config/fish/functions/aliases.fish
 . $HOME/.fzf/shell/key-bindings.fish
-
-#. ~/.config/fish/security.fish
 
 # the right tmux setup in fish
 if status --is-interactive
@@ -164,28 +184,6 @@ setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native -C codegen-units=4"
 setenv WINEDEBUG fixme-all
-
-## PATH variables
-# ---------------
-if test (uname) = Darwin
-    set PATH /opt/homebrew/bin/ $PATH
-    set PATH /usr/local/bin/ $PATH
-    set PATH $PATH /Applications/MATLAB_R2018b.app/bin
-    set PATH $PATH ~/bin
-    set PATH $PATH $HOME/.cargo/bin
-    set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
-    set PATH $PATH /Users/jethros/.rvm/scripts/rvm
-    set PATH $PATH /Library/TeX/texbin
-else
-    set PATH /usr/local/bin/ $PATH
-    set PATH $PATH ~/bin
-    set PATH $PATH ~/.scripts
-    set PATH $PATH ~/.local/bin
-    set PATH $PATH ~/.cargo/bin
-    set PATH $PATH $NPM_PACKAGES/bin
-    set PATH $PATH ~/.local/share/umake/bin
-    set PATH $PATH $HOME/.fzf/bin
-end
 
 if test -e $HOME/data/cargo-target
     setenv CARGO_TARGET_DIR $HOME/data/cargo-target
