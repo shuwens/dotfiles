@@ -172,6 +172,17 @@ set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
+set -g fish_prompt_pwd_dir_length 3
+
+# colored man output
+# from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
+setenv LESS_TERMCAP_mb \e'[01;31m'       # begin blinking
+setenv LESS_TERMCAP_md \e'[01;38;5;74m'  # begin bold
+setenv LESS_TERMCAP_me \e'[0m'           # end mode
+setenv LESS_TERMCAP_se \e'[0m'           # end standout-mode
+setenv LESS_TERMCAP_so \e'[38;5;246m'    # begin standout-mode - info box
+setenv LESS_TERMCAP_ue \e'[0m'           # end underline
+setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 ## Variables setting
 setenv EDITOR nvim
@@ -205,7 +216,6 @@ if test -d "$HOME/.pyenv"
     pyenv init - | source
 end
 
-#if plenv > /dev/null; plenv init - | source ; end
 
 # # Pretty ls colors
 if test -e $HOME/.dircolors
@@ -297,32 +307,19 @@ function fish_greeting
         # least important and urgent, remind me occasionally
         set_color cyan
         # echo "    [project] <description>"
-        # echo "    [CFP] SIGCOMM 2020 DDL: Jan 31, 2020"
-        echo "    [Blog #1] dev: mostly vim and Rust programming setup"
-        echo "    [Blog #2] My Rust learning experience"
-        echo "    [Blog #3] Year one experience as a PhD"
-        echo "    [Blog #4] Tracing in Rust"
-        echo "    [After NSDI ddl] Leetcode in Rust"
-        echo "    [After NSDI ddl] Rust 101 by Ralf Jung"
     end
     if [ $r -lt 35 ]
         # less important and urgent
         set_color green
         # echo "    [project] <description>"
-        echo "    [Research] Organize long paper idea"
-        echo "    [NetBricks] Clean the wiki pages"
     end
     if [ $r -lt 65 ]
         # important but not urgent things, note that these are the things I
         # work on every morning
         set_color yellow
-        echo "    [Blog #5] Writing is joggling"
-        # echo "    [Title and abstract DDL] NSDI 2022: March 04"
     end
     # important and urgent things, so I should get to it right away
     set_color red
-    # echo "    [CoNEXT 20] Impl and running expr"
-    echo "    [Expr bug] flow classification"
 
     echo
     set_color normal
