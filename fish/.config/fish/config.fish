@@ -195,7 +195,8 @@ setenv RUST_BACKTRACE 1
 setenv CARGO_INCREMENTAL 1
 setenv RUSTFLAGS "-C target-cpu=native -C codegen-units=4"
 setenv WINEDEBUG fixme-all
-setenv ZK_NOTEBOOK_DIR "/$HOME/Dropbox/org/zk_notebook"
+setenv ZK_NOTEBOOK_DIR "$HOME/Dropbox/org/zk_notebook"
+setenv DOOMDIR "$HOME/.config/doom"
 
 if test -e $HOME/data/cargo-target
     setenv CARGO_TARGET_DIR $HOME/data/cargo-target
