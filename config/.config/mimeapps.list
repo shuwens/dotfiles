@@ -13,9 +13,6 @@ application/x-bibtex=nvim.desktop;
 [Default Applications]
 image/gif=viewnior.desktop
 image/svg+xml=viewnior.desktop
-application/pdf=mupdf.desktop
-application/xps=mupdf.desktop
-application/vnd.ms-xpsdocument=mupdf.desktop
 image/png=sxiv.desktop
 image/jpg=sxiv.desktop
 image/jpeg=sxiv.desktop

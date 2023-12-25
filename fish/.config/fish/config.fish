@@ -24,6 +24,78 @@ else
     set PATH $PATH $HOME/.fzf/bin
 end
 
+# Add ssh identity, silently
+
+# macOS is now very annoying...
+if test (uname) = Darwin
+    # gnupg.fish
+    #
+    # Start or re-use a gpg-agent.
+    #
+    #gpgconf --launch gpg-agent
+
+    # Ensure that GPG Agent is used as the SSH agent
+    set -e SSH_AUTH_SOCK
+    set  -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+    #
+    # another way
+    # set GPG_TTY (tty)
+    # set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
+    # add alias for ssh to update the tty
+    # alias ssh "gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
+else
+    # ssh-add -K 2>/dev/null
+end
+
+if test -e $HOME/data/cargo-target
+    setenv CARGO_TARGET_DIR $HOME/data/cargo-target
+end
+
+setenv NVIM_HOME $HOME/.config/nvim
+# setenv INFOPATH "mkdir -p ~/.local/share/eless/info"
+
+# https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
+# setenv TZ ":/etc/localtime"
+
+# See https://github.com/fish-shell/fish-shell/issues/772
+# set FISH_CLIPBOARD_CMD "cat"
+
+# Add pyenv, if available
+if test -d "$HOME/.pyenv"
+    setenv PYENV_ROOT $HOME/.pyenv
+    status is-login; and pyenv init --path | source
+    pyenv init - | source
+end
+
+# fzf
+set PATH $PATH $HOME/.fzf/bin
+setenv FZF_DEFAULT_OPTS '--height 20%'
+
+# Java
+set --export JAVA_HOME (dirname (dirname (readlink -f (which java))))
+set -gx PATH $JAVA_HOME $PATH
+
+if test (uname) = Darwin
+    fish_add_path /usr/local/sbin
+    fish_add_path /usr/local/opt/node@16/bin
+    setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
+    setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
+else
+    setenv FZF_DEFAULT_COMMAND 'ag -g ""'
+    setenv FZF_CTRL_T_COMMAND 'ag -g ""'
+end
+
+function fish_user_key_bindings
+    bind \cz 'fg>/dev/null ^/dev/null'
+    if functions -q fzf_key_bindings
+        fzf_key_bindings
+    end
+end
+
+
+
+
 source ~/.config/fish/functions/aliases.fish
 . $HOME/.fzf/shell/key-bindings.fish
 
@@ -113,53 +185,6 @@ function d
     end
 end
 
-# Add ssh identity, silently
-
-# macOS is now very annoying...
-if test (uname) = Darwin
-    # gnupg.fish
-    #
-    # Start or re-use a gpg-agent.
-    #
-    #gpgconf --launch gpg-agent
-
-    # Ensure that GPG Agent is used as the SSH agent
-    set -e SSH_AUTH_SOCK
-    set  -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
-    #
-    # another way
-    # set GPG_TTY (tty)
-    # set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-
-    # add alias for ssh to update the tty
-    # alias ssh "gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
-else
-    # ssh-add -K 2>/dev/null
-end
-
-
-# fzf
-set PATH $PATH $HOME/.fzf/bin
-setenv FZF_DEFAULT_OPTS '--height 20%'
-
-if test (uname) = Darwin
-    fish_add_path /usr/local/sbin
-    fish_add_path /usr/local/opt/node@16/bin
-    setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
-    setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
-else
-    setenv FZF_DEFAULT_COMMAND 'ag -g ""'
-    setenv FZF_CTRL_T_COMMAND 'ag -g ""'
-end
-
-function fish_user_key_bindings
-    bind \cz 'fg>/dev/null ^/dev/null'
-    if functions -q fzf_key_bindings
-        fzf_key_bindings
-    end
-end
-
-
 set FORTUNES computers debian linux magic
 set FORTUNES futurama hitchhiker $FORTUNES
 set FORTUNES firefly calvin perl $FORTUNES
@@ -197,26 +222,6 @@ setenv RUSTFLAGS "-C target-cpu=native -C codegen-units=4"
 setenv WINEDEBUG fixme-all
 setenv ZK_NOTEBOOK_DIR "$HOME/Dropbox/org/zk_notebook"
 setenv DOOMDIR "$HOME/.config/doom"
-
-if test -e $HOME/data/cargo-target
-    setenv CARGO_TARGET_DIR $HOME/data/cargo-target
-end
-
-setenv NVIM_HOME $HOME/.config/nvim
-# setenv INFOPATH "mkdir -p ~/.local/share/eless/info"
-
-# https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
-# setenv TZ ":/etc/localtime"
-
-# See https://github.com/fish-shell/fish-shell/issues/772
-# set FISH_CLIPBOARD_CMD "cat"
-
-# Add pyenv, if available
-if test -d "$HOME/.pyenv"
-    setenv PYENV_ROOT $HOME/.pyenv
-    status is-login; and pyenv init --path | source
-    pyenv init - | source
-end
 
 
 # # Pretty ls colors
@@ -335,4 +340,3 @@ if test -f /Users/shwsun/tools/miniconda/bin/conda
     eval /Users/shwsun/tools/miniconda/bin/conda "shell.fish" "hook" $argv | source
 end
 # <<< conda initialize <<<
-
