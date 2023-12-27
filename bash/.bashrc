@@ -126,10 +126,10 @@ export FIGNORE="$FIGNORE:.aux:.out:.toc"
 export LESS="-F -X -R"
 
 # Color aliases
-#alias ls='ls --color=auto'
-alias ls='exa'
+alias ls='ls --color=auto'
+# alias ls='exa'
 alias grep='grep --color=auto'
-alias mplayer='mplayer -msgcolor'
+# alias mplayer='mplayer -msgcolor'
 # Common aliases
 alias more='less'
 # Convenience aliases
@@ -140,7 +140,8 @@ alias run='sudo systemctl start'
 alias restart='sudo systemctl restart'
 alias stop='sudo systemctl stop'
 alias x='sudo netctl'
-alias gc='git checkout'
+alias gc='git clone'
+alias gck='git checkout'
 alias gs='git status -s'
 alias ca='git commit -a -m'
 alias xt='date +%s'
@@ -233,13 +234,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 fi
 
+[ -f $HOME/.cargo/env ] && "$HOME/.cargo/env"
+
 # end of [.bashrc]
-source "$HOME/.cargo/env"
-. "$HOME/.cargo/env"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
