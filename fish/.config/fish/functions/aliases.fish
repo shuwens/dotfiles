@@ -84,6 +84,7 @@ abbr -a  gm "git m"
 abbr -a  gd "git diff"
 abbr -a  gr "git rebase -i HEAD~5"
 abbr -a  gs "git status"
+abbr -a  gck "git checkout"
 abbr -a  gc "git clone"
 abbr -a  a 'git amend --allow-empty --no-verify'
 abbr -a  gb 'git recent-branches 2.days.ago'
