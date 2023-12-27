@@ -1,76 +1,32 @@
-# zathurarc-light
+# Zathura configuration file
+# See man `man zathurarc'
+map r reload
+map p print
+map i recolor
+map J zoom out
+map K zoom in
+map R rotate
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
 
-set font                        "Noto Sans Mono normal 12"
-
-# Base16 colours
-set default-bg                  "#dfe1e8"
-set default-fg                  "#343d46"
-
-set statusbar-bg                "#c0c5ce"
-set statusbar-fg                "#343d46"
-
-set inputbar-bg                 "#343d46"
-set inputbar-fg                 "#dfe1e8"
-
-set notification-error-bg       "#bf616a"
-set notification-error-fg       "#343d46"
-
-set notification-warning-bg     "#bf616a"
-set notification-warning-fg     "#343d46"
-
-set highlight-color             "#ebcb8b"
-set highlight-active-color      "#bf616a"
-
-set completion-highlight-bg     "#343d46"
-set completion-highlight-fg     "#c0c5ce"
-
-set completion-bg               "#c0c5ce"
-set completion-fg               "#343d46"
-
-set notification-bg             "#a3be8c"
-set notification-fg             "#343d46"
-
-set recolor-lightcolor          "#dfe1e8"
-set recolor-darkcolor           "#4f5b66"
-# set recolor                     "true"
-
-# setting recolor-keephue true will keep any color your pdf
-# has.  If it is set to false, it will just be shades of gray
-set recolor-keephue             "true"
-
-# Rest of your configs go here:
-set selection-clipboard         "clipboard"
-# set adjust-open                 "width"
-
+# Open document in fit-width mode by default
 set adjust-open "best-fit"
-# set window-height 2000
-# set window-width 2000
 
-# key bindings
-map <PageUp> navigate previous
-map <PageDown> navigate next
+# One page per row by default
+set pages-per-row 1
 
-map = zoom in
-map - zoom out
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
 
-map <C-o> focus_inputbar ":exec acroread $FILE"
-map <C-q> quit
+#zoom settings
+set zoom-min 10
+set guioptions ""
 
-set first-page-column 1:1
-set selection-clipboard clipboard
-set statusbar-home-tilde true
-set statusbar-basename true
-set statusbar-h-padding 0
-set statusbar-v-padding 0
-set page-padding 1
-map u scroll half-up
-map d scroll half-down
-map D toggle_page_mode
-map e recolor
-set sandbox none
+set font "FiraCode 15"
 
-
-# colorscheme
 # zathurarc-dark
 set notification-error-bg       "#586e75" # base01  # seem not work
 set notification-error-fg       "#dc322f" # red
@@ -103,12 +59,12 @@ set highlight-active-color      "#268bd2" # blue
 
 set default-bg                  "#073642" # base02
 set default-fg                  "#93a1a1" # base1
-# set render-loading              true
-# set render-loading-fg           "#073642" # base02
-# set render-loading-bg           "#073642" # base02
+set render-loading              true
+set render-loading-fg           "#073642" # base02
+set render-loading-bg           "#073642" # base02
 
 # Recolor book content's color
 set recolor                     true
 set recolor-lightcolor          "#073642" # base02
 set recolor-darkcolor           "#93a1a1" # base1
-# set recolor-keephue             true      # keep original color
+set recolor-keephue             true      # keep original color

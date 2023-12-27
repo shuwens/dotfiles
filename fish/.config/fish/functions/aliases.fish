@@ -139,7 +139,7 @@ end
 if test (uname) = Darwin
 else
     function pdf -a filename
-        mupdf -r 165 $filename &
+        zathura $filename &
     end
 
     function o #-a filename
@@ -154,9 +154,9 @@ else
                 set o_open_args $o_open_args $arg
             end
         end
-        if set -q o_pdf_args
-			mupdf $o_flags -r 178 $o_pdf_args &
-        end
+   if set -q o_pdf_args
+	zathura $o_flags $o_pdf_args &
+   end
         if set -q o_open_args
             xdg-open $o_flags $o_open_args &
         end

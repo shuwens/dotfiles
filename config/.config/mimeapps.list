@@ -21,3 +21,4 @@ x-scheme-handler/https=firefox-developer-edition.desktop
 text/html=firefox-developer-edition.desktop
 text/plain=nvim.desktop
 inode/directory=thunar.desktop;
+application/pdf=org.pwmt.zathura.desktop

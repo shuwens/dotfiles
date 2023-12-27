@@ -20,4 +20,3 @@ stow -t ~/.config  .config
 # screenshots..
 # mkdir -p ~/Templates/Pictures/screenshots/
 # gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/$USER/Templates/Pictures/screenshots/"
-
