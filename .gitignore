@@ -8,3 +8,4 @@ tags
 *#*
 *.#*
 .DS_Store
+fish_variables
