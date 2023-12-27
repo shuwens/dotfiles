@@ -30,11 +30,13 @@ abbr -a Ef 'nvim ~/.config/fish/config.fish'
 abbr -a e etcdctl
 
 set PATH $PATH $HOME/.cargo/bin
+set PATH $PATH $HOME/.local/bin
+
 # Add pyenv, if available
-if test -d "$HOME/.pyenv"
-    pyenv init - | source
-status --is-interactive; and pyenv virtualenv-init - | source
-end
+# if test -d "$HOME/.pyenv"
+#     pyenv init - | source
+# status --is-interactive; and pyenv virtualenv-init - | source
+# end
 
 setenv EDITOR nvim
 setenv VISUAL nvim
