@@ -81,6 +81,7 @@ bspc rule -a Zotero desktop='^8' state=tiled
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
+bspc rule -a Obsidian desktop='^9' state=tiled
 
 bspc rule -a Discord desktop='^10' state=tiled
 bspc rule -a Slack desktop='^10' state=tiled

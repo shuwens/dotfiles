@@ -117,6 +117,7 @@ font:
     #   - JetBrains Sans Mono
     # family: "Noto Sans Mono Nerd Font"
     family: "Fira Code"
+    # family: "Share Tech Mono Nerd Font"
 
   # Bold font face
   bold:
