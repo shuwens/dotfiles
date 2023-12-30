@@ -41,7 +41,7 @@ size = 13
 family = "Fira Code"
 
 [font.bold_italic]
-family = "Noto Sans Mono Nerd Font"
+family = "Fira Code"
 
 [font.italic]
 family = "Fira Code"
