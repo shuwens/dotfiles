@@ -70,3 +70,6 @@ history = 0
 [window]
 decorations = "full"
 option_as_alt = "OnlyLeft"
+
+[env]
+TERM = "alacritty"
