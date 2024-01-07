@@ -34,7 +34,6 @@ fi
 #   bspwm things
 # =============================
 
-# bspc monitor eDP-1 -d I II III IV V VI VII VIII IX X
 bspc monitor eDP-1 -d I
 bspc monitor HDMI-1 -d II III IV V VI VII VIII IX X
 bspc desktop --focus II
@@ -83,10 +82,10 @@ bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
 bspc rule -a Obsidian desktop='^9' state=tiled
 
-bspc rule -a Discord desktop='^10' state=tiled
-bspc rule -a Slack desktop='^10' state=tiled
-bspc rule -a Microsoft Teams desktop='^10' state=tiled
-bspc rule -a Microsoft Teams - Preview desktop='^10'
+bspc rule -a Discord desktop='^9' state=tiled
+bspc rule -a Slack desktop='^9' state=tiled
+bspc rule -a Microsoft Teams desktop='^9' state=tiled
+bspc rule -a Microsoft Teams - Preview desktop='^9'
 
 bspc rule -a polybar border=off manage=off
 
