@@ -1,24 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#UID=jethros
 # Terminate already running bar instances
 killall -q polybar
+# If all your bars have ipc enabled, you can also use 
+# polybar-msg cmd quit
 
-# xsetroot -cursor_name left_ptr &
+# Launch bar1
+echo "---" | tee -a /tmp/polybar1.log
+polybar main 2>&1 | tee -a /tmp/polybar1.log & disown
 
-# Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-
-if xrandr --query | grep " connected" | grep "HDMI1" > /dev/null; then
-	m=$(xrandr --query | grep " connected" | grep "HDMI1" | cut -d" " -f1)
-else
-	m=$(xrandr --query | grep " connected" | grep primary | cut -d" " -f1)
-fi
-
-cmd=$(env "MONITOR=$m"  polybar --reload main)
-
-if [[ $# -gt 0 ]] && [[ $1 = "block" ]]; then
-	exec "${cmd[@]}"
-else
-	"${cmd[@]}" &
-fi
+echo "Bar launched..."
