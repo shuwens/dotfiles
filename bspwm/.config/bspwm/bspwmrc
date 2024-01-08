@@ -34,9 +34,9 @@ fi
 #   bspwm things
 # =============================
 
-bspc monitor eDP-1 -d I
-bspc monitor HDMI-1 -d II III IV V VI VII VIII IX X
-bspc desktop --focus II
+bspc monitor eDP-1 -d x1c
+bspc monitor HDMI-1 -d term web reader I II III IV office free
+bspc desktop --focus term
 
 bspc config border_width         2
 bspc config window_gap           20
