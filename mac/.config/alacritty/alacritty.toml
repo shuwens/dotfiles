@@ -38,16 +38,16 @@ foreground = "0xc8c093"
 size = 17
 
 [font.bold]
-family = "Fira Code"
+family = "JetBrainsMono Nerd Font"
 
 [font.bold_italic]
-family = "Fira Code"
+family = "JetBrainsMono Nerd Font"
 
 [font.italic]
-family = "Fira Code"
+family = "JetBrainsMono Nerd Font"
 
 [font.normal]
-family = "Fira Code"
+family = "JetBrainsMono Nerd Font"
 
 [[keyboard.bindings]]
 action = "Paste"
