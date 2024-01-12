@@ -35,7 +35,7 @@ fi
 # =============================
 
 bspc monitor eDP-1 -d x1c
-bspc monitor HDMI-1 -d term web reader I II III IV office free
+bspc monitor HDMI-1 -d term web reader I II III IV irc free
 bspc desktop --focus term
 
 bspc config border_width         2
