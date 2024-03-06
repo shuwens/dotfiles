@@ -25,11 +25,11 @@ if type -q nvim
     abbr -a  Et 'nvim ~/.tmux.conf'
 end
 
-if type -q exa
-    abbr -a  ls exa
-    abbr -a  la exa -a
-    abbr -a  ll exa -l --git
-    abbr -a  lll exa -la --git
+if type -q eza
+    abbr -a  ls eza
+    abbr -a  la eza -a
+    abbr -a  ll eza -l --git
+    abbr -a  lll eza -la --git
 else
     abbr -a  l 'ls'
     abbr -a  ll 'ls -l'
@@ -242,30 +242,32 @@ function px
     ssh -fND localhost:8080 -C jon@ssh.thesquareplanet.com -p 222
 end
 
-function cat --description "mdcat for markdown files, cat for everything else"
-    set cat_flags
-    for arg in $argv
-        if string match -rq -- '^-' $arg
-            set cat_flags $cat_flags $arg
-        end
-        if string match -rq -- '.md$' $arg
-            set cat_mdcat_args $cat_mdcat_args $arg
-        else if string match -rq -- '.json$' $arg
-            set cat_jsoncat_args $cat_jsoncat_args $arg
-        else
-            set cat_cat_args $cat_cat_args $arg
-        end
-    end
-    if set -q cat_mdcat_args
-        command mdcat $cat_flags $cat_mdcat_args
-    end
-    if set -q cat_jsoncat_args
-        command cat $cat_flags $cat_jsoncat_args | jq .
-    end
-    if set -q cat_cat_args
-        command cat $cat_flags $cat_cat_args
-    end
 
+if type -q exa
+    function cat --description "mdcat for markdown files, cat for everything else"
+        set cat_flags
+        for arg in $argv
+            if string match -rq -- '^-' $arg
+                set cat_flags $cat_flags $arg
+            end
+            if string match -rq -- '.md$' $arg
+                set cat_mdcat_args $cat_mdcat_args $arg
+            else if string match -rq -- '.json$' $arg
+                set cat_jsoncat_args $cat_jsoncat_args $arg
+            else
+                set cat_cat_args $cat_cat_args $arg
+            end
+        end
+        if set -q cat_mdcat_args
+            command mdcat $cat_flags $cat_mdcat_args
+        end
+        if set -q cat_jsoncat_args
+            command cat $cat_flags $cat_jsoncat_args | jq .
+        end
+        if set -q cat_cat_args
+            command cat $cat_flags $cat_cat_args
+        end
+    end
 end
 
 function mktable --description "produces a LaTeX table for oxide testing results"

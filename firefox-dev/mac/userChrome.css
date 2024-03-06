@@ -28,6 +28,8 @@
 	.tab-background { border-top: none !important; }
 	#navigator-toolbox::after { border: none; }
 	#TabsToolbar .tabbrowser-arrowscrollbox,
+	/* https://www.reddit.com/r/firefox/comments/we90l2/is_it_possible_to_completely_remove_the_tab_bar/ */
+	#TabsToolbar { visibility: collapse !important; }
 	#tabbrowser-tabs, .tab-stack { min-height: 38px !important; }
 	.tabbrowser-tab { font-size: 110% !important; }
 	.tab-content { padding: 0 5px; }

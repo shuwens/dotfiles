@@ -82,6 +82,7 @@ if test (uname) = Darwin
     setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
     setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 else
+    fish_add_path ~/.local/bin
     setenv FZF_DEFAULT_COMMAND 'ag -g ""'
     setenv FZF_CTRL_T_COMMAND 'ag -g ""'
 end
@@ -93,11 +94,10 @@ function fish_user_key_bindings
     end
 end
 
-
-
-
 source ~/.config/fish/functions/aliases.fish
-. $HOME/.fzf/shell/key-bindings.fish
+if test -d "$HOME/.fzf"
+    . $HOME/.fzf/shell/key-bindings.fish
+end
 
 # the right tmux setup in fish
 if status --is-interactive
