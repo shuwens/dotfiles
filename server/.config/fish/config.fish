@@ -33,10 +33,10 @@ set PATH $PATH $HOME/.cargo/bin
 set PATH $PATH $HOME/.local/bin
 
 # Add pyenv, if available
-# if test -d "$HOME/.pyenv"
-#     pyenv init - | source
-# status --is-interactive; and pyenv virtualenv-init - | source
-# end
+if test -d "$HOME/.pyenv"
+pyenv init - | source
+status --is-interactive; and pyenv virtualenv-init - | source
+end
 
 setenv EDITOR nvim
 setenv VISUAL nvim
@@ -47,9 +47,9 @@ if status --is-interactive
 		set fish_function_path $fish_function_path ~/dev/others/base16/templates/fish-shell/functions
 		builtin source ~/dev/others/base16/templates/fish-shell/conf.d/base16.fish
 	end
-	if ! set -q TMUX
-		exec tmux
-	end
+	#if ! set -q TMUX
+	#	exec tmux
+	#end
 end
 
 if command -v aurman > /dev/null
@@ -220,7 +220,7 @@ function fish_prompt
 	set_color brblack
 	echo -n "["(date "+%H:%M")"] "
 	set_color blue
-	echo -n (hostnamectl hostname)
+	echo -n (hostname)
 	if [ $PWD != $HOME ]
 		set_color brblack
 		echo -n ':'
@@ -252,33 +252,33 @@ function fish_greeting
 	echo -e " \\e[1mNetwork:\\e[0m"
 	echo
 	# http://tdt.rocks/linux_network_interface_naming.html
-	echo -ne (\
-		ip addr show up scope global | \
-			grep -E ': <|inet' | \
-			sed \
-				-e 's/^[[:digit:]]\+: //' \
-				-e 's/: <.*//' \
-				-e 's/.*inet[[:digit:]]* //' \
-				-e 's/\/.*//'| \
-			awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
-			sort | \
-			column -t -R1 | \
-			# public addresses are underlined for visibility \
-			sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
-			# private addresses are not \
-			sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
-			# unknown interfaces are cyan \
-			sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
-			# ethernet interfaces are normal \
-			sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
-			# wireless interfaces are purple \
-			sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
-			# wwan interfaces are yellow \
-			sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
-			sed 's/$/\\\e[0m/' | \
-			sed 's/^/\t/' \
-		)
-	echo
+	# echo -ne (\
+	# 	ip addr show up scope global | \
+	# 		grep -E ': <|inet' | \
+	# 		sed \
+	# 			-e 's/^[[:digit:]]\+: //' \
+	# 			-e 's/: <.*//' \
+	# 			-e 's/.*inet[[:digit:]]* //' \
+	# 			-e 's/\/.*//'| \
+	# 		awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
+	# 		sort | \
+	# 		column -t -R1 | \
+	# 		# public addresses are underlined for visibility \
+	# 		sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
+	# 		# private addresses are not \
+	# 		sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
+	# 		# unknown interfaces are cyan \
+	# 		sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
+	# 		# ethernet interfaces are normal \
+	# 		sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
+	# 		# wireless interfaces are purple \
+	# 		sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
+	# 		# wwan interfaces are yellow \
+	# 		sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
+	# 		sed 's/$/\\\e[0m/' | \
+	# 		sed 's/^/\t/' \
+	# 	)
+	# echo
 
 	set r (random 0 100)
 	if [ $r -lt 5 ] # only occasionally show backlog (5%)
