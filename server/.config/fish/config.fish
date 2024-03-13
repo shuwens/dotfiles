@@ -1,6 +1,5 @@
 abbr -a yr 'cal -y'
 abbr -a c cargo
-abbr -a e nvim
 abbr -a m make
 abbr -a o xdg-open
 abbr -a g git
@@ -18,29 +17,34 @@ abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --for
 complete --command aurman --wraps pacman
 
 # common
-abbr -a vim nvim
 abbr -a gs 'git status'
 abbr -a pull 'git pull'
 abbr -a push 'git push'
 
 abbr -a g '~/dev/garage/target/release/garage'
-abbr -a Ev 'nvim ~/.config/nvim/init.lua'
-abbr -a Ef 'nvim ~/.config/fish/config.fish'
-
 abbr -a e etcdctl
 
 set PATH $PATH $HOME/.cargo/bin
 set PATH $PATH $HOME/.local/bin
 
 # Add pyenv, if available
+# fish_add_path $PYENV_ROOT/bin
 if test -d "$HOME/.pyenv"
-pyenv init - | source
-status --is-interactive; and pyenv virtualenv-init - | source
+	setenv PYENV_ROOT $HOME/.pyenv
+	status --is-interactive; and pyenv virtualenv-init - | source
+	# status is-login; and pyenv init --path | source
+	pyenv init - | source
 end
 
-setenv EDITOR nvim
-setenv VISUAL nvim
 
+if command -v nvim > /dev/null
+	setenv EDITOR nvim
+	setenv VISUAL nvim
+	abbr -a e nvim
+	abbr -a vim nvim
+	abbr -a Ev 'nvim ~/.config/nvim/init.lua'
+	abbr -a Ef 'nvim ~/.config/fish/config.fish'
+end
 
 if status --is-interactive
 	if test -d ~/dev/others/base16/templates/fish-shell
@@ -77,12 +81,12 @@ end
 
 function ssh
 	switch $argv[1]
-	case "*.amazonaws.com"
-		env TERM=xterm /usr/bin/ssh $argv
-	case "ubuntu@"
-		env TERM=xterm /usr/bin/ssh $argv
-	case "*"
-		/usr/bin/ssh $argv
+		case "*.amazonaws.com"
+			env TERM=xterm /usr/bin/ssh $argv
+		case "ubuntu@"
+			env TERM=xterm /usr/bin/ssh $argv
+		case "*"
+			/usr/bin/ssh $argv
 	end
 end
 
@@ -198,16 +202,39 @@ function penv -d "Set up environment for the PDOS openstack service"
 end
 function pvm -d "Run nova/glance commands against the PDOS openstack service"
 	switch $argv[1]
-	case 'image-*'
-		penv glance $argv
-	case 'c'
-		penv cinder $argv[2..-1]
-	case 'g'
-		penv glance $argv[2..-1]
-	case '*'
-		penv nova $argv
+		case 'image-*'
+			penv glance $argv
+		case 'c'
+			penv cinder $argv[2..-1]
+		case 'g'
+			penv glance $argv[2..-1]
+		case '*'
+			penv nova $argv
 	end
 end
+
+# for git journal, I should only use ["Added", "Changed", "Fixed", "Improved", "Removed"]
+function lazy
+    if test "$argv"
+        git add -A
+        git commit -am "$argv"
+        git push
+    else
+        git r
+    end
+end
+
+function check
+    if test "$argv"
+        git add -A
+        git commit -am "Checkpoint: $argv"
+        git push
+    else
+        git cp
+    end
+end
+
+
 
 function fish_user_key_bindings
 	bind \cz 'fg>/dev/null ^/dev/null'
@@ -246,38 +273,38 @@ function fish_greeting
 		awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
 		sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
 		paste -sd ''\
-	)
+		)
 	echo
 
 	echo -e " \\e[1mNetwork:\\e[0m"
 	echo
 	# http://tdt.rocks/linux_network_interface_naming.html
 	# echo -ne (\
-	# 	ip addr show up scope global | \
-	# 		grep -E ': <|inet' | \
-	# 		sed \
-	# 			-e 's/^[[:digit:]]\+: //' \
-	# 			-e 's/: <.*//' \
-	# 			-e 's/.*inet[[:digit:]]* //' \
-	# 			-e 's/\/.*//'| \
-	# 		awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
-	# 		sort | \
-	# 		column -t -R1 | \
-	# 		# public addresses are underlined for visibility \
-	# 		sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
-	# 		# private addresses are not \
-	# 		sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
-	# 		# unknown interfaces are cyan \
-	# 		sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
-	# 		# ethernet interfaces are normal \
-	# 		sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
-	# 		# wireless interfaces are purple \
-	# 		sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
-	# 		# wwan interfaces are yellow \
-	# 		sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
-	# 		sed 's/$/\\\e[0m/' | \
-	# 		sed 's/^/\t/' \
-	# 	)
+		# 	ip addr show up scope global | \
+		# 		grep -E ': <|inet' | \
+		# 		sed \
+		# 			-e 's/^[[:digit:]]\+: //' \
+		# 			-e 's/: <.*//' \
+		# 			-e 's/.*inet[[:digit:]]* //' \
+		# 			-e 's/\/.*//'| \
+		# 		awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
+		# 		sort | \
+		# 		column -t -R1 | \
+		# 		# public addresses are underlined for visibility \
+		# 		sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
+		# 		# private addresses are not \
+		# 		sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
+		# 		# unknown interfaces are cyan \
+		# 		sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
+		# 		# ethernet interfaces are normal \
+		# 		sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
+		# 		# wireless interfaces are purple \
+		# 		sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
+		# 		# wwan interfaces are yellow \
+		# 		sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
+		# 		sed 's/$/\\\e[0m/' | \
+		# 		sed 's/^/\t/' \
+		# 	)
 	# echo
 
 	set r (random 0 100)

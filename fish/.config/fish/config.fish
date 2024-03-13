@@ -64,7 +64,9 @@ setenv NVIM_HOME $HOME/.config/nvim
 # Add pyenv, if available
 if test -d "$HOME/.pyenv"
     setenv PYENV_ROOT $HOME/.pyenv
-    status is-login; and pyenv init --path | source
+    fish_add_path $PYENV_ROOT/bin
+    status --is-interactive; and pyenv virtualenv-init - | source
+    # status is-login; and pyenv init --path | source
     pyenv init - | source
 end
 
