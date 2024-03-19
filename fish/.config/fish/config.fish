@@ -126,7 +126,7 @@ if test (uname) = Darwin
     abbr -a  upgrade brew upgrade
     abbr -a  o open
     abbr -a  w wget
-    abbr -a  emacs emacs -nw
+    # abbr -a  emacs emacs -nw
     abbr -a  jn "jupyter notebook --browser=firefox"
 else
     abbr -a  jn 'jupyter notebook --browser="firefox-developer-edition %s"'
