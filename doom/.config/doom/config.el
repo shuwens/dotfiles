@@ -28,7 +28,7 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18 :weight 'normal)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20 :weight 'normal)
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font"))
 (setq doom-modeline-height 18)
 
