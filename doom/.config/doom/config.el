@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "G. Bai"
-      user-mail-address "gdbaifdu@gmail.com")
+(setq user-full-name "Shuwen Sun"
+      user-mail-address "shuwenjsun.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -71,7 +71,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Dropbox/org/")
 (setq org-download-image-dir "images")  ; `org-download-image-dir` defaults to `org-directory'/.attach/
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -121,9 +121,9 @@
             (call-interactively #'save-buffer)))
 
 ;; directory
-(setq directory-abbrev-alist
-      '(("^/Users/gbai/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org" . "/Users/gbai/org/beorg")
-        ("^/Users/gbai/Documents/GitHub/org-node" . "/Users/gbai/org/org-node")))
+;; (setq directory-abbrev-alist
+;;       '(("^/Users/gbai/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org" . "/Users/gbai/org/beorg")
+;;         ("^/Users/gbai/Documents/GitHub/org-node" . "/Users/gbai/org/org-node")))
 
 ;; Magit
 (setq magit-ediff-dwim-show-on-hunks t)
@@ -169,11 +169,11 @@
 (setq confirm-kill-emacs nil)
 
 ;; change company-complete-selection mappping
-(with-eval-after-load 'evil
-  (with-eval-after-load 'company
-    (define-key company-active-map [return] nil)
-    (define-key company-active-map (kbd "RET") nil)
-    (evil-define-key nil company-active-map (kbd "C-f") #'company-complete-selection)))
+;; (with-eval-after-load 'evil
+;;   (with-eval-after-load 'company
+;;     (define-key company-active-map [return] nil)
+;;     (define-key company-active-map (kbd "RET") nil)
+;;     (evil-define-key nil company-active-map (kbd "C-f") #'company-complete-selection)))
 
 ;; doom-dashboard
 (defun my/open-portal ()
@@ -298,7 +298,7 @@
   (setq org-highlight-latex-and-related '(latex script entities))
 
   ;; agenda
-  (setq! org-agenda-files '("~/org/beorg" "~/org/beorg/daily"))
+  (setq! org-agenda-files '("~/Dropbox/org/notes" "~/Dropbox/org/daily"))
 
   ;; org-babel
   ;; active Babel languages
@@ -309,7 +309,7 @@
      (matlab . t)))
 
   ;; Org-roam
-  (setq org-roam-directory (concat org-directory "beorg/"))
+  (setq org-roam-directory (concat org-directory "~/Dropbox/org/roam"))
   (defun my/org-roam-node-insert ()
     (interactive)
     (my/insert-after 'org-roam-node-insert))
@@ -345,7 +345,7 @@
 
   ;; Citar
   (setq! citar-bibliography '("~/Zotero/my_library.bib"))
-  (setq! citar-notes-paths '("~/org/beorg/citar/"))
+  (setq! citar-notes-paths '("~/Dropbox/org/citar/"))
   (setq! citar-file-open-function 'org-open-file)
   (setq! citar-templates
          '((main . "${author editor:36}     ${date year issued:4}     ${title:48}")
