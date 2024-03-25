@@ -13,10 +13,11 @@ stow X			-t ~
 stow bspwm		-t ~
 # arch
 # install paru
-sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim ttf-jetbrains-mono-nerd ttf-fira-code ttf-fira-sans the_silver_searcher
+sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim the_silver_searcher tk zathura zathura-pdf-poppler tailscale 
+sudo pacman -S ttf-jetbrains-mono-nerd ttf-fira-code ttf-fira-sans ttf-linux-libertine
 
-sudo paru -S google-chrome slack-desktop dropbox
-# sudo paru -S texlive biber
+sudo paru -S google-chrome slack-desktop dropbox ttf-monaco
+# sudo paru -S texlive biber texlive-lang
 
 
 # on remote linux

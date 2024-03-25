@@ -15,12 +15,11 @@ if test (uname) = Darwin
     set PATH $PATH /Library/TeX/texbin
 else
     set PATH /usr/local/bin/ $PATH
-    set PATH $PATH ~/bin
+    # set PATH $PATH ~/bin
     set PATH $PATH ~/.scripts
     set PATH $PATH ~/.local/bin
     set PATH $PATH ~/.cargo/bin
     set PATH $PATH $NPM_PACKAGES/bin
-    set PATH $PATH ~/.local/share/umake/bin
     set PATH $PATH $HOME/.fzf/bin
 end
 
@@ -75,8 +74,8 @@ set PATH $PATH $HOME/.fzf/bin
 setenv FZF_DEFAULT_OPTS '--height 20%'
 
 # Java
-set --export JAVA_HOME (dirname (dirname (readlink -f (which java))))
-set -gx PATH $JAVA_HOME $PATH
+# set --export JAVA_HOME (dirname (dirname (readlink -f (which java))))
+# set -gx PATH $JAVA_HOME $PATH
 
 if test (uname) = Darwin
     fish_add_path /usr/local/sbin
