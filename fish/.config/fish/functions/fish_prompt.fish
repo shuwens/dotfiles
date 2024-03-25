@@ -14,7 +14,12 @@ function fish_prompt
     set_color normal
     echo -n "@"
     set_color blue
-		echo -n (hostnamectl hostname)
+
+    if test (uname) = Darwin
+	echo -n (hostname)
+    else
+	echo -n (hostnamectl hostname)
+    end
     if [ $PWD != $HOME ]
         set_color brblack
         echo -n ':'

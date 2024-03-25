@@ -23,6 +23,7 @@ if type -q nvim
     abbr -a  Es 'nvim ~/.config/nvim/spell/en.utf-8.add'
     abbr -a  Ee 'nvim ~/.spacemacs'
     abbr -a  Et 'nvim ~/.tmux.conf'
+    abbr -a  Ed 'nvim ~/.config/doom/init.el'
 end
 
 if type -q eza
