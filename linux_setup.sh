@@ -1,32 +1,33 @@
 #!/bin/bash
 
-stow alacritty	-t ~
-stow bash		-t ~
-stow fish		-t ~
-stow tmux		-t ~
-stow X			-t ~
 stow screen		-t ~
 # stow bin		-t ~
 stow scripts	-t ~
+
+# only on arch
+stow tmux		-t ~
+stow fish		-t ~
+stow bash		-t ~
+stow alacritty	-t ~
+stow X			-t ~
 stow bspwm		-t ~
-
-# stow -t ~   spacemacs
-
-## dot config
-cd config || exit
-stow -t ~/.config  .config
-
-## Gnome setting changes!
-# screenshots..
-# mkdir -p ~/Templates/Pictures/screenshots/
-# gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/$USER/Templates/Pictures/screenshots/"
-
-
-# arch 
+# arch
 # install paru
-sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim ttf-jetbrains-mono-nerd ttf-fira-code ttf-fira-sans
-
-
+sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim ttf-jetbrains-mono-nerd ttf-fira-code ttf-fira-sans the_silver_searcher
 
 sudo paru -S google-chrome slack-desktop dropbox
-# sudo paru -S texlive biber 
+# sudo paru -S texlive biber
+
+
+# on remote linux
+stow server -t ~
+# apt-get install silversearcher-ag
+
+
+## dot config
+#cd config || exit
+#stow -t ~/.config  .config
+
+
+
+
