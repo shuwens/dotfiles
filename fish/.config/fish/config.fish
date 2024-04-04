@@ -7,11 +7,11 @@
 if test (uname) = Darwin
     set PATH /opt/homebrew/bin/ $PATH
     set PATH /usr/local/bin/ $PATH
-    set PATH $PATH /Applications/MATLAB_R2018b.app/bin
-    set PATH $PATH ~/bin
+    # set PATH $PATH /Applications/MATLAB_R2018b.app/bin
+    # set PATH $PATH ~/bin
     set PATH $PATH $HOME/.cargo/bin
-    set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
-    set PATH $PATH /Users/jethros/.rvm/scripts/rvm
+    # set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
+    # set PATH $PATH /Users/jethros/.rvm/scripts/rvm
     set PATH $PATH /Library/TeX/texbin
 else
     set PATH /usr/local/bin/ $PATH
@@ -107,11 +107,6 @@ if status --is-interactive
     # set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
     # gpgconf --launch gpg-agent
 
-    # Base16 Shell
-    # if test -d ~/dev/others/base16/fish-shell
-    #     set fish_function_path $fish_function_path ~/dev/others/base16/fish-shell/functions
-    #     builtin source ~/dev/others/base16/fish-shell/conf.d/base16.fish
-    # end
     if ! set -q TMUX
         exec tmux
     end
@@ -137,11 +132,6 @@ else
         function upgrade
             echo (pass x1c/jethros) | sudo -S apt -y upgrade
         end
-    else if [ -e /usr/bin/aurman ]
-        complete --command aurman --wraps pacman
-        # native arch systems
-        abbr -a p 'aurman'
-        abbr -a up 'aurman -Syu'
     else if [ -e /usr/bin/yay ]
         # arch systems w/ yaourt
         complete --command yay --wraps pacman
@@ -149,8 +139,8 @@ else
         abbr -a  up 'yay -Syyu'
     else if [ -e /usr/bin/paru ]
         # native arch systems
-        abbr -a  p 'sudo paru'
-        abbr -a  up 'sudo paru -Syu'
+        abbr -a  p 'paru -S'
+        abbr -a  up 'paru -Syu'
     else if [ -e /usr/bin/pacman ]
         # native arch systems
         abbr -a  p 'sudo pacman'

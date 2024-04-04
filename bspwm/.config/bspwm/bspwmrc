@@ -35,7 +35,7 @@ fi
 # =============================
 
 bspc monitor eDP-1 -d x1c
-bspc monitor HDMI-1 -d term web reader I II III IV irc free
+bspc monitor HDMI-1 -d term web reader free I II III IV irc
 bspc desktop --focus term
 
 bspc config border_width         2
@@ -71,7 +71,7 @@ bspc rule -a MuPDF desktop='^4' state=tiled
 bspc rule -a PCManFM desktop='^5' follow=on state=tiled
 bspc rule -a Thunar desktop='^5' state=tiled
 
-bspc rule -a Roam Research desktop='^7'
+# bspc rule -a Roam Research desktop='^7'
 
 bspc rule -a MineTime desktop='^8' follow=on state=tiled
 bspc rule -a Wireshark desktop='^8' state=tiled
