@@ -35,7 +35,7 @@ fi
 # =============================
 
 bspc monitor eDP-1 -d x1c
-bspc monitor HDMI-1 -d term web reader free I II III IV irc
+bspc monitor HDMI-1 -d term web reader I II III IRC emacs fun
 bspc desktop --focus term
 
 bspc config border_width         2
@@ -61,6 +61,7 @@ bspc config -d "^4" top_padding 0
 bspc rule -a Alacritty state=tiled
 
 bspc rule -a zoom desktop='^1'
+bspc rule -a Google-chrome desktop='^1'
 
 bspc rule -a firefox desktop='^3' follow=on state=tiled
 bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
@@ -78,14 +79,14 @@ bspc rule -a Wireshark desktop='^8' state=tiled
 bspc rule -a qBittorrent desktop='^8' state=tiled
 bspc rule -a Zotero desktop='^8' state=tiled
 
+bspc rule -a Discord desktop='^8' state=tiled
+bspc rule -a Slack desktop='^8' state=tiled
+bspc rule -a Microsoft Teams desktop='^8' state=tiled
+bspc rule -a Microsoft Teams - Preview desktop='^8'
+
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Emacs desktop='^9' state=tiled
 bspc rule -a Obsidian desktop='^9' state=tiled
-
-bspc rule -a Discord desktop='^9' state=tiled
-bspc rule -a Slack desktop='^9' state=tiled
-bspc rule -a Microsoft Teams desktop='^9' state=tiled
-bspc rule -a Microsoft Teams - Preview desktop='^9'
 
 bspc rule -a polybar border=off manage=off
 
