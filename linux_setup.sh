@@ -1,37 +1,38 @@
 #!/bin/bash
 
-stow screen		-t ~
 # stow bin		-t ~
 stow scripts	-t ~
 
+. /etc/os-release
+
+case $ID in
+    ubuntu) 
+        echo "This is Ubuntu!"
+        stow server -t ~
+        ;;
+
+    arch)
+        echo "This is Arch Linux!"
+        stow bspwm		-t ~
+stow screen		-t ~
 # only on arch
 stow tmux		-t ~
 stow fish		-t ~
 stow bash		-t ~
 stow alacritty	-t ~
 stow X			-t ~
-stow bspwm		-t ~
 
-. /etc/os-release
+        # install paru
+        sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim the_silver_searcher tk zathura zathura-pdf-poppler tailscale ranger
+        sudo pacman -S ttf-jetbrains-mono-nerd ttf-fira-code ttf-fira-sans ttf-linux-libertine ttf-dejavu-sans-mono-powerline-git
 
-case $ID in
-  echo "This is Ubuntu!"
-  ubuntu) stow server -t ~
-  ;;
+        sudo paru -S google-chrome slack-desktop dropbox ttf-monaco
+        # sudo paru -S texlive biber texlive-lang
+        ;;
 
-arch)
-  echo "This is Arch Linux!"
-  # install paru
-  sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim the_silver_searcher tk zathura zathura-pdf-poppler tailscale ranger
-  sudo pacman -S ttf-jetbrains-mono-nerd ttf-fira-code ttf-fira-sans ttf-linux-libertine ttf-dejavu-sans-mono-powerline-git
+    centos) echo "This is CentOS!"
+        ;;
 
-  sudo paru -S google-chrome slack-desktop dropbox ttf-monaco
-  # sudo paru -S texlive biber texlive-lang
-  ;;
-
-centos) echo "This is CentOS!"
-  ;;
-
-*) echo "This is an unknown distribution."
-  ;;
+    *) echo "This is an unknown distribution."
+        ;;
 esac
