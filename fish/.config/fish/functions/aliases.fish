@@ -19,6 +19,7 @@ if type -q nvim
     abbr -a  Ee 'nvim ~/.spacemacs'
     abbr -a  Et 'nvim ~/.tmux.conf'
     abbr -a  Ed 'nvim ~/.config/doom/init.el'
+    abbr -a  ds 'doom sync'
 end
 
 if type -q eza
@@ -240,30 +241,30 @@ end
 
 
 if type -q eza
-    function cat --description "mdcat for markdown files, cat for everything else"
-        set cat_flags
-        for arg in $argv
-            if string match -rq -- '^-' $arg
-                set cat_flags $cat_flags $arg
-            end
-            if string match -rq -- '.md$' $arg
-                set cat_mdcat_args $cat_mdcat_args $arg
-            else if string match -rq -- '.json$' $arg
-                set cat_jsoncat_args $cat_jsoncat_args $arg
-            else
-                set cat_cat_args $cat_cat_args $arg
-            end
-        end
-        if set -q cat_mdcat_args
-            command mdcat $cat_flags $cat_mdcat_args
-        end
-        if set -q cat_jsoncat_args
-            command cat $cat_flags $cat_jsoncat_args | jq .
-        end
-        if set -q cat_cat_args
-            command cat $cat_flags $cat_cat_args
-        end
-    end
+    # function cat --description "mdcat for markdown files, cat for everything else"
+    #     set cat_flags
+    #     for arg in $argv
+    #         if string match -rq -- '^-' $arg
+    #             set cat_flags $cat_flags $arg
+    #         end
+    #         if string match -rq -- '.md$' $arg
+    #             set cat_mdcat_args $cat_mdcat_args $arg
+    #         else if string match -rq -- '.json$' $arg
+    #             set cat_jsoncat_args $cat_jsoncat_args $arg
+    #         else
+    #             set cat_cat_args $cat_cat_args $arg
+    #         end
+    #     end
+    #     if set -q cat_mdcat_args
+    #         command mdcat $cat_flags $cat_mdcat_args
+    #     end
+    #     if set -q cat_jsoncat_args
+    #         command cat $cat_flags $cat_jsoncat_args | jq .
+    #     end
+    #     if set -q cat_cat_args
+    #         command cat $cat_flags $cat_cat_args
+    #     end
+    # end
 end
 
 function mktable --description "produces a LaTeX table for oxide testing results"
