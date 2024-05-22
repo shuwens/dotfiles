@@ -3,7 +3,7 @@ abbr -a c cargo
 abbr -a m make
 abbr -a o xdg-open
 abbr -a g git
-abbr -a gc 'git checkout'
+abbr -a gc 'git clone'
 abbr -a ga 'git add -p'
 abbr -a vimdiff 'nvim -d'
 abbr -a ct 'cargo t'

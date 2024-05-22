@@ -6,7 +6,7 @@ stow scripts	-t ~
 . /etc/os-release
 
 case $ID in
-    ubuntu) 
+    ubuntu)
         echo "This is Ubuntu!"
         stow server -t ~
         ;;
@@ -14,13 +14,13 @@ case $ID in
     arch)
         echo "This is Arch Linux!"
         stow bspwm		-t ~
-stow screen		-t ~
-# only on arch
-stow tmux		-t ~
-stow fish		-t ~
-stow bash		-t ~
-stow alacritty	-t ~
-stow X			-t ~
+        stow screen		-t ~
+        # only on arch
+        stow tmux		-t ~
+        stow fish		-t ~
+        stow bash		-t ~
+        stow alacritty	-t ~
+        stow X			-t ~
 
         # install paru
         sudo pacman -S firefox-developer-edition emacs tmux alacritty neovim the_silver_searcher tk zathura zathura-pdf-poppler tailscale ranger
