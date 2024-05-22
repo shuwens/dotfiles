@@ -8,6 +8,7 @@ stow scripts	-t ~
 case $ID in
     ubuntu)
         echo "This is Ubuntu!"
+        mv ~/.bashrc ~/.bashrc.bak
         stow server -t ~
         ;;
 
