@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# read STATUS_DP < /sys/class/drm/card0-DP-1/status
+# read STATUS_DP2 < /sys/class/drm/card0-DP-2/status
+# read STATUS_DP3 < /sys/class/drm/card0-DP-3/status
+# read STATUS_DP4 < /sys/class/drm/card0-DP-4/status
+# read STATUS_HDMI < /sys/class/drm/card0-HDMI-A-1/status
+# read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
+
 read STATUS_DP < /sys/class/drm/card1-eDP-1/status
 read STATUS_HDMI < /sys/class/drm/card1-HDMI-A-1/status
 #read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
@@ -12,32 +19,32 @@ maxlight() {
 
 lowdpi() {
 	/bin/sed -i 's/Xft.dpi: .*/Xft.dpi: 96/' ~/.Xresources
-	/usr/bin/sudo -E -u jethros xrdb ~/.Xresources
+	/usr/bin/sudo -E -u shwsun xrdb ~/.Xresources
 }
 
 hidpi() {
 	/bin/sed -i 's/Xft.dpi: .*/Xft.dpi: 144/' ~/.Xresources
-	/usr/bin/sudo -u jethros xrdb ~/.Xresources
+	/usr/bin/sudo -u shwsun xrdb ~/.Xresources
 }
 
 DEV=""
 DEVC=""
 STATUS="disconnected"
-if [[ "$STATUS_HDMI" = "connected" ]]; then
+if [[ "$STATUS_HDMI" == "connected" ]]; then
 	STATUS="connected"
 	DEV="HDMI-1"
 	DEVC="HDMI-A-1"
-elif [[ "$STATUS_DP" = "connected" ]]; then
+elif [[ "$STATUS_DP" == "connected" ]]; then
 	STATUS="connected"
 	DEV="eDP-1"
 	DEVC="eDP-1"
-elif [[ "$STATUS_HDMI2" = "connected" ]]; then
+elif [[ "$STATUS_HDMI2" == "connected" ]]; then
 	STATUS="connected"
 	DEV="HDMI-2"
 	DEVC="HDMI-A-2"
 fi
 
-if [ "$STATUS" = "disconnected" ]; then
+if [ "$STATUS" == "disconnected" ]; then
 	/usr/bin/xrandr --output DP2 --off
 	/usr/bin/xrandr --output HDMI-1 --off
 	/usr/bin/xrandr --output HDMI-2 --off
@@ -49,16 +56,20 @@ if [ "$STATUS" = "disconnected" ]; then
 	#/usr/bin/sed -i 's/HandleLidSwitch\=ignore/HandleLidSwitch\=suspend/' /etc/systemd/logind.conf
 else
 	if [[ $1 == "mirror" ]]; then
-		#/usr/bin/xrandr --output $DEV --mode 1024x768
+		/usr/bin/xrandr --output $DEV --mode 3840x2160
 		#/usr/bin/xrandr --output eDP-1 --mode 1024x768 --same-as $DEV
-		/usr/bin/xrandr --output $DEV --auto
+		# /usr/bin/xrandr --output $DEV --auto
 		/usr/bin/xrandr --output eDP-1 --auto --same-as $DEV
 	elif [[ $1 == "desktop" ]]; then
-		/usr/bin/xrandr --output $DEV --auto
+		printf "desktop"
+		# echo $DEV
+		# /usr/bin/xrandr --output $DEV --primary --mode 2560x1440
+		/usr/bin/xrandr --output $DEV --primary --auto
 		/usr/bin/xrandr --output eDP-1 --off
 	elif [[ $1 == "dual" ]]; then
 		echo $DEV
-		/usr/bin/xrandr --output $DEV --primary --auto
+		# /usr/bin/xrandr --output $DEV --mode 3840x2160
+		/usr/bin/xrandr --output $DEV --primary --mode 3840x2160
 		/usr/bin/xrandr --output eDP-1 --auto --left-of $DEV
 	else
 		edid=$(/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /bin/sed 's/\s*-$//')
@@ -93,7 +104,7 @@ fi
 
 # notify-osd doesn't need to be restored
 /usr/bin/pkill notify-osd
-/usr/bin/sudo -E -u jethros nitrogen --restore
-/usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
-# /usr/bin/sudo -E -u jethros /home/jethros/bin/touchpad-setup.sh
+/usr/bin/sudo -E -u shwsun nitrogen --restore
+/usr/bin/sudo -E -u shwsun /home/shwsun/.config/polybar/launch.sh
+# /usr/bin/sudo -E -u shwsun /home/shwsun/bin/touchpad-setup.sh
 # /usr/bin/systemctl restart systemd-logind

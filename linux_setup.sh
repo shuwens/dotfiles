@@ -8,8 +8,12 @@ stow scripts	-t ~
 case $ID in
     ubuntu)
         echo "This is Ubuntu!"
-        mv ~/.bashrc ~/.bashrc.bak
+        mv ~/.bashrc ~/.bashrc.bak || true
         stow server -t ~
+        sudo apt update
+        sudo apt install -y stow neovim fish ranger silversearcher-ag
+        chsh -s $(which fish)
+        echo "Done!"
         ;;
 
     arch)
