@@ -106,5 +106,8 @@ fi
 # /usr/bin/pkill notify-osd
 # /usr/bin/sudo -E -u shwsun nitrogen --restore
 # /usr/bin/sudo -E -u shwsun /home/shwsun/.config/polybar/launch.sh
+# /usr/bin/pkill notify-osd
+# /usr/bin/sudo -E -u shwsun nitrogen --restore
+# /usr/bin/sudo -E -u shwsun /home/shwsun/.config/polybar/launch.sh
 # /usr/bin/sudo -E -u shwsun /home/shwsun/bin/touchpad-setup.sh
 # /usr/bin/systemctl restart systemd-logind

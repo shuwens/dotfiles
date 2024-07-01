@@ -9,6 +9,9 @@ setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 
 SXHKD_SHELL=/bin/bash sxhkd &
 nitrogen --restore &
+# dunst -conf ~/.config/dunst/dunstrc &
+if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
+# if [ -z "$(pgrep tilda)" ] ; then tilda & fi
 
 # gnupg keyring agent
 # ensure it's started so SSH will work
@@ -21,6 +24,7 @@ if [ -e ~/.scripts/hotplug-dp.sh ]; then
   (
   sleep .2;
   sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
+  # sudo -E -u jethros ~/.scripts/hotplug-dp.sh desktop;
   ) &
 fi
 
@@ -29,8 +33,8 @@ fi
 # =============================
 
 # bspc monitor eDP-1 -d x1c
-bspc monitor HDMI-1 -d emacs term web reader I II III IRC null fun
-# bspc desktop --focus term
+bspc monitor HDMI-1 -d null term web reader I II III IRC emacs fun
+bspc desktop --focus term
 
 bspc config border_width         2
 bspc config window_gap           20
@@ -57,7 +61,6 @@ bspc rule -a Alacritty state=tiled
 bspc rule -a Emacs desktop='^1' state=tiled
 
 bspc rule -a zoom desktop='^1'
-bspc rule -a Google-chrome desktop='^1'
 
 bspc rule -a firefox desktop='^3' follow=on state=tiled
 bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
@@ -82,6 +85,8 @@ bspc rule -a Microsoft Teams - Preview desktop='^8'
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Obsidian desktop='^9' state=tiled
+
+bspc rule -a Google-chrome desktop='^10'
 
 bspc rule -a polybar border=off manage=off
 
