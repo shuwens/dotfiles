@@ -20,6 +20,8 @@ if type -q nvim
     abbr -a  Et 'nvim ~/.tmux.conf'
     abbr -a  Ed 'nvim ~/.config/doom/init.el'
     abbr -a  ds 'doom sync'
+
+    abbr -a  Xd 'open ~/dev/minor/xnvme.github.io/en/v0.7.4/index.html'
 end
 
 if type -q eza

@@ -107,9 +107,9 @@ if status --is-interactive
     # set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
     # gpgconf --launch gpg-agent
 
-    # if ! set -q TMUX
-    #     exec tmux
-    # end
+    if ! set -q TMUX
+        exec tmux
+    end
 end
 
 # systems update

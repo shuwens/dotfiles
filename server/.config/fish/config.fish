@@ -10,11 +10,12 @@ abbr -a ct 'cargo t'
 abbr -a amz 'env AWS_SECRET_ACCESS_KEY=(pass www/aws-secret-key | head -n1)'
 abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {iid: .InstanceId, type: .InstanceType, key:.KeyName, state:.State.Name, host:.PublicDnsName}'"
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
-abbr -a ks 'keybase chat send'
-abbr -a kr 'keybase chat read'
-abbr -a kl 'keybase chat list'
 abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --format=%B HEAD | tail -n+3)'
-complete --command aurman --wraps pacman
+
+# abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b dev; cd zstore; make setup; cd subprojects; git clone https://github.com/spdk/spdk --recursive --branch v23.09-pre; cd spdk; ./configure --with-shared --enable-debug; make'
+abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b dev; cd zstore; make setup; '
+
+# complete --command aurman --wraps pacman
 
 # common
 abbr -a gs 'git status'
