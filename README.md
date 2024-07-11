@@ -1,6 +1,6 @@
 My dotfiles
 
-
+```wget https://raw.githubusercontent.com/shuwens/dotfiles/main/bin/bin/install-dots.sh```
 
 
 ## Current look
