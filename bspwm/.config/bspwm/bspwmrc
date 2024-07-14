@@ -1,12 +1,11 @@
 #!/bin/sh
 
-## BEHAVIOR
-# Keymap
-# setxkbmap no;
 setxkbmap -option compose:rctrl
 setxkbmap -option altwin:swap_alt_win
 setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 
+if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
+[ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
 SXHKD_SHELL=/bin/bash sxhkd &
 nitrogen --restore &
 # dunst -conf ~/.config/dunst/dunstrc &
@@ -27,12 +26,12 @@ if [ -e ~/.scripts/hotplug-dp.sh ]; then
   # sudo -E -u jethros ~/.scripts/hotplug-dp.sh desktop;
   ) &
 fi
+# sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
 
 # =============================
 #   bspwm things
 # =============================
 
-# bspc monitor eDP-1 -d x1c
 bspc monitor HDMI-1 -d null term web reader I II III IRC emacs fun
 bspc desktop --focus term
 
@@ -59,8 +58,8 @@ bspc config -d "^4" top_padding 0
 bspc rule -a Alacritty state=tiled
 
 bspc rule -a Emacs desktop='^1' state=tiled
-
 bspc rule -a zoom desktop='^1'
+bspc rule -a Google-chrome desktop='^1'
 
 bspc rule -a firefox desktop='^3' follow=on state=tiled
 bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
@@ -86,8 +85,6 @@ bspc rule -a Microsoft Teams - Preview desktop='^8'
 bspc rule -a Code desktop='^9' follow=on state=tiled
 bspc rule -a Obsidian desktop='^9' state=tiled
 
-bspc rule -a Google-chrome desktop='^10'
-
 bspc rule -a polybar border=off manage=off
 
 # Any popup type terminal windows
@@ -99,21 +96,3 @@ bspc rule -a GlobalProtect state=floating
 
 # Any popup type terminal windows large
 bspc rule -a "*:popup_window_large" state=floating rectangle=1500x750 center
-
-
-systemctl --user start ulauncher.service &
-if [ -x ~/.config/polybar/launch.sh ]; then
-	echo "start polybar"
-	~/.config/polybar/launch.sh
-fi
-
-if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
-if [ -z "$(pgrep tilda)" ] ; then tilda & fi
-if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
-dunst -conf ~/.config/dunst/dunstrc &
-# [ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
-
-# /usr/bin/sudo -E -u shwsun nitrogen --restore
-# /usr/bin/sudo -E -u shwsun /home/shwsun/.config/polybar/launch.sh
-# /usr/bin/sudo -E -u shwsun /home/shwsun/bin/touchpad-setup.sh
-# /usr/bin/systemctl restart systemd-logind
