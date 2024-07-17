@@ -11,6 +11,7 @@ nitrogen --restore &
 # dunst -conf ~/.config/dunst/dunstrc &
 if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
 sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
+xsetroot -cursor_name left_ptr &
 
 # =============================
 #   bspwm things
