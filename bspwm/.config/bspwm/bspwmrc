@@ -27,6 +27,7 @@ if [ -e ~/.scripts/hotplug-dp.sh ]; then
   ) &
 fi
 # sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
+# xsetroot -cursor_name left_ptr &
 
 # =============================
 #   bspwm things
