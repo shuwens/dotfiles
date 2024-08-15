@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# read STATUS_DP < /sys/class/drm/card0-DP-1/status
-# read STATUS_DP2 < /sys/class/drm/card0-DP-2/status
-# read STATUS_DP3 < /sys/class/drm/card0-DP-3/status
-# read STATUS_DP4 < /sys/class/drm/card0-DP-4/status
-# read STATUS_HDMI < /sys/class/drm/card0-HDMI-A-1/status
-# read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
-
 read STATUS_DP < /sys/class/drm/card1-eDP-1/status
 read STATUS_HDMI < /sys/class/drm/card1-HDMI-A-1/status
 #read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
@@ -49,6 +42,7 @@ if [ "$STATUS_HDMI" == "connected" ]; then
 		/usr/bin/xrandr --output $DEV --mode 3840x2160
 		/usr/bin/xrandr --output eDP-1 --auto --same-as $DEV
 	elif [[ $1 == "desktop" ]]; then
+		echo "shit"
 		/usr/bin/xrandr --output $DEV --mode 2560x1440
 		/usr/bin/xrandr --output eDP-1 --off
 	elif [[ $1 == "dual" ]]; then
@@ -60,11 +54,11 @@ if [ "$STATUS_HDMI" == "connected" ]; then
 	fi
 else
 	if [[ $1 == "mirror" ]]; then
-		/usr/bin/xrandr --output $DEV --auto
+		/usr/bin/xrandr --output eDP-1 --auto
 	elif [[ $1 == "desktop" ]]; then
-		/usr/bin/xrandr --output $DEV --auto
+		/usr/bin/xrandr --output eDP-1 --auto
 	elif [[ $1 == "dual" ]]; then
-		/usr/bin/xrandr --output $DEV --auto
+		/usr/bin/xrandr --output eDP-1 --auto
 	else
 		edid=$(/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /bin/sed 's/\s*-$//')
 		printf $edid

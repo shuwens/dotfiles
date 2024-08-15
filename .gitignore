@@ -9,3 +9,6 @@ tags
 *.#*
 .DS_Store
 fish_variables
+
+server/.config/nvim/
+

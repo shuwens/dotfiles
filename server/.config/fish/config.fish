@@ -1,6 +1,7 @@
 abbr -a yr 'cal -y'
 abbr -a c cargo
-abbr -a m make
+abbr -a , make
+abbr -a m 'meson compile'
 abbr -a o xdg-open
 abbr -a g git
 abbr -a gc 'git clone'
@@ -12,8 +13,8 @@ abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --format=%B HEAD | tail -n+3)'
 
-# abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b dev; cd zstore; make setup; cd subprojects; git clone https://github.com/spdk/spdk --recursive --branch v23.09-pre; cd spdk; ./configure --with-shared --enable-debug; make'
-abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b dev; cd zstore; make setup; '
+abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b spdk; cd zstore; make setup; cd build; meson compile'
+abbr -a fk 'sudo kill -9 '
 
 # complete --command aurman --wraps pacman
 

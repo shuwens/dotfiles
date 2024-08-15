@@ -63,7 +63,7 @@ bspc rule -a zoom desktop='^1'
 bspc rule -a Google-chrome desktop='^1'
 
 bspc rule -a firefox desktop='^3' follow=on state=tiled
-bspc rule -a firefoxdeveloperedition desktop='^3' follow=on state=tiled
+bspc rule -a firefox-developer-edition desktop='^3' follow=on state=tiled
 
 bspc rule -a Zathura desktop='^4' follow=on state=tiled
 bspc rule -a MuPDF desktop='^4' state=tiled
@@ -84,7 +84,8 @@ bspc rule -a Microsoft Teams desktop='^8' state=tiled
 bspc rule -a Microsoft Teams - Preview desktop='^8'
 
 bspc rule -a Code desktop='^9' follow=on state=tiled
-bspc rule -a Obsidian desktop='^9' state=tiled
+bspc rule -a obsidian desktop='^9' state=tiled
+bspc rule -a 1Password desktop='^9' state=tiled
 
 bspc rule -a polybar border=off manage=off
 

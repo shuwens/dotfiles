@@ -51,7 +51,7 @@ abbr -a vi vim
 # abbr -a  R ranger
 # abbr -a bs bibtex-search
 # abbr -a notes 'ag "TODO|HACK|FIXME|OPTIMIZE"'
-# abbr -a  m make
+abbr -a  m make
 # abbr -a  mm 'make run'
 # abbr -a  wifi 'nmcli d wifi list'
 
