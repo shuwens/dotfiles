@@ -4,10 +4,10 @@ setxkbmap -option compose:rctrl
 setxkbmap -option altwin:swap_alt_win
 setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 
-if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
-[ -x ~/.config/polybar/launch.sh ] && ~/.config/polybar/launch.sh &
+# if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
 SXHKD_SHELL=/bin/bash sxhkd &
 nitrogen --restore &
+
 # dunst -conf ~/.config/dunst/dunstrc &
 if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
 # if [ -z "$(pgrep tilda)" ] ; then tilda & fi
@@ -19,13 +19,13 @@ if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
 # gpgconf --launch gpg-agent
 # export "SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
-if [ -e ~/.scripts/hotplug-dp.sh ]; then
-  (
-  sleep .2;
-  sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
-  # sudo -E -u jethros ~/.scripts/hotplug-dp.sh desktop;
-  ) &
-fi
+# if [ -e ~/.scripts/hotplug-dp.sh ]; then
+#   (
+#   sleep .2;
+#   # sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
+#   sudo -E -u jethros ~/.scripts/hotplug-dp.sh desktop;
+#   ) &
+# fi
 # sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
 # xsetroot -cursor_name left_ptr &
 
@@ -98,3 +98,8 @@ bspc rule -a GlobalProtect state=floating
 
 # Any popup type terminal windows large
 bspc rule -a "*:popup_window_large" state=floating rectangle=1500x750 center
+
+if [ -x ~/.config/polybar/launch.sh ]; then
+	echo "start polybar"
+	~/.config/polybar/launch.sh
+fi
