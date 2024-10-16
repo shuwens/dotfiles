@@ -13,7 +13,7 @@ abbr -a ais "aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | {
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a pr 'gh pr create -t (git show -s --format=%s HEAD) -b (git show -s --format=%B HEAD | tail -n+3)'
 
-abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b spdk; cd zstore; make setup; cd build; meson compile'
+abbr -a zs 'cd ..; sudo rm -rf zstore; git clone git@github.com:shuwens/zstore.git -b dev; cd zstore; make setup; cd build; meson compile'
 abbr -a fk 'sudo kill -9 '
 
 # complete --command aurman --wraps pacman
