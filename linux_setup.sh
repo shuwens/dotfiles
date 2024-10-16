@@ -8,10 +8,11 @@ stow scripts	-t ~
 case $ID in
     ubuntu)
         echo "This is Ubuntu!"
+        sudo apt install -y stow 
         mv ~/.bashrc ~/.bashrc.bak || true
         stow server -t ~
         sudo apt update
-        sudo apt install -y stow neovim fish ranger silversearcher-ag
+        sudo apt install -y neovim fish ranger silversearcher-ag make net-tools
         chsh -s $(which fish)
         echo "Done!"
         ;;
