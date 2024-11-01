@@ -19,6 +19,8 @@ if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi
 # gpgconf --launch gpg-agent
 # export "SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
+sudo -E -u shwsun ~/.scripts/hotplug-dp.sh desktop;
+
 # if [ -e ~/.scripts/hotplug-dp.sh ]; then
 #   (
 #   sleep .2;
