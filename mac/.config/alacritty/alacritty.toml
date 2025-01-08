@@ -72,8 +72,7 @@ decorations = "full"
 option_as_alt = "OnlyLeft"
 dynamic_padding = false
 dynamic_title = true
-# opacity = 1.0
-opacity = 0.75
+opacity = 0.85
 
 [env]
 TERM = "alacritty"

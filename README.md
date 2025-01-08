@@ -7,6 +7,12 @@ My dotfiles
 
 ![Current look of my desktop](imgs/desktop-look.png?raw=true "Title")
 
+# terminal search
+
+wezterm
+- https://github.com/gonstoll/dotfiles/tree/master/.config/wezterm
+- https://github.com/KevinSilvester/wezterm-config
+
 ## TODO: tmux
 https://www.reddit.com/r/tmux/comments/n2hcsz/whats_your_workflow_to_work_simultaneously_with/
 https://www.reddit.com/r/tmux/comments/ndotyo/best_workflow_for_using_tmux_on_a_remote_host/
