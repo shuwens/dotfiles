@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 setxkbmap -option compose:rctrl
 setxkbmap -option altwin:swap_alt_win
 setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
@@ -7,6 +8,7 @@ setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 # if [ -z "$(pgrep nm-applet)" ] ; then nm-applet --sm-disable & fi
 SXHKD_SHELL=/bin/bash sxhkd &
 nitrogen --restore &
+# fcitx &
 
 # dunst -conf ~/.config/dunst/dunstrc &
 if [ -z "$(pgrep dropbox )" ] ; then dropbox start & fi

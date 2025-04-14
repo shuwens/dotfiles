@@ -102,14 +102,13 @@ end
 
 # the right tmux setup in fish
 if status --is-interactive
-    # GPG
-    # set -x GPG_TTY (tty)
-    # set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-    # gpgconf --launch gpg-agent
-
-    if ! set -q TMUX
-        exec tmux
-    end
+    switch $TERM
+		case 'linux'
+			:
+		case '*'
+			if ! set -q TMUX
+				exec tmux
+			end
 end
 
 # systems update
@@ -141,6 +140,7 @@ else
         # native arch systems
         abbr -a  p 'paru -S'
         abbr -a  up 'paru -Syu'
+        complete --command paru --wraps pacman
     else if [ -e /usr/bin/pacman ]
         # native arch systems
         abbr -a  p 'sudo pacman'
