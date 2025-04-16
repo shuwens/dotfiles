@@ -103,12 +103,13 @@ end
 # the right tmux setup in fish
 if status --is-interactive
     switch $TERM
-		case 'linux'
-			:
-		case '*'
-			if ! set -q TMUX
-				exec tmux
-			end
+        case 'linux'
+            :
+        case '*'
+            if ! set -q TMUX
+                exec tmux
+            end
+    end
 end
 
 # systems update
