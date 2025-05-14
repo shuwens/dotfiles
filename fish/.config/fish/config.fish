@@ -1,7 +1,3 @@
-#
-#       My Fish Shell Config
-#
-
 ## PATH variables
 # ---------------
 if test (uname) = Darwin
@@ -13,6 +9,10 @@ if test (uname) = Darwin
     # set PATH $PATH /Users/jethros/.gem/ruby/2.6.0/bin
     # set PATH $PATH /Users/jethros/.rvm/scripts/rvm
     set PATH $PATH /Library/TeX/texbin
+    fish_add_path /usr/local/sbin
+    fish_add_path /usr/local/opt/node@16/bin
+    setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
+    setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 else
     set PATH /usr/local/bin/ $PATH
     # set PATH $PATH ~/bin
@@ -21,16 +21,24 @@ else
     set PATH $PATH ~/.cargo/bin
     set PATH $PATH $NPM_PACKAGES/bin
     set PATH $PATH $HOME/.fzf/bin
+    fish_add_path ~/.local/bin
+    setenv FZF_DEFAULT_COMMAND 'ag -g ""'
+    setenv FZF_CTRL_T_COMMAND 'ag -g ""'
 end
+
+
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /Users/shwsun/tools/miniconda/bin/conda
+    eval /Users/shwsun/tools/miniconda/bin/conda "shell.fish" "hook" $argv | source
+end
+
 
 # Add ssh identity, silently
 
 # macOS is now very annoying...
 if test (uname) = Darwin
     # gnupg.fish
-    #
     # Start or re-use a gpg-agent.
-    #
     #gpgconf --launch gpg-agent
 
     # Ensure that GPG Agent is used as the SSH agent
@@ -70,23 +78,15 @@ if test -d "$HOME/.pyenv"
 end
 
 # fzf
-set PATH $PATH $HOME/.fzf/bin
-setenv FZF_DEFAULT_OPTS '--height 20%'
+if test -d "$HOME/.fzf"
+    set PATH $PATH $HOME/.fzf/bin
+    . $HOME/.fzf/shell/key-bindings.fish
+    setenv FZF_DEFAULT_OPTS '--height 20%'
+end
 
 # Java
 # set --export JAVA_HOME (dirname (dirname (readlink -f (which java))))
 # set -gx PATH $JAVA_HOME $PATH
-
-if test (uname) = Darwin
-    fish_add_path /usr/local/sbin
-    fish_add_path /usr/local/opt/node@16/bin
-    setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
-    setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
-else
-    fish_add_path ~/.local/bin
-    setenv FZF_DEFAULT_COMMAND 'ag -g ""'
-    setenv FZF_CTRL_T_COMMAND 'ag -g ""'
-end
 
 function fish_user_key_bindings
     bind \cz 'fg>/dev/null ^/dev/null'
@@ -96,9 +96,6 @@ function fish_user_key_bindings
 end
 
 source ~/.config/fish/functions/aliases.fish
-if test -d "$HOME/.fzf"
-    . $HOME/.fzf/shell/key-bindings.fish
-end
 
 # the right tmux setup in fish
 if status --is-interactive
@@ -326,9 +323,3 @@ end
 
 # end of [fish/config.fish]
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /Users/shwsun/tools/miniconda/bin/conda
-    eval /Users/shwsun/tools/miniconda/bin/conda "shell.fish" "hook" $argv | source
-end
-# <<< conda initialize <<<

@@ -3,6 +3,7 @@
 [user]
 	name = Shuwen Sun
 	email = sun.shuw@northeastern.edu
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICvj1NVk2fegLLdSAkxCJqPjQX3efpzckv8JgYN75rO/
 	# signkey = 2AE1C8AF5D86FE72
 [ui "color"]
 	ui = always
@@ -71,7 +72,7 @@
 	algorithm = patience
 	compactionHeuristic = true
 [commit]
-	gpgsign = false
+	gpgsign = true
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 	annotate = yes
@@ -83,3 +84,7 @@
     path = ~/dev/achtung/.gitconfig_include
 [credential]
 	helper = store
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
